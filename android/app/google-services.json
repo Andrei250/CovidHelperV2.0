@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "753197462009",
+    "firebase_url": "https://covidelhelper.firebaseio.com",
+    "project_id": "covidelhelper",
+    "storage_bucket": "covidelhelper.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:753197462009:android:2b514ab8a6e45bbb890d28",
+        "android_client_info": {
+          "package_name": "com.example.covidhelper_v2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "753197462009-n89qkshihkc0mr3o2tc4705a3m3jk1uj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-BwXk4AL92IF7n2jKk2iOFfP_COEmIq0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "753197462009-n89qkshihkc0mr3o2tc4705a3m3jk1uj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
