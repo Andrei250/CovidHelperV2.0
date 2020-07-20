@@ -7,6 +7,6 @@ import 'package:covidhelper_v2/utils/app_theme.dart';
 import 'components/ListUsers.dart';
 
 void main() => runApp(MaterialApp(
-    theme: ThemeData.dark(),
-  home: AdminPanel(),
+    theme: AppTheme.darkTheme,
+  home: RegisterEmail()
 ));

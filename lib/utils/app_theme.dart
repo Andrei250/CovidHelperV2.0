@@ -24,27 +24,29 @@ class AppTheme {
       ),
     ),
     colorScheme: ColorScheme.light(
-      primary: Colors.black,
-      onPrimary: Colors.black,
-      primaryVariant: Colors.black,
+      primary: Colors.lightBlueAccent,
+      onPrimary: Colors.lightBlue,
+      primaryVariant: Colors.lightBlueAccent,
       secondary: Colors.red,
     ),
     cardTheme: CardTheme(
-      color: Colors.black,
+      color: Colors.lightBlue,
     ),
     iconTheme: IconThemeData(
       color: Colors.white54,
     ),
 
     textTheme: TextTheme(
-      title: TextStyle(
-        color: Colors.white,
-        fontSize: 20.0,
-      ),
-      subtitle: TextStyle(
-        color: Colors.white70,
-        fontSize: 18.0,
-      ),
-    ),
+        headline1: TextStyle(
+            fontFamily: 'quicksand', color: lightColor, fontSize: 40.0),
+        headline2: TextStyle(
+            fontFamily: 'quicksand', color: lightColor, fontSize: 25.0),
+        headline3: TextStyle(
+            fontFamily: 'quicksand', color: lightColor, fontSize: 20.0),
+        subtitle1: TextStyle(
+            fontFamily: 'quicksand', color: lightColor, fontSize: 15.0),
+        subtitle2: TextStyle(
+            fontFamily: 'quicksand', color: lightColor, fontSize: 10.0))
+
   );
 }
