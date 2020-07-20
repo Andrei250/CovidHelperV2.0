@@ -1,6 +1,5 @@
 import 'package:covidhelper_v2/components/RegisterUser.dart';
 import 'package:flutter/material.dart';
-import 'package:covidhelper_v2/utils/app_theme.dart';
 
 class AdminPanel extends StatefulWidget {
   @override
@@ -9,10 +8,8 @@ class AdminPanel extends StatefulWidget {
 
 class _AdminPanelState extends State<AdminPanel> {
   int _selectedIndex = 1;
-  static const TextStyle optionStyle = TextStyle(
-      fontSize: 30,
-      fontWeight: FontWeight.bold
-  );
+  static const TextStyle optionStyle =
+      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
     Text(
       'Index 0: Home',
@@ -57,7 +54,7 @@ class _AdminPanelState extends State<AdminPanel> {
             title: Text('More'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.featured_play_list ),
+            icon: Icon(Icons.featured_play_list),
             title: Text('Users'),
           ),
           BottomNavigationBarItem(
