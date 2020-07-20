@@ -14,6 +14,7 @@ class AppTheme {
   static final ThemeData darkTheme = ThemeData(
 
     scaffoldBackgroundColor: primaryColor,
+    buttonColor: Colors.red[400],
 
     appBarTheme: AppBarTheme(
       color: secondaryColor,
@@ -34,6 +35,7 @@ class AppTheme {
     iconTheme: IconThemeData(
       color: Colors.white54,
     ),
+
     textTheme: TextTheme(
       title: TextStyle(
         color: Colors.white,
