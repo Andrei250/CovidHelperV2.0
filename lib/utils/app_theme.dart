@@ -12,7 +12,9 @@ class AppTheme {
   static const Color secondaryAccentColor = Color.fromRGBO(63, 125, 32, 1);
 
   static final ThemeData darkTheme = ThemeData(
+
     scaffoldBackgroundColor: primaryColor,
+
     appBarTheme: AppBarTheme(
       color: secondaryColor,
       elevation: 0,
