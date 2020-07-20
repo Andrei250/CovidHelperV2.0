@@ -12,10 +12,8 @@ class AppTheme {
   static const Color secondaryAccentColor = Color.fromRGBO(63, 125, 32, 1);
 
   static final ThemeData darkTheme = ThemeData(
-
     scaffoldBackgroundColor: primaryColor,
     buttonColor: Colors.red[400],
-
     appBarTheme: AppBarTheme(
       color: secondaryColor,
       elevation: 0,
@@ -35,7 +33,6 @@ class AppTheme {
     iconTheme: IconThemeData(
       color: Colors.white54,
     ),
-
     textTheme: TextTheme(
         headline1: TextStyle(
             fontFamily: 'quicksand', color: lightColor, fontSize: 40.0),
@@ -46,7 +43,27 @@ class AppTheme {
         subtitle1: TextStyle(
             fontFamily: 'quicksand', color: lightColor, fontSize: 15.0),
         subtitle2: TextStyle(
-            fontFamily: 'quicksand', color: lightColor, fontSize: 10.0))
+            fontFamily: 'quicksand', color: lightColor, fontSize: 10.0)),
 
+    inputDecorationTheme: InputDecorationTheme(
+      labelStyle: eLabel,
+      enabledBorder: new OutlineInputBorder(
+        borderRadius: new BorderRadius.circular(25.0),
+        borderSide: BorderSide(
+          color: AppTheme.primaryVariantColor,
+        ),
+      ),
+      focusedBorder: new OutlineInputBorder(
+        borderRadius: new BorderRadius.circular(25.0),
+        borderSide: BorderSide(
+          color: AppTheme.lightColor,
+        ),
+      ),
+    ),
   );
 }
+final eLabel = TextStyle(
+  color: Colors.white,
+  fontWeight: FontWeight.bold,
+  fontFamily: 'quicksand',
+);
