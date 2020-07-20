@@ -46,3 +46,19 @@ class AppTheme {
     ),
   );
 }
+
+final eHintText = TextStyle(
+  color: Colors.white54,
+  fontFamily: 'OpenSans',
+);
+
+final eLabel = TextStyle(
+  color: Colors.white,
+  fontWeight: FontWeight.bold,
+  fontFamily: 'OpenSans',
+);
+
+final LBoxDecoration = BoxDecoration(
+  color: Color.fromRGBO(37, 34, 35, 1),
+  borderRadius: BorderRadius.circular(10.0),
+);
