@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:covidhelper_v2/utils/app_theme.dart';
 
 void main() {
   runApp(MyApp());
@@ -97,12 +98,10 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
+            Text('You have pushed the button this many times:',
+                style: TextStyle(fontFamily: 'Quicksand')),
             Text(
               '$_counter',
-              style: Theme.of(context).textTheme.headline4,
             ),
           ],
         ),
