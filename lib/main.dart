@@ -3,6 +3,6 @@ import 'package:covidhelper_v2/pages/register_email.dart';
 import 'package:covidhelper_v2/utils/app_theme.dart';
 
 void main() => runApp(MaterialApp(
-    theme: ThemeData.dark(),
+    theme: AppTheme.darkTheme,
   home: RegisterEmail()
 ));
