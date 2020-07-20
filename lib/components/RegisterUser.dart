@@ -1,6 +1,5 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:covidhelper_v2/utils/app_theme.dart';
+import 'package:flutter/material.dart';
 
 class RegisterUser extends StatefulWidget {
   @override
@@ -21,7 +20,8 @@ class _RegisterUserState extends State<RegisterUser> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(
-        children: <Widget>[ Container(
+        children: <Widget>[
+          Container(
             padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
             child: Form(
               child: Column(
@@ -41,41 +41,39 @@ class _RegisterUserState extends State<RegisterUser> {
                       });
                     },
                   ),
-
                   SizedBox(height: 20.0),
-
                   TextFormField(
                     onChanged: (val) {
                       setState(() => first_name = val);
                     },
                   ),
-
-                  SizedBox(height: 20.0,),
-
+                  SizedBox(
+                    height: 20.0,
+                  ),
                   TextFormField(
                     onChanged: (val) {
                       setState(() => last_name = val);
                     },
                   ),
-
-                  SizedBox(height: 20.0,),
-
+                  SizedBox(
+                    height: 20.0,
+                  ),
                   TextFormField(
                     onChanged: (val) {
                       setState(() => phone = val);
                     },
                   ),
-
-                  SizedBox(height: 20.0,),
-
+                  SizedBox(
+                    height: 20.0,
+                  ),
                   TextFormField(
                     onChanged: (val) {
                       setState(() => address = val);
                     },
                   ),
-
-                  SizedBox(height: 20.0,),
-
+                  SizedBox(
+                    height: 20.0,
+                  ),
                   RaisedButton(
                     color: AppTheme.darkTheme.buttonColor,
                     child: Text(
