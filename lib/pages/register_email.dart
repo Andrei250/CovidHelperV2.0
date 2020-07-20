@@ -34,15 +34,15 @@ class _RegisterEmailState extends State<RegisterEmail> {
                   ],
                 ),
               ),
-              Container(
-                padding: EdgeInsets.all(10.0),
-                decoration: BoxDecoration(
-                  border: Border(bottom: BorderSide(color: Colors.red))
-                ),
-                child: TextField(decoration: InputDecoration(
-                  hintText: "aasdaaaaaaaaaaaaaaaasd"
-                ),),
-              )
+//              Container(
+//                padding: EdgeInsets.all(10.0),
+//                decoration: BoxDecoration(
+//                  border: Border(bottom: BorderSide(color: Colors.red))
+//                ),
+//                child: TextField(decoration: InputDecoration(
+//                  hintText: "aasdaaaaaaaaaaaaaaaasd"
+//                ),),
+//              )
             ],
           ),
         ),
