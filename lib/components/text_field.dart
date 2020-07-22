@@ -1,27 +1,51 @@
-import 'package:flutter/material.dart';
 import 'package:covidhelper_v2/utils/app_theme.dart';
-
+import 'package:flutter/material.dart';
 
 class InputTextField extends StatefulWidget {
+  final TextInputType inputType;
+  final String label;
+
+  InputTextField({this.inputType, this.label});
+
   @override
   _InputTextFieldState createState() => _InputTextFieldState();
 }
 
 class _InputTextFieldState extends State<InputTextField> {
+  FocusNode focusNode = new FocusNode();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    focusNode = FocusNode();
+    focusNode.addListener(onOnFocusNodeEvent);
+  }
+
+  onOnFocusNodeEvent() {
+    setState(() {});
+  }
+
+  @override
+  void dispose() {
+    // Clean up the focus node when the Form is disposed.
+    focusNode.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-//      body: TextFormField(
-//        keyboardType: widget.inputType,
-//        focusNode: focusNode,
-//        style: AppTheme.darkTheme.textTheme.subtitle1,
-//        cursorColor: AppTheme.lightColor,
-//        decoration: new InputDecoration(
-//          labelText: '${widget.label}',
-//          labelStyle:
-//          focusNode.hasFocus ? eLabelFocused : eLabel,
-//        ),
-//      ),,
+      body: TextFormField(
+        keyboardType: widget.inputType,
+        focusNode: focusNode,
+        style: AppTheme.darkTheme.textTheme.subtitle1,
+        cursorColor: AppTheme.lightColor,
+        decoration: new InputDecoration(
+          labelText: '${widget.label}',
+          labelStyle: focusNode.hasFocus ? eLabelFocused : eLabel,
+        ),
+      ),
     );
   }
 }
