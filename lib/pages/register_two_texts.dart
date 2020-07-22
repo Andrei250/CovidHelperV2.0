@@ -3,25 +3,27 @@ import 'package:covidhelper_v2/utils/app_theme.dart';
 import 'package:covidhelper_v2/utils/logo_register.dart';
 import 'package:flutter/material.dart';
 
-class RegisterOneText extends StatefulWidget {
-  final String label;
+class RegisterTwoTexts extends StatefulWidget {
+  final String labelOne;
+  final String labelTwo;
   final String welcomeTextBig;
   final String welcomeTextSmall;
-  final bool passwordText;
   final TextInputType inputType;
+  final bool passwordText;
 
-  RegisterOneText(
-      {this.label,
+  RegisterTwoTexts(
+      {this.labelOne,
+      this.labelTwo,
       this.welcomeTextBig,
       this.welcomeTextSmall,
-      this.passwordText,
-      this.inputType});
+      this.inputType,
+      this.passwordText});
 
   @override
-  _RegisterOneTextState createState() => _RegisterOneTextState();
+  _RegisterTwoTextsState createState() => _RegisterTwoTextsState();
 }
 
-class _RegisterOneTextState extends State<RegisterOneText> {
+class _RegisterTwoTextsState extends State<RegisterTwoTexts> {
   @override
   void initState() {
     // TODO: implement initState
@@ -48,8 +50,8 @@ class _RegisterOneTextState extends State<RegisterOneText> {
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0.0, 60.0, 0.0, 20.0),
                       child: SizedBox(
-                        height: 70.0,
-                        width: 70.0,
+                        height: 60.0,
+                        width: 60.0,
                         child: LogoRegister(),
                       ),
                     ),
@@ -58,15 +60,32 @@ class _RegisterOneTextState extends State<RegisterOneText> {
                     Text('${widget.welcomeTextSmall}',
                         style: AppTheme.darkTheme.textTheme.headline3),
                     SizedBox(
-                      height: 30.0,
+                      height: 20.0,
                     ),
-                    SizedBox(
-                        width: 320.0,
-                        height: 100.0,
-                        child: InputTextField(
-                            inputType: widget.inputType,
+                    Column(
+                      children: <Widget>[
+                        SizedBox(
+                          width: 320.0,
+                          height: 50.0,
+                          child: InputTextField(
+                            label: '${widget.labelOne}',
                             passwordText: widget.passwordText,
-                            label: '${widget.label}')),
+                            inputType: widget.inputType,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 20.0,
+                        ),
+                        SizedBox(
+                            width: 320.0,
+                            height: 50.0,
+                            child: InputTextField(
+                              label: '${widget.labelTwo}',
+                              passwordText: widget.passwordText,
+                              inputType: widget.inputType,
+                            ))
+                      ],
+                    ),
                   ],
                 ),
               ),

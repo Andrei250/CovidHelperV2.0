@@ -14,7 +14,8 @@ class _RegisterPhoneState extends State<RegisterPhone> {
       label: 'Telefon',
       welcomeTextBig: 'Numar de telefon',
       welcomeTextSmall: 'Indroduceti numarul de telefon',
-          inputType: TextInputType.number,
+      inputType: TextInputType.number,
+      passwordText: false,
     ));
   }
 }

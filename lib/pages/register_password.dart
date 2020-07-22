@@ -1,0 +1,22 @@
+import 'package:covidhelper_v2/pages/register_two_texts.dart';
+import 'package:flutter/material.dart';
+
+class RegisterPassword extends StatefulWidget {
+  @override
+  _RegisterPasswordState createState() => _RegisterPasswordState();
+}
+
+class _RegisterPasswordState extends State<RegisterPassword> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        child: RegisterTwoTexts(
+      labelOne: 'Parola',
+      labelTwo: 'Confirmati parola',
+      welcomeTextBig: 'Alegeti o parola',
+      welcomeTextSmall: 'Indroduceti parola',
+      passwordText: true,
+      inputType: TextInputType.text,
+    ));
+  }
+}
