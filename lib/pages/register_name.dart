@@ -1,19 +1,19 @@
 import 'package:covidhelper_v2/pages/register_one_text.dart';
 import 'package:flutter/material.dart';
 
-class RegisterEmail extends StatefulWidget {
+class RegisterName extends StatefulWidget {
   @override
-  _RegisterEmailState createState() => _RegisterEmailState();
+  _RegisterNameState createState() => _RegisterNameState();
 }
 
-class _RegisterEmailState extends State<RegisterEmail> {
+class _RegisterNameState extends State<RegisterName> {
   @override
   Widget build(BuildContext context) {
     return Container(
         child: RegisterOneText(
-          label: 'Email',
-          welcomeTextBig: 'Creati un cont nou',
-          welcomeTextSmall: 'Indroduceti adresa de email',
+          label: 'Numele si prenumele',
+          welcomeTextBig: 'Numele si prenumele',
+          welcomeTextSmall: 'Indroduceti numele si prenumele',
           inputType: TextInputType.text,
           passwordText: false,
         ));

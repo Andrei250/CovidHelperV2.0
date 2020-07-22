@@ -11,8 +11,8 @@ class LogoRegister extends StatelessWidget {
       body: SvgPicture.asset(
         logo_one,
         color: AppTheme.lightColor,
-        height: 70.0,
-        width: 70.0,
+        height: 60.0,
+        width: 60.0,
       ),
     );
   }
