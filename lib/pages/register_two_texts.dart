@@ -10,6 +10,8 @@ class RegisterTwoTexts extends StatefulWidget {
   final String welcomeTextSmall;
   final TextInputType inputType;
   final bool passwordText;
+  final VoidCallback onPressed;
+  final String route;
 
   RegisterTwoTexts(
       {this.labelOne,
@@ -17,7 +19,9 @@ class RegisterTwoTexts extends StatefulWidget {
       this.welcomeTextBig,
       this.welcomeTextSmall,
       this.inputType,
-      this.passwordText});
+      this.passwordText,
+      this.onPressed,
+      this.route});
 
   @override
   _RegisterTwoTextsState createState() => _RegisterTwoTextsState();
@@ -37,7 +41,7 @@ class _RegisterTwoTextsState extends State<RegisterTwoTexts> {
       theme: AppTheme.darkTheme,
       home: Scaffold(
         floatingActionButton:
-            new RaisedButton(onPressed: () {}, child: Text('Inainte')),
+            new RaisedButton(child: Text('Inainte')),
         body: Container(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -48,7 +52,7 @@ class _RegisterTwoTextsState extends State<RegisterTwoTexts> {
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(0.0, 60.0, 0.0, 20.0),
+                      padding: const EdgeInsets.fromLTRB(0.0, 40.0, 0.0, 20.0),
                       child: SizedBox(
                         height: 60.0,
                         width: 60.0,

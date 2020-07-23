@@ -16,6 +16,10 @@ class _RegisterEmailState extends State<RegisterEmail> {
           welcomeTextSmall: 'Indroduceti adresa de email',
           inputType: TextInputType.text,
           passwordText: false,
+          onPressed: () {
+            Navigator.of(context).pushNamed('/register_phone');
+          },
+          route: '/register_email',
         ));
   }
 }
