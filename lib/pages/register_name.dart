@@ -11,11 +11,15 @@ class _RegisterNameState extends State<RegisterName> {
   Widget build(BuildContext context) {
     return Container(
         child: RegisterOneText(
-          label: 'Numele si prenumele',
-          welcomeTextBig: 'Numele si prenumele',
-          welcomeTextSmall: 'Indroduceti numele si prenumele',
-          inputType: TextInputType.text,
-          passwordText: false,
-        ));
+      label: 'Numele si prenumele',
+      welcomeTextBig: 'Numele si prenumele',
+      welcomeTextSmall: 'Indroduceti numele si prenumele',
+      inputType: TextInputType.text,
+      passwordText: false,
+      onPressed: () {
+          Navigator.of(context).pushNamed('/register_email');
+        },
+          route: '/register_name',
+    ));
   }
 }

@@ -17,6 +17,11 @@ class _RegisterPasswordState extends State<RegisterPassword> {
       welcomeTextSmall: 'Indroduceti parola',
       passwordText: true,
       inputType: TextInputType.text,
+          onPressed: () {
+            Navigator.of(context).pushNamed('/register_email');
+          },
+          route: '/register_password',
+
     ));
   }
 }

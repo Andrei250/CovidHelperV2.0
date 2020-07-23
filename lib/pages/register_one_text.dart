@@ -1,7 +1,9 @@
 import 'package:covidhelper_v2/components/text_field.dart';
+import 'package:covidhelper_v2/pages/register_all.dart';
 import 'package:covidhelper_v2/utils/app_theme.dart';
 import 'package:covidhelper_v2/utils/logo_register.dart';
 import 'package:flutter/material.dart';
+import 'package:covidhelper_v2/pages/register_all.dart';
 
 class RegisterOneText extends StatefulWidget {
   final String label;
@@ -9,13 +11,17 @@ class RegisterOneText extends StatefulWidget {
   final String welcomeTextSmall;
   final bool passwordText;
   final TextInputType inputType;
+  final VoidCallback onPressed;
+  final String route;
 
   RegisterOneText(
       {this.label,
       this.welcomeTextBig,
       this.welcomeTextSmall,
       this.passwordText,
-      this.inputType});
+      this.inputType,
+      this.onPressed,
+      this.route});
 
   @override
   _RegisterOneTextState createState() => _RegisterOneTextState();
@@ -34,8 +40,11 @@ class _RegisterOneTextState extends State<RegisterOneText> {
       debugShowCheckedModeBanner: false,
       theme: AppTheme.darkTheme,
       home: Scaffold(
-        floatingActionButton:
-            new RaisedButton(onPressed: () {}, child: Text('Inainte')),
+        floatingActionButton: new RaisedButton(
+            child: Text('Inainte'),
+            onPressed:
+              widget.onPressed,
+            ),
         body: Container(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -46,7 +55,7 @@ class _RegisterOneTextState extends State<RegisterOneText> {
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(0.0, 60.0, 0.0, 20.0),
+                      padding: const EdgeInsets.fromLTRB(0.0, 40.0, 0.0, 20.0),
                       child: SizedBox(
                         height: 70.0,
                         width: 70.0,
