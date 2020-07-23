@@ -44,7 +44,7 @@ class _LoginState extends State<Login> {
                         alignment: Alignment.centerLeft,
                         decoration: LBoxDecoration,
                         height: 60.0,
-                        child: TextField(
+                        child: TextFormField(
                           keyboardType: TextInputType.emailAddress,
                           style: AppTheme.darkTheme.textTheme.subtitle1,
                           decoration: InputDecoration(
@@ -77,7 +77,7 @@ class _LoginState extends State<Login> {
                         alignment: Alignment.centerLeft,
                         decoration: LBoxDecoration,
                         height: 60.0,
-                        child: TextField(
+                        child: TextFormField(
                           obscureText: true,
                           style:  AppTheme.darkTheme.textTheme.subtitle1,
                           decoration: InputDecoration(
