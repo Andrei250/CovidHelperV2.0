@@ -14,7 +14,12 @@ class _RegisterEmailState extends State<RegisterEmail> {
           label: 'Email',
           welcomeTextBig: 'Creati un cont nou',
           welcomeTextSmall: 'Indroduceti adresa de email',
-          inputType: TextInputType.number,
+          inputType: TextInputType.text,
+          passwordText: false,
+          onPressed: () {
+            Navigator.of(context).pushNamed('/register_phone');
+          },
+          route: '/register_email',
         ));
   }
 }

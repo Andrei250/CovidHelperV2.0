@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 class InputTextField extends StatefulWidget {
   final TextInputType inputType;
   final String label;
+  final bool passwordText;
 
-  InputTextField({this.inputType, this.label});
+
+  InputTextField({ this.inputType, this.label, this.passwordText });
 
   @override
   _InputTextFieldState createState() => _InputTextFieldState();
@@ -37,6 +39,7 @@ class _InputTextFieldState extends State<InputTextField> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: TextFormField(
+        obscureText: widget.passwordText,
         keyboardType: widget.inputType,
         focusNode: focusNode,
         style: AppTheme.darkTheme.textTheme.subtitle1,
