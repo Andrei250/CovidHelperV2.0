@@ -1,20 +1,19 @@
+import 'package:covidhelper_v2/components/more_menu_admin.dart';
 import 'package:covidhelper_v2/components/list_users.dart';
+import 'package:covidhelper_v2/components/more_menu_admin.dart';
 import 'package:covidhelper_v2/components/register_user.dart';
 import 'package:covidhelper_v2/models/vulnerable_person.dart';
 import 'package:covidhelper_v2/services/firestore_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 class AdminPanel extends StatefulWidget {
   @override
   _AdminPanelState createState() => _AdminPanelState();
 }
-
 class _AdminPanelState extends State<AdminPanel> {
   int _selectedIndex = 1;
-
   static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
     Text(
       'Index 0: Home',
@@ -29,23 +28,19 @@ class _AdminPanelState extends State<AdminPanel> {
       style: optionStyle,
     ),
   ];
-
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
   }
-
   Widget _getFragment(int index) {
     if (index == 0) {
-      return _widgetOptions.elementAt(0);
+      return MoreMenuAdmin();
     } else if (index == 2) {
       return RegisterUser();
     }
-
     return ListUsers();
   }
-
   @override
   Widget build(BuildContext context) {
     return StreamProvider<List<VulnerablePerson>>.value(
