@@ -1,7 +1,4 @@
 import 'package:covidhelper_v2/components/form_input.dart';
-import 'package:covidhelper_v2/components/text_field.dart';
-import 'package:covidhelper_v2/models/vulnerable_person.dart';
-import 'package:covidhelper_v2/services/firestore_service.dart';
 import 'package:covidhelper_v2/services/firestore_service.dart';
 import 'package:covidhelper_v2/utils/app_theme.dart';
 import 'package:flutter/material.dart';
