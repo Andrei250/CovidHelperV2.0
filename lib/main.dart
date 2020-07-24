@@ -14,5 +14,5 @@ import 'components/list_users.dart';
 
 void main() => runApp(MaterialApp(
     theme: AppTheme.darkTheme,
-  home: Register(),
+  home: AdminPanel(),
 ));

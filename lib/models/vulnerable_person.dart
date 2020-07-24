@@ -26,7 +26,6 @@ class VulnerablePerson {
     var dataMap = Map<String, dynamic>();
     dataMap['first_name'] = this.first_name;
     dataMap['last_name'] = this.last_name;
-    dataMap['uid'] = this.uid;
     dataMap['address'] = this.address;
     dataMap['email'] = this.email;
     dataMap['phone'] = this.phone;
