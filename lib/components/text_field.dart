@@ -1,3 +1,4 @@
+import 'package:covidhelper_v2/models/vendor.dart';
 import 'package:covidhelper_v2/utils/app_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -15,6 +16,7 @@ class InputTextField extends StatefulWidget {
 
 class _InputTextFieldState extends State<InputTextField> {
   FocusNode focusNode = new FocusNode();
+  String value;
 
   @override
   void initState() {
@@ -37,6 +39,7 @@ class _InputTextFieldState extends State<InputTextField> {
 
   @override
   Widget build(BuildContext context) {
+    final user = InheritedModel.inheritFrom<Vendor>(context, aspect: 'one');
     return Scaffold(
       body: TextFormField(
         obscureText: widget.passwordText,
@@ -48,6 +51,10 @@ class _InputTextFieldState extends State<InputTextField> {
           labelText: '${widget.label}',
           labelStyle: focusNode.hasFocus ? eLabelFocused : eLabel,
         ),
+        onChanged: (val) {
+          setState(() => value = val);
+          print(value);
+        },
       ),
     );
   }
