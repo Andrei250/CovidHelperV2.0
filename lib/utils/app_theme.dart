@@ -13,7 +13,6 @@ class AppTheme {
 
   static final ThemeData darkTheme = ThemeData(
     scaffoldBackgroundColor: primaryColor,
-    buttonColor: Colors.red[400],
     appBarTheme: AppBarTheme(
       color: secondaryColor,
       elevation: 0,
@@ -44,9 +43,13 @@ class AppTheme {
             fontFamily: 'quicksand', color: lightColor, fontSize: 15.0),
         subtitle2: TextStyle(
             fontFamily: 'quicksand', color: lightColor, fontSize: 10.0)),
-
+    buttonTheme: ButtonThemeData(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(25.0),
+      ),
+      buttonColor: lightColor,
+    ),
     inputDecorationTheme: InputDecorationTheme(
-      labelStyle: eLabel,
       enabledBorder: new OutlineInputBorder(
         borderRadius: new BorderRadius.circular(25.0),
         borderSide: BorderSide(
@@ -57,6 +60,7 @@ class AppTheme {
         borderRadius: new BorderRadius.circular(25.0),
         borderSide: BorderSide(
           color: AppTheme.lightColor,
+          width: 1.5,
         ),
       ),
     ),
@@ -64,21 +68,15 @@ class AppTheme {
 }
 
 
-final eHintText = TextStyle(
-  color: Colors.white54,
-  fontFamily: 'quicksand',
-);
-
-
 final eLabel = TextStyle(
-  color: Colors.white,
-  fontWeight: FontWeight.bold,
+  color: AppTheme.primaryVariantColor,
+  fontWeight: FontWeight.normal,
   fontFamily: 'quicksand',
-
 );
 
-final LBoxDecoration = BoxDecoration(
-  color: Color.fromRGBO(37, 34, 35, 1),
-  borderRadius: BorderRadius.circular(10.0),
+final eLabelFocused = TextStyle(
+  color: AppTheme.lightColor,
+  fontWeight: FontWeight.bold,
 );
+
 

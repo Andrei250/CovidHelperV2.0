@@ -1,14 +1,38 @@
 import 'package:covidhelper_v2/components/text_field.dart';
-import 'package:flutter/material.dart';
 import 'package:covidhelper_v2/utils/app_theme.dart';
 import 'package:covidhelper_v2/utils/logo_register.dart';
+import 'package:flutter/material.dart';
 
-class Login extends StatefulWidget {
+class RegisterTwoTexts extends StatefulWidget {
+  final String labelOne;
+  final String labelTwo;
+  final String welcomeTextBig;
+  final String welcomeTextSmall;
+  final TextInputType inputType;
+  final bool passwordText;
+  final VoidCallback onPressed;
+  final String route;
+
+  RegisterTwoTexts(
+      {this.labelOne,
+      this.labelTwo,
+      this.welcomeTextBig,
+      this.welcomeTextSmall,
+      this.inputType,
+      this.passwordText,
+      this.onPressed,
+      this.route});
+
   @override
-  _LoginState createState() => _LoginState();
+  _RegisterTwoTextsState createState() => _RegisterTwoTextsState();
 }
 
-class _LoginState extends State<Login> {
+class _RegisterTwoTextsState extends State<RegisterTwoTexts> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +41,7 @@ class _LoginState extends State<Login> {
       theme: AppTheme.darkTheme,
       home: Scaffold(
         floatingActionButton:
-        new RaisedButton(child: Text('Inainte')),
+            new RaisedButton(child: Text('Inainte')),
         body: Container(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -35,10 +59,12 @@ class _LoginState extends State<Login> {
                         child: LogoRegister(),
                       ),
                     ),
-                    Text('Conecteaza-te',
+                    Text('${widget.welcomeTextBig}',
                         style: AppTheme.darkTheme.textTheme.headline2),
+                    Text('${widget.welcomeTextSmall}',
+                        style: AppTheme.darkTheme.textTheme.headline3),
                     SizedBox(
-                      height: 40.0,
+                      height: 20.0,
                     ),
                     Column(
                       children: <Widget>[
@@ -46,9 +72,9 @@ class _LoginState extends State<Login> {
                           width: 320.0,
                           height: 50.0,
                           child: InputTextField(
-                            label: 'Email',
-                            passwordText: false,
-                            inputType: TextInputType.text,
+                            label: '${widget.labelOne}',
+                            passwordText: widget.passwordText,
+                            inputType: widget.inputType,
                           ),
                         ),
                         SizedBox(
@@ -58,9 +84,9 @@ class _LoginState extends State<Login> {
                             width: 320.0,
                             height: 50.0,
                             child: InputTextField(
-                              label: 'Parola',
-                              passwordText: true,
-                              inputType: TextInputType.text,
+                              label: '${widget.labelTwo}',
+                              passwordText: widget.passwordText,
+                              inputType: widget.inputType,
                             ))
                       ],
                     ),
