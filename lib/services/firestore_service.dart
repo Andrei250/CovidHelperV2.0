@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:covidhelper_v2/models/vulnerable_person.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_user_stream/firebase_user_stream.dart';
 
 class FirestoreService {
   Firestore _db = Firestore.instance;
