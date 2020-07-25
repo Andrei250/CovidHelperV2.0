@@ -5,7 +5,6 @@ import 'package:covidhelper_v2/pages/register/register_password.dart';
 import 'package:covidhelper_v2/pages/register/register_phone.dart';
 import 'package:flutter/material.dart';
 
-
 class Register extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
