@@ -1,7 +1,6 @@
+import 'package:covidhelper_v2/pages/register/register_one_text.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
-
-import 'file:///C:/Users/pc3/Desktop/CovidHelperFlutter/CovidHelperV2.0/lib/pages/register/register_one_text.dart';
 
 class RegisterEmail extends StatefulWidget {
   @override
