@@ -13,6 +13,8 @@ class RegisterTwoTexts extends StatefulWidget {
   final bool passwordText;
   final VoidCallback onPressed;
   final String route;
+  final Function(String) changeFirstValue;
+  final Function(String) changeSecondValue;
 
   RegisterTwoTexts(
       {this.labelOne,
@@ -22,7 +24,9 @@ class RegisterTwoTexts extends StatefulWidget {
       this.inputType,
       this.passwordText,
       this.onPressed,
-      this.route});
+      this.route,
+      this.changeFirstValue,
+      this.changeSecondValue});
 
   @override
   _RegisterTwoTextsState createState() => _RegisterTwoTextsState();
@@ -38,12 +42,13 @@ class _RegisterTwoTextsState extends State<RegisterTwoTexts> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: AppTheme.darkTheme,
       onGenerateRoute: RegisterAll.generateRoute,
+      theme: AppTheme.darkTheme,
       home: Scaffold(
-        floatingActionButton:
-            new RaisedButton(child: Text('Inainte')),
+        floatingActionButton: new RaisedButton(
+          child: Text('Inainte'),
+          onPressed: widget.onPressed,
+        ),
         body: Container(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -77,6 +82,7 @@ class _RegisterTwoTextsState extends State<RegisterTwoTexts> {
                             label: '${widget.labelOne}',
                             passwordText: widget.passwordText,
                             inputType: widget.inputType,
+                            changeValue: widget.changeFirstValue,
                           ),
                         ),
                         SizedBox(
@@ -89,6 +95,7 @@ class _RegisterTwoTextsState extends State<RegisterTwoTexts> {
                               label: '${widget.labelTwo}',
                               passwordText: widget.passwordText,
                               inputType: widget.inputType,
+                              changeValue: widget.changeSecondValue,
                             ))
                       ],
                     ),

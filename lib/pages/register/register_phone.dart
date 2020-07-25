@@ -1,5 +1,6 @@
-import 'file:///C:/Users/pc3/Desktop/CovidHelperFlutter/CovidHelperV2.0/lib/pages/register/register_one_text.dart';
 import 'package:flutter/material.dart';
+
+import 'file:///C:/Users/pc3/Desktop/CovidHelperFlutter/CovidHelperV2.0/lib/pages/register/register_one_text.dart';
 
 class RegisterPhone extends StatefulWidget {
   @override
@@ -7,8 +8,14 @@ class RegisterPhone extends StatefulWidget {
 }
 
 class _RegisterPhoneState extends State<RegisterPhone> {
+  String phoneNumber;
+
   @override
   Widget build(BuildContext context) {
+    void changePhoneNumber (String val) {
+      phoneNumber = val;
+    }
+
     return Container(
         child: RegisterOneText(
       label: 'Telefon',
@@ -16,10 +23,12 @@ class _RegisterPhoneState extends State<RegisterPhone> {
       welcomeTextSmall: 'Indroduceti numarul de telefon',
       inputType: TextInputType.number,
       passwordText: false,
-      onPressed: () {
-        Navigator.of(context).pushNamed('/register_password');
-      },
       route: '/register_phone',
+      changeValue: changePhoneNumber,
+      onPressed: () {
+        Navigator.of(context).pushNamed('/register_password', arguments: phoneNumber);
+
+      },
     ));
   }
 }

@@ -76,3 +76,9 @@ final eLabelFocused = TextStyle(
   fontWeight: FontWeight.bold,
   fontFamily: 'quicksand',
 );
+
+final eLabelError = TextStyle(
+  color: Colors.red[700],
+  fontWeight: FontWeight.bold,
+  fontFamily: 'quicksand',
+);

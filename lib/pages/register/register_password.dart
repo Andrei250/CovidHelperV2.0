@@ -1,5 +1,6 @@
-import 'file:///C:/Users/pc3/Desktop/CovidHelperFlutter/CovidHelperV2.0/lib/pages/register/register_two_texts.dart';
 import 'package:flutter/material.dart';
+
+import 'file:///C:/Users/pc3/Desktop/CovidHelperFlutter/CovidHelperV2.0/lib/pages/register/register_two_texts.dart';
 
 class RegisterPassword extends StatefulWidget {
   @override
@@ -7,8 +8,19 @@ class RegisterPassword extends StatefulWidget {
 }
 
 class _RegisterPasswordState extends State<RegisterPassword> {
+  String password;
+  String passwordConfirm;
+
   @override
   Widget build(BuildContext context) {
+    void changePassword(String val) {
+      password = val;
+    }
+
+    void changePasswordConfirm(String val) {
+      passwordConfirm = val;
+    }
+
     return Container(
         child: RegisterTwoTexts(
       labelOne: 'Parola',
@@ -17,11 +29,12 @@ class _RegisterPasswordState extends State<RegisterPassword> {
       welcomeTextSmall: 'Indroduceti parola',
       passwordText: true,
       inputType: TextInputType.text,
-          onPressed: () {
-            Navigator.of(context).pushNamed('/register_email');
-          },
-          route: '/register_password',
-
+      route: '/register_password',
+      changeFirstValue: changePassword,
+      changeSecondValue: changePasswordConfirm,
+      onPressed: () {
+        Navigator.of(context).pushNamed('/home', arguments: password);
+      },
     ));
   }
 }

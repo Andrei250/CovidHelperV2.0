@@ -7,8 +7,13 @@ class RegisterEmail extends StatefulWidget {
 }
 
 class _RegisterEmailState extends State<RegisterEmail> {
+  String email;
+
   @override
   Widget build(BuildContext context) {
+   void changeEmail (String val) {
+     email = val;
+   }
     return Container(
         child: RegisterOneText(
           label: 'Email',
@@ -16,10 +21,11 @@ class _RegisterEmailState extends State<RegisterEmail> {
           welcomeTextSmall: 'Indroduceti adresa de email',
           inputType: TextInputType.text,
           passwordText: false,
-          onPressed: () {
-            Navigator.of(context).pushNamed('/register_phone');
-          },
           route: '/register_email',
+          changeValue: changeEmail,
+          onPressed: () {
+            Navigator.of(context).pushNamed('/register_phone', arguments: email);
+          },
         ));
   }
 }

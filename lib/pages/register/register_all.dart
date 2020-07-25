@@ -1,4 +1,5 @@
 import 'file:///C:/Users/pc3/Desktop/CovidHelperFlutter/CovidHelperV2.0/lib/pages/register/register_email.dart';
+import 'package:covidhelper_v2/pages/home.dart';
 import 'package:covidhelper_v2/pages/register/register_name.dart';
 import 'package:covidhelper_v2/pages/register/register_password.dart';
 import 'file:///C:/Users/pc3/Desktop/CovidHelperFlutter/CovidHelperV2.0/lib/pages/register/register_phone.dart';
@@ -17,17 +18,28 @@ class Register extends StatelessWidget {
 
 class RegisterAll {
   static Route<dynamic> generateRoute(RouteSettings settings) {
+    final args = settings.arguments;
     switch (settings.name) {
       case '/register_name':
         return MaterialPageRoute(builder: (_) => RegisterName());
       case '/register_email':
+        print(args);
+
         return MaterialPageRoute(builder: (_) => RegisterEmail());
+
       case '/register_phone':
+        print(args);
         return MaterialPageRoute(builder: (_) => RegisterPhone());
       case '/register_password':
+        print(args);
         return MaterialPageRoute(builder: (_) => RegisterPassword());
         // TODO add pushReplacementNamed !!!!!!!!!!!!!!!
+      case '/home':
+        print(args);
+        return MaterialPageRoute(builder: (_) => Home());
+        break;
       default:
+        print(args);
         return null;
     }
   }

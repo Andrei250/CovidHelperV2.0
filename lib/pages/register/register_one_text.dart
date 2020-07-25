@@ -12,6 +12,7 @@ class RegisterOneText extends StatefulWidget {
   final TextInputType inputType;
   final VoidCallback onPressed;
   final String route;
+  final Function(String) changeValue;
 
   RegisterOneText(
       {this.label,
@@ -20,13 +21,16 @@ class RegisterOneText extends StatefulWidget {
       this.passwordText,
       this.inputType,
       this.onPressed,
-      this.route});
+      this.route,
+      this.changeValue});
 
   @override
   _RegisterOneTextState createState() => _RegisterOneTextState();
 }
 
 class _RegisterOneTextState extends State<RegisterOneText> {
+  String name;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -35,16 +39,19 @@ class _RegisterOneTextState extends State<RegisterOneText> {
 
   @override
   Widget build(BuildContext context) {
+    void changeName(String val) {
+      name = val;
+    }
+
     return MaterialApp(
       onGenerateRoute: RegisterAll.generateRoute,
       debugShowCheckedModeBanner: false,
       theme: AppTheme.darkTheme,
       home: Scaffold(
         floatingActionButton: new RaisedButton(
-            child: Text('Inainte'),
-            onPressed:
-              widget.onPressed,
-            ),
+          child: Text('Inainte'),
+          onPressed: widget.onPressed,
+        ),
         body: Container(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -73,9 +80,11 @@ class _RegisterOneTextState extends State<RegisterOneText> {
                         width: 320.0,
                         height: 100.0,
                         child: InputTextField(
-                            inputType: widget.inputType,
-                            passwordText: widget.passwordText,
-                            label: '${widget.label}')),
+                          inputType: widget.inputType,
+                          passwordText: widget.passwordText,
+                          label: '${widget.label}',
+                          changeValue: widget.changeValue,
+                        )),
                   ],
                 ),
               ),

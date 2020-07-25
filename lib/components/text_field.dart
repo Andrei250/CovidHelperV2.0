@@ -6,9 +6,10 @@ class InputTextField extends StatefulWidget {
   final TextInputType inputType;
   final String label;
   final bool passwordText;
+  final Function(String) changeValue;
 
 
-  InputTextField({ this.inputType, this.label, this.passwordText });
+  InputTextField({ this.inputType, this.label, this.passwordText, this.changeValue});
 
   @override
   _InputTextFieldState createState() => _InputTextFieldState();
@@ -51,10 +52,7 @@ class _InputTextFieldState extends State<InputTextField> {
           labelText: '${widget.label}',
           labelStyle: focusNode.hasFocus ? eLabelFocused : eLabel,
         ),
-        onChanged: (val) {
-          setState(() => value = val);
-          print(value);
-        },
+        onChanged: (val) => widget.changeValue(val),
       ),
     );
   }
