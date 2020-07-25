@@ -60,8 +60,8 @@ class _RegisterOneTextState extends State<RegisterOneText> {
               child: Column(
                 children: <Widget>[
                   SizedBox(
-                    height: 70.0,
-                    width: 70.0,
+                    height: 60.0,
+                    width: 60.0,
                     child: LogoRegister(),
                   ),
                   SizedBox(

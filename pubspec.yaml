@@ -38,6 +38,7 @@ dependencies:
   passwordfield: ^0.0.7
   email_validator: ^1.0.5
   firebase_user_stream: ^1.0.0
+  regexed_validator: ^1.0.4
 
 dev_dependencies:
   flutter_test:

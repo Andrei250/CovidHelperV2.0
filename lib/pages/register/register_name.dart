@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:regexed_validator/regexed_validator.dart';
 
 import 'file:///C:/Users/pc3/Desktop/CovidHelperFlutter/CovidHelperV2.0/lib/pages/register/register_one_text.dart';
 
@@ -9,12 +10,25 @@ class RegisterName extends StatefulWidget {
 
 class _RegisterNameState extends State<RegisterName> {
   String name;
+  String errorText;
 
   @override
   Widget build(BuildContext context) {
+    bool nameOk = false;
+
     void changeName(String val) {
       name = val;
-//    print(name);
+    }
+
+    void verifyName() {
+      if (name == null) {
+        errorText = 'Introduceti numele si prenumele!';
+      } else if (validator.name(name) == false) {
+        errorText = 'Indroduceti corect numele!';
+      } else {
+        errorText = null;
+        nameOk = true;
+      }
     }
 
     return Container(
@@ -27,8 +41,14 @@ class _RegisterNameState extends State<RegisterName> {
       route: '/register_name',
       changeValue: changeName,
       onPressed: () {
-        Navigator.of(context).pushNamed('/register_email', arguments: name);
+        setState(() {
+          verifyName();
+          if (nameOk == true) {
+            Navigator.of(context).pushNamed('/register_email', arguments: name);
+          }
+        });
       },
+      errorText: errorText,
     ));
   }
 }

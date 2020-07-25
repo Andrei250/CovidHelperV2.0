@@ -66,7 +66,7 @@ class _RegisterTwoTextsState extends State<RegisterTwoTexts> {
                         child: LogoRegister(),
                       ),
                       SizedBox(
-                        height: 20.0,
+                        height: 15.0,
                       ),
                       SizedBox(
                         child: Text('${widget.welcomeTextBig}',

@@ -1,10 +1,10 @@
-import 'file:///C:/Users/pc3/Desktop/CovidHelperFlutter/CovidHelperV2.0/lib/pages/register/register_email.dart';
 import 'package:covidhelper_v2/pages/home.dart';
 import 'package:covidhelper_v2/pages/register/register_name.dart';
 import 'package:covidhelper_v2/pages/register/register_password.dart';
-import 'file:///C:/Users/pc3/Desktop/CovidHelperFlutter/CovidHelperV2.0/lib/pages/register/register_phone.dart';
-import 'package:covidhelper_v2/utils/app_theme.dart';
 import 'package:flutter/material.dart';
+
+import 'file:///C:/Users/pc3/Desktop/CovidHelperFlutter/CovidHelperV2.0/lib/pages/register/register_email.dart';
+import 'file:///C:/Users/pc3/Desktop/CovidHelperFlutter/CovidHelperV2.0/lib/pages/register/register_phone.dart';
 
 class Register extends StatelessWidget {
   @override
@@ -33,7 +33,6 @@ class RegisterAll {
       case '/register_password':
         print(args);
         return MaterialPageRoute(builder: (_) => RegisterPassword());
-        // TODO add pushReplacementNamed !!!!!!!!!!!!!!!
       case '/home':
         print(args);
         return MaterialPageRoute(builder: (_) => Home());
