@@ -4,6 +4,7 @@ import 'package:covidhelper_v2/components/more_menu_admin.dart';
 import 'package:covidhelper_v2/components/register_user.dart';
 import 'package:covidhelper_v2/models/vulnerable_person.dart';
 import 'package:covidhelper_v2/services/firestore_service.dart';
+import 'package:covidhelper_v2/utils/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 class AdminPanel extends StatefulWidget {
@@ -65,7 +66,9 @@ class _AdminPanelState extends State<AdminPanel> {
             ),
           ],
           currentIndex: _selectedIndex,
-          selectedItemColor: Colors.amber[800],
+          backgroundColor: AppTheme.darkTheme.scaffoldBackgroundColor,
+          unselectedItemColor: Colors.grey[700],
+          selectedItemColor: Colors.white,
           onTap: _onItemTapped,
         ),
       ),
