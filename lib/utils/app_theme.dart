@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class AppTheme {
-  //
   AppTheme._();
 
   static const Color primaryColor = Color.fromRGBO(13, 10, 11, 1);

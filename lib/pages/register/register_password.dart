@@ -1,4 +1,4 @@
-import 'package:covidhelper_v2/pages/register_two_texts.dart';
+import 'package:covidhelper_v2/pages/register/register_two_texts.dart';
 import 'package:flutter/material.dart';
 
 class RegisterPassword extends StatefulWidget {

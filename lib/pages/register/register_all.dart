@@ -1,7 +1,7 @@
-import 'package:covidhelper_v2/pages/register_email.dart';
-import 'package:covidhelper_v2/pages/register_name.dart';
-import 'package:covidhelper_v2/pages/register_password.dart';
-import 'package:covidhelper_v2/pages/register_phone.dart';
+import 'package:covidhelper_v2/pages/register/register_email.dart';
+import 'package:covidhelper_v2/pages/register/register_name.dart';
+import 'package:covidhelper_v2/pages/register/register_password.dart';
+import 'package:covidhelper_v2/pages/register/register_phone.dart';
 import 'package:covidhelper_v2/utils/app_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -26,12 +26,13 @@ class RegisterAll {
         return MaterialPageRoute(builder: (_) => RegisterPhone());
       case '/register_password':
         return MaterialPageRoute(builder: (_) => RegisterPassword());
+        // TODO add pushReplacementNamed !!!!!!!!!!!!!!!
       default:
         return null;
     }
   }
 
-  static Route<dynamic> _errorRoute() {
+/*    static Route<dynamic> _errorRoute() {
     return MaterialPageRoute(builder: (_) {
       return MaterialApp(
           theme: AppTheme.darkTheme,
@@ -42,5 +43,5 @@ class RegisterAll {
             ),
           ));
     });
-  }
+  }*/
 }
