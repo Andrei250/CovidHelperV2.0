@@ -1,7 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-
-import 'user.dart';
-
 class VulnerablePerson {
   // ignore: non_constant_identifier_names
   String first_name;
