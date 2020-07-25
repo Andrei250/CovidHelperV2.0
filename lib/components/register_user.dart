@@ -1,6 +1,8 @@
 import 'package:covidhelper_v2/components/form_input.dart';
+import 'package:covidhelper_v2/models/admin.dart';
 import 'package:covidhelper_v2/services/firestore_service.dart';
 import 'package:covidhelper_v2/utils/app_theme.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
 
@@ -157,7 +159,7 @@ class _RegisterUserState extends State<RegisterUser> {
                     child: Text(
                       'Register',
                       style: TextStyle(
-                        color: Colors.white,
+                        color: Colors.black,
                         fontSize: 20.0,
                       ),
                     ),
