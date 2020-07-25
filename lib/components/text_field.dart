@@ -1,4 +1,3 @@
-import 'package:covidhelper_v2/models/vendor.dart';
 import 'package:covidhelper_v2/utils/app_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -7,9 +6,13 @@ class InputTextField extends StatefulWidget {
   final String label;
   final bool passwordText;
   final Function(String) changeValue;
+  final String errorText;
 
-
-  InputTextField({ this.inputType, this.label, this.passwordText, this.changeValue});
+  InputTextField({this.inputType,
+    this.label,
+    this.passwordText,
+    this.changeValue,
+    this.errorText});
 
   @override
   _InputTextFieldState createState() => _InputTextFieldState();
@@ -40,20 +43,57 @@ class _InputTextFieldState extends State<InputTextField> {
 
   @override
   Widget build(BuildContext context) {
-    final user = InheritedModel.inheritFrom<Vendor>(context, aspect: 'one');
+//    final user = InheritedModel.inheritFrom<Vendor>(context, aspect: 'one');
+
+    String _name;
+
     return Scaffold(
-      body: TextFormField(
-        obscureText: widget.passwordText,
-        keyboardType: widget.inputType,
-        focusNode: focusNode,
-        style: AppTheme.darkTheme.textTheme.subtitle1,
-        cursorColor: AppTheme.lightColor,
-        decoration: new InputDecoration(
-          labelText: '${widget.label}',
-          labelStyle: focusNode.hasFocus ? eLabelFocused : eLabel,
-        ),
-        onChanged: (val) => widget.changeValue(val),
-      ),
-    );
+        body: Column(
+          children: <Widget>[
+            SizedBox(
+              child: TextFormField(
+                obscureText: widget.passwordText,
+                keyboardType: widget.inputType,
+                focusNode: focusNode,
+                style: AppTheme.darkTheme.textTheme.subtitle1,
+                cursorColor: AppTheme.lightColor,
+                decoration: new InputDecoration(
+                  labelText: '${widget.label}',
+                  labelStyle: widget.errorText != null
+                      ? eLabelError
+                      : focusNode.hasFocus ? eLabelFocused : eLabel,
+                  enabledBorder: new OutlineInputBorder(
+                    borderRadius: new BorderRadius.circular(25.0),
+                    borderSide: BorderSide(
+                      color: widget.errorText != null
+                          ? Colors.red
+                          : AppTheme.primaryVariantColor,
+                    ),
+                  ),
+                  focusedBorder: new OutlineInputBorder(
+                    borderRadius: new BorderRadius.circular(25.0),
+                    borderSide: BorderSide(
+                      color: widget.errorText != null
+                          ? Colors.red
+                          : AppTheme.lightColor,
+                      width: 1.5,
+                    ),
+                  ),
+                ),
+                onChanged: (val) => widget.changeValue(val),
+              ),
+            ),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(20, 5, 0, 0),
+                child: Text(
+                  widget.errorText == null ? '' : widget.errorText,
+                  style: eWarning,
+                ),
+              ),
+            ),
+          ],
+        ));
   }
 }

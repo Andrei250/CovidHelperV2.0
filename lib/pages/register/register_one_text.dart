@@ -5,15 +5,6 @@ import 'package:covidhelper_v2/utils/logo_register.dart';
 import 'package:flutter/material.dart';
 
 class RegisterOneText extends StatefulWidget {
-  final String label;
-  final String welcomeTextBig;
-  final String welcomeTextSmall;
-  final bool passwordText;
-  final TextInputType inputType;
-  final VoidCallback onPressed;
-  final String route;
-  final Function(String) changeValue;
-
   RegisterOneText(
       {this.label,
       this.welcomeTextBig,
@@ -22,7 +13,18 @@ class RegisterOneText extends StatefulWidget {
       this.inputType,
       this.onPressed,
       this.route,
-      this.changeValue});
+      this.changeValue,
+      this.errorText});
+
+  final String label;
+  final String welcomeTextBig;
+  final String welcomeTextSmall;
+  final bool passwordText;
+  final TextInputType inputType;
+  final VoidCallback onPressed;
+  final String route;
+  final Function(String) changeValue;
+  final String errorText;
 
   @override
   _RegisterOneTextState createState() => _RegisterOneTextState();
@@ -45,51 +47,51 @@ class _RegisterOneTextState extends State<RegisterOneText> {
 
     return MaterialApp(
       onGenerateRoute: RegisterAll.generateRoute,
-      debugShowCheckedModeBanner: false,
       theme: AppTheme.darkTheme,
       home: Scaffold(
         floatingActionButton: new RaisedButton(
           child: Text('Inainte'),
           onPressed: widget.onPressed,
         ),
-        body: Container(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.max,
-            children: <Widget>[
-              Expanded(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(0.0, 40.0, 0.0, 20.0),
-                      child: SizedBox(
-                        height: 70.0,
-                        width: 70.0,
-                        child: LogoRegister(),
-                      ),
-                    ),
-                    Text('${widget.welcomeTextBig}',
+        body: ListView(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.fromLTRB(30.0, 50.0, 30.0, 10.0),
+              child: Column(
+                children: <Widget>[
+                  SizedBox(
+                    height: 70.0,
+                    width: 70.0,
+                    child: LogoRegister(),
+                  ),
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                  SizedBox(
+                    child: Text('${widget.welcomeTextBig}',
                         style: AppTheme.darkTheme.textTheme.headline2),
-                    Text('${widget.welcomeTextSmall}',
+                  ),
+                  SizedBox(
+                    child: Text('${widget.welcomeTextSmall}',
                         style: AppTheme.darkTheme.textTheme.headline3),
-                    SizedBox(
-                      height: 30.0,
-                    ),
-                    SizedBox(
-                        width: 320.0,
-                        height: 100.0,
-                        child: InputTextField(
-                          inputType: widget.inputType,
-                          passwordText: widget.passwordText,
-                          label: '${widget.label}',
-                          changeValue: widget.changeValue,
-                        )),
-                  ],
-                ),
+                  ),
+                  SizedBox(
+                    height: 30.0,
+                  ),
+                  SizedBox(
+                      width: 320.0,
+                      height: 100.0,
+                      child: InputTextField(
+                        inputType: widget.inputType,
+                        passwordText: widget.passwordText,
+                        label: '${widget.label}',
+                        changeValue: widget.changeValue,
+                        errorText: widget.errorText,
+                      )),
+                ],
               ),
-            ],
-          ),
+            )
+          ],
         ),
       ),
     );

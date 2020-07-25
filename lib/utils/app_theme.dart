@@ -82,3 +82,9 @@ final eLabelError = TextStyle(
   fontWeight: FontWeight.bold,
   fontFamily: 'quicksand',
 );
+
+final eWarning = TextStyle(
+  color: Colors.red[700],
+  fontFamily: 'quicksand',
+  fontSize: 15,
+);

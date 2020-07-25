@@ -10,15 +10,49 @@ class RegisterPassword extends StatefulWidget {
 class _RegisterPasswordState extends State<RegisterPassword> {
   String password;
   String passwordConfirm;
+  String errorFirstText;
+  String errorSecondText;
 
   @override
   Widget build(BuildContext context) {
+    bool passwordOk = false;
+    bool passwordConfirmOk = false;
+
     void changePassword(String val) {
       password = val;
     }
 
     void changePasswordConfirm(String val) {
       passwordConfirm = val;
+    }
+
+    void verifyPassword() {
+      if (password == null) {
+        errorFirstText = 'Alegeti o parola!';
+      } else if (password.length < 6) {
+        errorFirstText = 'Parola trebuie sa contina minim 6 caractere!';
+      } else if (password == null && passwordConfirm != null) {
+        errorFirstText = 'Alegeti o parola!';
+      } else {
+        errorFirstText = null;
+        passwordOk = true;
+      }
+    }
+
+    void verifyPasswordConfirm() {
+      if (passwordConfirm == null && password != null) {
+        errorSecondText = 'Confirmati parola!';
+      } else if (password != null && passwordConfirm != password) {
+        errorSecondText = 'Parolele nu coincid';
+      } else {
+        errorSecondText = null;
+        passwordConfirmOk = true;
+      }
+    }
+
+    void verifyBothPasswords() {
+      verifyPassword();
+      verifyPasswordConfirm();
     }
 
     return Container(
@@ -33,8 +67,16 @@ class _RegisterPasswordState extends State<RegisterPassword> {
       changeFirstValue: changePassword,
       changeSecondValue: changePasswordConfirm,
       onPressed: () {
-        Navigator.of(context).pushNamed('/home', arguments: password);
+        setState(() {
+          verifyBothPasswords();
+          if (passwordOk == true && passwordConfirmOk == true) {
+//            print('ebiness');
+//            Navigator.of(context).pushNamed('/home', arguments: password);
+          }
+        });
       },
+      errorFirstText: errorFirstText,
+      errorSecondText: errorSecondText,
     ));
   }
 }
