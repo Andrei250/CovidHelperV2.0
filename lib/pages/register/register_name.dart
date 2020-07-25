@@ -1,7 +1,7 @@
+import 'package:covidhelper_v2/pages/register/register_one_text.dart';
 import 'package:flutter/material.dart';
 import 'package:regexed_validator/regexed_validator.dart';
 
-import 'file:///C:/Users/pc3/Desktop/CovidHelperFlutter/CovidHelperV2.0/lib/pages/register/register_one_text.dart';
 
 class RegisterName extends StatefulWidget {
   @override
