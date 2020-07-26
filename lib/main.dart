@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:covidhelper_v2/utils/app_theme.dart';
 import 'package:flutter/material.dart';
 
+import 'components/change_password.dart';
+
 void main() => runApp(
     MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -22,6 +24,9 @@ class Routing {
         break;
       case '/admin_panel/change_name':
         return MaterialPageRoute(builder: (_) => ChangeName(data: settings.arguments));
+        break;
+      case '/admin_panel/change_password':
+        return MaterialPageRoute(builder: (_) => ChangePassword(data: settings.arguments));
         break;
       default:
         return null;
