@@ -11,17 +11,17 @@ class LoadingScreen extends StatefulWidget {
   @override
   _LoadingScreenState createState() => _LoadingScreenState();
 }
-class _LoadingScreenState extends State<LoadingScreen> {
 
+class _LoadingScreenState extends State<LoadingScreen> {
   void loading() async {
     await widget.registerBack.addNewUser();
-    Navigator.pushNamedAndRemoveUntil(context,
+    Navigator.of(context).pushNamedAndRemoveUntil(
         '/home', (Route<dynamic> route) => false,
         arguments: widget.registerBack);
   }
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
     loading();
   }

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:covidhelper_v2/models/admin.dart';
 import 'package:covidhelper_v2/models/vendor.dart';
+import 'package:covidhelper_v2/models/volunteer.dart';
 import 'package:covidhelper_v2/models/vulnerable_person.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -9,25 +10,14 @@ class FirestoreService {
   FirebaseAuth _auth = FirebaseAuth.instance;
 
   Stream<List<VulnerablePerson>> get vulnerables {
-    return _db.collection('Vulnerables').snapshots().map((snapshot) =>
-        snapshot
-            .documents
-            .map((document) => VulnerablePerson.fromJson(document.data))
-            .toList());
+    return _db.collection('Vulnerables').snapshots().map((snapshot) => snapshot
+        .documents
+        .map((document) => VulnerablePerson.fromJson(document.data))
+        .toList());
   }
-  Stream<List<Vendor>> get vendors {
-    return _db.collection('Vendors').snapshots().map((snapshot) =>
-        snapshot
-            .documents
-            .map((document) => Vendor.fromJson(document.data))
-            .toList());
-  }
-
-
 
   Future<void> addVulnerablePerson(VulnerablePerson person) {
     Map<String, dynamic> dataMap = person.toJson();
-
     return _db.collection("Vulnerables").document(person.uid).setData(dataMap);
   }
 
@@ -60,24 +50,41 @@ class FirestoreService {
     }
   }
 
-  Future<void> addNewVendor (Vendor vendor) {
+  Future<void> addNewVendor(Vendor vendor, String userValue) {
     Map<String, dynamic> dataMap = vendor.toJson();
-    return _db.collection('Vendors').document(vendor.uid).setData(dataMap);
+    return _db.collection(userValue).document(vendor.uid).setData(dataMap);
   }
 
-  Future createUser({String email, String password, String phoneNumber,
-      String name}) async {
+  Future<void> addNewVolunteer(Volunteer volunteer, String userValue) {
+    Map<String, dynamic> dataMap = volunteer.toJson();
+    return _db.collection(userValue).document(volunteer.uid).setData(dataMap);
+  }
+
+  Future createUser(
+      {String email,
+      String password,
+      String phoneNumber,
+      String name,
+      String userValue}) async {
     try {
       AuthResult result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       FirebaseUser user = result.user;
-      Vendor vendor = new Vendor(
-          name: name, email: email, phoneNumber: phoneNumber, uid: user.uid);
-      await addNewVendor(vendor);
-      await addUser(vendor.uid, "vendor");
-      return 200;
+      if (userValue == 'vendor') {
+        Vendor vendor = new Vendor(
+            name: name, email: email, phoneNumber: phoneNumber, uid: user.uid);
+        await addNewVendor(vendor, userValue);
+        await addUser(vendor.uid, userValue);
+        return 200;
+      } else {
+        Volunteer volunteer = new Volunteer(
+            name: name, email: email, phoneNumber: phoneNumber, uid: user.uid);
+        await addNewVolunteer(volunteer, userValue);
+        await addUser(volunteer.uid, userValue);
+        return 200;
+      }
     } catch (e) {
-      print (e.toString());
+      print(e.toString());
       return null;
     }
   }

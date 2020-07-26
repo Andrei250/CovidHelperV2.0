@@ -1,6 +1,7 @@
 import 'package:covidhelper_v2/components/loading_screen.dart';
 import 'package:covidhelper_v2/pages/home.dart';
 import 'package:covidhelper_v2/pages/register/register_back.dart';
+import 'package:covidhelper_v2/pages/register/register_choose.dart';
 import 'package:covidhelper_v2/pages/register/register_email.dart';
 import 'package:covidhelper_v2/pages/register/register_name.dart';
 import 'package:covidhelper_v2/pages/register/register_password.dart';
@@ -16,7 +17,7 @@ class _RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: '/register_name',
+      initialRoute: '/register_choose',
       onGenerateRoute: RegisterAll.generateRoute,
     );
   }
@@ -27,12 +28,15 @@ class RegisterAll {
   static String name;
   static String phoneNumber;
   static String password;
+  static String userValue;
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     final args = settings.arguments;
-
     switch (settings.name) {
+      case '/register_choose':
+        return MaterialPageRoute(builder: (_) => RegisterChoose());
       case '/register_name':
+        RegisterAll.userValue = args;
         return MaterialPageRoute(builder: (_) => RegisterName());
       case '/register_email':
         RegisterAll.name = args;
@@ -49,9 +53,11 @@ class RegisterAll {
             name: RegisterAll.name,
             email: RegisterAll.email,
             phoneNumber: RegisterAll.phoneNumber,
-            password: RegisterAll.password);
-            new LoadingScreen(registerBack: registerBack);
-        return MaterialPageRoute(builder: (_) => LoadingScreen(registerBack: registerBack));
+            password: RegisterAll.password,
+            userValue: RegisterAll.userValue);
+        new LoadingScreen(registerBack: registerBack);
+        return MaterialPageRoute(
+            builder: (_) => LoadingScreen(registerBack: registerBack));
       case '/home':
         return MaterialPageRoute(builder: (_) => Home());
         break;
