@@ -6,8 +6,10 @@ import 'package:flutter/rendering.dart';
 class ButtonSettings extends StatelessWidget {
   final String label;
   final Icon icon;
+  final String route;
+  final Map arguments;
 
-  ButtonSettings({this.label, this.icon});
+  ButtonSettings({this.label, this.icon, this.route, this.arguments});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,9 @@ class ButtonSettings extends StatelessWidget {
                   '${label}',
                   style: AppTheme.darkTheme.textTheme.headline3,
               ),
-              onTap: () {},
+              onTap: () {
+                Navigator.pushNamed(context, route, arguments: arguments);
+              },
             ),
           ),
         ),

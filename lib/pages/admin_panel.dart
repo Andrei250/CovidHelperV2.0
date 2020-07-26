@@ -1,12 +1,14 @@
 import 'package:covidhelper_v2/components/more_menu_admin.dart';
 import 'package:covidhelper_v2/components/list_users.dart';
-import 'package:covidhelper_v2/components/more_menu_admin.dart';
 import 'package:covidhelper_v2/components/register_user.dart';
+import 'package:covidhelper_v2/models/admin.dart';
 import 'package:covidhelper_v2/models/vulnerable_person.dart';
 import 'package:covidhelper_v2/services/firestore_service.dart';
 import 'package:covidhelper_v2/utils/app_theme.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 class AdminPanel extends StatefulWidget {
   @override
   _AdminPanelState createState() => _AdminPanelState();
@@ -29,19 +31,48 @@ class _AdminPanelState extends State<AdminPanel> {
       style: optionStyle,
     ),
   ];
+
+  static FirebaseAuth _auth = FirebaseAuth.instance;
+  FirebaseUser user;
+  Admin admin;
+
+  void _getUser() async {
+    user = await _auth.currentUser();
+    admin = await FirestoreService().getAdmin(user);
+  }
+
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
   }
+
+  void change() async{
+    admin = await FirestoreService().getAdmin(user);
+    setState(() {
+
+    });
+  }
+
   Widget _getFragment(int index) {
     if (index == 0) {
-      return MoreMenuAdmin();
+      return MoreMenuAdmin(
+        user: user,
+        admin: admin,
+        function: change,
+      );
     } else if (index == 2) {
       return RegisterUser();
     }
     return ListUsers();
   }
+
+  @override
+  void initState() {
+    super.initState();
+    _getUser();
+  }
+
   @override
   Widget build(BuildContext context) {
     return StreamProvider<List<VulnerablePerson>>.value(

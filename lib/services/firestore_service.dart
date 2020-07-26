@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:covidhelper_v2/models/admin.dart';
 import 'package:covidhelper_v2/models/vulnerable_person.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -51,5 +52,38 @@ class FirestoreService {
       print(e.toString());
       return null;
     }
+  }
+
+  Future<void> login(String email, String password) async {
+    try{
+      await _auth.signInWithEmailAndPassword(email: email, password: password);
+    } catch(e) {
+      print(e.toString());
+      return null;
+    }
+  }
+
+  Future<Admin> getAdmin(FirebaseUser user) async {
+    var userData = await _db.collection('Admins')
+                      .document(user.uid).get();
+
+    if (userData != null) {
+      Admin admin = new Admin(first_name: userData['first_name'], last_name: userData['last_name'], email: userData['email']);
+      return admin;
+    }
+
+    return null;
+  }
+
+  Future changeNameAdmin(String uid, Admin admin) async {
+    try {
+      var dataMap = admin.toJson();
+      _db.collection('Admins').document(uid).setData(dataMap);
+      return 200;
+    } catch(e) {
+      print (e.toString());
+      return null;
+    }
+
   }
 }
