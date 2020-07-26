@@ -39,6 +39,8 @@ dependencies:
   email_validator: ^1.0.5
   firebase_user_stream: ^1.0.0
   regexed_validator: ^1.0.4
+  cloud_functions: ^0.5.0
+  http: ^0.12.2
 
 dev_dependencies:
   flutter_test:

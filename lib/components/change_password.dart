@@ -59,7 +59,7 @@ class _ChangePasswordState extends State<ChangePassword> {
       appBar: AppBar(
         backgroundColor: AppTheme.darkTheme.scaffoldBackgroundColor,
         title: Text(
-          'Change name',
+          'Change Password',
           style: AppTheme.darkTheme.textTheme.headline2,
         ),
       ),
