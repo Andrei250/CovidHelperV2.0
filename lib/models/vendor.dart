@@ -1,25 +1,25 @@
-import 'package:flutter/material.dart';
+/// Class with the details about a vendor
 
-class Vendor extends InheritedModel {
-  const Vendor(this.name, this.email, this.phoneNumber, this.uid, Widget child)
-      : super(child: child);
+class Vendor {
+  const Vendor({this.name, this.email, this.phoneNumber, this.uid});
 
   final String name;
   final String email;
   final String phoneNumber;
   final String uid;
 
-  @override
-  bool updateShouldNotify(Vendor oldWidget) {
-    return name != oldWidget.name ||
-        email != oldWidget.email ||
-        phoneNumber != oldWidget.phoneNumber;
-    throw UnimplementedError();
-  }
+  Vendor.fromJson(Map<String, dynamic> parsedJson)
+      : name = parsedJson['name'] ?? '',
+        email = parsedJson['email'] ?? '',
+        phoneNumber = parsedJson['phoneNumber'] ?? '',
+        uid = parsedJson['uid'] ?? '';
 
-  @override
-  bool updateShouldNotifyDependent(Object oldObject, Set dependencies) {
-    // TODO: implement updateShouldNotifyDependent
-    throw UnimplementedError();
+  Map<String, dynamic> toJson() {
+    var dataMap = Map<String, dynamic>();
+    dataMap['name'] = this.name;
+    dataMap['email'] = this.email;
+    dataMap['phoneNumber'] = this.phoneNumber;
+    dataMap['uid'] = this.uid;
+    return dataMap;
   }
 }

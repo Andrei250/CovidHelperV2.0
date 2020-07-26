@@ -39,6 +39,7 @@ dependencies:
   email_validator: ^1.0.5
   firebase_user_stream: ^1.0.0
   regexed_validator: ^1.0.4
+  flutter_spinkit: ^4.1.2+1
 
 dev_dependencies:
   flutter_test:

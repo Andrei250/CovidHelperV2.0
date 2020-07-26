@@ -69,7 +69,7 @@ class _RegisterPasswordState extends State<RegisterPassword> {
         setState(() {
           verifyBothPasswords();
           if (passwordOk == true && passwordConfirmOk == true) {
-            Navigator.of(context).pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false, arguments: password);
+            Navigator.of(context).pushNamed('/loading', arguments: password);
           }
         });
       },
