@@ -117,6 +117,7 @@ class _ChangeNameState extends State<ChangeName> {
 
                           });
                         } else {
+                          await widget.data['function']();
                           Navigator.pop(context);
                         }
 

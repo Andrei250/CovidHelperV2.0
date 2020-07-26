@@ -47,7 +47,7 @@ class _AdminPanelState extends State<AdminPanel> {
     });
   }
 
-  void check() async{
+  void change() async{
     admin = await FirestoreService().getAdmin(user);
     setState(() {
 
@@ -59,14 +59,13 @@ class _AdminPanelState extends State<AdminPanel> {
       return MoreMenuAdmin(
         user: user,
         admin: admin,
-        function: check,
+        function: change,
       );
     } else if (index == 2) {
       return RegisterUser();
     }
     return ListUsers();
   }
-
 
   @override
   void initState() {

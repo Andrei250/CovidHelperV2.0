@@ -83,8 +83,8 @@ class _MoreMenuAdminState extends State<MoreMenuAdmin> {
                       arguments: {
                         'user' : widget.user,
                         'admin' : widget.admin,
+                        'function': widget.function,
                       },
-                      function: widget.function,
                     ),
                     ButtonSettings(
                       label: 'Change password',

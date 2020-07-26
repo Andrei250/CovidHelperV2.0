@@ -8,9 +8,8 @@ class ButtonSettings extends StatelessWidget {
   final Icon icon;
   final String route;
   final Map arguments;
-  final Function function;
 
-  ButtonSettings({this.label, this.icon, this.route, this.arguments, this.function});
+  ButtonSettings({this.label, this.icon, this.route, this.arguments});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +26,7 @@ class ButtonSettings extends StatelessWidget {
                   style: AppTheme.darkTheme.textTheme.headline3,
               ),
               onTap: () {
-                Navigator.pushNamed(context, route, arguments: arguments).then((_) => function());
+                Navigator.pushNamed(context, route, arguments: arguments);
               },
             ),
           ),
