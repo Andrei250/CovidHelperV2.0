@@ -84,6 +84,26 @@ class FirestoreService {
       print (e.toString());
       return null;
     }
+  }
 
+  Future changePassAdmin(FirebaseUser user, Admin admin, String password, String new_password) async {
+    try {
+      AuthCredential result = EmailAuthProvider.getCredential(email: admin.email, password: password);
+
+      if (result == null) {
+        return 404;
+      }
+
+      user.updatePassword(new_password).then((_) {
+        return 200;
+      }).catchError((onError) {
+        print(onError.toString());
+        return 404;
+      });
+
+    } catch(e) {
+      print (e.toString());
+      return null;
+    }
   }
 }

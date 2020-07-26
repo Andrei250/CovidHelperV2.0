@@ -92,6 +92,12 @@ class _MoreMenuAdminState extends State<MoreMenuAdmin> {
                         Icons.security,
                         color: Colors.white,
                       ),
+                      route: '/admin_panel/change_password',
+                      arguments: {
+                        'user' : widget.user,
+                        'admin' : widget.admin,
+                        'function': widget.function,
+                      },
                     ),
                     ButtonSettings(
                       label: 'See reports',
