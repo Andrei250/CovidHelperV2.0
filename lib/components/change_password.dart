@@ -1,4 +1,3 @@
-import 'package:covidhelper_v2/models/admin.dart';
 import 'package:covidhelper_v2/services/firestore_service.dart';
 import 'package:covidhelper_v2/utils/app_theme.dart';
 import 'package:flutter/cupertino.dart';

@@ -1,14 +1,14 @@
-/// Class with the details about a vendor
+/// Class with the details about a volunteer
 
-class Vendor {
-  const Vendor({this.name, this.email, this.phoneNumber, this.uid});
+class Volunteer {
+  const Volunteer({this.name, this.email, this.phoneNumber, this.uid});
 
   final String name;
   final String email;
   final String phoneNumber;
   final String uid;
 
-  Vendor.fromJson(Map<String, dynamic> parsedJson)
+  Volunteer.fromJson(Map<String, dynamic> parsedJson)
       : name = parsedJson['name'] ?? '',
         email = parsedJson['email'] ?? '',
         phoneNumber = parsedJson['phoneNumber'] ?? '',
