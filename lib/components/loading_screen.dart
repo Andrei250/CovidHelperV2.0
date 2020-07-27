@@ -1,5 +1,8 @@
+import 'package:covidhelper_v2/models/volunteer.dart';
 import 'package:covidhelper_v2/pages/register/register_back.dart';
+import 'package:covidhelper_v2/services/firestore_service.dart';
 import 'package:covidhelper_v2/utils/app_theme.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
@@ -15,9 +18,16 @@ class LoadingScreen extends StatefulWidget {
 class _LoadingScreenState extends State<LoadingScreen> {
   void loading() async {
     await widget.registerBack.addNewUser();
+
+    FirebaseAuth _auth = FirebaseAuth.instance;
+    FirebaseUser user;
+    Volunteer volunteer;
+    user = await _auth.currentUser();
+    volunteer = await FirestoreService().getVolunteer(user);
+
     Navigator.of(context).pushNamedAndRemoveUntil(
         '/home', (Route<dynamic> route) => false,
-        arguments: widget.registerBack);
+        arguments: volunteer);
   }
 
   @override
