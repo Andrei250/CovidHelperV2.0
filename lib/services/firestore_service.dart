@@ -16,6 +16,13 @@ class FirestoreService {
         .toList());
   }
 
+  Stream<List<Volunteer>> get volunteer {
+    return _db.collection('volunteer').snapshots().map((snapshot) => snapshot
+        .documents
+        .map((document) => Volunteer.fromJson(document.data))
+        .toList());
+  }
+
   Future<void> addVulnerablePerson(VulnerablePerson person) {
     Map<String, dynamic> dataMap = person.toJson();
     return _db.collection("Vulnerables").document(person.uid).setData(dataMap);
@@ -60,7 +67,7 @@ class FirestoreService {
     return _db.collection(userValue).document(volunteer.uid).setData(dataMap);
   }
 
-  Future createUser(
+  Future createVendorVolunteer(
       {String email,
       String password,
       String phoneNumber,
@@ -108,7 +115,18 @@ class FirestoreService {
           email: userData['email']);
       return admin;
     }
+    return null;
+  }
 
+  Future<Volunteer> getVolunteer(FirebaseUser user) async {
+    var userData = await _db.collection('volunteer').document(user.uid).get();
+    if (userData != null) {
+      Volunteer volunteer = new Volunteer(
+          name: userData['name'],
+          email: userData['email'],
+          phoneNumber: userData['phoneNumber']);
+      return volunteer;
+    }
     return null;
   }
 

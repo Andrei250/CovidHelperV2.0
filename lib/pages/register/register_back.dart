@@ -15,19 +15,12 @@ class RegisterBack {
   final FirestoreService _service = new FirestoreService();
 
   Future addNewUser() async {
-    dynamic result = await _service.createUser(
+    dynamic result = await _service.createVendorVolunteer(
         name: name,
         email: email,
         phoneNumber: phoneNumber,
         password: password,
         userValue: userValue);
-
-    print('user name -------------------------------  $name');
-    print('user email -------------------------------  $email');
-    print('user phone -------------------------------  $phoneNumber');
-    print('user pass -------------------------------  $password');
-    print('user value -------------------------------  $userValue');
-
     if (result == null) {
       message = 'Error on adding new user!';
     }
