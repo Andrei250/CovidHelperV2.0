@@ -88,3 +88,8 @@ final eWarning = TextStyle(
   fontFamily: 'quicksand',
   fontSize: 15,
 );
+final eButton = TextStyle(
+  color: AppTheme.primaryColor,
+  fontFamily: 'quicksand',
+  fontSize: 17,
+);
