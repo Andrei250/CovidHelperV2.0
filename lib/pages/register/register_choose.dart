@@ -12,6 +12,12 @@ class _RegisterChooseState extends State<RegisterChoose> {
   String name;
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       onGenerateRoute: RegisterAll.generateRoute,
@@ -48,8 +54,8 @@ class _RegisterChooseState extends State<RegisterChoose> {
                           style: eButton,
                         ),
                         onPressed: () {
-                          Navigator.of(context).pushNamed('/register_name',
-                              arguments: 'vendor');
+                          Navigator.of(context)
+                              .pushNamed('/register_name',  arguments: 'vendor');
                         }),
                   ),
                   SizedBox(
