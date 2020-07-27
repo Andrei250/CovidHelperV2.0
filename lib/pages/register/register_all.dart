@@ -6,6 +6,7 @@ import 'package:covidhelper_v2/pages/register/register_email.dart';
 import 'package:covidhelper_v2/pages/register/register_name.dart';
 import 'package:covidhelper_v2/pages/register/register_password.dart';
 import 'package:covidhelper_v2/pages/register/register_phone.dart';
+import 'package:covidhelper_v2/pages/register/transition.dart';
 import 'package:flutter/material.dart';
 
 class Register extends StatefulWidget {
@@ -34,19 +35,19 @@ class RegisterAll {
     final args = settings.arguments;
     switch (settings.name) {
       case '/register_choose':
-        return MaterialPageRoute(builder: (_) => RegisterChoose());
+        return CustomRoute(builder: (_) => RegisterChoose());
       case '/register_name':
         RegisterAll.userValue = args;
-        return MaterialPageRoute(builder: (_) => RegisterName());
+        return CustomRoute(builder: (_) => RegisterName());
       case '/register_email':
         RegisterAll.name = args;
-        return MaterialPageRoute(builder: (_) => RegisterEmail());
+        return CustomRoute(builder: (_) => RegisterEmail());
       case '/register_phone':
         RegisterAll.email = args;
-        return MaterialPageRoute(builder: (_) => RegisterPhone());
+        return CustomRoute(builder: (_) => RegisterPhone());
       case '/register_password':
         RegisterAll.phoneNumber = args;
-        return MaterialPageRoute(builder: (_) => RegisterPassword());
+        return CustomRoute(builder: (_) => RegisterPassword());
       case '/loading':
         RegisterAll.password = args;
         RegisterBack registerBack = new RegisterBack(
@@ -56,10 +57,10 @@ class RegisterAll {
             password: RegisterAll.password,
             userValue: RegisterAll.userValue);
         new LoadingScreen(registerBack: registerBack);
-        return MaterialPageRoute(
+        return CustomRoute(
             builder: (_) => LoadingScreen(registerBack: registerBack));
       case '/home':
-        return MaterialPageRoute(builder: (_) => Home());
+        return CustomRoute(builder: (_) => Home());
         break;
       default:
         return null;
