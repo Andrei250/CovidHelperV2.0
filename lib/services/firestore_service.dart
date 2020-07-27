@@ -1,9 +1,13 @@
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:covidhelper_v2/models/admin.dart';
 import 'package:covidhelper_v2/models/vendor.dart';
 import 'package:covidhelper_v2/models/volunteer.dart';
 import 'package:covidhelper_v2/models/vulnerable_person.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:http/http.dart';
+import 'package:http/http.dart' as http;
 
 class FirestoreService {
   Firestore _db = Firestore.instance;
@@ -162,4 +166,28 @@ class FirestoreService {
       return null;
     }
   }
+  
+  Future deleteVulnerable(VulnerablePerson person) async {
+    try {
+      await http.post(
+        'https://jsonplaceholder.typicode.com/albums',
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<String, String>{
+          'userEmail': person.email,
+        }),
+      );
+
+      await _db.collection('Users').document(person.uid).delete();
+      await _db.collection('Vulnerables').document(person.uid).delete();
+
+      return 200;
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
+
+}
 }
