@@ -17,6 +17,6 @@ void main() => runApp(
       debugShowCheckedModeBanner: false,
       theme: AppTheme.darkTheme,
      // home: Home(),
-     initialRoute: '/admin_panel',
+     initialRoute: '/login',
      onGenerateRoute: Routing.generateRoute,
 ));
