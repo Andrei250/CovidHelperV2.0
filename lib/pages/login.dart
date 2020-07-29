@@ -96,13 +96,13 @@ class _LoginState extends State<Login> {
                     Text('Conecteaza-te',
                         style: AppTheme.darkTheme.textTheme.headline2),
                     SizedBox(
-                      height: 40.0,
+                      height: 20.0,
                     ),
                     Column(
                       children: <Widget>[
                         SizedBox(
                           width: 320.0,
-                          height: 83.0,
+                          height: 102.0,
                           child: InputTextField(
                             label: 'Email',
                             passwordText: false,
@@ -110,6 +110,9 @@ class _LoginState extends State<Login> {
                             changeValue: changeEmail,
                             errorText: errorFirstText,
                           ),
+                        ),
+                        SizedBox(
+                          height: 10.0,
                         ),
                         SizedBox(
                             width: 320.0,
