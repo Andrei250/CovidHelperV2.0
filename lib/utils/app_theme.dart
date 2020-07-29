@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class AppTheme {
-  //
   AppTheme._();
 
   static const Color primaryColor = Color.fromRGBO(13, 10, 11, 1);
@@ -79,4 +78,21 @@ final eLabelFocused = TextStyle(
   fontWeight: FontWeight.bold,
 );
 
+
+final eLabelError = TextStyle(
+  color: Colors.red[700],
+  fontWeight: FontWeight.bold,
+  fontFamily: 'quicksand',
+);
+
+final eWarning = TextStyle(
+  color: Colors.red[700],
+  fontFamily: 'quicksand',
+  fontSize: 15,
+);
+final eButton = TextStyle(
+  color: AppTheme.primaryColor,
+  fontFamily: 'quicksand',
+  fontSize: 17,
+);
 

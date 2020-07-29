@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:covidhelper_v2/components/person_card.dart';
 import 'package:covidhelper_v2/models/vulnerable_person.dart';
 import 'package:covidhelper_v2/services/firestore_service.dart';
@@ -17,12 +16,49 @@ class _ListUsersState extends State<ListUsers> {
   @override
   Widget build(BuildContext context) {
     final vulnerables = Provider.of<List<VulnerablePerson>>(context);
+    final vendors = Provider.of<List<VulnerablePerson>>(context);
 
-    return ListView.builder(
-        itemCount:  vulnerables != null ? vulnerables.length : 0,
-        itemBuilder: (context, index) {
-          return PersonCard(vulnerable: vulnerables[index]);
-        },
+    return ListView(
+      children: [
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
+          child: Center(
+            child: Text(
+              'Vulnerables',
+              style: AppTheme.darkTheme.textTheme.headline2,
+            ),
+          ),
+        ),
+        ListView.builder(
+          scrollDirection: Axis.vertical,
+          shrinkWrap: true,
+          itemCount:  vulnerables != null ? vulnerables.length : 0,
+          itemBuilder: (context, index) {
+            return PersonCard(vulnerable: vulnerables[index]);
+          },
+        ),
+        Divider(
+          height: 10.0,
+          color: Colors.grey[400],
+        ),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
+          child: Center(
+            child: Text(
+              'Vendors',
+              style: AppTheme.darkTheme.textTheme.headline2,
+            ),
+          ),
+        ),
+        ListView.builder(
+          scrollDirection: Axis.vertical,
+          shrinkWrap: true,
+          itemCount:  vendors != null ? vendors.length : 0,
+          itemBuilder: (context, index) {
+            return PersonCard(vulnerable: vendors[index]);
+          },
+        ),
+      ],
     );
   }
 }
