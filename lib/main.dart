@@ -17,6 +17,6 @@ void main() => runApp(
       debugShowCheckedModeBanner: false,
       theme: AppTheme.darkTheme,
      // home: Home(),
-      initialRoute: '/vulnerable_main',
+      initialRoute: '/',
       onGenerateRoute: Routing.generateRoute,
 ));
