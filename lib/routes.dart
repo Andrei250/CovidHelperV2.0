@@ -1,4 +1,6 @@
+import 'package:covidhelper_v2/components/loading_screen.dart';
 import 'package:covidhelper_v2/pages/admin_panel.dart';
+import 'package:covidhelper_v2/pages/loading.dart';
 import 'package:covidhelper_v2/pages/vulnerable_interface.dart';
 import 'package:flutter/material.dart';
 
@@ -10,6 +12,9 @@ import 'pages/login.dart';
 class Routing {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case '/':
+        return MaterialPageRoute(builder: (_) => Loading());
+        break;
       case '/admin_panel':
         return MaterialPageRoute(builder: (_) => AdminPanel());
         break;
