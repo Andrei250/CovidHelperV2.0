@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'components/change_name.dart';
 import 'components/change_password.dart';
 import 'components/update_user.dart';
+import 'pages/login.dart';
 
 class Routing {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -23,6 +24,8 @@ class Routing {
         break;
       case '/vulnerable_main':
         return MaterialPageRoute(builder: (_) => VulnerableInterface());
+      case '/login':
+        return MaterialPageRoute(builder: (_) => Login());
         break;
       default:
         return null;
