@@ -19,7 +19,7 @@ void main() => runApp(
       debugShowCheckedModeBanner: false,
       theme: AppTheme.darkTheme,
      // home: Home(),
-      initialRoute: '/',
+      initialRoute: '/vendor_main',
       onGenerateRoute: Routing.generateRoute,
 ));
 
