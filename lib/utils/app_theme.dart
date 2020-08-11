@@ -9,6 +9,7 @@ class AppTheme {
   static const Color lightColor = Color.fromRGBO(243, 239, 245, 1);
   static const Color accentColor = Color.fromRGBO(114, 176, 29, 1);
   static const Color secondaryAccentColor = Color.fromRGBO(63, 125, 32, 1);
+  static const Color lightAccent = Color.fromRGBO(0, 204, 150, 1);
 
   static final ThemeData darkTheme = ThemeData(
     scaffoldBackgroundColor: primaryColor,

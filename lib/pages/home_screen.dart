@@ -18,7 +18,8 @@ class _HomeScreenState extends State<HomeScreen> {
             appBar: PreferredSize(
               preferredSize: Size.fromHeight(50.0),
               child: AppBar(
-                backgroundColor: Colors.lightGreen,
+                //  TODO change the color of the app bar ? or not
+                backgroundColor: Color.fromRGBO(0, 200, 150, 1),
                 elevation: 0,
                 title: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -38,10 +39,11 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             body: ListView(children: <Widget>[
               ClipRRect(
-                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(100.0)),
+                borderRadius:
+                    BorderRadius.vertical(bottom: Radius.elliptical(510.0, 100.0)),
                 child: Container(
                   height: 200,
-                  color: Colors.lightBlueAccent,
+                  color: AppTheme.lightAccent,
                   child: Center(
                       child: Text(
                     'Ai ajutat 35 de persoane',
@@ -49,10 +51,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   )),
                 ),
               ),
-              Container(
-                height: 200,
-                color: Colors.redAccent,
-              )
             ])));
   }
 }
