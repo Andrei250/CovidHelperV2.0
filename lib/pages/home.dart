@@ -1,4 +1,5 @@
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
+import 'package:covidhelper_v2/pages/home_screen.dart';
 import 'package:covidhelper_v2/pages/register/register_all.dart';
 import 'package:covidhelper_v2/pages/register/register_email.dart';
 import 'package:covidhelper_v2/utils/app_theme.dart';
@@ -40,7 +41,7 @@ class _HomeState extends State<Home> {
             backgroundColor: AppTheme.primaryColor,
             selectedIndex: _currentIndex,
             showElevation: true,
-            itemCornerRadius: 8,
+            itemCornerRadius: 25,
             curve: Curves.easeInBack,
             onItemSelected: (index) {
               setState(() {
@@ -51,32 +52,34 @@ class _HomeState extends State<Home> {
             items: <BottomNavyBarItem>[
               BottomNavyBarItem(
                 icon: Icon(Icons.home),
-                title: Text('home'),
-                activeColor: Colors.purpleAccent,
+                title: Text('Home', style: AppTheme.darkTheme.textTheme.subtitle1),
+                activeColor: AppTheme.lightColor,
+                inactiveColor: Colors.grey,
                 textAlign: TextAlign.center,
               ),
               BottomNavyBarItem(
                 icon: Icon(Icons.insert_chart),
-                title: Text('home'),
-                activeColor: Colors.purpleAccent,
+                title: Text('home', style: AppTheme.darkTheme.textTheme.subtitle1),
+                activeColor: AppTheme.lightColor,
+                inactiveColor: Colors.grey,
                 textAlign: TextAlign.center,
               ),
               BottomNavyBarItem(
                 icon: Icon(Icons.notifications),
-                title: Text('home'),
-                activeColor: Colors.purpleAccent,
+                title: Text('home', style: AppTheme.darkTheme.textTheme.subtitle1),
+                activeColor: AppTheme.lightColor,
+                inactiveColor: Colors.grey,
                 textAlign: TextAlign.center,
               )
             ],
           ),
-          body: SizedBox.expand(
-            child: PageView(
+          body: PageView(
               controller: _pageController,
               onPageChanged: (index) {
                 setState(() => _currentIndex = index);
               },
               children: <Widget>[
-                RegisterEmail(),
+                HomeScreen(),
                 Container(
                   color: Colors.amber,
                 ),
@@ -86,6 +89,6 @@ class _HomeState extends State<Home> {
               ],
             ),
           ),
-        ));
+        );
   }
 }
