@@ -1,3 +1,4 @@
+import 'package:covidhelper_v2/components/statistics_square.dart';
 import 'package:covidhelper_v2/utils/app_theme.dart';
 import 'package:covidhelper_v2/utils/logo_appbar.dart';
 import 'package:flutter/cupertino.dart';
@@ -39,17 +40,90 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             body: ListView(children: <Widget>[
               ClipRRect(
-                borderRadius:
-                    BorderRadius.vertical(bottom: Radius.elliptical(510.0, 100.0)),
+                borderRadius: BorderRadius.vertical(
+                    bottom: Radius.elliptical(510.0, 100.0)),
                 child: Container(
                   height: 200,
                   color: AppTheme.lightAccent,
                   child: Center(
-                      child: Text(
-                    'Ai ajutat 35 de persoane',
-                    style: AppTheme.darkTheme.textTheme.headline2,
+                      child: Column(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10.0),
+                        child: Icon(
+                          Icons.person,
+                          color: AppTheme.lightColor,
+                          size: 100.0,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10.0),
+                        child: Text(
+                          'Esti pe locul 2 in topul voluntarilor',
+                          style: AppTheme.darkTheme.textTheme.headline3,
+                        ),
+                      )
+                    ],
                   )),
                 ),
+              ),
+              SizedBox(
+                height: 25.0,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: StatisticsSquare(
+                      description: 'Ai acoperit',
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: StatisticsSquare(
+                      description: 'Ai ajutat',
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: StatisticsSquare(
+                      description: 'da',
+                    ),
+                  ),
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.all(6.0),
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: Text('Vezi statistici'),
+                ),
+              ),
+              SizedBox(
+                height: 10.0,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      height: 80.0,
+                      width: 392.0,
+                      child: FlatButton(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(25.0),
+                          ),
+                          color: AppTheme.lightAccent,
+                          child: Text(
+                            'Ajuta o persoana',
+                            style: eStatsTextValue,
+                          ),
+                          onPressed: () {}),
+                    ),
+                  ),
+                ],
               ),
             ])));
   }

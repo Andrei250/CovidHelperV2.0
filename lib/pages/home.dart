@@ -1,7 +1,6 @@
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:covidhelper_v2/pages/home_screen.dart';
 import 'package:covidhelper_v2/pages/register/register_all.dart';
-import 'package:covidhelper_v2/pages/register/register_email.dart';
 import 'package:covidhelper_v2/utils/app_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -38,7 +37,7 @@ class _HomeState extends State<Home> {
         onGenerateRoute: RegisterAll.generateRoute,
         home: Scaffold(
           bottomNavigationBar: BottomNavyBar(
-            backgroundColor: AppTheme.primaryColor,
+            backgroundColor: AppTheme.lightColor,
             selectedIndex: _currentIndex,
             showElevation: true,
             itemCornerRadius: 25,
@@ -52,23 +51,23 @@ class _HomeState extends State<Home> {
             items: <BottomNavyBarItem>[
               BottomNavyBarItem(
                 icon: Icon(Icons.home),
-                title: Text('Home', style: AppTheme.darkTheme.textTheme.subtitle1),
-                activeColor: AppTheme.lightColor,
-                inactiveColor: Colors.grey,
+                title: Text('Home', style: eNavBarText),
+                activeColor: AppTheme.lightAccent,
+                inactiveColor: AppTheme.lightAccent,
                 textAlign: TextAlign.center,
               ),
               BottomNavyBarItem(
                 icon: Icon(Icons.insert_chart),
-                title: Text('home', style: AppTheme.darkTheme.textTheme.subtitle1),
-                activeColor: AppTheme.lightColor,
-                inactiveColor: Colors.grey,
+                title: Text('home', style: eNavBarText,),
+                activeColor: AppTheme.lightAccent,
+                inactiveColor: AppTheme.lightAccent,
                 textAlign: TextAlign.center,
               ),
               BottomNavyBarItem(
                 icon: Icon(Icons.notifications),
-                title: Text('home', style: AppTheme.darkTheme.textTheme.subtitle1),
-                activeColor: AppTheme.lightColor,
-                inactiveColor: Colors.grey,
+                title: Text('home', style: eNavBarText),
+                activeColor: AppTheme.lightAccent,
+                inactiveColor: AppTheme.lightAccent,
                 textAlign: TextAlign.center,
               )
             ],
