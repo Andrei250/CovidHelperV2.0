@@ -42,7 +42,8 @@ class AppTheme {
         subtitle1: TextStyle(
             fontFamily: 'quicksand', color: lightColor, fontSize: 15.0),
         subtitle2: TextStyle(
-            fontFamily: 'quicksand', color: lightColor, fontSize: 10.0)),
+            fontFamily: 'quicksand', color: lightColor, fontSize: 10.0),
+    ),
     buttonTheme: ButtonThemeData(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(25.0),

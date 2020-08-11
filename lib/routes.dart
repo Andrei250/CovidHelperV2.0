@@ -1,7 +1,7 @@
 import 'package:covidhelper_v2/components/loading_screen.dart';
 import 'package:covidhelper_v2/pages/admin_panel.dart';
 import 'package:covidhelper_v2/pages/loading.dart';
-import 'package:covidhelper_v2/pages/vulnerable_interface.dart';
+import 'package:covidhelper_v2/pages/vulnerables_main.dart';
 import 'package:flutter/material.dart';
 
 import 'components/change_name.dart';
@@ -28,7 +28,8 @@ class Routing {
         return MaterialPageRoute(builder: (_) => UpdateInfoUser(data: settings.arguments));
         break;
       case '/vulnerable_main':
-        return MaterialPageRoute(builder: (_) => VulnerableInterface());
+        return MaterialPageRoute(builder: (_) => VulnerablesMain());
+        break;
       case '/login':
         return MaterialPageRoute(builder: (_) => Login());
         break;
