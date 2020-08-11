@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:covidhelper_v2/models/admin.dart';
+import 'package:covidhelper_v2/models/user.dart';
 import 'package:covidhelper_v2/models/vendor.dart';
 import 'package:covidhelper_v2/models/volunteer.dart';
 import 'package:covidhelper_v2/models/vulnerable_person.dart';
@@ -53,7 +54,7 @@ class FirestoreService {
         uid: user.uid,
       );
       await addVulnerablePerson(person);
-      await addUser(user.uid, "0");
+      await addUser(user.uid, "Vulnerables");
       return 200;
     } catch (e) {
       print(e.toString());
@@ -132,6 +133,19 @@ class FirestoreService {
           email: userData['email'],
           phoneNumber: userData['phoneNumber']);
       return volunteer;
+    }
+    return null;
+  }
+
+  Future<User> getUser(FirebaseUser user) async {
+    var userData = await _db.collection('Users').document(user.uid).get();
+    if (userData != null) {
+      User currentUser = new User(
+        uid: user.uid,
+        email: user.email,
+        user_value: userData['user_value']
+      );
+      return currentUser;
     }
     return null;
   }

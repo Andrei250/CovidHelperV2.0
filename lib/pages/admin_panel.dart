@@ -37,7 +37,6 @@ class _AdminPanelState extends State<AdminPanel> {
   Admin admin;
 
   void _getUser() async {
-    await FirestoreService().login("admin@admin.admin", "adminadmin");
     user = await _auth.currentUser();
     admin = await FirestoreService().getAdmin(user);
   }

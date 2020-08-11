@@ -102,7 +102,7 @@ class _LoginState extends State<Login> {
                       children: <Widget>[
                         SizedBox(
                           width: 320.0,
-                          height: 83.0,
+                          height: 102.0,
                           child: InputTextField(
                             label: 'Email',
                             passwordText: false,
