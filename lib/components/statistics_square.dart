@@ -1,4 +1,7 @@
 import 'package:covidhelper_v2/utils/app_theme.dart';
+import 'package:covidhelper_v2/utils/distance.dart';
+import 'package:covidhelper_v2/utils/pics.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class StatisticsSquare extends StatefulWidget {
@@ -19,6 +22,10 @@ class _StatisticsSquareState extends State<StatisticsSquare> {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(25.0),
         color: AppTheme.lightAccent,
+      image: DecorationImage(
+        colorFilter: ColorFilter.mode(Color.fromRGBO(0, 195, 137, 1), BlendMode.modulate),
+        image: AssetImage('assets/images/road.png'),
+      )
 //        gradient: LinearGradient(
 //          begin: Alignment.topCenter,
 //          end: Alignment.bottomCenter,

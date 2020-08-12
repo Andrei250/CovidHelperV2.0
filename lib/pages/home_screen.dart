@@ -23,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 backgroundColor: Color.fromRGBO(0, 200, 150, 1),
                 elevation: 0,
                 title: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
                     Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -70,28 +70,37 @@ class _HomeScreenState extends State<HomeScreen> {
               SizedBox(
                 height: 25.0,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: StatisticsSquare(
-                      description: 'Ai acoperit',
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: StatisticsSquare(
+                        description: 'Ai acoperit',
+                      ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: StatisticsSquare(
-                      description: 'Ai ajutat',
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: StatisticsSquare(
+                        description: 'Ai ajutat',
+                      ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: StatisticsSquare(
-                      description: 'da',
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: StatisticsSquare(
+                        description: 'da',
+                      ),
                     ),
-                  ),
-                ],
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: StatisticsSquare(
+                        description: 'da',
+                      ),
+                    ),
+                  ],
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.all(6.0),
