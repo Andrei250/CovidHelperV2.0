@@ -35,6 +35,7 @@ class _HomeState extends State<Home> {
     return MaterialApp(
         onGenerateRoute: RegisterAll.generateRoute,
         home: Scaffold(
+          backgroundColor: Colors.white,
           bottomNavigationBar: BottomNavyBar(
             backgroundColor: Colors.white,
             selectedIndex: _currentIndex,

@@ -17,7 +17,7 @@ void main() => runApp(
     MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: AppTheme.darkTheme,
-      home: Home(),
+      home: Register(),
 //      initialRoute: '/',
 //      onGenerateRoute: Routing.generateRoute,
 ));
