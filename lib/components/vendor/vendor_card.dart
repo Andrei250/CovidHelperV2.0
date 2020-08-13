@@ -75,15 +75,25 @@ class VendorCard extends StatelessWidget {
               Positioned(
                 top: 0,
                 child: Padding(
-                  padding: EdgeInsets.only(left: size.width / 10),
+                  padding: EdgeInsets.only(left: size.width / 11),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(size.width / 6),
                     child: Container(
-                      color: Colors.white,
-                      child: Image.asset(
-                        'assets/images/vulnerables/vendor_img.png',
-                        width: size.width / 6 ,
-                        height: size.width / 6,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(size.width / 6),
+                        border: Border.all(
+                          width: 2,
+                          color: AppTheme.lightAccent,
+                        ),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(3.0),
+                        child: Image.asset(
+                          'assets/images/vulnerables/vendor_img.png',
+                          width: size.width / 6,
+                          height: size.width / 6,
+                        ),
                       ),
                     ),
                   ),
