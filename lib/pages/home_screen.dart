@@ -1,5 +1,5 @@
 import 'package:covidhelper_v2/components/person_card_volunteer.dart';
-import 'package:covidhelper_v2/components/statistics_square.dart';
+import 'package:covidhelper_v2/components/fav_person_card.dart';
 import 'package:covidhelper_v2/utils/app_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +16,19 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+
+    String getInitials(String name) {
+      name = name.trim();
+      String initials = name[0];
+      int i = 0;
+      for (int i = 1; i < name.length; i++) {
+        if (name[i - 1] == ' ' && name[i] != ' ') {
+          initials += name[i];
+        }
+      }
+      return initials.toUpperCase();
+    }
+    
     return MaterialApp(
         debugShowCheckedModeBanner: false,
 //        theme: AppTheme.darkTheme,
@@ -43,8 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       width: 40.0,
                       height: 40.0,
                       child: Center(
-                          child: Text(
-                        'VU',
+                          child: Text(getInitials(widget.name),
                         style: eStreet,
                       )),
                       decoration: new BoxDecoration(
