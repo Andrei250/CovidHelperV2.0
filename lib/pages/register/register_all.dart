@@ -60,7 +60,7 @@ class RegisterAll {
         return CustomRoute(
             builder: (_) => LoadingScreen(registerBack: registerBack));
       case '/home':
-        return CustomRoute(builder: (_) => Home());
+        return CustomRoute(builder: (_) => Home(volunteer: args));
         break;
       default:
         return null;

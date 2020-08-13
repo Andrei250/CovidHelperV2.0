@@ -1,53 +1,86 @@
 import 'package:covidhelper_v2/utils/app_theme.dart';
-import 'package:covidhelper_v2/utils/distance.dart';
-import 'package:covidhelper_v2/utils/pics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class StatisticsSquare extends StatefulWidget {
-  StatisticsSquare({this.description});
+class FavPersonCard extends StatefulWidget {
+  FavPersonCard({this.name});
 
-  final String description;
+  final String name;
 
   @override
-  _StatisticsSquareState createState() => _StatisticsSquareState();
+  _FavPersonCardState createState() => _FavPersonCardState();
 }
 
-class _StatisticsSquareState extends State<StatisticsSquare> {
+class _FavPersonCardState extends State<FavPersonCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 120.0,
-      width: 120.0,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(25.0),
-        color: AppTheme.lightAccent,
-      image: DecorationImage(
-        colorFilter: ColorFilter.mode(Color.fromRGBO(0, 195, 137, 1), BlendMode.modulate),
-        image: AssetImage('assets/images/road.png'),
-      )
-//        gradient: LinearGradient(
-//          begin: Alignment.topCenter,
-//          end: Alignment.bottomCenter,
-//          colors: [AppTheme.lightGradient, AppTheme.lightAccent],
-//        ),
-      ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.fromLTRB(8.0, 15.0, 8.0, 8.0),
-            child: Text(
-              widget.description,
-              style: eStatsText,
-            ),
+          Row(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.fromLTRB(15.0, 8.0, 8.0, 8.0),
+                child: Icon(
+                  Icons.person_outline,
+                  color: AppTheme.lightAccent,
+                  size: 60,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  widget.name,
+                  style: eTitle,
+                ),
+              ),
+              Spacer(),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(8.0, 8.0, 15.0, 8.0),
+                child: Icon(
+                  Icons.info_outline,
+                  color: Colors.grey[600],
+                  size: 20,
+                ),
+              ),
+            ],
           ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(8.0, 40.0, 8.0, 8.0),
-            child: Text(
-              '500 km',
-              style: eStatsTextValue,
-            ),
+          Row(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.fromLTRB(25.0, 0.0, 0.0, 0.0),
+                child: FlatButton(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(25.0),
+                  ),
+                  onPressed: () {},
+                  color: AppTheme.lightAccent,
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(50.0, 2.0, 50.0, 2.0),
+                    child: Text(
+                      'ACCEPTA',
+                      style: eAcceptButton,
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(25.0, 0.0, 0.0, 0.0),
+                child: FlatButton(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(25.0),
+                  ),
+                  onPressed: () {},
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(10.0, 2.0, 10.0, 2.0),
+                    child: Text(
+                      'REFUZA',
+                      style: eDeclineButton,
+                    ),
+                  ),
+                ),
+              )
+            ],
           )
         ],
       ),
