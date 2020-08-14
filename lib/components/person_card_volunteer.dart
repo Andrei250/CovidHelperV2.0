@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:slide_popup_dialog/slide_popup_dialog.dart' as slideDialog;
 
-
 class PersonCardVolunteer extends StatefulWidget {
   PersonCardVolunteer({this.name});
 
@@ -49,7 +48,7 @@ class _PersonCardVolunteerState extends State<PersonCardVolunteer> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(8.0, 8.0, 15.0, 8.0),
                 child: IconButton(
-                  onPressed: (){
+                  onPressed: () {
                     _showDialog();
                   },
                   icon: new Icon(
@@ -65,6 +64,7 @@ class _PersonCardVolunteerState extends State<PersonCardVolunteer> {
       ),
     );
   }
+
   void _showDialog() {
     slideDialog.showSlideDialog(
       context: context,

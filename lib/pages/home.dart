@@ -6,9 +6,9 @@ import 'package:covidhelper_v2/utils/app_theme.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
-  Volunteer volunteer;
-
-  Home({ this.volunteer });
+//  Volunteer volunteer;
+//
+//  Home({ this.volunteer });
 
   @override
   _HomeState createState() => _HomeState();
@@ -78,7 +78,8 @@ class _HomeState extends State<Home> {
                 setState(() => _currentIndex = index);
               },
               children: <Widget>[
-                HomeScreen(name: widget.volunteer.name),
+//                HomeScreen(name: widget.volunteer.name),
+                HomeScreen(),
                 Container(
                   color: Colors.amber,
                 ),

@@ -5,9 +5,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
-  HomeScreen({this.name});
-
-  final String name;
+//  HomeScreen({this.name});
+//
+//  final String name;
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -56,7 +56,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       width: 40.0,
                       height: 40.0,
                       child: Center(
-                          child: Text(getInitials(widget.name),
+                          child: Text('s',
+//                          child: Text(getInitials(widget.name),
                         style: eStreet,
                       )),
                       decoration: new BoxDecoration(
@@ -82,7 +83,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             style: eWelcome,
                           ),
                           Text(
-                            widget.name,
+//                            widget.name,
+                          'a',
                             style: eWelcomeName,
                           )
                         ],
