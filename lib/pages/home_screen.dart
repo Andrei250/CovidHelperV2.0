@@ -1,13 +1,19 @@
-import 'package:covidhelper_v2/components/person_card_volunteer.dart';
 import 'package:covidhelper_v2/components/fav_person_card.dart';
+import 'package:covidhelper_v2/components/person_card_volunteer.dart';
 import 'package:covidhelper_v2/utils/app_theme.dart';
+import 'package:covidhelper_v2/utils/pics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class HomeScreen extends StatefulWidget {
 //  HomeScreen({this.name});
 //
 //  final String name;
+
+  final VoidCallback onButtonPressed;
+
+  HomeScreen({@required this.onButtonPressed});
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -16,7 +22,6 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-
     String getInitials(String name) {
       name = name.trim();
       String initials = name[0];
@@ -28,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
       }
       return initials.toUpperCase();
     }
-    
+
     return MaterialApp(
         debugShowCheckedModeBanner: false,
 //        theme: AppTheme.darkTheme,
@@ -56,7 +61,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       width: 40.0,
                       height: 40.0,
                       child: Center(
-                          child: Text('s',
+                          child: Text(
+                        's',
 //                          child: Text(getInitials(widget.name),
                         style: eStreet,
                       )),
@@ -84,7 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           Text(
 //                            widget.name,
-                          'a',
+                            'a',
                             style: eWelcomeName,
                           )
                         ],
@@ -119,10 +125,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                         15.0, 0.0, 10.0, 10.0),
                                     child: Row(
                                       children: <Widget>[
-                                        Icon(
-                                          Icons.map,
-                                          color: Colors.white,
-                                          size: 25.0,
+                                        SizedBox(
+                                          height: 30.0,
+                                          width: 30.0,
+                                          child: SvgPicture.asset(
+                                            distance,
+                                            color: AppTheme.lightColor,
+                                            height: 30.0,
+                                            width: 30.0,
+                                          ),
                                         ),
                                         SizedBox(
                                           width: 10.0,
@@ -169,7 +180,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(25.0),
                           ),
-                          onPressed: () {},
+                          onPressed: widget.onButtonPressed,
                           child: Text(
                             'Vezi toate',
                             style: eSeeAll,

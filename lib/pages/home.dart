@@ -1,5 +1,4 @@
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
-import 'package:covidhelper_v2/models/volunteer.dart';
 import 'package:covidhelper_v2/pages/home_screen.dart';
 import 'package:covidhelper_v2/pages/register/register_all.dart';
 import 'package:covidhelper_v2/utils/app_theme.dart';
@@ -33,62 +32,78 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        onGenerateRoute: RegisterAll.generateRoute,
-        home: Scaffold(
+      onGenerateRoute: RegisterAll.generateRoute,
+      color: Colors.white,
+      home: Scaffold(
+        backgroundColor: Colors.white,
+        bottomNavigationBar: BottomNavyBar(
           backgroundColor: Colors.white,
-          bottomNavigationBar: BottomNavyBar(
-            backgroundColor: Colors.white,
-            selectedIndex: _currentIndex,
-            showElevation: true,
-            itemCornerRadius: 25,
-            curve: Curves.easeInBack,
-            onItemSelected: (index) {
-              setState(() {
+          selectedIndex: _currentIndex,
+          showElevation: true,
+          itemCornerRadius: 25,
+          curve: Curves.easeInBack,
+          onItemSelected: (index) {
+            setState(
+              () {
                 _currentIndex = index;
                 _pageController.jumpToPage(index);
-              },);
-            },
-            items: <BottomNavyBarItem>[
-              BottomNavyBarItem(
-                icon: Icon(Icons.home),
-                title: Text('Home', style: eNavBarText),
-                activeColor: AppTheme.lightAccent,
-                inactiveColor: AppTheme.lightAccent,
-                textAlign: TextAlign.center,
-              ),
-              BottomNavyBarItem(
-                icon: Icon(Icons.insert_chart),
-                title: Text('home', style: eNavBarText,),
-                activeColor: AppTheme.lightAccent,
-                inactiveColor: AppTheme.lightAccent,
-                textAlign: TextAlign.center,
-              ),
-              BottomNavyBarItem(
-                icon: Icon(Icons.notifications),
-                title: Text('home', style: eNavBarText),
-                activeColor: AppTheme.lightAccent,
-                inactiveColor: AppTheme.lightAccent,
-                textAlign: TextAlign.center,
-              )
-            ],
-          ),
-          body: PageView(
-              controller: _pageController,
-              onPageChanged: (index) {
-                setState(() => _currentIndex = index);
               },
-              children: <Widget>[
-//                HomeScreen(name: widget.volunteer.name),
-                HomeScreen(),
-                Container(
-                  color: Colors.amber,
-                ),
-                Container(
-                  color: Colors.red,
-                ),
-              ],
+            );
+          },
+          items: <BottomNavyBarItem>[
+            BottomNavyBarItem(
+              icon: Icon(Icons.home),
+              title: Text('Home', style: eNavBarText),
+              activeColor: AppTheme.lightAccent,
+              inactiveColor: AppTheme.lightAccent,
+              textAlign: TextAlign.center,
             ),
-          ),
-        );
+            BottomNavyBarItem(
+              icon: Icon(Icons.person),
+              title: Text(
+                'Persoane',
+                style: eNavBarText,
+              ),
+              activeColor: AppTheme.lightAccent,
+              inactiveColor: AppTheme.lightAccent,
+              textAlign: TextAlign.center,
+            ),
+            BottomNavyBarItem(
+              icon: Icon(Icons.home),
+              title: Text('Home', style: eNavBarText),
+              activeColor: AppTheme.lightAccent,
+              inactiveColor: AppTheme.lightAccent,
+              textAlign: TextAlign.center,
+            ),
+            BottomNavyBarItem(
+              icon: Icon(Icons.notifications),
+              title: Text('home', style: eNavBarText),
+              activeColor: AppTheme.lightAccent,
+              inactiveColor: AppTheme.lightAccent,
+              textAlign: TextAlign.center,
+            )
+          ],
+        ),
+        body: PageView(
+          controller: _pageController,
+          onPageChanged: (index) {
+            setState(() => _currentIndex = index);
+          },
+          children: <Widget>[
+//                HomeScreen(name: widget.volunteer.name),
+            HomeScreen(onButtonPressed: () {
+              _pageController.animateToPage(1,
+                  duration: Duration(milliseconds: 500), curve: Curves.ease);
+            }),
+            Container(
+              color: Colors.amber,
+            ),
+            Container(
+              color: Colors.red,
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
