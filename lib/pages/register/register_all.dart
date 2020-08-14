@@ -1,5 +1,5 @@
 import 'package:covidhelper_v2/components/loading_screen.dart';
-import 'package:covidhelper_v2/pages/home.dart';
+import 'file:///C:/Users/pc3/Desktop/CovidHelperFlutter/CovidHelperV2.0/lib/pages/home_volunteer/home.dart';
 import 'package:covidhelper_v2/pages/register/register_back.dart';
 import 'package:covidhelper_v2/pages/register/register_choose.dart';
 import 'package:covidhelper_v2/pages/register/register_email.dart';
@@ -61,6 +61,7 @@ class RegisterAll {
             builder: (_) => LoadingScreen(registerBack: registerBack));
       case '/home':
         return CustomRoute(builder: (_) => Home());
+//        return CustomRoute(builder: (_) => Home(volunteer: args));
         break;
       default:
         return null;
