@@ -18,7 +18,14 @@ class _ListUsersState extends State<ListUsers> {
     final vulnerables = Provider.of<List<VulnerablePerson>>(context);
     final vendors = Provider.of<List<VulnerablePerson>>(context);
 
+    final vulnerables_widgets = List.generate(vulnerables.length, (index) {
+        return PersonCard(vulnerable: vulnerables[index]);
+    });
+
+    final vendors_widgets = List.generate(vendors.length, (index) => PersonCard(vulnerable : vendors[index]));
+
     return ListView(
+      scrollDirection: Axis.vertical,
       children: [
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
@@ -29,13 +36,9 @@ class _ListUsersState extends State<ListUsers> {
             ),
           ),
         ),
-        ListView.builder(
-          scrollDirection: Axis.vertical,
-          shrinkWrap: true,
-          itemCount:  vulnerables != null ? vulnerables.length : 0,
-          itemBuilder: (context, index) {
-            return PersonCard(vulnerable: vulnerables[index]);
-          },
+        Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: vulnerables_widgets,
         ),
         Divider(
           height: 10.0,
@@ -50,13 +53,9 @@ class _ListUsersState extends State<ListUsers> {
             ),
           ),
         ),
-        ListView.builder(
-          scrollDirection: Axis.vertical,
-          shrinkWrap: true,
-          itemCount:  vendors != null ? vendors.length : 0,
-          itemBuilder: (context, index) {
-            return PersonCard(vulnerable: vendors[index]);
-          },
+        Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: vendors_widgets,
         ),
       ],
     );
