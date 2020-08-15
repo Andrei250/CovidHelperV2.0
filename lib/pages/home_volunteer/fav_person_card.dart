@@ -194,3 +194,4 @@ class _FavPersonCardState extends State<FavPersonCard> {
     );
   }
 }
+

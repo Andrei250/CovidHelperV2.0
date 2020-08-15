@@ -1,12 +1,13 @@
+import 'package:covidhelper_v2/models/vulnerable_person.dart';
 import 'package:covidhelper_v2/utils/app_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:slide_popup_dialog/slide_popup_dialog.dart' as slideDialog;
 
 class PersonCardVolunteer extends StatefulWidget {
-  PersonCardVolunteer({this.name});
+  PersonCardVolunteer({this.vulnerablePerson});
 
-  final String name;
+  VulnerablePerson vulnerablePerson;
 
   @override
   _PersonCardVolunteerState createState() => _PersonCardVolunteerState();
@@ -34,7 +35,8 @@ class _PersonCardVolunteerState extends State<PersonCardVolunteer> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      widget.name,
+                      widget.vulnerablePerson.first_name +
+                          widget.vulnerablePerson.last_name,
                       style: eTitle,
                     ),
                     Text(
@@ -86,7 +88,8 @@ class _PersonCardVolunteerState extends State<PersonCardVolunteer> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    widget.name,
+                    widget.vulnerablePerson.first_name +
+                        widget.vulnerablePerson.last_name,
                     style: eTitle,
                   ),
                 ),

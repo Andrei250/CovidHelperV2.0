@@ -1,8 +1,10 @@
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
-import 'file:///C:/Users/pc3/Desktop/CovidHelperFlutter/CovidHelperV2.0/lib/pages/home_volunteer/home_screen.dart';
+import 'package:covidhelper_v2/pages/people_page_volunteer.dart';
 import 'package:covidhelper_v2/pages/register/register_all.dart';
 import 'package:covidhelper_v2/utils/app_theme.dart';
 import 'package:flutter/material.dart';
+
+import 'file:///C:/Users/pc3/Desktop/CovidHelperFlutter/CovidHelperV2.0/lib/pages/home_volunteer/home_screen.dart';
 
 class Home extends StatefulWidget {
 //  Volunteer volunteer;
@@ -95,8 +97,9 @@ class _HomeState extends State<Home> {
               _pageController.animateToPage(1,
                   duration: Duration(milliseconds: 500), curve: Curves.ease);
             }),
+            PeoplePageVolunteer(limit: false),
             Container(
-              color: Colors.amber,
+              color: Colors.purple,
             ),
             Container(
               color: Colors.red,

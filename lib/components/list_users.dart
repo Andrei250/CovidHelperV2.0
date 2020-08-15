@@ -30,6 +30,9 @@ class _ListUsersState extends State<ListUsers> {
           ),
         ),
         ListView.builder(
+          // added by vlad - daca nu merge sa stii ce sa schimbi
+        physics: NeverScrollableScrollPhysics(),
+          //
           scrollDirection: Axis.vertical,
           shrinkWrap: true,
           itemCount:  vulnerables != null ? vulnerables.length : 0,
@@ -51,6 +54,9 @@ class _ListUsersState extends State<ListUsers> {
           ),
         ),
         ListView.builder(
+          // added by vlad - daca nu merge sa stii ce sa schimbi
+          physics: NeverScrollableScrollPhysics(),
+          //
           scrollDirection: Axis.vertical,
           shrinkWrap: true,
           itemCount:  vendors != null ? vendors.length : 0,

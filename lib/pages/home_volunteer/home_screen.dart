@@ -1,10 +1,11 @@
-import 'file:///C:/Users/pc3/Desktop/CovidHelperFlutter/CovidHelperV2.0/lib/pages/home_volunteer/fav_person_card.dart';
-import 'file:///C:/Users/pc3/Desktop/CovidHelperFlutter/CovidHelperV2.0/lib/pages/home_volunteer/person_card_volunteer.dart';
+import 'package:covidhelper_v2/pages/volunteer_vulnerables.dart';
 import 'package:covidhelper_v2/utils/app_theme.dart';
 import 'package:covidhelper_v2/utils/pics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import 'file:///C:/Users/pc3/Desktop/CovidHelperFlutter/CovidHelperV2.0/lib/pages/home_volunteer/fav_person_card.dart';
 
 class HomeScreen extends StatefulWidget {
 //  HomeScreen({this.name});
@@ -190,18 +191,19 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   Expanded(
-                    child: ListView(
-                      scrollDirection: Axis.vertical,
-                      semanticChildCount: 5,
-                      shrinkWrap: true,
-                      children: [
-                        PersonCardVolunteer(name: 'Ionut Duiu'),
-                        PersonCardVolunteer(name: 'Andrei Dumitrescu'),
-                        PersonCardVolunteer(name: 'Sorin Pircalab'),
-                        PersonCardVolunteer(name: 'Catalin Bordea'),
-                        PersonCardVolunteer(name: 'Toma Alexandru'),
-                      ],
-                    ),
+                    child: VolunteerVulnerables(limit: true, number: 5,),
+//                    child: ListView(
+//                      scrollDirection: Axis.vertical,
+//                      semanticChildCount: 5,
+//                      shrinkWrap: true,
+//                      children: [
+////                        PersonCardVolunteer(name: 'Ionut Duiu'),
+////                        PersonCardVolunteer(name: 'Andrei Dumitrescu'),
+////                        PersonCardVolunteer(name: 'Sorin Pircalab'),
+////                        PersonCardVolunteer(name: 'Catalin Bordea'),
+////                        PersonCardVolunteer(name: 'Toma Alexandru'),
+//                      ],
+//                    ),
                   ),
                 ])));
   }
