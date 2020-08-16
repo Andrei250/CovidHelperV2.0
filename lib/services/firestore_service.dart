@@ -69,6 +69,29 @@ class FirestoreService {
     }
   }
 
+  Future<void> addReport(String type,
+                              String full_name,
+                              String message,
+                              FirebaseUser user) {
+    Map<String, dynamic> data = new Map<String, dynamic>();
+    data['type'] = type;
+    data['full_name'] = full_name;
+    data['message'] = message;
+    data['user_uid'] = user.uid;
+    return _db.collection("reports").document(user.uid).setData(data);
+  }
+
+  Future createReport(String type, String full_name, String message) async {
+    try {
+      FirebaseUser user = await _auth.currentUser();
+      await addReport(type, full_name, message, user);
+      return 200;
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
+
   Future<void> addNewVendor(Vendor vendor, String userValue) {
     Map<String, dynamic> dataMap = vendor.toJson();
     return _db.collection(userValue).document(vendor.uid).setData(dataMap);
