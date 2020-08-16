@@ -1,5 +1,6 @@
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:covidhelper_v2/components/vulnerable/need_help.dart';
+import 'package:covidhelper_v2/components/vulnerable/report.dart';
 import 'package:covidhelper_v2/models/vendor.dart';
 import 'package:covidhelper_v2/pages/register/register_all.dart';
 import 'package:covidhelper_v2/pages/register/register_email.dart';
@@ -112,9 +113,7 @@ class _VulnerablesMain extends State<VulnerablesMain> {
                   Container(
                     color: Colors.amber,
                   ),
-                  Container(
-                    color: Colors.red,
-                  ),
+                  Report(),
                 ],
               ),
             ),

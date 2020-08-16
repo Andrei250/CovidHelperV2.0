@@ -17,8 +17,6 @@ class FormInput extends StatefulWidget {
 
 class _FormInputState extends State<FormInput> {
 
-
-
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -33,7 +31,7 @@ class _FormInputState extends State<FormInput> {
             ),
             obscureText: widget.type,
             initialValue: widget.value != null ? widget.value : '',
-            validator: (val) => val.isEmpty ? 'This field is required' : '',
+            validator: (val) => val.isEmpty ? 'Camp obligatoriu' : '',
             onChanged: (val) => widget.changeValue(val),
           ),
         ),
