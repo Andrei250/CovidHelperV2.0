@@ -16,15 +16,17 @@ class _PeoplePageVolunteerState extends State<PeoplePageVolunteer> {
   @override
   Widget build(BuildContext context) {
     double deviceHeight = MediaQuery.of(context).size.height;
+    print(deviceHeight);
     double deviceWidth = MediaQuery.of(context).size.width;
     return Container(
       height: deviceHeight,
+      color: Colors.white,
       child: ListView(
         scrollDirection: Axis.vertical,
         shrinkWrap: true,
         children: <Widget>[
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.fromLTRB(8.0, 20.0, 8.0, 8.0),
             child: Center(
                 child: Text(
               'Aceste persoane au\nnevoin de ajutorul tau!',
@@ -34,6 +36,7 @@ class _PeoplePageVolunteerState extends State<PeoplePageVolunteer> {
           VolunteerVulnerables(
             limit: widget.limit,
             number: widget.number,
+            customHeight: deviceHeight * 0.85,
           ),
         ],
       ),

@@ -78,7 +78,7 @@ class _FavPersonCardState extends State<FavPersonCard> {
                   ),
                   onPressed: () {},
                   child: Padding(
-                    padding: const EdgeInsets.fromLTRB(10.0, 2.0, 10.0, 2.0),
+                    padding: const EdgeInsets.fromLTRB(2.0, 2.0, 2.0, 2.0),
                     child: Text(
                       'REFUZA',
                       style: eDeclineButton,
@@ -194,4 +194,3 @@ class _FavPersonCardState extends State<FavPersonCard> {
     );
   }
 }
-

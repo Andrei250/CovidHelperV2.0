@@ -1,6 +1,5 @@
 import 'package:covidhelper_v2/models/vulnerable_person.dart';
 import 'package:covidhelper_v2/services/firestore_service.dart';
-import 'package:covidhelper_v2/utils/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -28,7 +27,6 @@ class _VolunteerVulnerablesCardsState extends State<VolunteerVulnerablesCards> {
       shrinkWrap: true,
       scrollDirection: Axis.vertical,
       children: <Widget>[
-
         ListView.builder(
           physics: NeverScrollableScrollPhysics(),
           scrollDirection: Axis.vertical,

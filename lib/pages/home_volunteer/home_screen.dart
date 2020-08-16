@@ -35,10 +35,14 @@ class _HomeScreenState extends State<HomeScreen> {
       return initials.toUpperCase();
     }
 
+    double deviceHeight = MediaQuery.of(context).size.height;
+    double deviceWidth = MediaQuery.of(context).size.width;
+
     return MaterialApp(
         debugShowCheckedModeBanner: false,
 //        theme: AppTheme.darkTheme,
         home: Scaffold(
+            backgroundColor: Colors.white,
             appBar: PreferredSize(
               preferredSize: Size.fromHeight(50.0),
               child: AppBar(
@@ -82,6 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(15.0, 5.0, 0.0, 0.0),
                     child: Container(
+                      color: Colors.white,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
@@ -191,20 +196,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   Expanded(
-                    child: VolunteerVulnerables(limit: true, number: 5,),
-//                    child: ListView(
-//                      scrollDirection: Axis.vertical,
-//                      semanticChildCount: 5,
-//                      shrinkWrap: true,
-//                      children: [
-////                        PersonCardVolunteer(name: 'Ionut Duiu'),
-////                        PersonCardVolunteer(name: 'Andrei Dumitrescu'),
-////                        PersonCardVolunteer(name: 'Sorin Pircalab'),
-////                        PersonCardVolunteer(name: 'Catalin Bordea'),
-////                        PersonCardVolunteer(name: 'Toma Alexandru'),
-//                      ],
-//                    ),
-                  ),
+                      child:
+                          ListView(scrollDirection: Axis.vertical, children: [
+                    VolunteerVulnerables(
+                      limit: true,
+                      number: 5,
+                      customHeight: deviceHeight * 0.45,
+                    ),
+                  ])),
                 ])));
   }
 }

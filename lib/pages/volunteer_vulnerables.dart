@@ -5,10 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class VolunteerVulnerables extends StatefulWidget {
-  VolunteerVulnerables({this.limit, this.number});
+  VolunteerVulnerables({this.limit, this.number, this.customHeight});
 
   bool limit;
   int number;
+  double customHeight;
 
   @override
   _VolunteerVulnerablesState createState() => _VolunteerVulnerablesState();
@@ -17,12 +18,10 @@ class VolunteerVulnerables extends StatefulWidget {
 class _VolunteerVulnerablesState extends State<VolunteerVulnerables> {
   @override
   Widget build(BuildContext context) {
-    double deviceHeight = MediaQuery.of(context).size.height;
-    double deviceWidth = MediaQuery.of(context).size.width;
-
     return Container(
-      height: deviceHeight,
-      width: deviceWidth,
+      color: Colors.white,
+      height: widget.customHeight,
+//      width: deviceWidth,
       child: StreamProvider<List<VulnerablePerson>>.value(
           value: FirestoreService().vulnerables,
           child: Scaffold(
