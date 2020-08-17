@@ -3,7 +3,7 @@ import 'package:covidhelper_v2/services/firestore_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'home_volunteer/person_card_volunteer.dart';
+import '../home_volunteer/person_card_volunteer.dart';
 
 class VolunteerVulnerablesCards extends StatefulWidget {
   VolunteerVulnerablesCards({this.limit, this.number});

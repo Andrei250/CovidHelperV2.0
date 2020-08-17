@@ -152,8 +152,8 @@ class _PersonCardVolunteerState extends State<PersonCardVolunteer> {
                       borderRadius: BorderRadius.circular(25.0),
                     ),
                     onPressed: () {},
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(10.0, 2.0, 10.0, 2.0),
+                    child: Expanded(
+//                      padding: const EdgeInsets.fromLTRB(10.0, 2.0, 10.0, 2.0),
                       child: Text(
                         'REFUZA',
                         style: eDeclineButton,

@@ -120,6 +120,11 @@ final eAcceptButton = TextStyle(
   fontFamily: 'quicksand',
   fontSize: 15.0,
 );
+final eStats = TextStyle(
+  color: Colors.grey[600],
+  fontFamily: 'quicksand',
+  fontSize: 15.0,
+);
 final eDeclineButton = TextStyle(
   color: Colors.black,
   fontFamily: 'quicksand',

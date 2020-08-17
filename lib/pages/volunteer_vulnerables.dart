@@ -1,5 +1,5 @@
 import 'package:covidhelper_v2/models/vulnerable_person.dart';
-import 'package:covidhelper_v2/pages/volunteer_vulnearbles_card.dart';
+import 'file:///C:/Users/pc3/Desktop/CovidHelperFlutter/CovidHelperV2.0/lib/pages/volunteer/vulnerable_people_volunteer/volunteer_vulnearbles_card.dart';
 import 'package:covidhelper_v2/services/firestore_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

@@ -1,10 +1,10 @@
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
-import 'package:covidhelper_v2/pages/people_page_volunteer.dart';
 import 'package:covidhelper_v2/pages/register/register_all.dart';
+import 'package:covidhelper_v2/pages/statistics_volunteer/statistics.dart';
+import 'package:covidhelper_v2/pages/volunteer/home_volunteer/home_screen.dart';
+import 'package:covidhelper_v2/pages/volunteer/vulnerable_people_volunteer/people_page_volunteer.dart';
 import 'package:covidhelper_v2/utils/app_theme.dart';
 import 'package:flutter/material.dart';
-
-import 'file:///C:/Users/pc3/Desktop/CovidHelperFlutter/CovidHelperV2.0/lib/pages/home_volunteer/home_screen.dart';
 
 class Home extends StatefulWidget {
 //  Volunteer volunteer;
@@ -71,8 +71,8 @@ class _HomeState extends State<Home> {
               textAlign: TextAlign.center,
             ),
             BottomNavyBarItem(
-              icon: Icon(Icons.home),
-              title: Text('Home', style: eNavBarText),
+              icon: Icon(Icons.insert_chart),
+              title: Text('Statistici', style: eNavBarText),
               activeColor: AppTheme.lightAccent,
               inactiveColor: AppTheme.lightAccent,
               textAlign: TextAlign.center,
@@ -98,9 +98,7 @@ class _HomeState extends State<Home> {
                   duration: Duration(milliseconds: 500), curve: Curves.ease);
             }),
             PeoplePageVolunteer(limit: false),
-            Container(
-              color: Colors.purple,
-            ),
+            StatisticsVolunteer(),
             Container(
               color: Colors.red,
             ),

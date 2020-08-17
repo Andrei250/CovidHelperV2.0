@@ -45,6 +45,7 @@ dependencies:
   dots_indicator: ^1.2.0
   bottom_navy_bar: ^5.5.0
   slide_popup_dialog: ^0.0.2
+  fl_chart: ^0.11.0
 
 dev_dependencies:
   flutter_test:
