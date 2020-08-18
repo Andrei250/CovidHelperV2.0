@@ -10,6 +10,7 @@ class AppTheme {
   static const Color accentColor = Color.fromRGBO(114, 176, 29, 1);
   static const Color secondaryAccentColor = Color.fromRGBO(63, 125, 32, 1);
   static const Color lightAccent = Color.fromRGBO(0, 204, 150, 1);
+  static const Color lightGradient = Color.fromRGBO(0, 179, 131, 1);
 
   static final ThemeData darkTheme = ThemeData(
     scaffoldBackgroundColor: primaryColor,
@@ -93,4 +94,23 @@ final eButton = TextStyle(
   color: AppTheme.primaryColor,
   fontFamily: 'quicksand',
   fontSize: 17,
+);
+
+final eNavBarText = TextStyle(
+  color: AppTheme.lightAccent,
+  fontFamily: 'quicksand',
+  fontSize: 15.0,
+);
+
+final eStatsText = TextStyle(
+  color: AppTheme.lightColor,
+  fontFamily: 'quicksand',
+  fontSize: 15.0,
+);
+
+final eStatsTextValue = TextStyle(
+  color: AppTheme.lightColor,
+  fontFamily: 'quicksand',
+  fontSize: 20.0,
+  fontWeight: FontWeight.bold,
 );
