@@ -3,16 +3,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:slide_popup_dialog/slide_popup_dialog.dart' as slideDialog;
 
-class PersonCardVolunteer extends StatefulWidget {
-  PersonCardVolunteer({this.name});
+class FavPersonCard extends StatefulWidget {
+  FavPersonCard({this.name});
 
   final String name;
 
   @override
-  _PersonCardVolunteerState createState() => _PersonCardVolunteerState();
+  _FavPersonCardState createState() => _FavPersonCardState();
 }
 
-class _PersonCardVolunteerState extends State<PersonCardVolunteer> {
+class _FavPersonCardState extends State<FavPersonCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -30,18 +30,9 @@ class _PersonCardVolunteerState extends State<PersonCardVolunteer> {
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      widget.name,
-                      style: eTitle,
-                    ),
-                    Text(
-                      'Se afla la 3km de tine',
-                      style: eWelcome,
-                    ),
-                  ],
+                child: Text(
+                  widget.name,
+                  style: eTitle,
                 ),
               ),
               Spacer(),
@@ -58,6 +49,43 @@ class _PersonCardVolunteerState extends State<PersonCardVolunteer> {
                   ),
                 ),
               ),
+            ],
+          ),
+          Row(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.fromLTRB(25.0, 0.0, 0.0, 0.0),
+                child: FlatButton(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(25.0),
+                  ),
+                  onPressed: () {},
+                  color: AppTheme.lightAccent,
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(50.0, 2.0, 50.0, 2.0),
+                    child: Text(
+                      'ACCEPTA',
+                      style: eAcceptButton,
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(25.0, 0.0, 0.0, 0.0),
+                child: FlatButton(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(25.0),
+                  ),
+                  onPressed: () {},
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(2.0, 2.0, 2.0, 2.0),
+                    child: Text(
+                      'REFUZA',
+                      style: eDeclineButton,
+                    ),
+                  ),
+                ),
+              )
             ],
           ),
         ],

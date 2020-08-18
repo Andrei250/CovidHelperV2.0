@@ -1,18 +1,19 @@
+import 'package:covidhelper_v2/models/vulnerable_person.dart';
 import 'package:covidhelper_v2/utils/app_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:slide_popup_dialog/slide_popup_dialog.dart' as slideDialog;
 
-class FavPersonCard extends StatefulWidget {
-  FavPersonCard({this.name});
+class PersonCardVolunteer extends StatefulWidget {
+  PersonCardVolunteer({this.vulnerablePerson});
 
-  final String name;
+  VulnerablePerson vulnerablePerson;
 
   @override
-  _FavPersonCardState createState() => _FavPersonCardState();
+  _PersonCardVolunteerState createState() => _PersonCardVolunteerState();
 }
 
-class _FavPersonCardState extends State<FavPersonCard> {
+class _PersonCardVolunteerState extends State<PersonCardVolunteer> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -30,9 +31,19 @@ class _FavPersonCardState extends State<FavPersonCard> {
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  widget.name,
-                  style: eTitle,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      widget.vulnerablePerson.first_name +
+                          widget.vulnerablePerson.last_name,
+                      style: eTitle,
+                    ),
+                    Text(
+                      'Se afla la 3km de tine',
+                      style: eWelcome,
+                    ),
+                  ],
                 ),
               ),
               Spacer(),
@@ -49,43 +60,6 @@ class _FavPersonCardState extends State<FavPersonCard> {
                   ),
                 ),
               ),
-            ],
-          ),
-          Row(
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.fromLTRB(25.0, 0.0, 0.0, 0.0),
-                child: FlatButton(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(25.0),
-                  ),
-                  onPressed: () {},
-                  color: AppTheme.lightAccent,
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(50.0, 2.0, 50.0, 2.0),
-                    child: Text(
-                      'ACCEPTA',
-                      style: eAcceptButton,
-                    ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(25.0, 0.0, 0.0, 0.0),
-                child: FlatButton(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(25.0),
-                  ),
-                  onPressed: () {},
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(10.0, 2.0, 10.0, 2.0),
-                    child: Text(
-                      'REFUZA',
-                      style: eDeclineButton,
-                    ),
-                  ),
-                ),
-              )
             ],
           ),
         ],
@@ -114,7 +88,8 @@ class _FavPersonCardState extends State<FavPersonCard> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    widget.name,
+                    widget.vulnerablePerson.first_name +
+                        widget.vulnerablePerson.last_name,
                     style: eTitle,
                   ),
                 ),
@@ -177,8 +152,8 @@ class _FavPersonCardState extends State<FavPersonCard> {
                       borderRadius: BorderRadius.circular(25.0),
                     ),
                     onPressed: () {},
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(10.0, 2.0, 10.0, 2.0),
+                    child: Expanded(
+//                      padding: const EdgeInsets.fromLTRB(10.0, 2.0, 10.0, 2.0),
                       child: Text(
                         'REFUZA',
                         style: eDeclineButton,
