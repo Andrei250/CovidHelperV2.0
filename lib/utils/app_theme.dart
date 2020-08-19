@@ -143,6 +143,12 @@ final eWelcome = TextStyle(
   fontSize: 15.0,
   fontWeight: FontWeight.bold,
 );
+final eProducts = TextStyle(
+  color: Colors.white,
+  fontFamily: 'quicksand',
+  fontSize: 17.0,
+);
+
 final eWelcomeName = TextStyle(
   color: Colors.black,
   fontFamily: 'quicksand',
