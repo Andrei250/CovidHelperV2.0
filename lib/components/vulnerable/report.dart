@@ -71,11 +71,11 @@ class _ReportState extends State<Report> {
           children: [
             Container(
               margin: EdgeInsets.only(bottom: 20),
-              height: size.height * 0.2,
+              height: size.height * 0.3,
               child: Stack(
                 children: [
                   Container(
-                    height: size.height * 0.2 - 27,
+                    height: size.height * 0.3 - 27,
                     decoration: BoxDecoration(
                       color: AppTheme.lightAccent,
                       borderRadius: BorderRadius.only(

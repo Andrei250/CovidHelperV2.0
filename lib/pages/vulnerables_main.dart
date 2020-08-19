@@ -1,4 +1,5 @@
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
+import 'package:covidhelper_v2/components/left_nav.dart';
 import 'package:covidhelper_v2/components/vulnerable/need_help.dart';
 import 'package:covidhelper_v2/components/vulnerable/report.dart';
 import 'package:covidhelper_v2/models/vendor.dart';
@@ -33,7 +34,7 @@ class _VulnerablesMain extends State<VulnerablesMain> {
     super.dispose();
   }
 
-  AppBar interfaceAppBar() {
+  AppBar interfaceAppBar(GlobalKey<ScaffoldState> _scaffoldKey) {
     return AppBar(
       elevation:0,
       backgroundColor: AppTheme.lightAccent,
@@ -42,18 +43,23 @@ class _VulnerablesMain extends State<VulnerablesMain> {
             "assets/icons/menu.svg",
             color: Colors.white,
         ),
-        onPressed: () {},
+        onPressed: () => _scaffoldKey.currentState.openDrawer(),
       ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
+    final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+    Size size = MediaQuery.of(context).size;
+
     return StreamProvider<List<Vendor>>.value(
       value: FirestoreService().vendors,
       child: MaterialApp(
           home: Scaffold(
-            appBar: interfaceAppBar(),
+            key: _scaffoldKey,
+            appBar: interfaceAppBar(_scaffoldKey),
+            drawer: LeftNavigation(size: size),
             bottomNavigationBar: BottomNavyBar(
               backgroundColor: Colors.grey[100],
               selectedIndex: _currentIndex,
