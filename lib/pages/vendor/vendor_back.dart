@@ -1,27 +1,37 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'dart:collection';
-
 
 class VendorBack {
-
   VendorBack({this.uid});
 
   final String uid;
 
-  Future addStock(String categorydoc, String category, String product, int stock, double price) async{
-    CollectionReference cat = Firestore.instance.collection('vendor').document(uid).collection(categorydoc);
-    var dataMap = Map<String, Products>();
-    dataMap[product] = Products(price: price, stock: stock);
-    return await cat.document(category).setData(dataMap);
+  Future addStock(String categoryDoc, String category, String product,
+      int stock, double price) async {
+    CollectionReference cat = Firestore.instance
+        .collection('vendor')
+        .document('ACrR5h6tkFNshrsPrgLndmz0K4t2')
+        .collection(categoryDoc);
+    Products products = new Products(price: price, stock: stock);
+    Map<String, dynamic> dataMap = new Map<String, dynamic>();
+    dataMap.putIfAbsent(product, () => products.toJson());
+    return cat.document(category).setData(dataMap);
   }
-
 }
 
-class Products{
-
+class Products {
   Products({this.price, this.stock});
 
   int stock;
   double price;
 
+  Products.fromJson(Map<String, dynamic> parsedJson)
+      : stock = parsedJson['stock'] ?? '',
+        price = parsedJson['price'] ?? '';
+
+  Map<String, dynamic> toJson() {
+    var dataMap = Map<String, dynamic>();
+    dataMap['stock'] = this.stock;
+    dataMap['price'] = this.price;
+    return dataMap;
+  }
 }
