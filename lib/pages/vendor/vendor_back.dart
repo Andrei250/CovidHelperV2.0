@@ -8,12 +8,20 @@ class VendorBack {
 
   final String uid;
 
-  Future addStock(String categorydoc, String category, String product, int stock) async{
+  Future addStock(String categorydoc, String category, String product, int stock, double price) async{
     CollectionReference cat = Firestore.instance.collection('vendor').document(uid).collection(categorydoc);
-    var dataMap = Map<String, int>();
-    dataMap[product] = stock;
+    var dataMap = Map<String, Products>();
+    dataMap[product] = Products(price: price, stock: stock);
     return await cat.document(category).setData(dataMap);
   }
 
+}
+
+class Products{
+
+  Products({this.price, this.stock});
+
+  int stock;
+  double price;
 
 }

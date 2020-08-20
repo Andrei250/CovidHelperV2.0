@@ -214,7 +214,7 @@ class _VendorHomeScreenState extends State<VendorHomeScreen> {
                             borderRadius: BorderRadius.circular(25.0),
                           ),
                           onPressed: () {
-                            vend.addStock('Produse Alimentare', 'Lactate' , 'Lapte', 20);
+                            vend.addStock('Produse Alimentare', 'Lactate' , 'Iaurt', 20, 35.25);
                           },
                           child: Text(
                             'Vezi toate',
