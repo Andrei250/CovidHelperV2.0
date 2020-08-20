@@ -1,8 +1,9 @@
 import 'package:covidhelper_v2/pages/vendor/vendor_coming_volunteer.dart';
 import 'package:covidhelper_v2/pages/volunteer/home_volunteer/fav_person_card.dart';
-import 'package:covidhelper_v2/pages/volunteer_vulnerables.dart';
+import 'package:covidhelper_v2/pages/vendor/vendor_produtcs.dart';
 import 'package:covidhelper_v2/utils/app_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:covidhelper_v2/pages/vendor/vendor_back.dart';
 
 import 'package:covidhelper_v2/pages/volunteer/home_volunteer/fav_person_card.dart';
 
@@ -20,6 +21,8 @@ class VendorHomeScreen extends StatefulWidget {
 class _VendorHomeScreenState extends State<VendorHomeScreen> {
   int _currentIndex = 0;
   PageController _pageController;
+
+  final VendorBack vend = VendorBack();
 
   @override
   void initState() {
@@ -210,7 +213,9 @@ class _VendorHomeScreenState extends State<VendorHomeScreen> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(25.0),
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            vend.addStock('Produse Alimentare', 'Lactate' , 'Lapte', 20);
+                          },
                           child: Text(
                             'Vezi toate',
                             style: eSeeAll,
@@ -222,7 +227,7 @@ class _VendorHomeScreenState extends State<VendorHomeScreen> {
                   Expanded(
                       child:
                       ListView(scrollDirection: Axis.vertical, children: [
-                        VolunteerVulnerables(
+                        VendorProducts(
                           limit: true,
                           number: 5,
                           customHeight: deviceHeight * 0.45,
