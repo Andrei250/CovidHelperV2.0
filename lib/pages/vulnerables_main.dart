@@ -12,7 +12,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 class VulnerablesMain extends StatefulWidget {
+  final Map data;
 
+  VulnerablesMain({this.data});
   @override
   _VulnerablesMain createState() => _VulnerablesMain();
 }
@@ -20,7 +22,6 @@ class VulnerablesMain extends StatefulWidget {
 class _VulnerablesMain extends State<VulnerablesMain> {
   int _currentIndex = 0;
   PageController _pageController;
-
 
   @override
   void initState() {

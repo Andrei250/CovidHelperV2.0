@@ -18,7 +18,7 @@ void main() => runApp(
     MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: AppTheme.darkTheme,
-      home: VulnerablesMain(),
-//      initialRoute: '/vulnerable_main',
-//      onGenerateRoute: Routing.generateRoute,
+//      home: VulnerablesMain(),
+      initialRoute: '/',
+      onGenerateRoute: Routing.generateRoute,
 ));
