@@ -1,21 +1,21 @@
 import 'package:covidhelper_v2/models/vulnerable_person.dart';
-import 'package:covidhelper_v2/pages/volunteer/vulnerable_people_volunteer/volunteer_vulnearbles_card.dart';
+import 'package:covidhelper_v2/pages/vendor/vendor_products_card.dart';
 import 'package:covidhelper_v2/services/firestore_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class VolunteerVulnerables extends StatefulWidget {
-  VolunteerVulnerables({this.limit, this.number, this.customHeight});
+class VendorProducts extends StatefulWidget {
+  VendorProducts({this.limit, this.number, this.customHeight});
 
   bool limit;
   int number;
   double customHeight;
 
   @override
-  _VolunteerVulnerablesState createState() => _VolunteerVulnerablesState();
+  _VendorProductsState createState() => _VendorProductsState();
 }
 
-class _VolunteerVulnerablesState extends State<VolunteerVulnerables> {
+class _VendorProductsState extends State<VendorProducts> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -27,10 +27,10 @@ class _VolunteerVulnerablesState extends State<VolunteerVulnerables> {
           child: Scaffold(
             backgroundColor: Colors.white,
             body: Center(
-                child: VolunteerVulnerablesCards(
-              limit: widget.limit,
-              number: widget.number,
-            )),
+                child: VendorProductsCards(
+                  limit: widget.limit,
+                  number: widget.number,
+                )),
           )),
     );
   }

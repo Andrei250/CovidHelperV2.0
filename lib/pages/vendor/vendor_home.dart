@@ -1,23 +1,20 @@
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
-import 'package:covidhelper_v2/pages/home_screen.dart';
-import 'package:covidhelper_v2/pages/register/register_all.dart';
-import 'package:covidhelper_v2/pages/register/register_email.dart';
-import 'package:covidhelper_v2/pages/vendor_homescreen.dart';
+import 'package:covidhelper_v2/pages/vendor/vendor_homescreen.dart';
 import 'package:covidhelper_v2/utils/app_theme.dart';
 import 'package:flutter/material.dart';
 
-class vendorHome extends StatefulWidget {
+class VendorHome extends StatefulWidget {
 //
 //  Volunteer volunteer;
 //
 //
-//  vendorHome({ this.volunteer });
+//  VendorHome({ this.volunteer });
 
   @override
-  _vendorHomeState createState() => _vendorHomeState();
+  _VendorHomeState createState() => _VendorHomeState();
 }
 
-class _vendorHomeState extends State<vendorHome> {
+class _VendorHomeState extends State<VendorHome> {
   int _currentIndex = 0;
   PageController _pageController;
 
@@ -44,10 +41,12 @@ class _vendorHomeState extends State<vendorHome> {
           itemCornerRadius: 25,
           curve: Curves.easeInBack,
           onItemSelected: (index) {
-            setState(() {
-              _currentIndex = index;
-              _pageController.jumpToPage(index);
-            },);
+            setState(
+              () {
+                _currentIndex = index;
+                _pageController.jumpToPage(index);
+              },
+            );
           },
           items: <BottomNavyBarItem>[
             BottomNavyBarItem(
@@ -79,7 +78,7 @@ class _vendorHomeState extends State<vendorHome> {
             setState(() => _currentIndex = index);
           },
           children: <Widget>[
-            vendorHomeScreen(),
+            VendorHomeScreen(),
             Container(
               color: Colors.amber,
             ),
