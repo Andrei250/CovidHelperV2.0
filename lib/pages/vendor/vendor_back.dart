@@ -14,9 +14,23 @@ class VendorBack {
     Products products = new Products(price: price, stock: stock);
     Map<String, dynamic> dataMap = new Map<String, dynamic>();
     dataMap.putIfAbsent(product, () => products.toJson());
+    await addProduct(product, stock, price);
     return cat.document(category).setData(dataMap);
   }
 }
+
+  Future addProduct(String product,
+      int stock, double price) async {
+    CollectionReference cat = Firestore.instance
+        .collection('vendor')
+        .document('ACrR5h6tkFNshrsPrgLndmz0K4t2')
+        .collection('Products');
+    Products products = new Products(price: price, stock: stock);
+    Map<String, dynamic> dataMap = new Map<String, dynamic>();
+    dataMap.putIfAbsent(product, () => products.toJson());
+    return cat.document(product).setData(dataMap);
+
+  }
 
 class Products {
   Products({this.price, this.stock});
