@@ -1,7 +1,10 @@
 import 'package:covidhelper_v2/components/vendor/vendor_card.dart';
+import 'package:covidhelper_v2/components/vulnerable/help_person_card.dart';
 import 'package:covidhelper_v2/models/vendor.dart';
+import 'package:covidhelper_v2/pages/volunteer/home_volunteer/fav_person_card.dart';
 import 'package:covidhelper_v2/services/firestore_service.dart';
 import 'package:covidhelper_v2/utils/app_theme.dart';
+import 'package:covidhelper_v2/utils/pics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -33,42 +36,59 @@ class _NeedHelpState extends State<NeedHelp> {
             children: [
              Container(
                margin: EdgeInsets.only(bottom: 20),
-               height: size.height * 0.3,
+               height: 300,
                child: Stack(
                  children: [
                    Container(
-                     height: size.height * 0.3 - 27,
+                     height: 273,
                      decoration: BoxDecoration(
-                       color: AppTheme.lightAccent,
+                       color: Colors.white,
                        borderRadius: BorderRadius.only(
                          bottomLeft: Radius.circular(36),
                          bottomRight: Radius.circular(36),
                        ),
                      ),
-                     child: Row(
-                       crossAxisAlignment: CrossAxisAlignment.start,
-                       mainAxisAlignment: MainAxisAlignment.center,
-                       children: [
-                         Container(
-                           child: RaisedButton.icon(
-                               onPressed: () {},
-                               icon: Icon(
-                                   Icons.help,
-                                   size: 30,
-                               ),
-                               label: Text(
-                                   'Ajutor',
-                                   style: TextStyle(
-                                     fontSize: 20,
-                                     fontFamily: 'quicksand',
+                     child: Padding(
+                       padding: const EdgeInsets.fromLTRB(15.0, 20.0, 15.0, 15.0),
+                       child: Column(
+                         children: <Widget>[
+                           ClipRRect(
+                             borderRadius:
+                             BorderRadius.vertical(top: Radius.circular(25.0)),
+                             child: Container(
+                               width: double.maxFinite,
+                               height: 60.0,
+                               color: AppTheme.lightAccent,
+                               child: Column(
+                                 crossAxisAlignment: CrossAxisAlignment.start,
+                                 mainAxisAlignment: MainAxisAlignment.center,
+                                 children: <Widget>[
+                                   Padding(
+                                     padding: const EdgeInsets.fromLTRB(
+                                         15.0, 15.0, 10.0, 5.0),
+                                     child: Text(
+                                       'In caz ca ai nevoie urgenta de ceva, apasa butonul',
+                                       style: eGrey,
+                                       overflow: TextOverflow.ellipsis,
+                                       maxLines: 3,
+                                     ),
                                    ),
+                                 ],
                                ),
-                               color: Colors.red[400],
-                               padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
-                               shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
+                             ),
                            ),
-                         )
-                       ],
+                           ClipRRect(
+                             borderRadius: BorderRadius.vertical(
+                                 bottom: Radius.circular(25.0)),
+                             child: Container(
+                               width: double.maxFinite,
+                               height: 130.0,
+                               color: Colors.grey[200],
+                               child: HelpPersonCard(),
+                             ),
+                           ),
+                         ],
+                       ),
                      ),
                    ),
 
@@ -98,7 +118,7 @@ class _NeedHelpState extends State<NeedHelp> {
                              child: TextField(
                                onChanged: (value) {},
                                decoration: InputDecoration(
-                                 hintText: "Cauta magazin",
+                                 hintText: "Cauta produse",
                                  hintStyle: TextStyle(
                                      color: Colors.grey.withOpacity(0.5)
                                  ),

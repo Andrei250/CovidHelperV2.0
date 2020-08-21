@@ -38,13 +38,36 @@ class _VulnerablesMain extends State<VulnerablesMain> {
   AppBar interfaceAppBar(GlobalKey<ScaffoldState> _scaffoldKey) {
     return AppBar(
       elevation:0,
-      backgroundColor: AppTheme.lightAccent,
+      backgroundColor: Colors.white,
       leading: IconButton(
         icon: SvgPicture.asset(
             "assets/icons/menu.svg",
-            color: Colors.white,
+            color: Colors.black,
         ),
         onPressed: () => _scaffoldKey.currentState.openDrawer(),
+      ),
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Text(
+            'Covidhelper',
+            style: eTitle,
+          ),
+          Container(
+            width: 40.0,
+            height: 40.0,
+            child: Center(
+                child: Text(
+                  's',
+//                          child: Text(getInitials(widget.name),
+                  style: eStreet,
+                )),
+            decoration: new BoxDecoration(
+              color: AppTheme.lightAccent,
+              shape: BoxShape.circle,
+            ),
+          ),
+        ],
       ),
     );
   }
