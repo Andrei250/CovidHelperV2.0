@@ -6,8 +6,8 @@ import 'package:covidhelper_v2/models/user.dart';
 import 'package:covidhelper_v2/models/vendor.dart';
 import 'package:covidhelper_v2/models/volunteer.dart';
 import 'package:covidhelper_v2/models/vulnerable_person.dart';
+import 'package:covidhelper_v2/pages/vendor/vendor_back.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
 
 class FirestoreService {
@@ -21,11 +21,15 @@ class FirestoreService {
         .toList());
   }
 
-  Stream<List<VulnerablePerson>> get products {
-    return _db.collection('vendor').snapshots().map((snapshot) => snapshot
-        .documents
-        .map((document) => VulnerablePerson.fromJson(document.data))
-        .toList());
+  Stream<List<Products>> get products {
+    return _db
+        .collection('vendor')
+        .document('ACrR5h6tkFNshrsPrgLndmz0K4t2')
+        .collection('Products')
+        .snapshots()
+        .map((snapshot) => snapshot.documents
+            .map((document) => Products.fromJson(document.data))
+            .toList());
   }
 
   Stream<List<Volunteer>> get volunteer {
@@ -110,7 +114,8 @@ class FirestoreService {
 
   Future login(String email, String password) async {
     try {
-      AuthResult result = await _auth.signInWithEmailAndPassword(email: email, password: password);
+      AuthResult result = await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
       FirebaseUser user = result.user;
       return user;
     } catch (error) {
@@ -148,10 +153,7 @@ class FirestoreService {
     var userData = await _db.collection('Users').document(user.uid).get();
     if (userData != null) {
       User currentUser = new User(
-        uid: user.uid,
-        email: user.email,
-        user_value: userData['user_value']
-      );
+          uid: user.uid, email: user.email, user_value: userData['user_value']);
       return currentUser;
     }
     return null;
@@ -189,7 +191,7 @@ class FirestoreService {
       return null;
     }
   }
-  
+
   Future deleteVulnerable(VulnerablePerson person) async {
     try {
       await http.post(
@@ -211,6 +213,4 @@ class FirestoreService {
       return null;
     }
   }
-
 }
-

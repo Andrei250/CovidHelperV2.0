@@ -1,13 +1,14 @@
 import 'package:covidhelper_v2/models/vulnerable_person.dart';
+import 'package:covidhelper_v2/pages/vendor/vendor_back.dart';
 import 'package:covidhelper_v2/utils/app_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:slide_popup_dialog/slide_popup_dialog.dart' as slideDialog;
 
 class ProductCard extends StatefulWidget {
-  ProductCard({this.vulnerablePerson});
+  ProductCard({this.product});
 
-  VulnerablePerson vulnerablePerson;
+  Products product;
 
   @override
   _ProductCardState createState() => _ProductCardState();
@@ -16,6 +17,7 @@ class ProductCard extends StatefulWidget {
 class _ProductCardState extends State<ProductCard> {
   @override
   Widget build(BuildContext context) {
+
     return Container(
       child: Column(
         children: <Widget>[
@@ -26,7 +28,7 @@ class _ProductCardState extends State<ProductCard> {
                 child: Icon(
                   Icons.fastfood,
                   color: AppTheme.lightAccent,
-                  size: 60,
+                  size: 40,
                 ),
               ),
               Padding(
@@ -35,8 +37,7 @@ class _ProductCardState extends State<ProductCard> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      widget.vulnerablePerson.first_name +
-                          widget.vulnerablePerson.last_name,
+                      widget.product.name,
                       style: eTitle,
                     ),
                     Text(
@@ -88,8 +89,7 @@ class _ProductCardState extends State<ProductCard> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    widget.vulnerablePerson.first_name +
-                        widget.vulnerablePerson.last_name,
+                    widget.product.name,
                     style: eTitle,
                   ),
                 ),

@@ -1,4 +1,4 @@
-import 'package:covidhelper_v2/models/vulnerable_person.dart';
+import 'package:covidhelper_v2/pages/vendor/vendor_back.dart';
 import 'package:covidhelper_v2/pages/vendor/vendor_products_card.dart';
 import 'package:covidhelper_v2/services/firestore_service.dart';
 import 'package:flutter/material.dart';
@@ -22,15 +22,15 @@ class _VendorProductsState extends State<VendorProducts> {
       color: Colors.white,
       height: widget.customHeight,
 //      width: deviceWidth,
-      child: StreamProvider<List<VulnerablePerson>>.value(
-          value: FirestoreService().vulnerables,
+      child: StreamProvider<List<Products>>.value(
+          value: FirestoreService().products,
           child: Scaffold(
             backgroundColor: Colors.white,
             body: Center(
                 child: VendorProductsCards(
-                  limit: widget.limit,
-                  number: widget.number,
-                )),
+              limit: widget.limit,
+              number: widget.number,
+            )),
           )),
     );
   }

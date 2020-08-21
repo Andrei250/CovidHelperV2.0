@@ -1,23 +1,25 @@
-import 'file:///C:/Users/pc3/Desktop/CovidHelperFlutter/CovidHelperV2.0/lib/pages/volunteer/vulnerable_people_volunteer/volunteer_vulnerables.dart';
+import 'package:covidhelper_v2/pages/vendor/vendor_produtcs.dart';
 import 'package:covidhelper_v2/utils/app_theme.dart';
 import 'package:flutter/material.dart';
 
-class PeoplePageVolunteer extends StatefulWidget {
-  PeoplePageVolunteer({this.limit, this.number, this.customHeight});
+class VendorAllProducts extends StatefulWidget {
+  VendorAllProducts({this.limit, this.number, this.customHeight});
 
   bool limit;
   int number;
   double customHeight;
 
   @override
-  _PeoplePageVolunteerState createState() => _PeoplePageVolunteerState();
+  _VendorAllProductsState createState() => _VendorAllProductsState();
 }
 
-class _PeoplePageVolunteerState extends State<PeoplePageVolunteer> {
+class _VendorAllProductsState extends State<VendorAllProducts> {
   @override
   Widget build(BuildContext context) {
     double deviceHeight = MediaQuery.of(context).size.height;
-    return Container(
+    return Material(
+        type: MaterialType.transparency,
+        child: Container(
       height: deviceHeight,
       color: Colors.white,
       child: ListView(
@@ -28,17 +30,17 @@ class _PeoplePageVolunteerState extends State<PeoplePageVolunteer> {
             padding: const EdgeInsets.fromLTRB(8.0, 20.0, 8.0, 8.0),
             child: Center(
                 child: Text(
-              'Aceste persoane au\nnevoin de ajutorul tau!',
+              'Produsele tale',
               style: eTitle,
             )),
           ),
-          VolunteerVulnerables(
+          VendorProducts(
             limit: widget.limit,
             number: widget.number,
             customHeight: deviceHeight * 0.85,
           ),
         ],
       ),
-    );
+    ));
   }
 }
