@@ -60,20 +60,22 @@ class _LoginState extends State<Login> {
       home: Scaffold(
         floatingActionButton:
         new RaisedButton(child: Text('Inainte'), onPressed: () async {
-          setState(()  {
-            verifyBoth();
-            if(passwordOk == true && emailOk == true){
-              valid = true;
+            setState(()  {
+              verifyBoth();
+              if(passwordOk == true && emailOk == true){
+                valid = true;
+              }
+            });
+            if(valid == true){
+              dynamic result = await _auth.login(email, password);
+              if(result == null){
+                setState(() {
+                  error = 'Email-ul sau parola incorecta!';
+                });
+              } else {
+                Navigator.of(context).pushNamedAndRemoveUntil(result['route'], (route) => false, arguments: result);
+              }
             }
-          });
-          if(valid == true){
-            dynamic result = await _auth.login(email, password);
-            if(result == null){
-              setState(() {
-                error = 'Email-ul sau parola incorecta!';
-              });
-            }
-             }
           },
         ),
         body: Container(

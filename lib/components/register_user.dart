@@ -58,17 +58,17 @@ class _RegisterUserState extends State<RegisterUser> {
       message = '';
       if (password.isEmpty || email.isEmpty || phone.isEmpty ||
           last_name.isEmpty || first_name.isEmpty || address.isEmpty) {
-        emptyness_error = 'All fields are required';
+        emptyness_error = 'Toate campurile sunt obligatorii';
         return false;
       }
 
       if (password.length < 6) {
-        password_error = 'Password must have more than 6 characters';
+        password_error = 'Parola trebuie sa aiba peste 6 caractere';
         return false;
       }
 
       if (!EmailValidator.validate(email)) {
-        email_error = 'Invalid email';
+        email_error = 'Email invalid';
         return false;
       }
 

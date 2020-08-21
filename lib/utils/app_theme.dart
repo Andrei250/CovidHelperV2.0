@@ -13,6 +13,21 @@ class AppTheme {
 //  static const Color lightAccent = Color.fromRGBO(0, 204, 150, 1);
   static const Color lightGradient = Color.fromRGBO(0, 179, 131, 1);
 
+  static final ThemeData lightTheme = ThemeData(
+    textTheme: TextTheme(
+      headline1: TextStyle(
+          fontFamily: 'quicksand', color: primaryColor, fontSize: 40.0),
+      headline2: TextStyle(
+          fontFamily: 'quicksand', color: primaryColor, fontSize: 25.0),
+      headline3: TextStyle(
+          fontFamily: 'quicksand', color: primaryColor, fontSize: 20.0),
+      subtitle1: TextStyle(
+          fontFamily: 'quicksand', color: primaryColor, fontSize: 15.0),
+      subtitle2: TextStyle(
+          fontFamily: 'quicksand', color: primaryColor, fontSize: 10.0),
+    ),
+  );
+
   static final ThemeData darkTheme = ThemeData(
     scaffoldBackgroundColor: primaryColor,
     appBarTheme: AppBarTheme(

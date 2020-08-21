@@ -21,6 +21,14 @@ class FirestoreService {
         .toList());
   }
 
+  Stream<List<Vendor>> get vendors {
+    return _db.collection('vendor').snapshots().map((snapshot) =>
+        snapshot
+            .documents
+            .map((document) => Vendor.fromJson(document.data))
+            .toList());
+  }
+
   Stream<List<VulnerablePerson>> get products {
     return _db.collection('vendor').snapshots().map((snapshot) => snapshot
         .documents
@@ -62,6 +70,29 @@ class FirestoreService {
       );
       await addVulnerablePerson(person);
       await addUser(user.uid, "Vulnerables");
+      return 200;
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
+
+  Future<void> addReport(String type,
+                              String full_name,
+                              String message,
+                              FirebaseUser user) {
+    Map<String, dynamic> data = new Map<String, dynamic>();
+    data['type'] = type;
+    data['full_name'] = full_name;
+    data['message'] = message;
+    data['user_uid'] = user.uid;
+    return _db.collection("reports").document(user.uid).setData(data);
+  }
+
+  Future createReport(String type, String full_name, String message) async {
+    try {
+      FirebaseUser user = await _auth.currentUser();
+      await addReport(type, full_name, message, user);
       return 200;
     } catch (e) {
       print(e.toString());
@@ -112,7 +143,17 @@ class FirestoreService {
     try {
       AuthResult result = await _auth.signInWithEmailAndPassword(email: email, password: password);
       FirebaseUser user = result.user;
-      return user;
+      var userData = await _db.collection("Users").document(user.uid).get();
+      var userInfo = await _db.collection(userData['user_value']).document(user.uid).get();
+      Map<String, dynamic> retrievedData = new Map<String, dynamic>();
+      retrievedData['userInfo'] = userInfo;
+
+      if (userData['user_value'] == 'Vulnerables') {
+        retrievedData['route'] = '/vulnerable_main';
+        retrievedData['type'] = "vulnerable";
+      }
+      
+      return retrievedData;
     } catch (error) {
       print(error.toString());
       return null;
