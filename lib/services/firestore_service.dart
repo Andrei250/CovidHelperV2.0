@@ -25,7 +25,8 @@ class FirestoreService {
     return _db
         .collection('vendor')
         .document('ACrR5h6tkFNshrsPrgLndmz0K4t2')
-        .collection('Products').orderBy('stock')
+        .collection('Products')
+        .orderBy('stock')
         .snapshots()
         .map((snapshot) => snapshot.documents
             .map((document) => Products.fromJson(document.data))

@@ -51,16 +51,20 @@ class Products {
   String stock;
   String price;
   String name;
+  bool isShop;  // true if it's a shop, false otherwise (pharmacy)
+
 
   Products.fromJson(Map<String, dynamic> parsedJson)
       : stock = parsedJson['stock'] ?? '',
         price = parsedJson['price'] ?? '',
+        isShop = parsedJson['isShop'] ?? '',
         name = parsedJson['name'] ?? '';
 
   Map<String, dynamic> toJson() {
     var dataMap = Map<String, dynamic>();
     dataMap['stock'] = this.stock;
     dataMap['price'] = this.price;
+    dataMap['isShop'] = this.isShop;
     dataMap['name'] = this.name;
     return dataMap;
   }

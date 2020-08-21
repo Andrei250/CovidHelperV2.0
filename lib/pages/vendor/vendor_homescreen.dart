@@ -2,7 +2,9 @@ import 'package:covidhelper_v2/pages/vendor/vendor_back.dart';
 import 'package:covidhelper_v2/pages/vendor/vendor_coming_volunteer.dart';
 import 'package:covidhelper_v2/pages/vendor/vendor_produtcs.dart';
 import 'package:covidhelper_v2/utils/app_theme.dart';
+import 'package:covidhelper_v2/utils/pics.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class VendorHomeScreen extends StatefulWidget {
 //
@@ -69,8 +71,8 @@ class _VendorHomeScreenState extends State<VendorHomeScreen> {
                 title: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Icon(
-                      Icons.menu,
+                    SvgPicture.asset(
+                      drawer,
                       color: Colors.black,
                     ),
 //                    Container(height: 30, width: 30, child: LogoAppBar()),
@@ -128,7 +130,7 @@ class _VendorHomeScreenState extends State<VendorHomeScreen> {
                           BorderRadius.vertical(top: Radius.circular(25.0)),
                       child: Container(
                         width: double.maxFinite,
-                        height: 80.0,
+                        height: 90.0,
                         color: AppTheme.lightAccent,
                         child: Padding(
                             padding:
@@ -140,20 +142,19 @@ class _VendorHomeScreenState extends State<VendorHomeScreen> {
                                 Row(
                                   children: <Widget>[
                                     SizedBox(
+                                      width: 30.0,
+                                      height: 30.0,
+                                      child: SvgPicture.asset(
+                                        clock,
                                         height: 30.0,
                                         width: 30.0,
-                                        child: Icon(
-                                          Icons.access_time,
-                                          color: Colors.white,
-                                        )),
-//                                    SizedBox(
-//                                      width: 10.0,
-//                                    ),
+                                      ),
+                                    ),
                                     Padding(
                                       padding: const EdgeInsets.fromLTRB(
-                                          8.0, 0.0, 8.0, 0.0),
+                                          8.0, 8.0, 8.0, 8.0),
                                       child: Text(
-                                        'Voluntarul va ajunge in 10 minute',
+                                        'Voluntarul va ajunge in XXX minute',
                                         style: eProducts,
                                       ),
                                     )
@@ -162,15 +163,14 @@ class _VendorHomeScreenState extends State<VendorHomeScreen> {
                                 Row(
                                   children: <Widget>[
                                     SizedBox(
-                                        height: 30.0,
-                                        width: 30.0,
-                                        child: Icon(
-                                          Icons.filter_9_plus,
-                                          color: Colors.white,
-                                        )),
-//                                    SizedBox(
-//                                      width: 10.0,
-//                                    ),
+                                      width: 30.0,
+                                      height: 30.0,
+                                      child: SvgPicture.asset(
+                                        pack,
+                                        height: 30,
+                                        width: 30,
+                                      ),
+                                    ),
                                     Padding(
                                       padding: const EdgeInsets.fromLTRB(
                                           8.0, 0.0, 8.0, 0.0),
@@ -231,7 +231,7 @@ class _VendorHomeScreenState extends State<VendorHomeScreen> {
                 VendorProducts(
                   limit: true,
                   number: 5,
-                  customHeight: deviceHeight * 0.45,
+                  customHeight: deviceHeight * 0.4,
                 ),
               ])),
             ])));

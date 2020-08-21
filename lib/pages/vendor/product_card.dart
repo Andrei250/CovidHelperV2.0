@@ -1,8 +1,9 @@
-import 'package:covidhelper_v2/models/vulnerable_person.dart';
 import 'package:covidhelper_v2/pages/vendor/vendor_back.dart';
 import 'package:covidhelper_v2/utils/app_theme.dart';
+import 'package:covidhelper_v2/utils/pics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:slide_popup_dialog/slide_popup_dialog.dart' as slideDialog;
 
 class ProductCard extends StatefulWidget {
@@ -17,7 +18,6 @@ class ProductCard extends StatefulWidget {
 class _ProductCardState extends State<ProductCard> {
   @override
   Widget build(BuildContext context) {
-
     return Container(
       child: Column(
         children: <Widget>[
@@ -25,10 +25,14 @@ class _ProductCardState extends State<ProductCard> {
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.fromLTRB(15.0, 8.0, 8.0, 8.0),
-                child: Icon(
-                  Icons.fastfood,
-                  color: AppTheme.lightAccent,
-                  size: 40,
+                child: SizedBox(
+                  width: 50.0,
+                  height: 50.0,
+                  child: SvgPicture.asset(
+                    widget.product.isShop == true ? food : pill,
+                    height: 50,
+                    width: 50,
+                  ),
                 ),
               ),
               Padding(
@@ -41,7 +45,9 @@ class _ProductCardState extends State<ProductCard> {
                       style: eTitle,
                     ),
                     Text(
-                      'Mai sunt ' + widget.product.stock + ' de produse in stoc',
+                      'Mai sunt ' +
+                          widget.product.stock +
+                          ' de produse in stoc',
                       style: eWelcome,
                     ),
                   ],
@@ -80,10 +86,14 @@ class _ProductCardState extends State<ProductCard> {
               children: <Widget>[
                 Padding(
                   padding: const EdgeInsets.fromLTRB(20.0, 8.0, 8.0, 8.0),
-                  child: Icon(
-                    Icons.person_outline,
-                    color: AppTheme.lightAccent,
-                    size: 60,
+                  child: SizedBox(
+                    width: 60.0,
+                    height: 60.0,
+                    child: SvgPicture.asset(
+                      widget.product.isShop == true ? food : pill,
+                      height: 60,
+                      width: 60,
+                    ),
                   ),
                 ),
                 Padding(
