@@ -22,9 +22,17 @@ class FirestoreService {
   }
 
   Stream<List<Vendor>> get vendors {
+    return _db.collection('vendor').snapshots().map((snapshot) =>
+        snapshot
+            .documents
+            .map((document) => Vendor.fromJson(document.data))
+            .toList());
+  }
+
+  Stream<List<VulnerablePerson>> get products {
     return _db.collection('vendor').snapshots().map((snapshot) => snapshot
         .documents
-        .map((document) => Vendor.fromJson(document.data))
+        .map((document) => VulnerablePerson.fromJson(document.data))
         .toList());
   }
 
