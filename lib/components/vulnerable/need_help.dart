@@ -27,6 +27,9 @@ class _NeedHelpState extends State<NeedHelp> {
     Size size = MediaQuery.of(context).size;
 
     final vendors = Provider.of<List<Vendor>>(context);
+    final vendors_widgets = List.generate(vendors.length <= 4 ? vendors.length : 4, (index) {
+      return VendorCard(vendor: vendors[index], size:  size);
+    });
 
     return ListView(
       shrinkWrap: true,
@@ -172,20 +175,25 @@ class _NeedHelpState extends State<NeedHelp> {
              SizedBox(
                height: 20,
              ),
-             SizedBox(
-               height: size.height * 0.4,
-               child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  shrinkWrap: true,
-                  padding: EdgeInsets.symmetric(vertical: 2.0, horizontal: 10.0),
-                  itemCount: (vendors.length >= 4) ? 4 : vendors.length,
-                  itemBuilder: (context, index) {
-                    return VendorCard(vendor : vendors[index], size: size);
-                  },
-                ),
-             ),
+
            ],
         ),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            for (int i = 0; i < vendors_widgets.length; i += 2)
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  vendors_widgets[i],
+                  if (i + 1 < vendors_widgets.length)
+                    vendors_widgets[i + 1],
+                ],
+              ),
+          ],
+        ),
+
       ],
     );
   }
