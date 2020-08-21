@@ -10,6 +10,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class AdminPanel extends StatefulWidget {
+  final Map data;
+
+  AdminPanel({this.data});
   @override
   _AdminPanelState createState() => _AdminPanelState();
 }

@@ -1,5 +1,5 @@
 import 'package:covidhelper_v2/pages/volunteer/home_volunteer/fav_person_card.dart';
-import 'file:///C:/Users/pc3/Desktop/CovidHelperFlutter/CovidHelperV2.0/lib/pages/volunteer/vulnerable_people_volunteer/volunteer_vulnerables.dart';
+import 'package:covidhelper_v2/pages/volunteer/vulnerable_people_volunteer/volunteer_vulnerables.dart';
 import 'package:covidhelper_v2/utils/app_theme.dart';
 import 'package:covidhelper_v2/utils/pics.dart';
 import 'package:flutter/cupertino.dart';
