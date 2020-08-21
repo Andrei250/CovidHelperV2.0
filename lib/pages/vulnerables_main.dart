@@ -23,6 +23,19 @@ class _VulnerablesMain extends State<VulnerablesMain> {
   int _currentIndex = 0;
   PageController _pageController;
 
+  Widget getPage() {
+    if (_currentIndex == 0) {
+      return NeedHelp();
+    } else if (_currentIndex == 1) {
+      return Container(
+        color: Colors.amber,
+      );
+    } else if (_currentIndex == 2) {
+      return Report();
+    }
+
+  }
+
   @override
   void initState() {
     super.initState();
@@ -93,7 +106,9 @@ class _VulnerablesMain extends State<VulnerablesMain> {
               onItemSelected: (index) {
                 setState(() {
                   _currentIndex = index;
-                  _pageController.jumpToPage(index);
+                  setState(() {
+
+                  });;
                 },);
               },
               items: <BottomNavyBarItem>[
@@ -134,16 +149,12 @@ class _VulnerablesMain extends State<VulnerablesMain> {
             ),
             body: SizedBox.expand(
               child: PageView(
-                controller: _pageController,
-                onPageChanged: (index) {
-                  setState(() => _currentIndex = index);
-                },
+//                controller: _pageController,
+//                onPageChanged: (index) {
+//                  setState(() => _currentIndex = index);
+//                },
                 children: <Widget>[
-                  NeedHelp(),
-                  Container(
-                    color: Colors.amber,
-                  ),
-                  Report(),
+                  getPage(),
                 ],
               ),
             ),
