@@ -1,5 +1,4 @@
 import 'package:covidhelper_v2/components/loading_screen.dart';
-import 'package:covidhelper_v2/pages/home.dart';
 import 'package:covidhelper_v2/pages/register/register_back.dart';
 import 'package:covidhelper_v2/pages/register/register_choose.dart';
 import 'package:covidhelper_v2/pages/register/register_email.dart';
@@ -7,6 +6,7 @@ import 'package:covidhelper_v2/pages/register/register_name.dart';
 import 'package:covidhelper_v2/pages/register/register_password.dart';
 import 'package:covidhelper_v2/pages/register/register_phone.dart';
 import 'package:covidhelper_v2/pages/register/transition.dart';
+import 'package:covidhelper_v2/pages/volunteer/home_volunteer/home.dart';
 import 'package:flutter/material.dart';
 
 class Register extends StatefulWidget {
@@ -61,6 +61,7 @@ class RegisterAll {
             builder: (_) => LoadingScreen(registerBack: registerBack));
       case '/home':
         return CustomRoute(builder: (_) => Home());
+//        return CustomRoute(builder: (_) => Home(volunteer: args));
         break;
       default:
         return null;
