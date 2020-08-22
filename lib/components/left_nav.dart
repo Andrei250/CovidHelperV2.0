@@ -1,3 +1,4 @@
+import 'package:covidhelper_v2/models/vulnerable_person.dart';
 import 'package:covidhelper_v2/utils/app_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -6,8 +7,9 @@ import 'button_settings.dart';
 
 class LeftNavigation extends StatefulWidget {
   final Size size;
+  final VulnerablePerson person;
 
-  LeftNavigation({this.size});
+  LeftNavigation({this.size, this.person});
 
   @override
   _LeftNavigationState createState() => _LeftNavigationState();
@@ -28,8 +30,8 @@ class _LeftNavigationState extends State<LeftNavigation> {
                   children: [
                     Image.asset('assets/images/background.png'),
                     Positioned(
-                      left: widget.size.width * 0.07,
-                      top: widget.size.width * 0.07,
+                      left: orientation == Orientation.portrait ? widget.size.width * 0.07 : widget.size.width * 0.03,
+                      top: orientation == Orientation.portrait ? widget.size.width * 0.17 : widget.size.width * 0.1,
                       child: Row(
                         children: [
                           Container(
@@ -48,12 +50,12 @@ class _LeftNavigationState extends State<LeftNavigation> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "Numele si Prenumele",
-                                  style: AppTheme.darkTheme.textTheme.subtitle1,
+                                  widget.person.first_name + ' ' +widget.person.last_name ,
+                                  style: AppTheme.darkTheme.textTheme.headline3,
                                 ),
                                 Text(
-                                  "Numarul de telefon sau Email",
-                                  style: AppTheme.darkTheme.textTheme.subtitle2,
+                                  widget.person.phone,
+                                  style: AppTheme.darkTheme.textTheme.headline4,
                                 ),
                               ],
                             ),
@@ -62,23 +64,23 @@ class _LeftNavigationState extends State<LeftNavigation> {
                       ),
                     ),
 
-                    Positioned(
-                      left: widget.size.width * 0.07,
-                      bottom: orientation == Orientation.portrait ? widget.size.width * 0.20 : widget.size.width * 0.10,
-                      child: Row(
-                        children: [
-                          Text(
-                            "Email",
-                            style: AppTheme.darkTheme.textTheme.headline3,
-                          ),
-
-                          IconButton(
-                            icon: Icon(Icons.arrow_circle_down, color: Colors.white,),
-                            onPressed: () {},
-                          ),
-                        ],
-                      ),
-                    ),
+//                    Positioned(
+//                      left: widget.size.width * 0.07,
+//                      bottom: orientation == Orientation.portrait ? widget.size.width * 0.20 : widget.size.width * 0.10,
+//                      child: Row(
+//                        children: [
+//                          Text(
+//                            "Email",
+//                            style: AppTheme.darkTheme.textTheme.headline3,
+//                          ),
+//
+//                          IconButton(
+//                            icon: Icon(Icons.arrow_drop_down_circle, color: Colors.white,),
+//                            onPressed: () {},
+//                          ),
+//                        ],
+//                      ),
+//                    ),
                   ],
                 ),
               ),

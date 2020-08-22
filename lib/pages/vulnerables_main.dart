@@ -3,6 +3,7 @@ import 'package:covidhelper_v2/components/left_nav.dart';
 import 'package:covidhelper_v2/components/vulnerable/need_help.dart';
 import 'package:covidhelper_v2/components/vulnerable/report.dart';
 import 'package:covidhelper_v2/models/vendor.dart';
+import 'package:covidhelper_v2/models/vulnerable_person.dart';
 import 'package:covidhelper_v2/pages/register/register_all.dart';
 import 'package:covidhelper_v2/pages/register/register_email.dart';
 import 'package:covidhelper_v2/services/firestore_service.dart';
@@ -96,7 +97,7 @@ class _VulnerablesMain extends State<VulnerablesMain> {
           home: Scaffold(
             key: _scaffoldKey,
             appBar: interfaceAppBar(_scaffoldKey),
-            drawer: LeftNavigation(size: size),
+            drawer: LeftNavigation(size: size, person: VulnerablePerson().fromStream(widget.data['userInfo'])),
             bottomNavigationBar: BottomNavyBar(
               backgroundColor: Colors.grey[100],
               selectedIndex: _currentIndex,

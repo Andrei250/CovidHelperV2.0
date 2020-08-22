@@ -28,5 +28,15 @@ class VulnerablePerson {
     return dataMap;
   }
 
+  VulnerablePerson fromStream(var data) {
+    VulnerablePerson person = new VulnerablePerson();
+    person.first_name = data['first_name'] ?? '';
+    person.last_name = data['last_name'] ?? '';
+    person.uid = data['uid'] ?? '';
+    person.address = data['address'] ?? '';
+    person.email = data['email'] ?? '';
+    person.phone = data['phone'] ?? '';
 
+    return person;
+  }
 }
