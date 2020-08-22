@@ -10,7 +10,7 @@ void main() => runApp(
     MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: AppTheme.darkTheme,
-//      home: VulnerablesMain(),
+      home: VendorHome(),
       initialRoute: '/',
       onGenerateRoute: Routing.generateRoute,
 ));

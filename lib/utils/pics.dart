@@ -6,3 +6,6 @@ const clock = 'assets/icons/clock.svg';
 const pack = 'assets/icons/pack.svg';
 const user = 'assets/icons/user.svg';
 const drawer = 'assets/icons/menu.svg';
+const home = 'assets/icons/home.svg';
+const list = 'assets/icons/list.svg';
+const graph = 'assets/icons/graph.svg';
