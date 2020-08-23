@@ -97,7 +97,7 @@ class _VulnerablesMain extends State<VulnerablesMain> {
           home: Scaffold(
             key: _scaffoldKey,
             appBar: interfaceAppBar(_scaffoldKey),
-            drawer: LeftNavigation(size: size, person: VulnerablePerson().fromStream(widget.data['userInfo'])),
+            drawer: LeftNavigation(size: size, person: VulnerablePerson().fromStream(widget.data['userInfo']), data: widget.data, context: context),
             bottomNavigationBar: BottomNavyBar(
               backgroundColor: Colors.grey[100],
               selectedIndex: _currentIndex,
@@ -109,7 +109,7 @@ class _VulnerablesMain extends State<VulnerablesMain> {
                   _currentIndex = index;
                   setState(() {
 
-                  });;
+                  });
                 },);
               },
               items: <BottomNavyBarItem>[
@@ -137,7 +137,7 @@ class _VulnerablesMain extends State<VulnerablesMain> {
                 ),
                 BottomNavyBarItem(
                   icon: Icon(Icons.report),
-                  title: Text('Raporteaza',
+                  title: Text('Raport',
                       style: TextStyle(
                           fontFamily: 'quicksand',
                           color: AppTheme.lightAccent,

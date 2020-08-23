@@ -139,21 +139,24 @@ class FirestoreService {
     }
   }
 
+  Future<Map<String, dynamic>> getUserData(FirebaseUser user) async{
+    var userData = await _db.collection("Users").document(user.uid).get();
+    var userInfo = await _db.collection(userData['user_value']).document(user.uid).get();
+    Map<String, dynamic> retrievedData = new Map<String, dynamic>();
+    retrievedData['userInfo'] = userInfo;
+
+    if (userData['user_value'] == 'Vulnerables') {
+      retrievedData['route'] = '/vulnerable_main';
+      retrievedData['type'] = "vulnerable";
+    }
+    return retrievedData;
+  }
+
   Future login(String email, String password) async {
     try {
       AuthResult result = await _auth.signInWithEmailAndPassword(email: email, password: password);
       FirebaseUser user = result.user;
-      var userData = await _db.collection("Users").document(user.uid).get();
-      var userInfo = await _db.collection(userData['user_value']).document(user.uid).get();
-      Map<String, dynamic> retrievedData = new Map<String, dynamic>();
-      retrievedData['userInfo'] = userInfo;
-
-      if (userData['user_value'] == 'Vulnerables') {
-        retrievedData['route'] = '/vulnerable_main';
-        retrievedData['type'] = "vulnerable";
-      }
-      
-      return retrievedData;
+      return await getUserData(user);
     } catch (error) {
       print(error.toString());
       return null;

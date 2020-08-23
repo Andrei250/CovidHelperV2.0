@@ -8,8 +8,10 @@ import 'button_settings.dart';
 class LeftNavigation extends StatefulWidget {
   final Size size;
   final VulnerablePerson person;
+  final Map data;
+  final BuildContext context;
 
-  LeftNavigation({this.size, this.person});
+  LeftNavigation({this.size, this.person, this.data, this.context});
 
   @override
   _LeftNavigationState createState() => _LeftNavigationState();
@@ -63,28 +65,10 @@ class _LeftNavigationState extends State<LeftNavigation> {
                         ],
                       ),
                     ),
-
-//                    Positioned(
-//                      left: widget.size.width * 0.07,
-//                      bottom: orientation == Orientation.portrait ? widget.size.width * 0.20 : widget.size.width * 0.10,
-//                      child: Row(
-//                        children: [
-//                          Text(
-//                            "Email",
-//                            style: AppTheme.darkTheme.textTheme.headline3,
-//                          ),
-//
-//                          IconButton(
-//                            icon: Icon(Icons.arrow_drop_down_circle, color: Colors.white,),
-//                            onPressed: () {},
-//                          ),
-//                        ],
-//                      ),
-//                    ),
                   ],
                 ),
               ),
-              getNavigations(orientation, widget.size),
+              getNavigations(orientation, widget.size, widget.context),
             ],
           ),
         );
@@ -94,7 +78,7 @@ class _LeftNavigationState extends State<LeftNavigation> {
 }
 
 
-Widget getNavigations(Orientation orientation, Size size) {
+Widget getNavigations(Orientation orientation, Size size, BuildContext context) {
   return Column(
     children: [
       Padding(
@@ -141,11 +125,15 @@ Widget getNavigations(Orientation orientation, Size size) {
               },
             ),
             ButtonSettings(
-              label: 'Log out',
+              label: 'Deconecteaza-te',
               icon: Icon(
                 Icons.exit_to_app,
                 color: Colors.black,
               ),
+              arguments: {
+                'log-out' : true,
+                'context' : context,
+              },
             ),
           ],
         ),

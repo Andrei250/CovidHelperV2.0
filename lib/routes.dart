@@ -13,7 +13,7 @@ import 'pages/login.dart';
 class Routing {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
-      case '/':
+      case '/loading':
         return MaterialPageRoute(builder: (_) => Loading());
         break;
       case '/admin_panel':

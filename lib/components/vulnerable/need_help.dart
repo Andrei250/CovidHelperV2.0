@@ -16,20 +16,34 @@ class NeedHelp extends StatefulWidget {
 }
 
 class _NeedHelpState extends State<NeedHelp> {
+  List<Vendor> vendors;
 
   @override
   void initState() {
     super.initState();
   }
 
+  void getVendors() async {
+    vendors = await Provider.of<List<Vendor>>(context);
+    setState(() {
+
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    getVendors();
 
-    final vendors = Provider.of<List<Vendor>>(context);
-    final vendors_widgets = List.generate(vendors.length <= 4 ? vendors.length : 4, (index) {
-      return VendorCard(vendor: vendors[index], size:  size);
+    List vendors_widgets = List.generate(0, (index) {
+      return Container();
     });
+
+    if (vendors != null) {
+      vendors_widgets = List.generate(vendors.length <= 4 ? vendors.length : 4, (index) {
+        return VendorCard(vendor: vendors[index], size:  size);
+      });
+    }
 
     return ListView(
       shrinkWrap: true,
