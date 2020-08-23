@@ -1,7 +1,10 @@
 import 'package:covidhelper_v2/components/vendor/vendor_card.dart';
+import 'package:covidhelper_v2/components/vulnerable/help_person_card.dart';
 import 'package:covidhelper_v2/models/vendor.dart';
+import 'package:covidhelper_v2/pages/volunteer/home_volunteer/fav_person_card.dart';
 import 'package:covidhelper_v2/services/firestore_service.dart';
 import 'package:covidhelper_v2/utils/app_theme.dart';
+import 'package:covidhelper_v2/utils/pics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -13,17 +16,34 @@ class NeedHelp extends StatefulWidget {
 }
 
 class _NeedHelpState extends State<NeedHelp> {
+  List<Vendor> vendors;
 
   @override
   void initState() {
     super.initState();
   }
 
+  void getVendors() async {
+    vendors = await Provider.of<List<Vendor>>(context);
+    setState(() {
+
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    getVendors();
 
-    final vendors = Provider.of<List<Vendor>>(context);
+    List vendors_widgets = List.generate(0, (index) {
+      return Container();
+    });
+
+    if (vendors != null) {
+      vendors_widgets = List.generate(vendors.length <= 4 ? vendors.length : 4, (index) {
+        return VendorCard(vendor: vendors[index], size:  size);
+      });
+    }
 
     return ListView(
       shrinkWrap: true,
@@ -33,42 +53,59 @@ class _NeedHelpState extends State<NeedHelp> {
             children: [
              Container(
                margin: EdgeInsets.only(bottom: 20),
-               height: size.height * 0.3,
+               height: 300,
                child: Stack(
                  children: [
                    Container(
-                     height: size.height * 0.3 - 27,
+                     height: 273,
                      decoration: BoxDecoration(
-                       color: AppTheme.lightAccent,
+                       color: Colors.white,
                        borderRadius: BorderRadius.only(
                          bottomLeft: Radius.circular(36),
                          bottomRight: Radius.circular(36),
                        ),
                      ),
-                     child: Row(
-                       crossAxisAlignment: CrossAxisAlignment.start,
-                       mainAxisAlignment: MainAxisAlignment.center,
-                       children: [
-                         Container(
-                           child: RaisedButton.icon(
-                               onPressed: () {},
-                               icon: Icon(
-                                   Icons.help,
-                                   size: 30,
-                               ),
-                               label: Text(
-                                   'Ajutor',
-                                   style: TextStyle(
-                                     fontSize: 20,
-                                     fontFamily: 'quicksand',
+                     child: Padding(
+                       padding: const EdgeInsets.fromLTRB(15.0, 20.0, 15.0, 15.0),
+                       child: Column(
+                         children: <Widget>[
+                           ClipRRect(
+                             borderRadius:
+                             BorderRadius.vertical(top: Radius.circular(25.0)),
+                             child: Container(
+                               width: double.maxFinite,
+                               height: 60.0,
+                               color: AppTheme.lightAccent,
+                               child: Column(
+                                 crossAxisAlignment: CrossAxisAlignment.start,
+                                 mainAxisAlignment: MainAxisAlignment.center,
+                                 children: <Widget>[
+                                   Padding(
+                                     padding: const EdgeInsets.fromLTRB(
+                                         15.0, 15.0, 10.0, 5.0),
+                                     child: Text(
+                                       'In caz ca ai nevoie urgenta de ceva, apasa butonul',
+                                       style: eGrey,
+                                       overflow: TextOverflow.ellipsis,
+                                       maxLines: 3,
+                                     ),
                                    ),
+                                 ],
                                ),
-                               color: Colors.red[400],
-                               padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
-                               shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
+                             ),
                            ),
-                         )
-                       ],
+                           ClipRRect(
+                             borderRadius: BorderRadius.vertical(
+                                 bottom: Radius.circular(25.0)),
+                             child: Container(
+                               width: double.maxFinite,
+                               height: 130.0,
+                               color: Colors.grey[200],
+                               child: HelpPersonCard(),
+                             ),
+                           ),
+                         ],
+                       ),
                      ),
                    ),
 
@@ -98,7 +135,7 @@ class _NeedHelpState extends State<NeedHelp> {
                              child: TextField(
                                onChanged: (value) {},
                                decoration: InputDecoration(
-                                 hintText: "Cauta magazin",
+                                 hintText: "Cauta produse",
                                  hintStyle: TextStyle(
                                      color: Colors.grey.withOpacity(0.5)
                                  ),
@@ -152,20 +189,25 @@ class _NeedHelpState extends State<NeedHelp> {
              SizedBox(
                height: 20,
              ),
-             SizedBox(
-               height: size.height * 0.4,
-               child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  shrinkWrap: true,
-                  padding: EdgeInsets.symmetric(vertical: 2.0, horizontal: 10.0),
-                  itemCount: (vendors.length >= 4) ? 4 : vendors.length,
-                  itemBuilder: (context, index) {
-                    return VendorCard(vendor : vendors[index], size: size);
-                  },
-                ),
-             ),
+
            ],
         ),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            for (int i = 0; i < vendors_widgets.length; i += 2)
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  vendors_widgets[i],
+                  if (i + 1 < vendors_widgets.length)
+                    vendors_widgets[i + 1],
+                ],
+              ),
+          ],
+        ),
+
       ],
     );
   }

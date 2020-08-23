@@ -57,12 +57,13 @@ class _AdminPanelState extends State<AdminPanel> {
     });
   }
 
-  Widget _getFragment(int index) {
+  Widget _getFragment(int index, BuildContext context) {
     if (index == 0) {
       return MoreMenuAdmin(
         user: user,
         admin: admin,
         function: change,
+        context: context,
       );
     } else if (index == 2) {
       return RegisterUser();
@@ -82,7 +83,7 @@ class _AdminPanelState extends State<AdminPanel> {
       value: FirestoreService().vulnerables,
       child: Scaffold(
         body: Center(
-          child: _getFragment(_selectedIndex),
+          child: _getFragment(_selectedIndex, context),
         ),
         bottomNavigationBar: BottomNavigationBar(
           items: const <BottomNavigationBarItem>[
