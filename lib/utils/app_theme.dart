@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class AppTheme {
   AppTheme._();
 
-  static const Color primaryColor = Color.fromRGBO(13, 10, 11, 1);
+  static const Color primaryColor = Colors.black;
   static const Color secondaryColor = Color.fromRGBO(37, 34, 35, 1);
   static const Color primaryVariantColor = Color.fromRGBO(69, 73, 85, 1);
   static const Color lightColor = Color.fromRGBO(255, 255, 255, 1);
@@ -86,12 +86,12 @@ class AppTheme {
 }
 
 final eLabel = TextStyle(
-  color: AppTheme.primaryVariantColor,
+  color: Colors.grey[600],
   fontWeight: FontWeight.normal,
   fontFamily: 'quicksand',
 );
 final eLabelFocused = TextStyle(
-  color: AppTheme.lightColor,
+  color: AppTheme.lightAccent,
   fontWeight: FontWeight.bold,
   fontFamily: 'quicksand',
 );
@@ -108,7 +108,7 @@ final eWarning = TextStyle(
   fontSize: 15,
 );
 final eButton = TextStyle(
-  color: AppTheme.primaryColor,
+  color: Colors.white,
   fontFamily: 'quicksand',
   fontSize: 17,
 );
@@ -180,4 +180,9 @@ final eGrey = TextStyle(
   color: Colors.grey[300],
   fontFamily: 'quicksand',
   fontSize: 15.0,
+);
+final eTextField = TextStyle(
+  color: Colors.black,
+  fontFamily: 'quicksand',
+  fontSize: 17.0,
 );

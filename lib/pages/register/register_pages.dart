@@ -1,0 +1,65 @@
+import 'package:covidhelper_v2/pages/register/register_choose.dart';
+import 'package:covidhelper_v2/pages/register/register_name.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+class RegisterPages extends StatefulWidget {
+//
+//  Volunteer volunteer;
+//
+//
+//  RegisterPages({ this.volunteer });
+
+  @override
+  _RegisterPagesState createState() => _RegisterPagesState();
+}
+
+class _RegisterPagesState extends State<RegisterPages> {
+  int _currentIndex = 0;
+  PageController _pageController;
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController();
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+  void hideKeyboard(BuildContext context) {
+    SystemChannels.textInput.invokeMethod('TextInput.hide');
+    FocusScope.of(context).requestFocus(FocusNode());
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        body: PageView(
+          physics: new NeverScrollableScrollPhysics(),
+          controller: _pageController,
+          onPageChanged: (index) {
+            setState(() => _currentIndex = index);
+          },
+          children: <Widget>[
+            RegisterChoose(onButtonPressed: () {
+              _pageController.animateToPage(1,
+                  duration: Duration(milliseconds: 500), curve: Curves.ease);
+            }),
+            RegisterName(onButtonPressed: () {
+              hideKeyboard(context);
+              _pageController.animateToPage(0,
+                  duration: Duration(milliseconds: 500), curve: Curves.ease);
+            }),
+            Container(
+              color: Colors.red,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

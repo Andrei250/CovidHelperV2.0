@@ -10,9 +10,9 @@ class LogoRegister extends StatelessWidget {
     return Scaffold(
       body: SvgPicture.asset(
         logo_one,
-        color: AppTheme.lightColor,
-        height: 60.0,
-        width: 60.0,
+        color: AppTheme.lightAccent,
+        height: 80.0,
+        width: 80.0,
       ),
     );
   }

@@ -49,15 +49,17 @@ class _InputTextFieldState extends State<InputTextField> {
     String _name;
 
     return Scaffold(
+      backgroundColor: Colors.white,
         body: Column(
       children: <Widget>[
         SizedBox(
           child: TextFormField(
+            autofocus: true,
             obscureText: widget.passwordText,
             keyboardType: widget.inputType,
             focusNode: focusNode,
-            style: AppTheme.darkTheme.textTheme.subtitle1,
-            cursorColor: AppTheme.lightColor,
+            style: eTextField,
+            cursorColor: AppTheme.lightAccent,
             decoration: new InputDecoration(
               labelText: '${widget.label}',
               labelStyle: widget.errorText != null
@@ -68,7 +70,7 @@ class _InputTextFieldState extends State<InputTextField> {
                 borderSide: BorderSide(
                   color: widget.errorText != null
                       ? Colors.red
-                      : AppTheme.primaryVariantColor,
+                      : Colors.black54,
                 ),
               ),
               focusedBorder: new OutlineInputBorder(
@@ -76,7 +78,7 @@ class _InputTextFieldState extends State<InputTextField> {
                 borderSide: BorderSide(
                   color: widget.errorText != null
                       ? Colors.red
-                      : AppTheme.lightColor,
+                      : AppTheme.lightAccent,
                   width: 1.5,
                 ),
               ),
