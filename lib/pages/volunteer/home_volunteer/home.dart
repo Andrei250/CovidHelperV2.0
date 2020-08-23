@@ -1,6 +1,6 @@
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:covidhelper_v2/pages/register/register_all.dart';
-import 'package:covidhelper_v2/pages/statistics_volunteer/statistics.dart';
+import 'package:covidhelper_v2/pages/volunteer/statistics_volunteer/statistics.dart';
 import 'package:covidhelper_v2/pages/volunteer/home_volunteer/home_screen.dart';
 import 'package:covidhelper_v2/pages/volunteer/vulnerable_people_volunteer/people_page_volunteer.dart';
 import 'package:covidhelper_v2/utils/app_theme.dart';
