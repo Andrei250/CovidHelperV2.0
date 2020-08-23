@@ -52,39 +52,37 @@ class _InputTextFieldState extends State<InputTextField> {
       backgroundColor: Colors.white,
         body: Column(
       children: <Widget>[
-        SizedBox(
-          child: TextFormField(
-            autofocus: true,
-            obscureText: widget.passwordText,
-            keyboardType: widget.inputType,
-            focusNode: focusNode,
-            style: eTextField,
-            cursorColor: AppTheme.lightAccent,
-            decoration: new InputDecoration(
-              labelText: '${widget.label}',
-              labelStyle: widget.errorText != null
-                  ? eLabelError
-                  : focusNode.hasFocus ? eLabelFocused : eLabel,
-              enabledBorder: new OutlineInputBorder(
-                borderRadius: new BorderRadius.circular(25.0),
-                borderSide: BorderSide(
-                  color: widget.errorText != null
-                      ? Colors.red
-                      : Colors.black54,
-                ),
-              ),
-              focusedBorder: new OutlineInputBorder(
-                borderRadius: new BorderRadius.circular(25.0),
-                borderSide: BorderSide(
-                  color: widget.errorText != null
-                      ? Colors.red
-                      : AppTheme.lightAccent,
-                  width: 1.5,
-                ),
+        TextFormField(
+//          autofocus: true,
+          obscureText: widget.passwordText,
+          keyboardType: widget.inputType,
+          focusNode: focusNode,
+          style: eTextField,
+          cursorColor: AppTheme.lightAccent,
+          decoration: new InputDecoration(
+            labelText: '${widget.label}',
+            labelStyle: widget.errorText != null
+                ? eLabelError
+                : focusNode.hasFocus ? eLabelFocused : eLabel,
+            enabledBorder: new OutlineInputBorder(
+              borderRadius: new BorderRadius.circular(25.0),
+              borderSide: BorderSide(
+                color: widget.errorText != null
+                    ? Colors.red
+                    : Colors.black54,
               ),
             ),
-            onChanged: (val) => widget.changeValue(val),
+            focusedBorder: new OutlineInputBorder(
+              borderRadius: new BorderRadius.circular(25.0),
+              borderSide: BorderSide(
+                color: widget.errorText != null
+                    ? Colors.red
+                    : AppTheme.lightAccent,
+                width: 1.5,
+              ),
+            ),
           ),
+          onChanged: (val) => widget.changeValue(val),
         ),
         Align(
           alignment: Alignment.centerLeft,

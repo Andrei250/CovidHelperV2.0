@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:regexed_validator/regexed_validator.dart';
 
 class RegisterName extends StatefulWidget {
-  RegisterName({this.onButtonPressed});
+  RegisterName({this.onButtonBackPressed, this.onButtonNextPressed});
 
-  final VoidCallback onButtonPressed;
+  final VoidCallback onButtonBackPressed;
+  final VoidCallback onButtonNextPressed;
 
   @override
   _RegisterNameState createState() => _RegisterNameState();
@@ -52,7 +53,8 @@ class _RegisterNameState extends State<RegisterName> {
         });
       },
       errorText: errorText,
-      onButtonPressed: widget.onButtonPressed,
+      onButtonBackPressed: widget.onButtonBackPressed,
+      onButtonNextPressed: widget.onButtonNextPressed,
     ));
   }
 }

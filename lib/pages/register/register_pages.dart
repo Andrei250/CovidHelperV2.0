@@ -1,5 +1,7 @@
 import 'package:covidhelper_v2/pages/register/register_choose.dart';
+import 'package:covidhelper_v2/pages/register/register_email.dart';
 import 'package:covidhelper_v2/pages/register/register_name.dart';
+import 'package:covidhelper_v2/pages/register/register_phone.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -29,6 +31,7 @@ class _RegisterPagesState extends State<RegisterPages> {
     _pageController.dispose();
     super.dispose();
   }
+
   void hideKeyboard(BuildContext context) {
     SystemChannels.textInput.invokeMethod('TextInput.hide');
     FocusScope.of(context).requestFocus(FocusNode());
@@ -49,9 +52,24 @@ class _RegisterPagesState extends State<RegisterPages> {
               _pageController.animateToPage(1,
                   duration: Duration(milliseconds: 500), curve: Curves.ease);
             }),
-            RegisterName(onButtonPressed: () {
+            RegisterName(onButtonBackPressed: () {
               hideKeyboard(context);
               _pageController.animateToPage(0,
+                  duration: Duration(milliseconds: 500), curve: Curves.ease);
+            }, onButtonNextPressed: () {
+              hideKeyboard(context);
+              _pageController.animateToPage(2,
+                  duration: Duration(milliseconds: 500), curve: Curves.ease);
+            }),
+            RegisterEmail(onButtonBackPressed: () {
+              _pageController.animateToPage(1,
+                  duration: Duration(milliseconds: 500), curve: Curves.ease);
+            }, onButtonNextPressed: () {
+              _pageController.animateToPage(3,
+                  duration: Duration(milliseconds: 500), curve: Curves.ease);
+            }),
+            RegisterPhone(onButtonBackPressed: () {
+              _pageController.animateToPage(2,
                   duration: Duration(milliseconds: 500), curve: Curves.ease);
             }),
             Container(

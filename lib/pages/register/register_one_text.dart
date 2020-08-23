@@ -15,7 +15,8 @@ class RegisterOneText extends StatefulWidget {
       this.route,
       this.changeValue,
       this.errorText,
-      this.onButtonPressed});
+      this.onButtonBackPressed,
+      this.onButtonNextPressed});
 
   final String label;
   final String welcomeTextBig;
@@ -26,7 +27,8 @@ class RegisterOneText extends StatefulWidget {
   final String route;
   final Function(String) changeValue;
   final String errorText;
-  final VoidCallback onButtonPressed;
+  final VoidCallback onButtonBackPressed;
+  final VoidCallback onButtonNextPressed;
 
   @override
   _RegisterOneTextState createState() => _RegisterOneTextState();
@@ -54,7 +56,7 @@ class _RegisterOneTextState extends State<RegisterOneText> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios),
           color: Colors.black,
-          onPressed: widget.onButtonPressed,
+          onPressed: widget.onButtonBackPressed,
         ),
         backgroundColor: Colors.white,
         elevation: 0,
@@ -106,7 +108,7 @@ class _RegisterOneTextState extends State<RegisterOneText> {
           'Inainte',
           style: eButton,
         ),
-        onPressed: widget.onPressed,
+        onPressed: widget.onButtonNextPressed,
       ),
     );
   }

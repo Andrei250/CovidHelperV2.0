@@ -2,6 +2,11 @@ import 'package:covidhelper_v2/pages/register/register_one_text.dart';
 import 'package:flutter/material.dart';
 
 class RegisterPhone extends StatefulWidget {
+  RegisterPhone({this.onButtonNextPressed, this.onButtonBackPressed});
+
+  final VoidCallback onButtonBackPressed;
+  final VoidCallback onButtonNextPressed;
+
   @override
   _RegisterPhoneState createState() => _RegisterPhoneState();
 }
@@ -48,6 +53,8 @@ class _RegisterPhoneState extends State<RegisterPhone> {
         });
       },
       errorText: errorText,
+      onButtonBackPressed: widget.onButtonBackPressed,
+//      onButtonNextPressed: widget.onButtonNextPressed,
     ));
   }
 }

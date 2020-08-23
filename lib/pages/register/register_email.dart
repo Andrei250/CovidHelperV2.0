@@ -3,6 +3,11 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 
 class RegisterEmail extends StatefulWidget {
+  RegisterEmail({this.onButtonBackPressed, this.onButtonNextPressed});
+
+  final VoidCallback onButtonBackPressed;
+  final VoidCallback onButtonNextPressed;
+
   @override
   _RegisterEmailState createState() => _RegisterEmailState();
 }
@@ -38,8 +43,8 @@ class _RegisterEmailState extends State<RegisterEmail> {
     return Container(
         child: RegisterOneText(
       label: 'Email',
-      welcomeTextBig: 'Creati un cont nou',
-      welcomeTextSmall: 'Indroduceti adresa de email',
+      welcomeTextBig: 'Indroduceti adresa de email',
+//      welcomeTextSmall: '',
       inputType: TextInputType.text,
       passwordText: false,
       route: '/register_email',
@@ -54,6 +59,8 @@ class _RegisterEmailState extends State<RegisterEmail> {
         });
       },
       errorText: errorText,
+      onButtonBackPressed: widget.onButtonBackPressed,
+      onButtonNextPressed: widget.onButtonNextPressed,
     ));
   }
 }
