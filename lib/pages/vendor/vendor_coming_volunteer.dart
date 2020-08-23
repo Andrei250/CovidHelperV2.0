@@ -70,7 +70,7 @@ class _VendorComingVolunteerState extends State<VendorComingVolunteer> {
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(50.0, 2.0, 50.0, 2.0),
                     child: Text(
-                      'ACCEPTA',
+                      'SUNA',
                       style: eAcceptButton,
                     ),
                   ),
@@ -111,10 +111,14 @@ class _VendorComingVolunteerState extends State<VendorComingVolunteer> {
               children: <Widget>[
                 Padding(
                   padding: const EdgeInsets.fromLTRB(20.0, 8.0, 8.0, 8.0),
-                  child: Icon(
-                    Icons.person_outline,
-                    color: AppTheme.lightAccent,
-                    size: 60,
+                  child:SizedBox(
+                    width: 50.0,
+                    height: 50.0,
+                    child: SvgPicture.asset(
+                      user,
+                      height: 50,
+                      width: 50,
+                    ),
                   ),
                 ),
                 Padding(
@@ -170,7 +174,7 @@ class _VendorComingVolunteerState extends State<VendorComingVolunteer> {
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(50.0, 2.0, 50.0, 2.0),
                       child: Text(
-                        'ACCEPTA',
+                        'SUNA',
                         style: eAcceptButton,
                       ),
                     ),
