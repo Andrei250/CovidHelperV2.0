@@ -73,7 +73,7 @@ class _LeftNavigationState extends State<LeftNavigation> {
                           ),
 
                           IconButton(
-                            icon: Icon(Icons.arrow_circle_down, color: Colors.white,),
+                            icon: Icon(Icons.arrow_drop_down_circle, color: Colors.white,),
                             onPressed: () {},
                           ),
                         ],
