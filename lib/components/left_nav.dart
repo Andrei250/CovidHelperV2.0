@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 import 'button_settings.dart';
 
 class LeftNavigation extends StatefulWidget {
-  final Size size;
-  final VulnerablePerson person;
-  final Map data;
+  Size size;
+  VulnerablePerson person;
+  Map data;
   final BuildContext context;
 
   LeftNavigation({this.size, this.person, this.data, this.context});
@@ -68,7 +68,7 @@ class _LeftNavigationState extends State<LeftNavigation> {
                   ],
                 ),
               ),
-              getNavigations(orientation, widget.size, widget.context),
+              getNavigations(orientation, widget.size, widget.context, widget.data),
             ],
           ),
         );
@@ -78,7 +78,7 @@ class _LeftNavigationState extends State<LeftNavigation> {
 }
 
 
-Widget getNavigations(Orientation orientation, Size size, BuildContext context) {
+Widget getNavigations(Orientation orientation, Size size, BuildContext context, Map data) {
   return Column(
     children: [
       Padding(
@@ -95,9 +95,10 @@ Widget getNavigations(Orientation orientation, Size size, BuildContext context) 
                 Icons.settings,
                 color: Colors.black,
               ),
-              route: '/',
+              route: '/settings',
               arguments: {
-                'user' : "DA",
+                'userInfo' : data,
+                'context' : context,
               },
             ),
             ButtonSettings(

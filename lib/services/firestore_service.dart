@@ -237,6 +237,24 @@ class FirestoreService {
     }
   }
 
+  Future deleteUser(FirebaseUser user, String password) async {
+    String uid = user.uid;
+    try{
+      AuthResult result = await user.reauthenticateWithCredential(
+          EmailAuthProvider.getCredential(email: user.email, password: password)
+      );
+      await result.user.delete().then((_) async{
+        await _db.collection('Users').document(uid).delete();
+        await _db.collection('Vulnerables').document(uid).delete();
+      });
+
+      return 200;
+    }catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
+
   Future deleteVulnerable(VulnerablePerson person) async {
     try {
       await http.post(
