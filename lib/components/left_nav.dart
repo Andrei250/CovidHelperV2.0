@@ -120,9 +120,10 @@ Widget getNavigations(Orientation orientation, Size size, BuildContext context, 
                 Icons.feedback,
                 color: Colors.black,
               ),
-              route: '/',
+              route: '/feedback',
               arguments: {
-                'user' : "DA",
+                'userInfo' : data,
+                'context' : context,
               },
             ),
             ButtonSettings(

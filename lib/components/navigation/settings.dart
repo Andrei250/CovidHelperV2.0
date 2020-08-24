@@ -56,12 +56,10 @@ class _SettingsState extends State<Settings> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    GlobalKey _customKey = new GlobalKey();
 
     return Scaffold(
       appBar: interfaceAppBar(widget.data['context']),
       backgroundColor: Colors.white,
-      key: _customKey,
       body: Column(
         children: [
           Divider(

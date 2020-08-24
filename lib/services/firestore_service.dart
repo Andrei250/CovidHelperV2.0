@@ -105,6 +105,25 @@ class FirestoreService {
     }
   }
 
+  Future<void> addFeedback(String message,
+      FirebaseUser user) {
+    Map<String, dynamic> data = new Map<String, dynamic>();
+    data['message'] = message;
+    data['user_uid'] = user.uid;
+    return _db.collection("reports").document(user.uid).setData(data);
+  }
+
+  Future createFeedback(String message) async {
+    try {
+      FirebaseUser user = await _auth.currentUser();
+      await addFeedback(message, user);
+      return 200;
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
+
   Future<void> addNewVendor(Vendor vendor, String userValue) {
     Map<String, dynamic> dataMap = vendor.toJson();
     return _db.collection(userValue).document(vendor.uid).setData(dataMap);
@@ -153,6 +172,9 @@ class FirestoreService {
     if (userData['user_value'] == 'Vulnerables') {
       retrievedData['route'] = '/vulnerable_main';
       retrievedData['type'] = "vulnerable";
+    } else if (userData['user_value'] == "Admins") {
+      retrievedData['route'] = '/admin_panel';
+      retrievedData['type'] = "admin";
     }
     return retrievedData;
   }
