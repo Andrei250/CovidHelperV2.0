@@ -57,7 +57,7 @@ class _InputTextFieldState extends State<InputTextField> {
             keyboardType: widget.inputType,
             focusNode: focusNode,
             style: AppTheme.darkTheme.textTheme.subtitle1,
-            cursorColor: AppTheme.lightColor,
+            cursorColor: AppTheme.lightAccent,
             decoration: new InputDecoration(
               labelText: '${widget.label}',
               labelStyle: widget.errorText != null
@@ -68,7 +68,7 @@ class _InputTextFieldState extends State<InputTextField> {
                 borderSide: BorderSide(
                   color: widget.errorText != null
                       ? Colors.red
-                      : AppTheme.primaryVariantColor,
+                      : AppTheme.lightAccent,
                 ),
               ),
               focusedBorder: new OutlineInputBorder(
@@ -76,7 +76,7 @@ class _InputTextFieldState extends State<InputTextField> {
                 borderSide: BorderSide(
                   color: widget.errorText != null
                       ? Colors.red
-                      : AppTheme.lightColor,
+                      : AppTheme.lightAccent,
                   width: 1.5,
                 ),
               ),

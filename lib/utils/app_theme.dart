@@ -98,6 +98,13 @@ final eButton = TextStyle(
   fontSize: 17,
 );
 
+final eProduct = TextStyle(
+  color: AppTheme.primaryColor,
+  fontFamily: 'quicksand',
+  fontSize: 20,
+  fontWeight: FontWeight.bold,
+);
+
 final eNavBarText = TextStyle(
   color: AppTheme.lightAccent,
   fontFamily: 'quicksand',

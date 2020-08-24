@@ -14,7 +14,7 @@ class VendorBack {
     Products products = new Products(price: price, stock: stock);
     Map<String, dynamic> dataMap = new Map<String, dynamic>();
     dataMap.putIfAbsent(product, () => products.toJson());
-    return cat.document(category).setData(dataMap);
+    return cat.document(category).updateData(dataMap);
   }
 }
 
