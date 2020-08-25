@@ -47,7 +47,7 @@ class _VendorAddProductCardState extends State<VendorAddProductCard> {
               ),
               Spacer(),
               Padding(
-                padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
+                padding: const EdgeInsets.fromLTRB(0.0, 0.0, 4.0, 0.0),
                 child: FlatButton(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(25.0),
@@ -55,11 +55,12 @@ class _VendorAddProductCardState extends State<VendorAddProductCard> {
                   onPressed: () {
                     if(_formKey.currentState.validate()){
                       services.addStock(widget.categoryDoc, widget.category, widget.name, product.stock, product.price);
+                      services.addStockToProducts(widget.name, product.stock, product.price, false);
                     }
                   },
                   color: AppTheme.lightAccent,
                   child: Padding(
-                    padding: const EdgeInsets.fromLTRB(5.0, 2.0, 5.0, 2.0),
+                    padding: const EdgeInsets.fromLTRB(3.5, 2.0, 3.5, 2.0),
                     child: Text(
                       'Actualizeaza',
                       style: eAcceptButton,

@@ -226,19 +226,13 @@ class _VendorAddProductsState extends State<VendorAddProducts> {
                 Padding(
                     padding: const EdgeInsets.fromLTRB(25.0, 0.0, 10.0, 5.0),
                     child: Text(
-                      '2.Pentru a aduaga cantitate disponibila apasati butonul "+" din dreptul fiecarui produs',
+                      '2.Pentru a aduaga cantitate disponibila inserati in campurile corespunzatoare fiecarui produs pretul si cantitatea pe care o aveti',
                       style: eWelcome,
                     )),
                 Padding(
                     padding: const EdgeInsets.fromLTRB(25.0, 0.0, 10.0, 5.0),
                     child: Text(
-                      'aaaaaaaaaaaaaaaaaaaaaaaa',
-                      style: eWelcome,
-                    )),
-                Padding(
-                    padding: const EdgeInsets.fromLTRB(25.0, 0.0, 10.0, 25.0),
-                    child: Text(
-                      'aaaaaaaaaaaaaaaaaaaaaa',
+                      '3.Apasati pe butonul "Actualizeaza" din dreapta fiecarui produs si produsul dumneavoastra va fi actualizat imediat',
                       style: eWelcome,
                     )),
               ],
