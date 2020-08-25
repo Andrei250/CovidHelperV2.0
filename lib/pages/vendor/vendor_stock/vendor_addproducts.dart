@@ -94,26 +94,7 @@ class _VendorAddProductsState extends State<VendorAddProducts> {
             body: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(15.0, 5.0, 0.0, 0.0),
-                    child: Container(
-                      color: Colors.white,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            'Salut!',
-                            style: eWelcome,
-                          ),
-                          Text(
-//                            widget.name,
-                            'a',
-                            style: eWelcomeName,
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
+                  SizedBox(height: 15,),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(15.0, 5.0, 5.0, 5.0),
                     child: Row(

@@ -47,7 +47,7 @@ class _VendorAddProductCardState extends State<VendorAddProductCard> {
               ),
               Spacer(),
               Padding(
-                padding: const EdgeInsets.fromLTRB(0.0, 0.0, 4.0, 0.0),
+                padding: const EdgeInsets.fromLTRB(0.0, 0.0, 14.0, 0.0),
                 child: FlatButton(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(25.0),
@@ -60,7 +60,7 @@ class _VendorAddProductCardState extends State<VendorAddProductCard> {
                   },
                   color: AppTheme.lightAccent,
                   child: Padding(
-                    padding: const EdgeInsets.fromLTRB(3.5, 2.0, 3.5, 2.0),
+                    padding: const EdgeInsets.fromLTRB(2.5, 2.0, 2.5, 2.0),
                     child: Text(
                       'Actualizeaza',
                       style: eAcceptButton,
