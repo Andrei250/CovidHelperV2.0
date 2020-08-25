@@ -63,7 +63,7 @@ class _SettingsState extends State<Settings> {
       body: Column(
         children: [
           Divider(
-            thickness: 2,
+            thickness: 1,
           ),
           ListTile(
             leading: Icon(Icons.notifications),
@@ -75,7 +75,7 @@ class _SettingsState extends State<Settings> {
             },
           ),
           Divider(
-            thickness: 2,
+            thickness: 1,
           ),
 
           ListTile(
@@ -97,7 +97,6 @@ class _SettingsState extends State<Settings> {
                   content: TextField(
                     obscureText: true,
                     decoration: InputDecoration(
-                      border: OutlineInputBorder(),
                       labelText: 'Parola',
                     ),
                     controller: customController,
@@ -139,7 +138,7 @@ class _SettingsState extends State<Settings> {
             },
           ),
           Divider(
-            thickness: 2,
+            thickness: 1,
           ),
         ],
       ),

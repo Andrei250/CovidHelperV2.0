@@ -110,7 +110,7 @@ class FirestoreService {
     Map<String, dynamic> data = new Map<String, dynamic>();
     data['message'] = message;
     data['user_uid'] = user.uid;
-    return _db.collection("reports").document(user.uid).setData(data);
+    return _db.collection("feedback").add(data);
   }
 
   Future createFeedback(String message) async {
