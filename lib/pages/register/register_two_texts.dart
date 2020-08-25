@@ -128,7 +128,7 @@ class _RegisterTwoTextsState extends State<RegisterTwoTexts> {
                         one: false,
                       )),
                   SizedBox(
-                    height: 30.0,
+                    height: 50.0,
                   ),
                 ],
               ),

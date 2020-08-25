@@ -15,7 +15,8 @@ class RegisterOneText extends StatefulWidget {
       this.changeValue,
       this.errorText,
       this.onButtonBackPressed,
-      this.onButtonNextPressed});
+      this.onButtonNextPressed,
+      this.loading});
 
   final String label;
   final String welcomeTextBig;
@@ -27,6 +28,7 @@ class RegisterOneText extends StatefulWidget {
   final String errorText;
   final VoidCallback onButtonBackPressed;
   final VoidCallback onButtonNextPressed;
+  final bool loading;
 
   @override
   _RegisterOneTextState createState() => _RegisterOneTextState();
@@ -50,10 +52,15 @@ class _RegisterOneTextState extends State<RegisterOneText> {
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-//          bottom: PreferredSize(
-//            preferredSize: Size(double.infinity, 1.0),
-//            child: LinearProgressIndicator(),
-//          ),
+          bottom: widget.loading
+              ? PreferredSize(
+                  preferredSize: Size(double.infinity, 1.0),
+                  child: LinearProgressIndicator(
+                    valueColor:
+                        AlwaysStoppedAnimation<Color>(AppTheme.lightAccent),
+                  ),
+                )
+              : null,
           leading: IconButton(
             icon: Icon(Icons.arrow_back_ios),
             color: Colors.black,
@@ -65,7 +72,9 @@ class _RegisterOneTextState extends State<RegisterOneText> {
         body: ListView(
           shrinkWrap: true,
           children: <Widget>[
-            SizedBox(height: 10,),
+            SizedBox(
+              height: 10,
+            ),
             Padding(
               padding: const EdgeInsets.fromLTRB(30.0, 0.0, 30.0, 10.0),
               child: Column(

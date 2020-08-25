@@ -32,8 +32,10 @@ class _InputTextFieldState extends State<InputTextField> {
     focusNode = FocusNode();
     focusNode.addListener(onOnFocusNodeEvent);
     if (widget.one) {
-      WidgetsBinding.instance.addPostFrameCallback(
-          (_) => FocusScope.of(context).requestFocus(focusNode));
+      Future.delayed(const Duration(milliseconds: 100), () {
+        WidgetsBinding.instance.addPostFrameCallback(
+            (_) => FocusScope.of(context).requestFocus(focusNode));
+      });
     }
   }
 
@@ -59,7 +61,6 @@ class _InputTextFieldState extends State<InputTextField> {
         body: Column(
           children: <Widget>[
             TextFormField(
-//              autofocus: true,
               obscureText: widget.passwordText,
               keyboardType: widget.inputType,
               focusNode: focusNode,

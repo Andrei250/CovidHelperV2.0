@@ -45,47 +45,6 @@ class _RegisterPagesState extends State<RegisterPages> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: PageView(
-        physics: new NeverScrollableScrollPhysics(),
-        controller: _pageController,
-        onPageChanged: (index) {
-          setState(() => _currentIndex = index);
-        },
-        children: <Widget>[
-          RegisterChoose(onButtonPressed: () {
-            _pageController.animateToPage(1,
-                duration: Duration(milliseconds: 500), curve: Curves.ease);
-          }),
-          RegisterEmail(onButtonBackPressed: () {
-            _pageController.animateToPage(0,
-                duration: Duration(milliseconds: 500), curve: Curves.ease);
-          }, onButtonNextPressed: () {
-            _pageController.animateToPage(2,
-                duration: Duration(milliseconds: 500), curve: Curves.ease);
-          }),
-          RegisterPassword(onButtonBackPressed: () {
-            _pageController.animateToPage(1,
-                duration: Duration(milliseconds: 500), curve: Curves.ease);
-          }, onButtonNextPressed: () {
-            _pageController.animateToPage(3,
-                duration: Duration(milliseconds: 500), curve: Curves.ease);
-          }),
-          RegisterName(onButtonBackPressed: () {
-            hideKeyboard(context);
-            _pageController.animateToPage(2,
-                duration: Duration(milliseconds: 500), curve: Curves.ease);
-          }, onButtonNextPressed: () {
-            hideKeyboard(context);
-            _pageController.animateToPage(4,
-                duration: Duration(milliseconds: 500), curve: Curves.ease);
-          }),
-          RegisterPhone(onButtonBackPressed: () {
-            _pageController.animateToPage(3,
-                duration: Duration(milliseconds: 500), curve: Curves.ease);
-          }),
-        ],
-      ),
-    );
+    return null;
   }
 }

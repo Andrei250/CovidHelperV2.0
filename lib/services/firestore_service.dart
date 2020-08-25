@@ -28,17 +28,16 @@ class FirestoreService {
         .collection('Products')
         .orderBy('stock')
         .snapshots()
-        .map((snapshot) =>
-        snapshot.documents
+        .map((snapshot) => snapshot.documents
             .map((document) => Products.fromJson(document.data))
             .toList());
   }
+
   Stream<List<Vendor>> get vendors {
-    return _db.collection('vendor').snapshots().map((snapshot) =>
-        snapshot
-            .documents
-            .map((document) => Vendor.fromJson(document.data))
-            .toList());
+    return _db.collection('vendor').snapshots().map((snapshot) => snapshot
+        .documents
+        .map((document) => Vendor.fromJson(document.data))
+        .toList());
   }
 
   Stream<List<Volunteer>> get volunteer {
@@ -82,10 +81,8 @@ class FirestoreService {
     }
   }
 
-  Future<void> addReport(String type,
-                              String full_name,
-                              String message,
-                              FirebaseUser user) {
+  Future<void> addReport(
+      String type, String full_name, String message, FirebaseUser user) {
     Map<String, dynamic> data = new Map<String, dynamic>();
     data['type'] = type;
     data['full_name'] = full_name;
@@ -150,7 +147,8 @@ class FirestoreService {
           email: email, password: password);
       FirebaseUser user = result.user;
       var userData = await _db.collection("Users").document(user.uid).get();
-      var userInfo = await _db.collection(userData['user_value']).document(user.uid).get();
+      var userInfo =
+          await _db.collection(userData['user_value']).document(user.uid).get();
       Map<String, dynamic> retrievedData = new Map<String, dynamic>();
       retrievedData['userInfo'] = userInfo;
 
@@ -158,7 +156,7 @@ class FirestoreService {
         retrievedData['route'] = '/vulnerable_main';
         retrievedData['type'] = "vulnerable";
       }
-      
+
       return retrievedData;
     } catch (error) {
       print(error.toString());
@@ -187,6 +185,19 @@ class FirestoreService {
           email: userData['email'],
           phoneNumber: userData['phoneNumber']);
       return volunteer;
+    }
+    return null;
+  }
+
+  Future<Vendor> getVendor(FirebaseUser user) async {
+    var userData = await _db.collection('vendor').document(user.uid).get();
+    if (userData != null) {
+      Vendor vendor = new Vendor(
+          name: userData['name'],
+          email: userData['email'],
+          phoneNumber: userData['phoneNumber']);
+
+      return vendor;
     }
     return null;
   }

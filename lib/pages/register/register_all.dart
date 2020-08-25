@@ -1,5 +1,4 @@
 import 'package:covidhelper_v2/components/loading_screen.dart';
-import 'package:covidhelper_v2/pages/register/new_loaging.dart';
 import 'package:covidhelper_v2/pages/register/register_back.dart';
 import 'package:covidhelper_v2/pages/register/register_choose.dart';
 import 'package:covidhelper_v2/pages/register/register_email.dart';
@@ -7,6 +6,7 @@ import 'package:covidhelper_v2/pages/register/register_name.dart';
 import 'package:covidhelper_v2/pages/register/register_password.dart';
 import 'package:covidhelper_v2/pages/register/register_phone.dart';
 import 'package:covidhelper_v2/pages/register/transition.dart';
+import 'package:covidhelper_v2/pages/vendor/vendor_home.dart';
 import 'package:covidhelper_v2/pages/volunteer/home_volunteer/home.dart';
 import 'package:flutter/material.dart';
 
@@ -40,9 +40,6 @@ class RegisterAll {
       case '/register_email':
         RegisterAll.userValue = args;
         return CustomRoute(builder: (_) => RegisterEmail());
-        case '/register_loading':
-        RegisterAll.userValue = args;
-        return CustomRoute(builder: (_) => NewLoading());
       case '/register_password':
         RegisterAll.email = args;
         return CustomRoute(builder: (_) => RegisterPassword());
@@ -54,7 +51,6 @@ class RegisterAll {
         return CustomRoute(builder: (_) => RegisterPhone());
       case '/loading':
         RegisterAll.phoneNumber = args;
-        print(RegisterAll.password);
         RegisterBack registerBack = new RegisterBack(
             name: RegisterAll.name,
             email: RegisterAll.email,
@@ -65,8 +61,15 @@ class RegisterAll {
         return CustomRoute(
             builder: (_) => LoadingScreen(registerBack: registerBack));
       case '/home':
-        return CustomRoute(builder: (_) => Home());
+        if (RegisterAll.userValue == 'vendor') {
+          print ('1111111111111111111111111111111111111111111111111111111');
+          return CustomRoute(builder: (_) => VendorHome());
 //        return CustomRoute(builder: (_) => Home(volunteer: args));
+        } else if (RegisterAll.userValue == 'volunteer') {
+          print ('000000000000000000000000000000000000000000000000000000');
+          return CustomRoute(builder: (_) => Home());
+//        return CustomRoute(builder: (_) => Home(volunteer: args));
+        }
         break;
       default:
         return null;

@@ -1,5 +1,4 @@
 import 'package:covidhelper_v2/services/firestore_service.dart';
-import 'package:covidhelper_v2/utils/app_theme.dart';
 
 class RegisterBack {
   RegisterBack(
@@ -22,11 +21,6 @@ class RegisterBack {
         phoneNumber: phoneNumber,
         password: password,
         userValue: userValue);
-    print(name);
-    print(email);
-    print(phoneNumber);
-    print(password);
-    print('00000000000000000000000000000000000000000000');
     if (result == null) {
       message = 'Error on adding new user!';
     }

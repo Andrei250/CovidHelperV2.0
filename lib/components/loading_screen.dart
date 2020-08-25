@@ -1,3 +1,4 @@
+import 'package:covidhelper_v2/models/vendor.dart';
 import 'package:covidhelper_v2/models/volunteer.dart';
 import 'package:covidhelper_v2/pages/register/register_back.dart';
 import 'package:covidhelper_v2/services/firestore_service.dart';
@@ -21,13 +22,22 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
     FirebaseAuth _auth = FirebaseAuth.instance;
     FirebaseUser user;
-    Volunteer volunteer;
-    user = await _auth.currentUser();
-    volunteer = await FirestoreService().getVolunteer(user);
 
-    Navigator.of(context).pushNamedAndRemoveUntil(
-        '/home', (Route<dynamic> route) => false,
-        arguments: volunteer);
+    user = await _auth.currentUser();
+
+    if (widget.registerBack.userValue == 'volunteer') {
+      Volunteer volunteer;
+      volunteer = await FirestoreService().getVolunteer(user);
+      Navigator.of(context).pushNamedAndRemoveUntil(
+          '/home', (Route<dynamic> route) => false,
+          arguments: volunteer);
+    } else if (widget.registerBack.userValue == 'vendor') {
+      Vendor vendor;
+      vendor = await FirestoreService().getVendor(user);
+      Navigator.of(context).pushNamedAndRemoveUntil(
+          '/home', (Route<dynamic> route) => false,
+          arguments: vendor);
+    }
   }
 
   @override

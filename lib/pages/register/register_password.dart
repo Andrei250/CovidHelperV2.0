@@ -17,7 +17,6 @@ class _RegisterPasswordState extends State<RegisterPassword> {
   String errorFirstText;
   String errorSecondText;
 
-
   @override
   Widget build(BuildContext context) {
     bool passwordOk = false;
@@ -62,27 +61,29 @@ class _RegisterPasswordState extends State<RegisterPassword> {
 
     return Container(
         child: RegisterTwoTexts(
-          labelOne: 'Parola',
-          labelTwo: 'Confirmati parola',
-          welcomeTextBig: 'Alegeti o parola',
-          welcomeTextSmall: 'Indroduceti parola',
-          passwordText: true,
-          inputType: TextInputType.text,
-          route: '/register_password',
-          changeFirstValue: changePassword,
-          changeSecondValue: changePasswordConfirm,
-          onButtonNextPressed: () {
-            setState(() {
-              verifyBothPasswords();
-              if (passwordOk == true && passwordConfirmOk == true) {
-                Navigator.of(context).pushNamed(
-                    '/register_name', arguments: password);
-              }
-            });
-          },
-          errorFirstText: errorFirstText,
-          errorSecondText: errorSecondText,
-//          onButtonBackPressed: widget.onButtonBackPressed,
-        ));
+      labelOne: 'Parola',
+      labelTwo: 'Confirmati parola',
+      welcomeTextBig: 'Alegeti o parola',
+      welcomeTextSmall: 'Indroduceti parola',
+      passwordText: true,
+      inputType: TextInputType.text,
+      route: '/register_password',
+      changeFirstValue: changePassword,
+      changeSecondValue: changePasswordConfirm,
+      onButtonNextPressed: () {
+        setState(() {
+          verifyBothPasswords();
+          if (passwordOk == true && passwordConfirmOk == true) {
+            Navigator.of(context)
+                .pushNamed('/register_name', arguments: password);
+          }
+        });
+      },
+      onButtonBackPressed: () {
+        Navigator.of(context).pop();
+      },
+      errorFirstText: errorFirstText,
+      errorSecondText: errorSecondText,
+    ));
   }
 }

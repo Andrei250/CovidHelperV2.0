@@ -1,13 +1,9 @@
 import 'package:covidhelper_v2/pages/register/register_one_text.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class RegisterEmail extends StatefulWidget {
-  RegisterEmail({this.onButtonBackPressed, this.onButtonNextPressed});
-
-  final VoidCallback onButtonBackPressed;
-  final VoidCallback onButtonNextPressed;
-
   @override
   _RegisterEmailState createState() => _RegisterEmailState();
 }
@@ -15,6 +11,13 @@ class RegisterEmail extends StatefulWidget {
 class _RegisterEmailState extends State<RegisterEmail> {
   String email;
   String errorText;
+  bool _loading;
+
+  @override
+  void initState() {
+    super.initState();
+    _loading = false;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,17 +50,34 @@ class _RegisterEmailState extends State<RegisterEmail> {
       passwordText: false,
       route: '/register_email',
       changeValue: changeEmail,
+      loading: _loading,
       onButtonNextPressed: () {
         setState(() {
           verifyEmail();
           if (emailOk == true) {
+            setState(() {
+              _loading = true;
+            });
             Navigator.of(context)
-                .pushNamed('/register_loading', arguments: email);
+                .pushNamed('/register_password', arguments: email);
+            setState(() {
+              _loading = false;
+            });
           }
         });
       },
+      onButtonBackPressed: () {
+        setState(() {
+          _loading = true;
+          SystemChannels.textInput.invokeMethod('TextInput.hide');
+        });
+        Navigator.of(context).pop();
+        setState(() {
+          _loading = false;
+        });
+      },
       errorText: errorText,
-//      onButtonBackPressed: widget.onButtonBackPressed,
     );
   }
+
 }
