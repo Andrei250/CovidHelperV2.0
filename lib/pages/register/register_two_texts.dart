@@ -1,8 +1,8 @@
 import 'package:covidhelper_v2/components/text_field.dart';
-import 'package:covidhelper_v2/pages/register/register_all.dart';
 import 'package:covidhelper_v2/utils/app_theme.dart';
-import 'package:covidhelper_v2/utils/logo_register.dart';
+import 'package:covidhelper_v2/utils/pics.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class RegisterTwoTexts extends StatefulWidget {
   RegisterTwoTexts(
@@ -17,7 +17,9 @@ class RegisterTwoTexts extends StatefulWidget {
       this.changeFirstValue,
       this.changeSecondValue,
       this.errorFirstText,
-      this.errorSecondText});
+      this.errorSecondText,
+      this.onButtonNextPressed,
+      this.onButtonBackPressed});
 
   final String labelOne;
   final String labelTwo;
@@ -31,6 +33,8 @@ class RegisterTwoTexts extends StatefulWidget {
   final Function(String) changeSecondValue;
   final String errorFirstText;
   final String errorSecondText;
+  final VoidCallback onButtonBackPressed;
+  final VoidCallback onButtonNextPressed;
 
   @override
   _RegisterTwoTextsState createState() => _RegisterTwoTextsState();
@@ -42,71 +46,94 @@ class _RegisterTwoTextsState extends State<RegisterTwoTexts> {
     // TODO: implement initState
     super.initState();
   }
+  ScrollController _scrollController = ScrollController();
+
+  _scrollToBottom() {
+    _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
+  }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        onGenerateRoute: RegisterAll.generateRoute,
-        theme: AppTheme.darkTheme,
-        home: Scaffold(
-            floatingActionButton: new RaisedButton(
-              child: Text('Inainte'),
-              onPressed: widget.onPressed,
-            ),
-            body: ListView(
-//              shrinkWrap: true,
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(30.0, 50.0, 30.0, 10.0),
-                  child: Column(
-                    children: <Widget>[
-                      SizedBox(
-                        height: 60.0,
-                        width: 60.0,
-                        child: LogoRegister(),
-                      ),
-                      SizedBox(
-                        height: 15.0,
-                      ),
-                      SizedBox(
-                        child: Text('${widget.welcomeTextBig}',
-                            style: AppTheme.darkTheme.textTheme.headline2),
-                      ),
-                      SizedBox(
-                        child: Text('${widget.welcomeTextSmall}',
-                            style: AppTheme.darkTheme.textTheme.headline3),
-                      ),
-                      SizedBox(
-                        height: 20.0,
-                      ),
-                      SizedBox(
-                        width: 320.0,
-                        height: 110.0,
-                        child: InputTextField(
-                          label: '${widget.labelOne}',
-                          passwordText: widget.passwordText,
-                          inputType: widget.inputType,
-                          changeValue: widget.changeFirstValue,
-                          errorText: widget.errorFirstText,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20.0,
-                      ),
-                      SizedBox(
-                          width: 320.0,
-                          height: 88.0,
-                          child: InputTextField(
-                            label: '${widget.labelTwo}',
-                            passwordText: widget.passwordText,
-                            inputType: widget.inputType,
-                            changeValue: widget.changeSecondValue,
-                            errorText: widget.errorSecondText,
-                          )),
-                    ],
+    return Scaffold(
+      resizeToAvoidBottomInset: true,
+        backgroundColor: Colors.white,
+        appBar: AppBar(
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back_ios),
+            color: Colors.black,
+            onPressed: widget.onButtonBackPressed,
+          ),
+          backgroundColor: Colors.white,
+          elevation: 0,
+        ),
+        floatingActionButton: new RaisedButton(
+          color: AppTheme.lightAccent,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(25.0),
+          ),
+          child: Text(
+            'Inainte',
+            style: eButton,
+          ),
+          onPressed: widget.onButtonNextPressed,
+        ),
+        body: ListView(
+              shrinkWrap: true,
+          controller: _scrollController,
+          reverse: true,
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.fromLTRB(30.0, 0.0, 30.0, 10.0),
+              child: Column(
+                children: <Widget>[
+                  SvgPicture.asset(
+                    logo_one,
+                    color: AppTheme.lightAccent,
+                    height: 80.0,
+                    width: 80.0,
                   ),
-                )
-              ],
-            )));
+                  SizedBox(
+                    height: 30.0,
+                  ),
+                  SizedBox(
+                    child: Text(widget.welcomeTextBig, style: eTitle),
+                  ),
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                  SizedBox(
+                    width: 320.0,
+                    height: 105.0,
+                    child: InputTextField(
+                      label: '${widget.labelOne}',
+                      passwordText: widget.passwordText,
+                      inputType: widget.inputType,
+                      changeValue: widget.changeFirstValue,
+                      errorText: widget.errorFirstText,
+                      one: true,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                  SizedBox(
+                      width: 320.0,
+                      height: 88.0,
+                      child: InputTextField(
+                        label: '${widget.labelTwo}',
+                        passwordText: widget.passwordText,
+                        inputType: widget.inputType,
+                        changeValue: widget.changeSecondValue,
+                        errorText: widget.errorSecondText,
+                        one: false,
+                      )),
+                  SizedBox(
+                    height: 30.0,
+                  ),
+                ],
+              ),
+            )
+          ],
+        ));
   }
 }

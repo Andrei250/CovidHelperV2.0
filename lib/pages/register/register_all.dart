@@ -1,4 +1,5 @@
 import 'package:covidhelper_v2/components/loading_screen.dart';
+import 'package:covidhelper_v2/pages/register/new_loaging.dart';
 import 'package:covidhelper_v2/pages/register/register_back.dart';
 import 'package:covidhelper_v2/pages/register/register_choose.dart';
 import 'package:covidhelper_v2/pages/register/register_email.dart';
@@ -36,20 +37,24 @@ class RegisterAll {
     switch (settings.name) {
       case '/register_choose':
         return CustomRoute(builder: (_) => RegisterChoose());
-      case '/register_name':
-        RegisterAll.userValue = args;
-        return CustomRoute(builder: (_) => RegisterName());
       case '/register_email':
-        RegisterAll.name = args;
+        RegisterAll.userValue = args;
         return CustomRoute(builder: (_) => RegisterEmail());
-      case '/register_phone':
-        RegisterAll.email = args;
-        return CustomRoute(builder: (_) => RegisterPhone());
+        case '/register_loading':
+        RegisterAll.userValue = args;
+        return CustomRoute(builder: (_) => NewLoading());
       case '/register_password':
-        RegisterAll.phoneNumber = args;
+        RegisterAll.email = args;
         return CustomRoute(builder: (_) => RegisterPassword());
-      case '/loading':
+      case '/register_name':
         RegisterAll.password = args;
+        return CustomRoute(builder: (_) => RegisterName());
+      case '/register_phone':
+        RegisterAll.name = args;
+        return CustomRoute(builder: (_) => RegisterPhone());
+      case '/loading':
+        RegisterAll.phoneNumber = args;
+        print(RegisterAll.password);
         RegisterBack registerBack = new RegisterBack(
             name: RegisterAll.name,
             email: RegisterAll.email,

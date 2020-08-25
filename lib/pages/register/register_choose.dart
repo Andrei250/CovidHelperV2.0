@@ -68,16 +68,18 @@ class _RegisterChooseState extends State<RegisterChoose> {
                     width: double.infinity,
                     height: 50.0,
                     child: FlatButton(
-                      color: AppTheme.lightAccent,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(25.0),
-                      ),
-                      child: Text(
-                        'Cu produse din magazinul meu',
-                        style: eButton,
-                      ),
-                      onPressed: widget.onButtonPressed,
-                    ),
+                        color: AppTheme.lightAccent,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(25.0),
+                        ),
+                        child: Text(
+                          'Cu produse din magazinul meu',
+                          style: eButton,
+                        ),
+                        onPressed: () {
+                          Navigator.of(context)
+                              .pushNamed('/register_email', arguments: 'vendor');
+                        }),
                   ),
                   SizedBox(
                     height: 5.0,
@@ -92,7 +94,10 @@ class _RegisterChooseState extends State<RegisterChoose> {
                         ),
                         child: Text('Livrand produse, ca voluntar',
                             style: eButton),
-                        onPressed: () {}),
+                        onPressed: () {
+                          Navigator.of(context).pushNamed('/register_email',
+                              arguments: 'volunteer');
+                        }),
                   ),
                   SizedBox(
                     height: 5.0,

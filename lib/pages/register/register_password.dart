@@ -2,6 +2,11 @@ import 'package:covidhelper_v2/pages/register/register_two_texts.dart';
 import 'package:flutter/material.dart';
 
 class RegisterPassword extends StatefulWidget {
+  RegisterPassword({this.onButtonBackPressed, this.onButtonNextPressed});
+
+  final VoidCallback onButtonBackPressed;
+  final VoidCallback onButtonNextPressed;
+
   @override
   _RegisterPasswordState createState() => _RegisterPasswordState();
 }
@@ -11,6 +16,7 @@ class _RegisterPasswordState extends State<RegisterPassword> {
   String passwordConfirm;
   String errorFirstText;
   String errorSecondText;
+
 
   @override
   Widget build(BuildContext context) {
@@ -56,25 +62,27 @@ class _RegisterPasswordState extends State<RegisterPassword> {
 
     return Container(
         child: RegisterTwoTexts(
-      labelOne: 'Parola',
-      labelTwo: 'Confirmati parola',
-      welcomeTextBig: 'Alegeti o parola',
-      welcomeTextSmall: 'Indroduceti parola',
-      passwordText: true,
-      inputType: TextInputType.text,
-      route: '/register_password',
-      changeFirstValue: changePassword,
-      changeSecondValue: changePasswordConfirm,
-      onPressed: () {
-        setState(() {
-          verifyBothPasswords();
-          if (passwordOk == true && passwordConfirmOk == true) {
-            Navigator.of(context).pushNamed('/loading', arguments: password);
-          }
-        });
-      },
-      errorFirstText: errorFirstText,
-      errorSecondText: errorSecondText,
-    ));
+          labelOne: 'Parola',
+          labelTwo: 'Confirmati parola',
+          welcomeTextBig: 'Alegeti o parola',
+          welcomeTextSmall: 'Indroduceti parola',
+          passwordText: true,
+          inputType: TextInputType.text,
+          route: '/register_password',
+          changeFirstValue: changePassword,
+          changeSecondValue: changePasswordConfirm,
+          onButtonNextPressed: () {
+            setState(() {
+              verifyBothPasswords();
+              if (passwordOk == true && passwordConfirmOk == true) {
+                Navigator.of(context).pushNamed(
+                    '/register_name', arguments: password);
+              }
+            });
+          },
+          errorFirstText: errorFirstText,
+          errorSecondText: errorSecondText,
+//          onButtonBackPressed: widget.onButtonBackPressed,
+        ));
   }
 }

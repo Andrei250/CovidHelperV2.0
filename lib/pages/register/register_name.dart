@@ -44,17 +44,16 @@ class _RegisterNameState extends State<RegisterName> {
       passwordText: false,
       route: '/register_name',
       changeValue: changeName,
-      onPressed: () {
+      onButtonNextPressed: () {
         setState(() {
           verifyName();
           if (nameOk == true) {
-            Navigator.of(context).pushNamed('/register_email', arguments: name);
+            Navigator.of(context).pushNamed('/register_phone', arguments: name);
           }
         });
       },
       errorText: errorText,
-      onButtonBackPressed: widget.onButtonBackPressed,
-      onButtonNextPressed: widget.onButtonNextPressed,
+//      onButtonBackPressed: widget.onButtonBackPressed,
     ));
   }
 }

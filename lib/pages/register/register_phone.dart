@@ -43,18 +43,17 @@ class _RegisterPhoneState extends State<RegisterPhone> {
       passwordText: false,
       route: '/register_phone',
       changeValue: changePhoneNumber,
-      onPressed: () {
+      onButtonNextPressed: () {
         setState(() {
           verifyPhone();
           if (phoneOk == true) {
             Navigator.of(context)
-                .pushNamed('/register_password', arguments: phoneNumber);
+                .pushNamed('/loading', arguments: phoneNumber);
           }
         });
       },
       errorText: errorText,
-      onButtonBackPressed: widget.onButtonBackPressed,
-//      onButtonNextPressed: widget.onButtonNextPressed,
+//      onButtonBackPressed: widget.onButtonBackPressed,
     ));
   }
 }

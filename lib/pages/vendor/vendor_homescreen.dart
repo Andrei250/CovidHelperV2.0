@@ -142,12 +142,12 @@ class _VendorHomeScreenState extends State<VendorHomeScreen> {
                                 Row(
                                   children: <Widget>[
                                     SizedBox(
-                                      width: 30.0,
-                                      height: 30.0,
+                                      width: 25.0,
+                                      height: 25.0,
                                       child: SvgPicture.asset(
                                         clock,
-                                        height: 30.0,
-                                        width: 30.0,
+                                        height: 25.0,
+                                        width: 25.0,
                                       ),
                                     ),
                                     Padding(
@@ -163,12 +163,12 @@ class _VendorHomeScreenState extends State<VendorHomeScreen> {
                                 Row(
                                   children: <Widget>[
                                     SizedBox(
-                                      width: 30.0,
-                                      height: 30.0,
+                                      width: 25.0,
+                                      height: 25.0,
                                       child: SvgPicture.asset(
                                         pack,
-                                        height: 30,
-                                        width: 30,
+                                        height: 25,
+                                        width: 25,
                                       ),
                                     ),
                                     Padding(

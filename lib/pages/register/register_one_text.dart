@@ -11,7 +11,6 @@ class RegisterOneText extends StatefulWidget {
       this.welcomeTextSmall,
       this.passwordText,
       this.inputType,
-      this.onPressed,
       this.route,
       this.changeValue,
       this.errorText,
@@ -23,7 +22,6 @@ class RegisterOneText extends StatefulWidget {
   final String welcomeTextSmall;
   final bool passwordText;
   final TextInputType inputType;
-  final VoidCallback onPressed;
   final String route;
   final Function(String) changeValue;
   final String errorText;
@@ -50,66 +48,70 @@ class _RegisterOneTextState extends State<RegisterOneText> {
     }
 
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios),
-          color: Colors.black,
-          onPressed: widget.onButtonBackPressed,
-        ),
         backgroundColor: Colors.white,
-        elevation: 0,
-      ),
-      body: ListView(
-        shrinkWrap: true,
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.fromLTRB(30.0, 10.0, 30.0, 10.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                SvgPicture.asset(
-                  logo_one,
-                  color: AppTheme.lightAccent,
-                  height: 80.0,
-                  width: 80.0,
-                ),
-                SizedBox(
-                  height: 30.0,
-                ),
-                SizedBox(
-                  child: Text('${widget.welcomeTextBig}', style: eTitle),
-                ),
-                SizedBox(
-                  height: 30.0,
-                ),
-                SizedBox(
-                    width: 320.0,
-                    height: 100.0,
-                    child: InputTextField(
-                      inputType: widget.inputType,
-                      passwordText: widget.passwordText,
-                      label: '${widget.label}',
-                      changeValue: widget.changeValue,
-                      errorText: widget.errorText,
-                    )),
-              ],
+        appBar: AppBar(
+//          bottom: PreferredSize(
+//            preferredSize: Size(double.infinity, 1.0),
+//            child: LinearProgressIndicator(),
+//          ),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back_ios),
+            color: Colors.black,
+            onPressed: widget.onButtonBackPressed,
+          ),
+          backgroundColor: Colors.white,
+          elevation: 0,
+        ),
+        body: ListView(
+          shrinkWrap: true,
+          children: <Widget>[
+            SizedBox(height: 10,),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(30.0, 0.0, 30.0, 10.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  SvgPicture.asset(
+                    logo_one,
+                    color: AppTheme.lightAccent,
+                    height: 80.0,
+                    width: 80.0,
+                  ),
+                  SizedBox(
+                    height: 30.0,
+                  ),
+                  SizedBox(
+                    child: Text('${widget.welcomeTextBig}', style: eTitle),
+                  ),
+                  SizedBox(
+                    height: 30.0,
+                  ),
+                  SizedBox(
+                      width: 320.0,
+                      height: 100.0,
+                      child: InputTextField(
+                        inputType: widget.inputType,
+                        passwordText: widget.passwordText,
+                        label: '${widget.label}',
+                        changeValue: widget.changeValue,
+                        errorText: widget.errorText,
+                        one: true,
+                      )),
+                ],
+              ),
             ),
-          )
-        ],
-      ),
-      floatingActionButton: new RaisedButton(
-        color: AppTheme.lightAccent,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(25.0),
+          ],
         ),
-        child: Text(
-          'Inainte',
-          style: eButton,
-        ),
-        onPressed: widget.onButtonNextPressed,
-      ),
-    );
+        floatingActionButton: new RaisedButton(
+          color: AppTheme.lightAccent,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(25.0),
+          ),
+          child: Text(
+            'Inainte',
+            style: eButton,
+          ),
+          onPressed: widget.onButtonNextPressed,
+        ));
   }
 }

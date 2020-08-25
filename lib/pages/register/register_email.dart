@@ -40,27 +40,24 @@ class _RegisterEmailState extends State<RegisterEmail> {
       }
     }
 
-    return Container(
-        child: RegisterOneText(
+    return RegisterOneText(
       label: 'Email',
       welcomeTextBig: 'Indroduceti adresa de email',
-//      welcomeTextSmall: '',
       inputType: TextInputType.text,
       passwordText: false,
       route: '/register_email',
       changeValue: changeEmail,
-      onPressed: () {
+      onButtonNextPressed: () {
         setState(() {
           verifyEmail();
           if (emailOk == true) {
             Navigator.of(context)
-                .pushNamed('/register_phone', arguments: email);
+                .pushNamed('/register_loading', arguments: email);
           }
         });
       },
       errorText: errorText,
-      onButtonBackPressed: widget.onButtonBackPressed,
-      onButtonNextPressed: widget.onButtonNextPressed,
-    ));
+//      onButtonBackPressed: widget.onButtonBackPressed,
+    );
   }
 }
