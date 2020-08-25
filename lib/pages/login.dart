@@ -1,9 +1,8 @@
 import 'package:covidhelper_v2/components/text_field.dart';
-import 'package:flutter/material.dart';
+import 'package:covidhelper_v2/services/firestore_service.dart';
 import 'package:covidhelper_v2/utils/app_theme.dart';
 import 'package:covidhelper_v2/utils/logo_register.dart';
-import 'package:covidhelper_v2/services/firestore_service.dart';
-
+import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -18,6 +17,17 @@ class _LoginState extends State<Login> {
   String error = '';
   String errorFirstText;
   String errorSecondText;
+
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  ScrollController _scrollController = ScrollController();
+
+  _scrollToBottom() {
+    _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,112 +44,130 @@ class _LoginState extends State<Login> {
     }
 
     void verifyEmail() {
-      if(email == null){
-        errorFirstText  = 'Introduceti adresa dumneavoastra de email!';
+      if (email == null) {
+        setState(() {
+          errorFirstText = 'Introduceti adresa de email!';
+        });
       } else {
-        emailOk = true;
+        setState(() {
+          emailOk = true;
+        });
       }
     }
 
     void verifyPassword() {
       if (password == null) {
-        errorSecondText = 'Introduceti parola dumneavoastra!';
+        setState(() {
+          errorSecondText = 'Introduceti parola!';
+        });
       } else {
-        passwordOk = true;
+        setState(() {
+          passwordOk = true;
+        });
       }
     }
 
-    void verifyBoth(){
+    void verifyBoth() {
       verifyEmail();
       verifyPassword();
     }
 
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: AppTheme.darkTheme,
-      home: Scaffold(
-        floatingActionButton:
-        new RaisedButton(child: Text('Inainte'), onPressed: () async {
-            setState(()  {
+    return Scaffold(
+        backgroundColor: Colors.white,
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(1.0),
+          child: AppBar(
+            backgroundColor: Colors.white,
+            elevation: 0,
+          ),
+        ),
+        floatingActionButton: new RaisedButton(
+          color: AppTheme.lightAccent,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(25.0),
+          ),
+          child: Text(
+            'Inainte',
+            style: eButton,
+          ),
+          onPressed: () async {
+            setState(() {
               verifyBoth();
-              if(passwordOk == true && emailOk == true){
+              if (passwordOk == true && emailOk == true) {
                 valid = true;
               }
             });
-            if(valid == true){
+            if (valid == true) {
               dynamic result = await _auth.login(email, password);
-              if(result == null){
+              if (result == null) {
                 setState(() {
-                  error = 'Email-ul sau parola incorecta!';
+                  errorFirstText = 'Email-ul sau parola incorecta!';
+                  errorSecondText = 'Email-ul sau parola incorecta!';
                 });
               } else {
-                Navigator.of(context).pushNamedAndRemoveUntil(result['route'], (route) => false, arguments: result);
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                    result['route'], (route) => false,
+                    arguments: result);
               }
             }
           },
         ),
-        body: Container(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.max,
+        body: ListView(
+            shrinkWrap: true,
+            controller: _scrollController,
+            reverse: true,
             children: <Widget>[
-              Expanded(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(0.0, 40.0, 0.0, 20.0),
-                      child: SizedBox(
-                        height: 60.0,
-                        width: 60.0,
-                        child: LogoRegister(),
+              Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(30.0, 0.0, 30.0, 10.0),
+                  child: Column(
+                    children: <Widget>[
+                      SizedBox(
+                        height: 49.0,
                       ),
-                    ),
-                    Text('Conecteaza-te',
-                        style: AppTheme.darkTheme.textTheme.headline2),
-                    SizedBox(
-                      height: 20.0,
-                    ),
-                    Column(
-                      children: <Widget>[
-                        SizedBox(
+                      LogoRegister(),
+                      SizedBox(
+                        height: 30.0,
+                      ),
+                      SizedBox(
+                        child: Text('Intra in cont', style: eTitle),
+                      ),
+                      SizedBox(
+                        height: 20.0,
+                      ),
+                      SizedBox(
+                        width: 320.0,
+                        height: 105.0,
+                        child: InputTextField(
+                          label: 'Email',
+                          passwordText: false,
+                          inputType: TextInputType.text,
+                          changeValue: changeEmail,
+                          errorText: errorFirstText,
+                          one: true,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20.0,
+                      ),
+                      SizedBox(
                           width: 320.0,
-                          height: 102.0,
+                          height: 88.0,
                           child: InputTextField(
-                            label: 'Email',
-                            passwordText: false,
+                            label: 'Parola',
+                            passwordText: true,
                             inputType: TextInputType.text,
-                            changeValue: changeEmail,
-                            errorText: errorFirstText,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 10.0,
-                        ),
-                        SizedBox(
-                            width: 320.0,
-                            height: 83.0,
-                            child: InputTextField(
-                              label: 'Parola',
-                              passwordText: true,
-                              inputType: TextInputType.text,
-                              changeValue: changePassword,
-                              errorText: errorSecondText,
-                            )),
-                        SizedBox(height: 5.0,),
-                        Text(
-                          error,
-                          style: TextStyle(color: Colors.red, fontSize: 14.0),
-                        ),
-                      ],
-                    ),
-                  ],
+                            changeValue: changePassword,
+                            errorText: errorSecondText,
+                            one: false,
+                          )),
+                      SizedBox(
+                        height: 80.0,
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
+              ]),
+            ]));
   }
 }

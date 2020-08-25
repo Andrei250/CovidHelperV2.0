@@ -46,6 +46,7 @@ class _RegisterTwoTextsState extends State<RegisterTwoTexts> {
     // TODO: implement initState
     super.initState();
   }
+
   ScrollController _scrollController = ScrollController();
 
   _scrollToBottom() {
@@ -55,7 +56,7 @@ class _RegisterTwoTextsState extends State<RegisterTwoTexts> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: true,
+        resizeToAvoidBottomInset: true,
         backgroundColor: Colors.white,
         appBar: AppBar(
           leading: IconButton(
@@ -78,7 +79,7 @@ class _RegisterTwoTextsState extends State<RegisterTwoTexts> {
           onPressed: widget.onButtonNextPressed,
         ),
         body: ListView(
-              shrinkWrap: true,
+          shrinkWrap: true,
           controller: _scrollController,
           reverse: true,
           children: <Widget>[

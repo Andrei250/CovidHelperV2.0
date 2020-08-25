@@ -7,13 +7,11 @@ import 'app_theme.dart';
 class LogoRegister extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SvgPicture.asset(
+    return SvgPicture.asset(
         logo_one,
         color: AppTheme.lightAccent,
         height: 80.0,
         width: 80.0,
-      ),
     );
   }
 }

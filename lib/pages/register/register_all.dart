@@ -1,4 +1,5 @@
 import 'package:covidhelper_v2/components/loading_screen.dart';
+import 'package:covidhelper_v2/pages/login.dart';
 import 'package:covidhelper_v2/pages/register/register_back.dart';
 import 'package:covidhelper_v2/pages/register/register_choose.dart';
 import 'package:covidhelper_v2/pages/register/register_email.dart';
@@ -37,6 +38,8 @@ class RegisterAll {
     switch (settings.name) {
       case '/register_choose':
         return CustomRoute(builder: (_) => RegisterChoose());
+        case '/login':
+        return CustomRoute(builder: (_) => Login());
       case '/register_email':
         RegisterAll.userValue = args;
         return CustomRoute(builder: (_) => RegisterEmail());
@@ -62,11 +65,9 @@ class RegisterAll {
             builder: (_) => LoadingScreen(registerBack: registerBack));
       case '/home':
         if (RegisterAll.userValue == 'vendor') {
-          print ('1111111111111111111111111111111111111111111111111111111');
           return CustomRoute(builder: (_) => VendorHome());
 //        return CustomRoute(builder: (_) => Home(volunteer: args));
         } else if (RegisterAll.userValue == 'volunteer') {
-          print ('000000000000000000000000000000000000000000000000000000');
           return CustomRoute(builder: (_) => Home());
 //        return CustomRoute(builder: (_) => Home(volunteer: args));
         }

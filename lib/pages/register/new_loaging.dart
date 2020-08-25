@@ -11,10 +11,11 @@ class _NewLoadingState extends State<NewLoading> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white.withOpacity(0.3),
+      backgroundColor: Colors.white,
       body: Center(
         child: SpinKitChasingDots(
           color: AppTheme.lightAccent,
+          size: 50,
         ),
       ),
     );

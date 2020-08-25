@@ -77,8 +77,8 @@ class _RegisterChooseState extends State<RegisterChoose> {
                           style: eButton,
                         ),
                         onPressed: () {
-                          Navigator.of(context)
-                              .pushNamed('/register_email', arguments: 'vendor');
+                          Navigator.of(context).pushNamed('/register_email',
+                              arguments: 'vendor');
                         }),
                   ),
                   SizedBox(
@@ -106,13 +106,15 @@ class _RegisterChooseState extends State<RegisterChoose> {
                     width: double.infinity,
                     height: 50.0,
                     child: FlatButton(
-                        color: Colors.grey.withOpacity(1),
+                        color: Colors.blue[300],
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(25.0),
                         ),
                         child: Text('Am deja cont si vreau sa ma loghez',
                             style: eButton),
-                        onPressed: () {}),
+                        onPressed: () {
+                          Navigator.of(context).pushNamed('/login');
+                        }),
                   ),
                 ],
               )

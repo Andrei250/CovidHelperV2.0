@@ -46,12 +46,12 @@ class _LoadingScreenState extends State<LoadingScreen> {
     loading();
   }
 
-  @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Center(
-        child: SpinKitDoubleBounce(
-          color: AppTheme.lightColor,
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Center(
+        child: SpinKitChasingDots(
+          color: AppTheme.lightAccent,
         ),
       ),
     );
