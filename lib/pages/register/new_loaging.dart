@@ -15,7 +15,6 @@ class _NewLoadingState extends State<NewLoading> {
       body: Center(
         child: SpinKitChasingDots(
           color: AppTheme.lightAccent,
-          size: 50,
         ),
       ),
     );

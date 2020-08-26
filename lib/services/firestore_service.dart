@@ -155,6 +155,12 @@ class FirestoreService {
       if (userData['user_value'] == 'Vulnerables') {
         retrievedData['route'] = '/vulnerable_main';
         retrievedData['type'] = "vulnerable";
+      } else if (userData['user_value'] == 'volunteer') {
+        retrievedData['route'] = '/home';
+        retrievedData['type'] = 'volunteer';
+      } else if (userData['user_value'] == 'vendor') {
+        retrievedData['route'] = '/vendor_home';
+        retrievedData['type'] = "vendor";
       }
 
       return retrievedData;

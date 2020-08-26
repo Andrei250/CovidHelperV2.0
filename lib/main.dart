@@ -1,18 +1,14 @@
-import 'package:covidhelper_v2/components/loading_screen.dart';
-import 'package:covidhelper_v2/pages/login.dart';
-import 'package:covidhelper_v2/pages/register/new_loaging.dart';
-import 'package:covidhelper_v2/pages/register/register_email.dart';
-import 'package:covidhelper_v2/pages/register/register_pages.dart';
-import 'package:covidhelper_v2/pages/register/register_password.dart';
-import 'package:covidhelper_v2/pages/vendor/vendor_home.dart';
-import 'package:flutter/material.dart';
+import 'package:covidhelper_v2/pages/loading.dart';
+import 'package:covidhelper_v2/routes.dart';
 import 'package:covidhelper_v2/utils/app_theme.dart';
+import 'package:flutter/material.dart';
 
 import 'pages/register/register_all.dart';
 
-void main() => runApp(
-    MaterialApp(
+void main() => runApp(MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: AppTheme.darkTheme,
-      home: Login(),
-));
+      home: Loading(),
+      initialRoute: '/',
+      onGenerateRoute: Routing.generateRoute,
+    ));

@@ -17,10 +17,12 @@ class _LoginState extends State<Login> {
   String error = '';
   String errorFirstText;
   String errorSecondText;
+  bool _loading;
 
   void initState() {
     // TODO: implement initState
     super.initState();
+    _loading = false;
   }
 
   ScrollController _scrollController = ScrollController();
@@ -74,11 +76,22 @@ class _LoginState extends State<Login> {
 
     return Scaffold(
         backgroundColor: Colors.white,
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(1.0),
-          child: AppBar(
-            backgroundColor: Colors.white,
-            elevation: 0,
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          elevation: 0,
+          bottom: _loading
+              ? PreferredSize(
+                  preferredSize: Size(double.infinity, 1.0),
+                  child: LinearProgressIndicator(
+                    valueColor:
+                        AlwaysStoppedAnimation<Color>(AppTheme.lightAccent),
+                  ),
+                )
+              : null,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back_ios),
+            color: Colors.black,
+            onPressed: () {},
           ),
         ),
         floatingActionButton: new RaisedButton(
@@ -98,13 +111,21 @@ class _LoginState extends State<Login> {
               }
             });
             if (valid == true) {
+              setState(() {
+                _loading = true;
+              });
               dynamic result = await _auth.login(email, password);
+              setState(() {
+                _loading = false;
+              });
+
               if (result == null) {
                 setState(() {
                   errorFirstText = 'Email-ul sau parola incorecta!';
                   errorSecondText = 'Email-ul sau parola incorecta!';
                 });
               } else {
+                print(result['route']);
                 Navigator.of(context).pushNamedAndRemoveUntil(
                     result['route'], (route) => false,
                     arguments: result);
@@ -119,12 +140,9 @@ class _LoginState extends State<Login> {
             children: <Widget>[
               Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(30.0, 0.0, 30.0, 10.0),
+                  padding: const EdgeInsets.fromLTRB(30.0, 5.0, 30.0, 10.0),
                   child: Column(
                     children: <Widget>[
-                      SizedBox(
-                        height: 49.0,
-                      ),
                       LogoRegister(),
                       SizedBox(
                         height: 30.0,
