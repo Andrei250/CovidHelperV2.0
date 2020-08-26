@@ -1,8 +1,14 @@
 import 'package:covidhelper_v2/pages/register/register_one_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:regexed_validator/regexed_validator.dart';
 
 class RegisterName extends StatefulWidget {
+  RegisterName({this.onButtonBackPressed, this.onButtonNextPressed});
+
+  final VoidCallback onButtonBackPressed;
+  final VoidCallback onButtonNextPressed;
+
   @override
   _RegisterNameState createState() => _RegisterNameState();
 }
@@ -10,6 +16,13 @@ class RegisterName extends StatefulWidget {
 class _RegisterNameState extends State<RegisterName> {
   String name;
   String errorText;
+  bool _loading;
+
+  @override
+  void initState() {
+    super.initState();
+    _loading = false;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,12 +52,29 @@ class _RegisterNameState extends State<RegisterName> {
       passwordText: false,
       route: '/register_name',
       changeValue: changeName,
-      onPressed: () {
+      loading: _loading,
+      onButtonNextPressed: () {
         setState(() {
           verifyName();
           if (nameOk == true) {
-            Navigator.of(context).pushNamed('/register_email', arguments: name);
+            setState(() {
+              _loading = true;
+            });
+            Navigator.of(context).pushNamed('/register_phone', arguments: name);
+            setState(() {
+              _loading = false;
+            });
           }
+        });
+      },
+      onButtonBackPressed: () {
+        setState(() {
+          _loading = true;
+          SystemChannels.textInput.invokeMethod('TextInput.hide');
+        });
+        Navigator.of(context).pop();
+        setState(() {
+          _loading = false;
         });
       },
       errorText: errorText,

@@ -1,4 +1,4 @@
-import 'package:covidhelper_v2/pages/statistics_volunteer/stats_widget.dart';
+import 'package:covidhelper_v2/pages/volunteer/statistics_volunteer/stats_widget.dart';
 import 'package:covidhelper_v2/utils/app_theme.dart';
 import 'package:flutter/material.dart';
 

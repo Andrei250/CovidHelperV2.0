@@ -49,6 +49,8 @@ dependencies:
   fl_chart: ^0.11.0
   adobe_xd: ^1.0.0+1
   validators: ^2.0.1
+  fluttertoast: ^7.0.2
+
 
 dev_dependencies:
   flutter_test:
@@ -71,6 +73,7 @@ flutter:
     - assets/icons/
     - assets/images/
     - assets/images/logos/logo_white.svg
+    - assets/images/vulnerables/vendor_img.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

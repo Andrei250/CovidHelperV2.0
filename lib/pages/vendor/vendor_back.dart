@@ -11,11 +11,13 @@ class VendorBack {
         .collection('vendor')
         .document('ACrR5h6tkFNshrsPrgLndmz0K4t2')
         .collection(categoryDoc);
-    Products products = new Products(price: price, stock: stock);
+    Products products = new Products(price: price, stock: stock, name: product);
     Map<String, dynamic> dataMap = new Map<String, dynamic>();
     dataMap.putIfAbsent(product, () => products.toJson());
     return cat.document(category).setData(dataMap, merge: true);
   }
+
+
 
   Future addStockToProducts( String product,
       int stock, double price, bool isShop) async {
@@ -34,19 +36,26 @@ class VendorBack {
 }
 
 class Products {
-  Products({this.price, this.stock});
+  Products({this.price, this.stock, this.name});
 
   int stock;
   double price;
+  String name;
+  bool isShop;  // true if it's a shop, false otherwise (pharmacy)
+
 
   Products.fromJson(Map<String, dynamic> parsedJson)
       : stock = parsedJson['stock'] ?? '',
-        price = parsedJson['price'] ?? '';
+        price = parsedJson['price'] ?? '',
+        isShop = parsedJson['isShop'] ?? '',
+        name = parsedJson['name'] ?? '';
 
   Map<String, dynamic> toJson() {
     var dataMap = Map<String, dynamic>();
     dataMap['stock'] = this.stock;
     dataMap['price'] = this.price;
+    dataMap['isShop'] = this.isShop;
+    dataMap['name'] = this.name;
     return dataMap;
   }
 }

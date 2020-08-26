@@ -6,8 +6,8 @@ import 'package:covidhelper_v2/models/user.dart';
 import 'package:covidhelper_v2/models/vendor.dart';
 import 'package:covidhelper_v2/models/volunteer.dart';
 import 'package:covidhelper_v2/models/vulnerable_person.dart';
+import 'package:covidhelper_v2/pages/vendor/vendor_back.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
 
 class FirestoreService {
@@ -18,6 +18,25 @@ class FirestoreService {
     return _db.collection('Vulnerables').snapshots().map((snapshot) => snapshot
         .documents
         .map((document) => VulnerablePerson.fromJson(document.data))
+        .toList());
+  }
+
+  Stream<List<Products>> get products {
+    return _db
+        .collection('vendor')
+        .document('ACrR5h6tkFNshrsPrgLndmz0K4t2')
+        .collection('Products')
+        .orderBy('stock')
+        .snapshots()
+        .map((snapshot) => snapshot.documents
+            .map((document) => Products.fromJson(document.data))
+            .toList());
+  }
+
+  Stream<List<Vendor>> get vendors {
+    return _db.collection('vendor').snapshots().map((snapshot) => snapshot
+        .documents
+        .map((document) => Vendor.fromJson(document.data))
         .toList());
   }
 
@@ -55,6 +74,46 @@ class FirestoreService {
       );
       await addVulnerablePerson(person);
       await addUser(user.uid, "Vulnerables");
+      return 200;
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
+
+  Future<void> addReport(
+      String type, String full_name, String message, FirebaseUser user) {
+    Map<String, dynamic> data = new Map<String, dynamic>();
+    data['type'] = type;
+    data['full_name'] = full_name;
+    data['message'] = message;
+    data['user_uid'] = user.uid;
+    return _db.collection("reports").document(user.uid).setData(data);
+  }
+
+  Future createReport(String type, String full_name, String message) async {
+    try {
+      FirebaseUser user = await _auth.currentUser();
+      await addReport(type, full_name, message, user);
+      return 200;
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
+
+  Future<void> addFeedback(String message,
+      FirebaseUser user) {
+    Map<String, dynamic> data = new Map<String, dynamic>();
+    data['message'] = message;
+    data['user_uid'] = user.uid;
+    return _db.collection("feedback").add(data);
+  }
+
+  Future createFeedback(String message) async {
+    try {
+      FirebaseUser user = await _auth.currentUser();
+      await addFeedback(message, user);
       return 200;
     } catch (e) {
       print(e.toString());
@@ -101,11 +160,48 @@ class FirestoreService {
     }
   }
 
+  Future<Map<String, dynamic>> getUserData(FirebaseUser user) async{
+    var userData = await _db.collection("Users").document(user.uid).get();
+    var userInfo = await _db.collection(userData['user_value']).document(user.uid).get();
+    Map<String, dynamic> retrievedData = new Map<String, dynamic>();
+    retrievedData['userInfo'] = userInfo;
+
+    if (userData['user_value'] == 'Vulnerables') {
+      retrievedData['route'] = '/vulnerable_main';
+      retrievedData['type'] = "vulnerable";
+    } else if (userData['user_value'] == "Admins") {
+      retrievedData['route'] = '/admin_panel';
+      retrievedData['type'] = "admin";
+    }
+    return retrievedData;
+  }
+
   Future login(String email, String password) async {
     try {
-      AuthResult result = await _auth.signInWithEmailAndPassword(email: email, password: password);
+      AuthResult result = await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
       FirebaseUser user = result.user;
-      return user;
+      var userData = await _db.collection("Users").document(user.uid).get();
+      var userInfo =
+          await _db.collection(userData['user_value']).document(user.uid).get();
+      Map<String, dynamic> retrievedData = new Map<String, dynamic>();
+      retrievedData['userInfo'] = userInfo;
+
+      if (userData['user_value'] == 'Vulnerables') {
+        retrievedData['route'] = '/vulnerable_main';
+        retrievedData['type'] = "vulnerable";
+      } else if (userData['user_value'] == 'volunteer') {
+        retrievedData['route'] = '/home';
+        retrievedData['type'] = 'volunteer';
+      } else if (userData['user_value'] == 'vendor') {
+        retrievedData['route'] = '/vendor_home';
+        retrievedData['type'] = "vendor";
+      } else if (userData['user_value'] == "Admins") {
+        retrievedData['route'] = '/admin_panel';
+        retrievedData['type'] = "admin";
+      }
+
+      return retrievedData;
     } catch (error) {
       print(error.toString());
       return null;
@@ -137,14 +233,24 @@ class FirestoreService {
     return null;
   }
 
+  Future<Vendor> getVendor(FirebaseUser user) async {
+    var userData = await _db.collection('vendor').document(user.uid).get();
+    if (userData != null) {
+      Vendor vendor = new Vendor(
+          name: userData['name'],
+          email: userData['email'],
+          phoneNumber: userData['phoneNumber']);
+
+      return vendor;
+    }
+    return null;
+  }
+
   Future<User> getUser(FirebaseUser user) async {
     var userData = await _db.collection('Users').document(user.uid).get();
     if (userData != null) {
       User currentUser = new User(
-        uid: user.uid,
-        email: user.email,
-        user_value: userData['user_value']
-      );
+          uid: user.uid, email: user.email, user_value: userData['user_value']);
       return currentUser;
     }
     return null;
@@ -182,7 +288,25 @@ class FirestoreService {
       return null;
     }
   }
-  
+
+  Future deleteUser(FirebaseUser user, String password) async {
+    String uid = user.uid;
+    try{
+      AuthResult result = await user.reauthenticateWithCredential(
+          EmailAuthProvider.getCredential(email: user.email, password: password)
+      );
+      await result.user.delete().then((_) async{
+        await _db.collection('Users').document(uid).delete();
+        await _db.collection('Vulnerables').document(uid).delete();
+      });
+
+      return 200;
+    }catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
+
   Future deleteVulnerable(VulnerablePerson person) async {
     try {
       await http.post(
@@ -204,6 +328,4 @@ class FirestoreService {
       return null;
     }
   }
-
 }
-

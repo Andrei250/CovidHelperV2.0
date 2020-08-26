@@ -1,4 +1,5 @@
 import 'package:covidhelper_v2/components/loading_screen.dart';
+import 'package:covidhelper_v2/pages/login.dart';
 import 'package:covidhelper_v2/pages/register/register_back.dart';
 import 'package:covidhelper_v2/pages/register/register_choose.dart';
 import 'package:covidhelper_v2/pages/register/register_email.dart';
@@ -6,6 +7,7 @@ import 'package:covidhelper_v2/pages/register/register_name.dart';
 import 'package:covidhelper_v2/pages/register/register_password.dart';
 import 'package:covidhelper_v2/pages/register/register_phone.dart';
 import 'package:covidhelper_v2/pages/register/transition.dart';
+import 'package:covidhelper_v2/pages/vendor/vendor_home.dart';
 import 'package:covidhelper_v2/pages/volunteer/home_volunteer/home.dart';
 import 'package:flutter/material.dart';
 
@@ -36,20 +38,22 @@ class RegisterAll {
     switch (settings.name) {
       case '/register_choose':
         return CustomRoute(builder: (_) => RegisterChoose());
-      case '/register_name':
-        RegisterAll.userValue = args;
-        return CustomRoute(builder: (_) => RegisterName());
+        case '/login':
+        return CustomRoute(builder: (_) => Login());
       case '/register_email':
-        RegisterAll.name = args;
+        RegisterAll.userValue = args;
         return CustomRoute(builder: (_) => RegisterEmail());
-      case '/register_phone':
-        RegisterAll.email = args;
-        return CustomRoute(builder: (_) => RegisterPhone());
       case '/register_password':
-        RegisterAll.phoneNumber = args;
+        RegisterAll.email = args;
         return CustomRoute(builder: (_) => RegisterPassword());
-      case '/loading':
+      case '/register_name':
         RegisterAll.password = args;
+        return CustomRoute(builder: (_) => RegisterName());
+      case '/register_phone':
+        RegisterAll.name = args;
+        return CustomRoute(builder: (_) => RegisterPhone());
+      case '/loading':
+        RegisterAll.phoneNumber = args;
         RegisterBack registerBack = new RegisterBack(
             name: RegisterAll.name,
             email: RegisterAll.email,
@@ -60,8 +64,13 @@ class RegisterAll {
         return CustomRoute(
             builder: (_) => LoadingScreen(registerBack: registerBack));
       case '/home':
-        return CustomRoute(builder: (_) => Home());
+        if (RegisterAll.userValue == 'vendor') {
+          return CustomRoute(builder: (_) => VendorHome());
 //        return CustomRoute(builder: (_) => Home(volunteer: args));
+        } else if (RegisterAll.userValue == 'volunteer') {
+          return CustomRoute(builder: (_) => Home());
+//        return CustomRoute(builder: (_) => Home(volunteer: args));
+        }
         break;
       default:
         return null;

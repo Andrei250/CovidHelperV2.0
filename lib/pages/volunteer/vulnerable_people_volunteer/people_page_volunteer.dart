@@ -1,12 +1,13 @@
-import 'package:covidhelper_v2/pages/volunteer_vulnerables.dart';
+import 'package:covidhelper_v2/pages/volunteer/vulnerable_people_volunteer/volunteer_vulnerables.dart';
 import 'package:covidhelper_v2/utils/app_theme.dart';
 import 'package:flutter/material.dart';
 
 class PeoplePageVolunteer extends StatefulWidget {
-  PeoplePageVolunteer({this.limit, this.number});
+  PeoplePageVolunteer({this.limit, this.number, this.customHeight});
 
   bool limit;
   int number;
+  double customHeight;
 
   @override
   _PeoplePageVolunteerState createState() => _PeoplePageVolunteerState();
@@ -16,8 +17,6 @@ class _PeoplePageVolunteerState extends State<PeoplePageVolunteer> {
   @override
   Widget build(BuildContext context) {
     double deviceHeight = MediaQuery.of(context).size.height;
-    print(deviceHeight);
-    double deviceWidth = MediaQuery.of(context).size.width;
     return Container(
       height: deviceHeight,
       color: Colors.white,

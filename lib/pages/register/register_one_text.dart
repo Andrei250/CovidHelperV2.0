@@ -1,8 +1,8 @@
 import 'package:covidhelper_v2/components/text_field.dart';
-import 'package:covidhelper_v2/pages/register/register_all.dart';
 import 'package:covidhelper_v2/utils/app_theme.dart';
-import 'package:covidhelper_v2/utils/logo_register.dart';
+import 'package:covidhelper_v2/utils/pics.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class RegisterOneText extends StatefulWidget {
   RegisterOneText(
@@ -11,20 +11,24 @@ class RegisterOneText extends StatefulWidget {
       this.welcomeTextSmall,
       this.passwordText,
       this.inputType,
-      this.onPressed,
       this.route,
       this.changeValue,
-      this.errorText});
+      this.errorText,
+      this.onButtonBackPressed,
+      this.onButtonNextPressed,
+      this.loading});
 
   final String label;
   final String welcomeTextBig;
   final String welcomeTextSmall;
   final bool passwordText;
   final TextInputType inputType;
-  final VoidCallback onPressed;
   final String route;
   final Function(String) changeValue;
   final String errorText;
+  final VoidCallback onButtonBackPressed;
+  final VoidCallback onButtonNextPressed;
+  final bool loading;
 
   @override
   _RegisterOneTextState createState() => _RegisterOneTextState();
@@ -45,35 +49,48 @@ class _RegisterOneTextState extends State<RegisterOneText> {
       name = val;
     }
 
-    return MaterialApp(
-      onGenerateRoute: RegisterAll.generateRoute,
-      theme: AppTheme.darkTheme,
-      home: Scaffold(
-        floatingActionButton: new RaisedButton(
-          child: Text('Inainte'),
-          onPressed: widget.onPressed,
+    return Scaffold(
+        backgroundColor: Colors.white,
+        appBar: AppBar(
+          bottom: widget.loading
+              ? PreferredSize(
+                  preferredSize: Size(double.infinity, 1.0),
+                  child: LinearProgressIndicator(
+                    valueColor:
+                        AlwaysStoppedAnimation<Color>(AppTheme.lightAccent),
+                  ),
+                )
+              : null,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back_ios),
+            color: Colors.black,
+            onPressed: widget.onButtonBackPressed,
+          ),
+          backgroundColor: Colors.white,
+          elevation: 0,
         ),
         body: ListView(
+          shrinkWrap: true,
           children: <Widget>[
+            SizedBox(
+              height: 10,
+            ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(30.0, 50.0, 30.0, 10.0),
+              padding: const EdgeInsets.fromLTRB(30.0, 0.0, 30.0, 10.0),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
-                  SizedBox(
-                    height: 60.0,
-                    width: 60.0,
-                    child: LogoRegister(),
+                  SvgPicture.asset(
+                    logo_one,
+                    color: AppTheme.lightAccent,
+                    height: 80.0,
+                    width: 80.0,
                   ),
                   SizedBox(
-                    height: 20.0,
+                    height: 30.0,
                   ),
                   SizedBox(
-                    child: Text('${widget.welcomeTextBig}',
-                        style: AppTheme.darkTheme.textTheme.headline2),
-                  ),
-                  SizedBox(
-                    child: Text('${widget.welcomeTextSmall}',
-                        style: AppTheme.darkTheme.textTheme.headline3),
+                    child: Text('${widget.welcomeTextBig}', style: eTitle),
                   ),
                   SizedBox(
                     height: 30.0,
@@ -87,13 +104,23 @@ class _RegisterOneTextState extends State<RegisterOneText> {
                         label: '${widget.label}',
                         changeValue: widget.changeValue,
                         errorText: widget.errorText,
+                        one: true,
                       )),
                 ],
               ),
-            )
+            ),
           ],
         ),
-      ),
-    );
+        floatingActionButton: new RaisedButton(
+          color: AppTheme.lightAccent,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(25.0),
+          ),
+          child: Text(
+            'Inainte',
+            style: eButton,
+          ),
+          onPressed: widget.onButtonNextPressed,
+        ));
   }
 }

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:covidhelper_v2/models/user.dart';
 import 'package:covidhelper_v2/models/volunteer.dart';
 import 'package:covidhelper_v2/pages/register/register_back.dart';
@@ -18,14 +19,33 @@ class _LoadingState extends State<Loading> {
     FirebaseUser user;
     User currentUser;
     user = await _auth.currentUser();
+    Firestore _db = Firestore.instance;
 
     await Future.delayed(Duration(seconds: 2), () {});
 
     if (user != null) {
       currentUser = await FirestoreService().getUser(user);
-      if (currentUser.user_value == 'Admins') {
-        Navigator.pushNamedAndRemoveUntil(context, '/admin_panel', (route) => false);
+      var userData = await _db.collection("Users").document(currentUser.uid).get();
+      var userInfo = await _db.collection(userData['user_value']).document(currentUser.uid).get();
+      Map<String, dynamic> retrievedData = new Map<String, dynamic>();
+      retrievedData['userInfo'] = userInfo;
+
+      if (userData['user_value'] == 'Vulnerables') {
+        retrievedData['route'] = '/vulnerable_main';
+        retrievedData['type'] = "vulnerable";
+      } else if (currentUser.user_value == "Admins") {
+        retrievedData['route'] = '/admin_panel';
+        retrievedData['type'] = "admin";
+      } else if (userData['user_value'] == 'volunteer') {
+        retrievedData['route'] = '/volunteer_home';
+        retrievedData['type'] = 'volunteer';
+      } else if (userData['user_value'] == 'vendor') {
+        retrievedData['route'] = '/vendor_home';
+        retrievedData['type'] = "vendor";
       }
+
+      Navigator.pushNamedAndRemoveUntil(context, retrievedData['route'], (route) => false, arguments: retrievedData);
+
     } else {
       Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
     }
