@@ -1,6 +1,7 @@
 import 'package:covidhelper_v2/pages/register/register_one_text.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class RegisterEmail extends StatefulWidget {
   @override
@@ -10,6 +11,13 @@ class RegisterEmail extends StatefulWidget {
 class _RegisterEmailState extends State<RegisterEmail> {
   String email;
   String errorText;
+  bool _loading;
+
+  @override
+  void initState() {
+    super.initState();
+    _loading = false;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,25 +43,41 @@ class _RegisterEmailState extends State<RegisterEmail> {
       }
     }
 
-    return Container(
-        child: RegisterOneText(
+    return RegisterOneText(
       label: 'Email',
-      welcomeTextBig: 'Creati un cont nou',
-      welcomeTextSmall: 'Indroduceti adresa de email',
+      welcomeTextBig: 'Indroduceti adresa de email',
       inputType: TextInputType.text,
       passwordText: false,
       route: '/register_email',
       changeValue: changeEmail,
-      onPressed: () {
+      loading: _loading,
+      onButtonNextPressed: () {
         setState(() {
           verifyEmail();
           if (emailOk == true) {
+            setState(() {
+              _loading = true;
+            });
             Navigator.of(context)
-                .pushNamed('/register_phone', arguments: email);
+                .pushNamed('/register_password', arguments: email);
+            setState(() {
+              _loading = false;
+            });
           }
         });
       },
+      onButtonBackPressed: () {
+        setState(() {
+          _loading = true;
+          SystemChannels.textInput.invokeMethod('TextInput.hide');
+        });
+        Navigator.of(context).pop();
+        setState(() {
+          _loading = false;
+        });
+      },
       errorText: errorText,
-    ));
+    );
   }
+
 }

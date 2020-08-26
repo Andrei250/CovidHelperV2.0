@@ -36,6 +36,12 @@ class _LoadingState extends State<Loading> {
       } else if (currentUser.user_value == "Admins") {
         retrievedData['route'] = '/admin_panel';
         retrievedData['type'] = "admin";
+      } else if (userData['user_value'] == 'volunteer') {
+        retrievedData['route'] = '/volunteer_home';
+        retrievedData['type'] = 'volunteer';
+      } else if (userData['user_value'] == 'vendor') {
+        retrievedData['route'] = '/vendor_home';
+        retrievedData['type'] = "vendor";
       }
 
       Navigator.pushNamedAndRemoveUntil(context, retrievedData['route'], (route) => false, arguments: retrievedData);

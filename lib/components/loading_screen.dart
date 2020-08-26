@@ -1,3 +1,4 @@
+import 'package:covidhelper_v2/models/vendor.dart';
 import 'package:covidhelper_v2/models/volunteer.dart';
 import 'package:covidhelper_v2/pages/register/register_back.dart';
 import 'package:covidhelper_v2/services/firestore_service.dart';
@@ -23,16 +24,18 @@ class _LoadingScreenState extends State<LoadingScreen> {
     FirebaseUser user;
     user = await _auth.currentUser();
 
-    if (user == null) {
+    if (widget.registerBack.userValue == 'volunteer') {
+      Volunteer volunteer;
+      volunteer = await FirestoreService().getVolunteer(user);
       Navigator.of(context).pushNamedAndRemoveUntil(
-          '/login', (Route<dynamic> route) => false);
-    } else {
-      var data = await FirestoreService().getUserData(user);
-
-      if (data != null) {
-        Navigator.of(context).pushNamedAndRemoveUntil(
-            data['route'], (Route<dynamic> route) => false, arguments: data);
-      }
+          '/home', (Route<dynamic> route) => false,
+          arguments: volunteer);
+    } else if (widget.registerBack.userValue == 'vendor') {
+      Vendor vendor;
+      vendor = await FirestoreService().getVendor(user);
+      Navigator.of(context).pushNamedAndRemoveUntil(
+          '/home', (Route<dynamic> route) => false,
+          arguments: vendor);
     }
   }
 
@@ -42,12 +45,12 @@ class _LoadingScreenState extends State<LoadingScreen> {
     loading();
   }
 
-  @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Center(
-        child: SpinKitDoubleBounce(
-          color: AppTheme.lightColor,
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Center(
+        child: SpinKitChasingDots(
+          color: AppTheme.lightAccent,
         ),
       ),
     );

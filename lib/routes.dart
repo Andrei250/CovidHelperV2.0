@@ -3,6 +3,8 @@ import 'package:covidhelper_v2/components/navigation/settings.dart';
 import 'package:covidhelper_v2/components/navigation/feedback.dart';
 import 'package:covidhelper_v2/pages/admin_panel.dart';
 import 'package:covidhelper_v2/pages/loading.dart';
+import 'package:covidhelper_v2/pages/vendor/vendor_home.dart';
+import 'package:covidhelper_v2/pages/volunteer/home_volunteer/home.dart';
 import 'package:covidhelper_v2/pages/vulnerables_main.dart';
 import 'package:flutter/material.dart';
 
@@ -39,6 +41,11 @@ class Routing {
       case '/login':
         return MaterialPageRoute(builder: (_) => Login());
         break;
+        case '/volunteer_home':
+        return MaterialPageRoute(builder: (_) => Home());
+        break;
+        case '/vendor_home':
+        return MaterialPageRoute(builder: (_) => VendorHome());
       case '/settings':
         return MaterialPageRoute(builder: (_) => Settings(data: settings.arguments));
         break;

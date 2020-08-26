@@ -2,6 +2,11 @@ import 'package:covidhelper_v2/pages/register/register_two_texts.dart';
 import 'package:flutter/material.dart';
 
 class RegisterPassword extends StatefulWidget {
+  RegisterPassword({this.onButtonBackPressed, this.onButtonNextPressed});
+
+  final VoidCallback onButtonBackPressed;
+  final VoidCallback onButtonNextPressed;
+
   @override
   _RegisterPasswordState createState() => _RegisterPasswordState();
 }
@@ -65,13 +70,17 @@ class _RegisterPasswordState extends State<RegisterPassword> {
       route: '/register_password',
       changeFirstValue: changePassword,
       changeSecondValue: changePasswordConfirm,
-      onPressed: () {
+      onButtonNextPressed: () {
         setState(() {
           verifyBothPasswords();
           if (passwordOk == true && passwordConfirmOk == true) {
-            Navigator.of(context).pushNamed('/loading', arguments: password);
+            Navigator.of(context)
+                .pushNamed('/register_name', arguments: password);
           }
         });
+      },
+      onButtonBackPressed: () {
+        Navigator.of(context).pop();
       },
       errorFirstText: errorFirstText,
       errorSecondText: errorSecondText,

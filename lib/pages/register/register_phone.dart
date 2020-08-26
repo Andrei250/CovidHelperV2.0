@@ -1,7 +1,13 @@
 import 'package:covidhelper_v2/pages/register/register_one_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class RegisterPhone extends StatefulWidget {
+  RegisterPhone({this.onButtonNextPressed, this.onButtonBackPressed});
+
+  final VoidCallback onButtonBackPressed;
+  final VoidCallback onButtonNextPressed;
+
   @override
   _RegisterPhoneState createState() => _RegisterPhoneState();
 }
@@ -9,6 +15,13 @@ class RegisterPhone extends StatefulWidget {
 class _RegisterPhoneState extends State<RegisterPhone> {
   String phoneNumber;
   String errorText;
+  bool _loading;
+
+  @override
+  void initState() {
+    super.initState();
+    _loading = false;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,13 +51,29 @@ class _RegisterPhoneState extends State<RegisterPhone> {
       passwordText: false,
       route: '/register_phone',
       changeValue: changePhoneNumber,
-      onPressed: () {
+      loading: _loading,
+      onButtonNextPressed: () {
         setState(() {
           verifyPhone();
           if (phoneOk == true) {
-            Navigator.of(context)
-                .pushNamed('/register_password', arguments: phoneNumber);
+            setState(() {
+              _loading = true;
+            });
+            Navigator.of(context).pushNamed('/loading', arguments: phoneNumber);
+            setState(() {
+              _loading = false;
+            });
           }
+        });
+      },
+      onButtonBackPressed: () {
+        setState(() {
+          _loading = true;
+          SystemChannels.textInput.invokeMethod('TextInput.hide');
+        });
+        Navigator.of(context).pop();
+        setState(() {
+          _loading = false;
         });
       },
       errorText: errorText,
