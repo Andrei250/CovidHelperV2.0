@@ -1,4 +1,6 @@
 import 'package:covidhelper_v2/components/loading_screen.dart';
+import 'package:covidhelper_v2/components/navigation/settings.dart';
+import 'package:covidhelper_v2/components/navigation/feedback.dart';
 import 'package:covidhelper_v2/pages/admin_panel.dart';
 import 'package:covidhelper_v2/pages/loading.dart';
 import 'package:covidhelper_v2/pages/vulnerables_main.dart';
@@ -36,6 +38,12 @@ class Routing {
         break;
       case '/login':
         return MaterialPageRoute(builder: (_) => Login());
+        break;
+      case '/settings':
+        return MaterialPageRoute(builder: (_) => Settings(data: settings.arguments));
+        break;
+      case '/feedback':
+        return MaterialPageRoute(builder: (_) => PersonFeedback(data: settings.arguments));
         break;
       default:
         return null;

@@ -16,7 +16,7 @@ class LoadingScreen extends StatefulWidget {
 }
 
 class _LoadingScreenState extends State<LoadingScreen> {
-  void loading() async {
+  Future loading() async {
 //    await widget.registerBack.addNewUser();
 
     FirebaseAuth _auth = FirebaseAuth.instance;
@@ -28,10 +28,12 @@ class _LoadingScreenState extends State<LoadingScreen> {
           '/login', (Route<dynamic> route) => false);
     } else {
       var data = await FirestoreService().getUserData(user);
-      Navigator.of(context).pushNamedAndRemoveUntil(
-          data['route'], (Route<dynamic> route) => false, arguments: data);
-    }
 
+      if (data != null) {
+        Navigator.of(context).pushNamedAndRemoveUntil(
+            data['route'], (Route<dynamic> route) => false, arguments: data);
+      }
+    }
   }
 
   @override

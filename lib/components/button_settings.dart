@@ -37,7 +37,12 @@ class ButtonSettings extends StatelessWidget {
                 if (arguments['log-out'] == true) {
                   singOut(arguments['context']);
                 } else {
-                  Navigator.pushNamed(context, route, arguments: arguments);
+                  if (arguments['context'] != null) {
+                    Navigator.pushNamed(arguments['context'], route, arguments: arguments);
+                  } else {
+                    Navigator.pushNamed(context, route, arguments: arguments);
+                  }
+
                 }
 
               },

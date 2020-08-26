@@ -23,6 +23,7 @@ class VulnerablesMain extends StatefulWidget {
 class _VulnerablesMain extends State<VulnerablesMain> {
   int _currentIndex = 0;
   PageController _pageController;
+  static final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   Widget getPage() {
     if (_currentIndex == 0) {
@@ -88,7 +89,6 @@ class _VulnerablesMain extends State<VulnerablesMain> {
 
   @override
   Widget build(BuildContext context) {
-    final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
     Size size = MediaQuery.of(context).size;
 
     return StreamProvider<List<Vendor>>.value(
