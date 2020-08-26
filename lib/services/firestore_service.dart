@@ -6,8 +6,8 @@ import 'package:covidhelper_v2/models/user.dart';
 import 'package:covidhelper_v2/models/vendor.dart';
 import 'package:covidhelper_v2/models/volunteer.dart';
 import 'package:covidhelper_v2/models/vulnerable_person.dart';
+import 'package:covidhelper_v2/pages/vendor/vendor_back.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
 
 class FirestoreService {
@@ -19,6 +19,26 @@ class FirestoreService {
         .documents
         .map((document) => VulnerablePerson.fromJson(document.data))
         .toList());
+  }
+
+  Stream<List<Products>> get products {
+    return _db
+        .collection('vendor')
+        .document('ACrR5h6tkFNshrsPrgLndmz0K4t2')
+        .collection('Products')
+        .orderBy('stock')
+        .snapshots()
+        .map((snapshot) =>
+        snapshot.documents
+            .map((document) => Products.fromJson(document.data))
+            .toList());
+  }
+  Stream<List<Vendor>> get vendors {
+    return _db.collection('vendor').snapshots().map((snapshot) =>
+        snapshot
+            .documents
+            .map((document) => Vendor.fromJson(document.data))
+            .toList());
   }
 
   Stream<List<Volunteer>> get volunteer {
@@ -55,6 +75,29 @@ class FirestoreService {
       );
       await addVulnerablePerson(person);
       await addUser(user.uid, "Vulnerables");
+      return 200;
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
+
+  Future<void> addReport(String type,
+                              String full_name,
+                              String message,
+                              FirebaseUser user) {
+    Map<String, dynamic> data = new Map<String, dynamic>();
+    data['type'] = type;
+    data['full_name'] = full_name;
+    data['message'] = message;
+    data['user_uid'] = user.uid;
+    return _db.collection("reports").document(user.uid).setData(data);
+  }
+
+  Future createReport(String type, String full_name, String message) async {
+    try {
+      FirebaseUser user = await _auth.currentUser();
+      await addReport(type, full_name, message, user);
       return 200;
     } catch (e) {
       print(e.toString());
@@ -101,11 +144,25 @@ class FirestoreService {
     }
   }
 
+  Future<Map<String, dynamic>> getUserData(FirebaseUser user) async{
+    var userData = await _db.collection("Users").document(user.uid).get();
+    var userInfo = await _db.collection(userData['user_value']).document(user.uid).get();
+    Map<String, dynamic> retrievedData = new Map<String, dynamic>();
+    retrievedData['userInfo'] = userInfo;
+
+    if (userData['user_value'] == 'Vulnerables') {
+      retrievedData['route'] = '/vulnerable_main';
+      retrievedData['type'] = "vulnerable";
+    }
+    return retrievedData;
+  }
+
   Future login(String email, String password) async {
     try {
-      AuthResult result = await _auth.signInWithEmailAndPassword(email: email, password: password);
+      AuthResult result = await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
       FirebaseUser user = result.user;
-      return user;
+      return await getUserData(user);
     } catch (error) {
       print(error.toString());
       return null;
@@ -141,10 +198,7 @@ class FirestoreService {
     var userData = await _db.collection('Users').document(user.uid).get();
     if (userData != null) {
       User currentUser = new User(
-        uid: user.uid,
-        email: user.email,
-        user_value: userData['user_value']
-      );
+          uid: user.uid, email: user.email, user_value: userData['user_value']);
       return currentUser;
     }
     return null;
@@ -182,7 +236,7 @@ class FirestoreService {
       return null;
     }
   }
-  
+
   Future deleteVulnerable(VulnerablePerson person) async {
     try {
       await http.post(
@@ -204,6 +258,4 @@ class FirestoreService {
       return null;
     }
   }
-
 }
-

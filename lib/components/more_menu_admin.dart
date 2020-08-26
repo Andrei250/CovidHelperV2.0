@@ -9,8 +9,9 @@ class MoreMenuAdmin extends StatefulWidget {
   final FirebaseUser user;
   final Admin admin;
   final Function function;
+  final BuildContext context;
 
-  MoreMenuAdmin({this.user, this.admin, this.function});
+  MoreMenuAdmin({this.user, this.admin, this.function, this.context});
 
   @override
   _MoreMenuAdminState createState() => _MoreMenuAdminState();
@@ -112,6 +113,10 @@ class _MoreMenuAdminState extends State<MoreMenuAdmin> {
                         Icons.exit_to_app,
                         color: Colors.white,
                       ),
+                      arguments: {
+                        'log-out' : true,
+                        'context' : widget.context,
+                      },
                     ),
                   ],
                 ),
