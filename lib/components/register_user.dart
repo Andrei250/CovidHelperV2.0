@@ -123,11 +123,33 @@ class _RegisterUserState extends State<RegisterUser> {
                   SizedBox(
                     width: 320.0,
                     height: 70.0,
-                    child: FormInput(
-                      label: 'Address',
-                      type: false,
-                      changeValue: changeAddress,
-                    ),
+                    child:
+//                    FormInput(
+////                      label: 'Address',
+////                      type: false,
+////                      changeValue: changeAddress,
+////                    ),
+
+                    TextField(
+                      decoration: InputDecoration(
+                        hintText: "Adresa",
+                        hintStyle: TextStyle(
+                          color: Color(0xFF757575),
+                          fontSize: 16,
+                        ),
+                        prefixIcon: Icon(Icons.search, color: Color(0xFF757575)),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        contentPadding: EdgeInsets.symmetric(vertical: 0),
+                        fillColor: Color(0xFFEEEEEE),
+                        filled: true,
+                      ),
+
+                    )
                   ),
                   SizedBox(
                     width: 320.0,
