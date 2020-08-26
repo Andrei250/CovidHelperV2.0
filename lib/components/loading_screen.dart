@@ -17,12 +17,11 @@ class LoadingScreen extends StatefulWidget {
 }
 
 class _LoadingScreenState extends State<LoadingScreen> {
-  void loading() async {
-    await widget.registerBack.addNewUser();
+  Future loading() async {
+//    await widget.registerBack.addNewUser();
 
     FirebaseAuth _auth = FirebaseAuth.instance;
     FirebaseUser user;
-
     user = await _auth.currentUser();
 
     if (widget.registerBack.userValue == 'volunteer') {

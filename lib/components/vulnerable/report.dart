@@ -90,7 +90,7 @@ class _ReportState extends State<Report> {
                         Expanded(
                           child: Container(
                             child: Padding(
-                              padding: EdgeInsets.symmetric(vertical: 0.0, horizontal: size.width * 0.1),
+                              padding: EdgeInsets.symmetric(vertical: 30.0, horizontal: size.width * 0.1),
                               child: Text(
                                 "Raporteaza o persoana sau un magazin",
                                 textAlign: TextAlign.center,

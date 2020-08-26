@@ -169,7 +169,6 @@ class _RegisterUserState extends State<RegisterUser> {
 
                         });
                       } else {
-                        print(email);
                         emptyness_error = '';
                         email_error = '';
                         password_error = '';
