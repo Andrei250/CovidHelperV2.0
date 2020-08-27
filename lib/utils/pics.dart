@@ -15,3 +15,5 @@ const product = 'assets/icons/product.svg';
 const box = 'assets/icons/box.svg';
 const people = 'assets/icons/people.svg';
 const location = 'assets/icons/location.svg';
+const dotLoading = 'assets/icons/dot_loading.svg';
+const from = 'assets/icons/from.svg';

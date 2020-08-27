@@ -245,7 +245,6 @@ class FirestoreService {
           name: userData['name'],
           email: userData['email'],
           phoneNumber: userData['phoneNumber']);
-
       return vendor;
     }
     return null;
