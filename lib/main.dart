@@ -12,7 +12,7 @@ import 'pages/register/register_all.dart';
 void main() => runApp(MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: AppTheme.darkTheme,
-      home: VendorHome(),
-      /*initialRoute: '/',
-      onGenerateRoute: Routing.generateRoute,*/
+      home: Register(),
+//      initialRoute: '/',
+//      onGenerateRoute: Routing.generateRoute,
     ));
