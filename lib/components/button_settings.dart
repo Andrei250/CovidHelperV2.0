@@ -15,7 +15,7 @@ class ButtonSettings extends StatelessWidget {
 
   void singOut(BuildContext context) async {
     await FirebaseAuth.instance.signOut();
-    Navigator.pushNamedAndRemoveUntil(context, '/login', (Route<dynamic> route) => false);
+    Navigator.pushNamedAndRemoveUntil(context, '/register', (Route<dynamic> route) => false);
   }
 
   @override
