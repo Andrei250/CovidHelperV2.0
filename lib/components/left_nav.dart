@@ -7,11 +7,10 @@ import 'button_settings.dart';
 
 class LeftNavigation extends StatefulWidget {
   Size size;
-  VulnerablePerson person;
   Map data;
   final BuildContext context;
 
-  LeftNavigation({this.size, this.person, this.data, this.context});
+  LeftNavigation({this.size, this.data, this.context});
 
   @override
   _LeftNavigationState createState() => _LeftNavigationState();
@@ -52,11 +51,11 @@ class _LeftNavigationState extends State<LeftNavigation> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  widget.person.first_name + ' ' +widget.person.last_name ,
+                                  widget.data['userInfo']['first_name'] + ' ' +widget.data['userInfo']['last_name'] ,
                                   style: AppTheme.darkTheme.textTheme.headline3,
                                 ),
                                 Text(
-                                  widget.person.phone,
+                                  widget.data['userInfo']['phone'],
                                   style: AppTheme.darkTheme.textTheme.headline4,
                                 ),
                               ],

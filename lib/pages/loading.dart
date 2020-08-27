@@ -33,7 +33,7 @@ class _LoadingState extends State<Loading> {
       if (userData['user_value'] == 'Vulnerables') {
         retrievedData['route'] = '/vulnerable_main';
         retrievedData['type'] = "vulnerable";
-      } else if (currentUser.user_value == "Admins") {
+      } else if (userData['user_value'] == "Admins") {
         retrievedData['route'] = '/admin_panel';
         retrievedData['type'] = "admin";
       } else if (userData['user_value'] == 'volunteer') {
