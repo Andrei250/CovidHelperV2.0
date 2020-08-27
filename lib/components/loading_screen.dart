@@ -18,7 +18,7 @@ class LoadingScreen extends StatefulWidget {
 
 class _LoadingScreenState extends State<LoadingScreen> {
   Future loading() async {
-//    await widget.registerBack.addNewUser();
+    await widget.registerBack.addNewUser();
 
     FirebaseAuth _auth = FirebaseAuth.instance;
     FirebaseUser user;

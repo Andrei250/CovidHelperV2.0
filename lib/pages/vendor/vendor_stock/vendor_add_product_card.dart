@@ -55,7 +55,7 @@ class _VendorAddProductCardState extends State<VendorAddProductCard> {
                   onPressed: () {
                     if(_formKey.currentState.validate()){
                       services.addStock(widget.categoryDoc, widget.category, widget.name, product.stock, product.price);
-                      services.addStockToProducts(widget.name, product.stock, product.price, false);
+                      services.addStockToProducts(widget.name, product.stock, product.price, true);
                     }
                   },
                   color: AppTheme.lightAccent,
@@ -87,8 +87,8 @@ class _VendorAddProductCardState extends State<VendorAddProductCard> {
                     if(!validators.isNumeric(value)){
                       return 'Introdu un numar';
                     }else{
-                      int stoc = int.tryParse(value);
-                      product.stock = stoc;
+                      //int stoc = int.tryParse(value);
+                      product.stock = value;
                     }
                     return null;
                   },
@@ -107,8 +107,8 @@ class _VendorAddProductCardState extends State<VendorAddProductCard> {
                     if(!validators.isFloat(value)){
                       return 'Introdu un numar';
                     }else{
-                      double pret = double.tryParse(value);
-                      product.price = pret;
+                      //double pret = double.tryParse(value);
+                      product.price = value;
                     }
                     return null;
                   },

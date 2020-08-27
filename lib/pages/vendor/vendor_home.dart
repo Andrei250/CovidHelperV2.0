@@ -60,7 +60,7 @@ class _VendorHomeState extends State<VendorHome> {
                 width: 30,
                 color: AppTheme.lightAccent,
               ),
-              title: Text('Home', style: eNavBarText),
+              title: Text('Acasa', style: eNavBarText),
               activeColor: AppTheme.lightAccent,
               inactiveColor: AppTheme.lightAccent,
               textAlign: TextAlign.center,
@@ -79,12 +79,12 @@ class _VendorHomeState extends State<VendorHome> {
             ),
             BottomNavyBarItem(
               icon: SvgPicture.asset(
-                graph,
+                box,
                 height: 30,
                 width: 30,
                 color: AppTheme.lightAccent,
               ),
-              title: Text('Statistici', style: eNavBarText),
+              title: Text('Stoc', style: eNavBarText),
               activeColor: AppTheme.lightAccent,
               inactiveColor: AppTheme.lightAccent,
               textAlign: TextAlign.center,
