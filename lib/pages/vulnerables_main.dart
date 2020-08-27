@@ -23,7 +23,7 @@ class VulnerablesMain extends StatefulWidget {
 class _VulnerablesMain extends State<VulnerablesMain> {
   int _currentIndex = 0;
   PageController _pageController;
-  static final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>(debugLabel: '_VulnerablesMain');
 
   Widget getPage() {
     if (_currentIndex == 0) {
