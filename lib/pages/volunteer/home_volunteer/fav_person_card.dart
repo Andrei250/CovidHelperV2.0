@@ -1,6 +1,8 @@
 import 'package:covidhelper_v2/utils/app_theme.dart';
+import 'package:covidhelper_v2/utils/pics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:slide_popup_dialog/slide_popup_dialog.dart' as slideDialog;
 
 class FavPersonCard extends StatefulWidget {
@@ -22,10 +24,10 @@ class _FavPersonCardState extends State<FavPersonCard> {
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.fromLTRB(15.0, 8.0, 8.0, 8.0),
-                child: Icon(
-                  Icons.person_outline,
-                  color: AppTheme.lightAccent,
-                  size: 60,
+                child: SvgPicture.asset(
+                  user,
+                  height: 50,
+                  width: 50,
                 ),
               ),
               Padding(
@@ -105,10 +107,10 @@ class _FavPersonCardState extends State<FavPersonCard> {
               children: <Widget>[
                 Padding(
                   padding: const EdgeInsets.fromLTRB(20.0, 8.0, 8.0, 8.0),
-                  child: Icon(
-                    Icons.person_outline,
-                    color: AppTheme.lightAccent,
-                    size: 60,
+                  child: SvgPicture.asset(
+                    user,
+                    height: 50,
+                    width: 50,
                   ),
                 ),
                 Padding(

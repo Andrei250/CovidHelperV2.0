@@ -13,3 +13,5 @@ const milk = 'assets/icons/milk.svg';
 const goods = 'assets/icons/goods.svg';
 const product = 'assets/icons/product.svg';
 const box = 'assets/icons/box.svg';
+const people = 'assets/icons/people.svg';
+

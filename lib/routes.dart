@@ -41,11 +41,12 @@ class Routing {
       case '/login':
         return MaterialPageRoute(builder: (_) => Login());
         break;
-        case '/volunteer_home':
+      case '/volunteer_home':
         return MaterialPageRoute(builder: (_) => Home());
         break;
-        case '/vendor_home':
+      case '/vendor_home':
         return MaterialPageRoute(builder: (_) => VendorHome());
+        break;
       case '/settings':
         return MaterialPageRoute(builder: (_) => Settings(data: settings.arguments));
         break;

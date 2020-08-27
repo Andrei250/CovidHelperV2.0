@@ -1,10 +1,12 @@
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:covidhelper_v2/pages/register/register_all.dart';
-import 'package:covidhelper_v2/pages/volunteer/statistics_volunteer/statistics.dart';
 import 'package:covidhelper_v2/pages/volunteer/home_volunteer/home_screen.dart';
+import 'package:covidhelper_v2/pages/volunteer/statistics_volunteer/statistics.dart';
 import 'package:covidhelper_v2/pages/volunteer/vulnerable_people_volunteer/people_page_volunteer.dart';
 import 'package:covidhelper_v2/utils/app_theme.dart';
+import 'package:covidhelper_v2/utils/pics.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class Home extends StatefulWidget {
 //  Volunteer volunteer;
@@ -54,14 +56,24 @@ class _HomeState extends State<Home> {
           },
           items: <BottomNavyBarItem>[
             BottomNavyBarItem(
-              icon: Icon(Icons.home),
+              icon: SvgPicture.asset(
+                home,
+                height: 30,
+                width: 30,
+                color: AppTheme.lightAccent,
+              ),
               title: Text('Home', style: eNavBarText),
               activeColor: AppTheme.lightAccent,
               inactiveColor: AppTheme.lightAccent,
               textAlign: TextAlign.center,
             ),
             BottomNavyBarItem(
-              icon: Icon(Icons.person),
+              icon: SvgPicture.asset(
+                people,
+                height: 30,
+                width: 30,
+                color: AppTheme.lightAccent,
+              ),
               title: Text(
                 'Persoane',
                 style: eNavBarText,
@@ -71,19 +83,24 @@ class _HomeState extends State<Home> {
               textAlign: TextAlign.center,
             ),
             BottomNavyBarItem(
-              icon: Icon(Icons.insert_chart),
+              icon: SvgPicture.asset(
+                graph,
+                height: 30,
+                width: 30,
+                color: AppTheme.lightAccent,
+              ),
               title: Text('Statistici', style: eNavBarText),
               activeColor: AppTheme.lightAccent,
               inactiveColor: AppTheme.lightAccent,
               textAlign: TextAlign.center,
             ),
-            BottomNavyBarItem(
-              icon: Icon(Icons.notifications),
-              title: Text('home', style: eNavBarText),
-              activeColor: AppTheme.lightAccent,
-              inactiveColor: AppTheme.lightAccent,
-              textAlign: TextAlign.center,
-            )
+        //     BottomNavyBarItem(
+        //       icon: Icon(Icons.notifications),
+        //       title: Text('home', style: eNavBarText),
+        //       activeColor: AppTheme.lightAccent,
+        //       inactiveColor: AppTheme.lightAccent,
+        //       textAlign: TextAlign.center,
+        //     )
           ],
         ),
         body: PageView(
@@ -99,9 +116,9 @@ class _HomeState extends State<Home> {
             }),
             PeoplePageVolunteer(limit: false),
             StatisticsVolunteer(),
-            Container(
-              color: Colors.red,
-            ),
+            // Container(
+            //   color: Colors.red,                     // notifications
+            // ),
           ],
         ),
       ),

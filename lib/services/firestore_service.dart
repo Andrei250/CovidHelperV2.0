@@ -102,8 +102,7 @@ class FirestoreService {
     }
   }
 
-  Future<void> addFeedback(String message,
-      FirebaseUser user) {
+  Future<void> addFeedback(String message, FirebaseUser user) {
     Map<String, dynamic> data = new Map<String, dynamic>();
     data['message'] = message;
     data['user_uid'] = user.uid;
@@ -160,9 +159,10 @@ class FirestoreService {
     }
   }
 
-  Future<Map<String, dynamic>> getUserData(FirebaseUser user) async{
+  Future<Map<String, dynamic>> getUserData(FirebaseUser user) async {
     var userData = await _db.collection("Users").document(user.uid).get();
-    var userInfo = await _db.collection(userData['user_value']).document(user.uid).get();
+    var userInfo =
+        await _db.collection(userData['user_value']).document(user.uid).get();
     Map<String, dynamic> retrievedData = new Map<String, dynamic>();
     retrievedData['userInfo'] = userInfo;
 
@@ -172,6 +172,12 @@ class FirestoreService {
     } else if (userData['user_value'] == "Admins") {
       retrievedData['route'] = '/admin_panel';
       retrievedData['type'] = "admin";
+    } else if (userData['user_value'] == 'vendor') {
+      retrievedData['route'] = '/vendor_home';
+      retrievedData['type'] = "vendor";
+    } else if (userData['user_value'] == 'volunteer') {
+      retrievedData['route'] = '/volunteer_home';
+      retrievedData['type'] = 'volunteer';
     }
     return retrievedData;
   }
@@ -191,7 +197,7 @@ class FirestoreService {
         retrievedData['route'] = '/vulnerable_main';
         retrievedData['type'] = "vulnerable";
       } else if (userData['user_value'] == 'volunteer') {
-        retrievedData['route'] = '/home';
+        retrievedData['route'] = '/volunteer_home';
         retrievedData['type'] = 'volunteer';
       } else if (userData['user_value'] == 'vendor') {
         retrievedData['route'] = '/vendor_home';
@@ -200,7 +206,6 @@ class FirestoreService {
         retrievedData['route'] = '/admin_panel';
         retrievedData['type'] = "admin";
       }
-
       return retrievedData;
     } catch (error) {
       print(error.toString());
@@ -291,17 +296,17 @@ class FirestoreService {
 
   Future deleteUser(FirebaseUser user, String password) async {
     String uid = user.uid;
-    try{
+    try {
       AuthResult result = await user.reauthenticateWithCredential(
-          EmailAuthProvider.getCredential(email: user.email, password: password)
-      );
-      await result.user.delete().then((_) async{
+          EmailAuthProvider.getCredential(
+              email: user.email, password: password));
+      await result.user.delete().then((_) async {
         await _db.collection('Users').document(uid).delete();
         await _db.collection('Vulnerables').document(uid).delete();
       });
 
       return 200;
-    }catch (e) {
+    } catch (e) {
       print(e.toString());
       return null;
     }
