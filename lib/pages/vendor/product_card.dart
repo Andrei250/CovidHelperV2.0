@@ -45,9 +45,7 @@ class _ProductCardState extends State<ProductCard> {
                       style: eTitle,
                     ),
                     Text(
-                      'Mai sunt ' +
-                          widget.product.stock +
-                          ' de produse in stoc',
+                      'Mai sunt ${widget.product.stock} de produse in stoc',
                       style: eWelcome,
                     ),
                   ],
