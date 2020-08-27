@@ -53,50 +53,13 @@ class _VendorAddProductsState extends State<VendorAddProducts> {
         debugShowCheckedModeBanner: false,
 //        theme: AppTheme.darkTheme,
         home: Scaffold(
+            resizeToAvoidBottomPadding: false,
             backgroundColor: Colors.white,
-            appBar: PreferredSize(
-              preferredSize: Size.fromHeight(50.0),
-              child: AppBar(
-                //  TODO change the color of the app bar ? or not
-//                backgroundColor: Color.fromRGBO(0, 200, 150, 1),
-                backgroundColor: Colors.white,
-                elevation: 0,
-                title: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Icon(
-                      Icons.menu,
-                      color: Colors.black,
-                    ),
-//                    Container(height: 30, width: 30, child: LogoAppBar()),
-                    Text(
-                      'Covidhelper',
-                      style: eTitle,
-                    ),
-                    Container(
-                      width: 40.0,
-                      height: 40.0,
-                      child: Center(
-                          child: Text(
-                            's',
-//                          child: Text(getInitials(widget.name),
-                            style: eStreet,
-                          )),
-                      decoration: new BoxDecoration(
-                        color: AppTheme.lightAccent,
-                        shape: BoxShape.circle,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
             body: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  SizedBox(height: 15,),
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(15.0, 5.0, 5.0, 5.0),
+                    padding: const EdgeInsets.fromLTRB(15.0, 55.0, 5.0, 0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[

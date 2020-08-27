@@ -6,7 +6,7 @@ class VendorBack {
   final String uid;
 
   Future addStock(String categoryDoc, String category, String product,
-      int stock, double price) async {
+      String stock, String price) async {
     CollectionReference cat = Firestore.instance
         .collection('vendor')
         .document('ACrR5h6tkFNshrsPrgLndmz0K4t2')
@@ -20,7 +20,7 @@ class VendorBack {
 
 
   Future addStockToProducts( String product,
-      int stock, double price, bool isShop) async {
+      String stock, String price, bool isShop) async {
     CollectionReference cat = Firestore.instance
         .collection('vendor')
         .document('ACrR5h6tkFNshrsPrgLndmz0K4t2')
@@ -38,8 +38,8 @@ class VendorBack {
 class Products {
   Products({this.price, this.stock, this.name});
 
-  int stock;
-  double price;
+  String stock;
+  String price;
   String name;
   bool isShop;  // true if it's a shop, false otherwise (pharmacy)
 

@@ -9,3 +9,7 @@ const drawer = 'assets/icons/menu.svg';
 const home = 'assets/icons/home.svg';
 const list = 'assets/icons/list.svg';
 const graph = 'assets/icons/graph.svg';
+const milk = 'assets/icons/milk.svg';
+const goods = 'assets/icons/goods.svg';
+const product = 'assets/icons/product.svg';
+const box = 'assets/icons/box.svg';
