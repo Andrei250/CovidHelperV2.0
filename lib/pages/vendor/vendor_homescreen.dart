@@ -13,9 +13,11 @@ class VendorHomeScreen extends StatefulWidget {
 //
 //  VendorHomeScreen({ this.volunteer });
 
-  final VoidCallback onButtonPressed;
+  final VoidCallback onSeeAllButtonPressed;
+  final VoidCallback onAddButtonPressed;
 
-  VendorHomeScreen({@required this.onButtonPressed});
+  VendorHomeScreen(
+      {@required this.onSeeAllButtonPressed, this.onAddButtonPressed});
 
   @override
   _VendorHomeScreenState createState() => _VendorHomeScreenState();
@@ -217,7 +219,7 @@ class _VendorHomeScreenState extends State<VendorHomeScreen> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(25.0),
                       ),
-                      onPressed: widget.onButtonPressed,
+                      onPressed: widget.onSeeAllButtonPressed,
                       child: Text(
                         'Vezi toate',
                         style: eSeeAll,
@@ -226,14 +228,15 @@ class _VendorHomeScreenState extends State<VendorHomeScreen> {
                   ],
                 ),
               ),
-                  Expanded(
-                      child: ListView(scrollDirection: Axis.vertical, children: [
-                        VendorProducts(
-                          limit: true,
-                          number: 5,
-                          customHeight: deviceHeight * 0.4,
-                        ),
-                  ])),
+              Expanded(
+                  child: ListView(scrollDirection: Axis.vertical, children: [
+                VendorProducts(
+                  limit: true,
+                  number: 5,
+                  customHeight: deviceHeight * 0.4,
+                  onAddButtonPressed: widget.onAddButtonPressed,
+                ),
+              ])),
             ])));
   }
 }
