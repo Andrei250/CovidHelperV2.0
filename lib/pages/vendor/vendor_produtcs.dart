@@ -5,11 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class VendorProducts extends StatefulWidget {
-  VendorProducts({this.limit, this.number, this.customHeight});
+  VendorProducts(
+      {this.limit, this.number, this.customHeight, this.onAddButtonPressed});
 
   bool limit;
   int number;
   double customHeight;
+  final VoidCallback onAddButtonPressed;
 
   @override
   _VendorProductsState createState() => _VendorProductsState();
@@ -21,16 +23,15 @@ class _VendorProductsState extends State<VendorProducts> {
     return Container(
       color: Colors.white,
       height: widget.customHeight,
-//      width: deviceWidth,
       child: StreamProvider<List<Products>>.value(
           value: FirestoreService().products,
           child: Scaffold(
             backgroundColor: Colors.white,
-            body: Center(
-                child: VendorProductsCards(
+            body: VendorProductsCards(
               limit: widget.limit,
               number: widget.number,
-            )),
+              onAddButtonPressed: widget.onAddButtonPressed,
+            ),
           )),
     );
   }
