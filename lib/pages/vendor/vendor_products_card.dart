@@ -35,7 +35,7 @@ class _VendorProductsCardsState extends State<VendorProductsCards> {
           itemCount: products != null
               ? widget.limit == true ? widget.number : products.length
               : 0,
-//          itemCount: products != null ? products.length : 0,
+         // itemCount: products != null ? products.length : 0,
           itemBuilder: (context, index) {
             return ProductCard(product: products[index]);
           },

@@ -18,6 +18,7 @@ class LoadingScreen extends StatefulWidget {
 
 class _LoadingScreenState extends State<LoadingScreen> {
   Future loading() async {
+
     await widget.registerBack.addNewUser();
 
     FirebaseAuth _auth = FirebaseAuth.instance;
@@ -34,8 +35,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
       Vendor vendor;
       vendor = await FirestoreService().getVendor(user);
       Navigator.of(context).pushNamedAndRemoveUntil(
-          '/home', (Route<dynamic> route) => false,
-          arguments: vendor);
+          '/home', (Route<dynamic> route) => false);
     }
   }
 
