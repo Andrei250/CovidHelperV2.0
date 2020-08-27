@@ -14,4 +14,5 @@ const goods = 'assets/icons/goods.svg';
 const product = 'assets/icons/product.svg';
 const box = 'assets/icons/box.svg';
 const people = 'assets/icons/people.svg';
-
+const people = 'assets/icons/people.svg';
+const location = 'assets/icons/location.svg';
