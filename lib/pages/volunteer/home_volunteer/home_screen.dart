@@ -52,10 +52,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 title: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Icon(
-                      Icons.menu,
+                    SvgPicture.asset(
+                      drawer,
                       color: Colors.black,
                     ),
+//
 //                    Container(height: 30, width: 30, child: LogoAppBar()),
                     Text(
                       'Covidhelper',
