@@ -135,8 +135,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           height: 30.0,
                                           width: 30.0,
                                           child: SvgPicture.asset(
-                                            distance,
-                                            color: AppTheme.lightColor,
+                                            location,
                                             height: 30.0,
                                             width: 30.0,
                                           ),
