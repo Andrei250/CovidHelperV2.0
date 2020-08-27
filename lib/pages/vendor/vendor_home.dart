@@ -98,8 +98,11 @@ class _VendorHomeState extends State<VendorHome> {
           },
           children: <Widget>[
 
-            VendorHomeScreen(onButtonPressed: () {
+            VendorHomeScreen(onSeeAllButtonPressed: () {
               _pageController.animateToPage(1,
+                  duration: Duration(milliseconds: 500), curve: Curves.ease);
+            }, onAddButtonPressed: () {
+              _pageController.animateToPage(2,
                   duration: Duration(milliseconds: 500), curve: Curves.ease);
             }),
             VendorAllProducts(limit: false),
