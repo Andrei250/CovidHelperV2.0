@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:covidhelper_v2/components/starting_loading.dart';
 import 'package:covidhelper_v2/models/user.dart';
 import 'package:covidhelper_v2/models/volunteer.dart';
 import 'package:covidhelper_v2/pages/register/register_back.dart';
@@ -60,11 +61,7 @@ class _LoadingState extends State<Loading> {
   Widget build(BuildContext context) {
     loading();
     return MaterialApp(
-      home: Center(
-        child: SpinKitDoubleBounce(
-          color: AppTheme.lightColor,
-        ),
-      ),
+      home: StartingLoading()
     );
   }
 }
