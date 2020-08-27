@@ -47,7 +47,7 @@ class _LoadingState extends State<Loading> {
       Navigator.pushNamedAndRemoveUntil(context, retrievedData['route'], (route) => false, arguments: retrievedData);
 
     } else {
-      Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
+      Navigator.pushNamedAndRemoveUntil(context, '/register', (route) => false);
     }
   }
 
