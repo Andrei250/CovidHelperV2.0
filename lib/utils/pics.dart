@@ -10,3 +10,4 @@ const home = 'assets/icons/home.svg';
 const list = 'assets/icons/list.svg';
 const graph = 'assets/icons/graph.svg';
 const people = 'assets/icons/people.svg';
+const location = 'assets/icons/location.svg';
