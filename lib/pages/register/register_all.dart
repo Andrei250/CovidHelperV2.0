@@ -65,9 +65,12 @@ class RegisterAll {
             builder: (_) => LoadingScreen(registerBack: registerBack));
       case '/home':
         if (RegisterAll.userValue == 'vendor') {
+          print('register all 0000000000000000000000000000000000000000000000000000000');
           return CustomRoute(builder: (_) => VendorHome());
 //        return CustomRoute(builder: (_) => Home(volunteer: args));
         } else if (RegisterAll.userValue == 'volunteer') {
+          print('register all 11111111111111111111111111111111111111111111111');
+
           return CustomRoute(builder: (_) => Home());
 //        return CustomRoute(builder: (_) => Home(volunteer: args));
         }

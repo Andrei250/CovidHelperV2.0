@@ -11,3 +11,5 @@ const list = 'assets/icons/list.svg';
 const graph = 'assets/icons/graph.svg';
 const people = 'assets/icons/people.svg';
 const location = 'assets/icons/location.svg';
+const dotLoading = 'assets/icons/dot_loading.svg';
+const from = 'assets/icons/from.svg';
