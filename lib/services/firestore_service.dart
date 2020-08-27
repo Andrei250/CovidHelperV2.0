@@ -206,7 +206,6 @@ class FirestoreService {
         retrievedData['route'] = '/admin_panel';
         retrievedData['type'] = "admin";
       }
-
       return retrievedData;
     } catch (error) {
       print(error.toString());
