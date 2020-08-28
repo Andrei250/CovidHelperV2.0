@@ -63,14 +63,17 @@ class RegisterAll {
         new LoadingScreen(registerBack: registerBack);
         return CustomRoute(
             builder: (_) => LoadingScreen(registerBack: registerBack));
-      case '/home':
-        if (RegisterAll.userValue == 'vendor') {
-          return CustomRoute(builder: (_) => VendorHome());
-//        return CustomRoute(builder: (_) => Home(volunteer: args));
-        } else if (RegisterAll.userValue == 'volunteer') {
-          return CustomRoute(builder: (_) => Home());
-//        return CustomRoute(builder: (_) => Home(volunteer: args));
-        }
+      case '/volunteer_home':
+        return CustomRoute(builder: (_) => Home());
+
+//       case '/home':
+//         if (RegisterAll.userValue == 'vendor') {
+//           return CustomRoute(builder: (_) => VendorHome());
+// //        return CustomRoute(builder: (_) => Home(volunteer: args));
+//         } else if (RegisterAll.userValue == 'volunteer') {
+//           return CustomRoute(builder: (_) => Home());
+// //        return CustomRoute(builder: (_) => Home(volunteer: args));
+//         }
         break;
       default:
         return null;
