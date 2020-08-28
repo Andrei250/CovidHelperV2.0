@@ -23,7 +23,7 @@ class VulnerablesMain extends StatefulWidget {
 class _VulnerablesMain extends State<VulnerablesMain> {
   int _currentIndex = 0;
   PageController _pageController;
-  static final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>(debugLabel: '_VulnerablesMain');
 
   Widget getPage() {
     if (_currentIndex == 0) {
@@ -97,7 +97,7 @@ class _VulnerablesMain extends State<VulnerablesMain> {
           home: Scaffold(
             key: _scaffoldKey,
             appBar: interfaceAppBar(_scaffoldKey),
-            drawer: LeftNavigation(size: size, person: VulnerablePerson().fromStream(widget.data['userInfo']), data: widget.data, context: context),
+            drawer: LeftNavigation(size: size, data: widget.data, context: context),
             bottomNavigationBar: BottomNavyBar(
               backgroundColor: Colors.grey[100],
               selectedIndex: _currentIndex,

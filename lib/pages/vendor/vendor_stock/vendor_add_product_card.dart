@@ -1,6 +1,8 @@
 import 'package:covidhelper_v2/utils/app_theme.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/physics.dart';
 import 'package:validators/validators.dart' as validators;
 import 'package:validators/sanitizers.dart' as sanitizers;
 import 'package:covidhelper_v2/pages/vendor/vendor_back.dart';

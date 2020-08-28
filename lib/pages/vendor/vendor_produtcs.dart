@@ -18,13 +18,14 @@ class VendorProducts extends StatefulWidget {
 }
 
 class _VendorProductsState extends State<VendorProducts> {
+
   @override
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
       height: widget.customHeight,
       child: StreamProvider<List<Products>>.value(
-          value: FirestoreService().products,
+          value: ListOfProducts().products,
           child: Scaffold(
             backgroundColor: Colors.white,
             body: VendorProductsCards(

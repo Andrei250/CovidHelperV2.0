@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:covidhelper_v2/components/starting_loading.dart';
 import 'package:covidhelper_v2/models/user.dart';
 import 'package:covidhelper_v2/models/volunteer.dart';
 import 'package:covidhelper_v2/pages/register/register_back.dart';
@@ -33,7 +34,7 @@ class _LoadingState extends State<Loading> {
       if (userData['user_value'] == 'Vulnerables') {
         retrievedData['route'] = '/vulnerable_main';
         retrievedData['type'] = "vulnerable";
-      } else if (currentUser.user_value == "Admins") {
+      } else if (userData['user_value'] == "Admins") {
         retrievedData['route'] = '/admin_panel';
         retrievedData['type'] = "admin";
       } else if (userData['user_value'] == 'volunteer') {
@@ -47,7 +48,7 @@ class _LoadingState extends State<Loading> {
       Navigator.pushNamedAndRemoveUntil(context, retrievedData['route'], (route) => false, arguments: retrievedData);
 
     } else {
-      Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
+      Navigator.pushNamedAndRemoveUntil(context, '/register', (route) => false);
     }
   }
 
@@ -60,11 +61,7 @@ class _LoadingState extends State<Loading> {
   Widget build(BuildContext context) {
     loading();
     return MaterialApp(
-      home: Center(
-        child: SpinKitDoubleBounce(
-          color: AppTheme.lightColor,
-        ),
-      ),
+      home: StartingLoading()
     );
   }
 }

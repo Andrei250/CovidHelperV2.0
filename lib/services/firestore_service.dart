@@ -20,18 +20,7 @@ class FirestoreService {
         .map((document) => VulnerablePerson.fromJson(document.data))
         .toList());
   }
-
-  Stream<List<Products>> get products {
-    return _db
-        .collection('vendor')
-        .document('ACrR5h6tkFNshrsPrgLndmz0K4t2')
-        .collection('Products')
-        .orderBy('stock')
-        .snapshots()
-        .map((snapshot) => snapshot.documents
-            .map((document) => Products.fromJson(document.data))
-            .toList());
-  }
+  
 
   Stream<List<Vendor>> get vendors {
     return _db.collection('vendor').snapshots().map((snapshot) => snapshot
