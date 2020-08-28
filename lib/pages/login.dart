@@ -111,13 +111,13 @@ class _LoginState extends State<Login> {
               }
             });
             if (valid == true) {
-              // setState(() {
-              //   _loading = true;
-              // });
+              setState(() {
+                _loading = true;
+              });
               dynamic result = await _auth.login(email, password);
-              // setState(() {
-              //   _loading = false;
-              // });
+              setState(() {
+                _loading = false;
+              });
 
               if (result == null) {
                 setState(() {

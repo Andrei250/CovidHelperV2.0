@@ -1,4 +1,5 @@
 import 'package:covidhelper_v2/pages/register/register_all.dart';
+import 'package:covidhelper_v2/routes.dart';
 import 'package:covidhelper_v2/utils/app_theme.dart';
 import 'package:covidhelper_v2/utils/pics.dart';
 import 'package:flutter/cupertino.dart';
@@ -26,7 +27,7 @@ class _RegisterChooseState extends State<RegisterChoose> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      onGenerateRoute: RegisterAll.generateRoute,
+      onGenerateRoute: Routing.generateRoute,
       home: Scaffold(
         // app bar with size 1px to deal with the notches
         backgroundColor: Colors.white,
