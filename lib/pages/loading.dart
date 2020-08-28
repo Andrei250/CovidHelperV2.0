@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:covidhelper_v2/components/starting_loading.dart';
 import 'package:covidhelper_v2/models/user.dart';
-import 'package:covidhelper_v2/models/volunteer.dart';
-import 'package:covidhelper_v2/pages/register/register_back.dart';
 import 'package:covidhelper_v2/services/firestore_service.dart';
 import 'package:covidhelper_v2/utils/app_theme.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -26,8 +24,12 @@ class _LoadingState extends State<Loading> {
 
     if (user != null) {
       currentUser = await FirestoreService().getUser(user);
-      var userData = await _db.collection("Users").document(currentUser.uid).get();
-      var userInfo = await _db.collection(userData['user_value']).document(currentUser.uid).get();
+      var userData =
+          await _db.collection("Users").document(currentUser.uid).get();
+      var userInfo = await _db
+          .collection(userData['user_value'])
+          .document(currentUser.uid)
+          .get();
       Map<String, dynamic> retrievedData = new Map<String, dynamic>();
       retrievedData['userInfo'] = userInfo;
 
@@ -45,10 +47,11 @@ class _LoadingState extends State<Loading> {
         retrievedData['type'] = "vendor";
       }
 
-      Navigator.pushNamedAndRemoveUntil(context, retrievedData['route'], (route) => false, arguments: retrievedData);
-
+      Navigator.pushNamedAndRemoveUntil(
+          context, retrievedData['route'], (route) => false,
+          arguments: retrievedData);
     } else {
-      Navigator.pushNamedAndRemoveUntil(context, '/register', (route) => false);
+      Navigator.pushNamedAndRemoveUntil(context, '/register_choose', (route) => false);
     }
   }
 

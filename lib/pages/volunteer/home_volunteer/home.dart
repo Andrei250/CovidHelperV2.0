@@ -8,6 +8,8 @@ import 'package:covidhelper_v2/utils/pics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../../routes.dart';
+
 class Home extends StatefulWidget {
 //  Volunteer volunteer;
 //
@@ -36,7 +38,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      onGenerateRoute: RegisterAll.generateRoute,
+      onGenerateRoute: Routing.generateRoute,
       color: Colors.white,
       home: Scaffold(
         backgroundColor: Colors.white,

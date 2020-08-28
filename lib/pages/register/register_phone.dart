@@ -59,7 +59,7 @@ class _RegisterPhoneState extends State<RegisterPhone> {
             setState(() {
               _loading = true;
             });
-            Navigator.of(context).pushNamed('/loading', arguments: phoneNumber);
+            Navigator.of(context).pushNamed('/loading_screen', arguments: phoneNumber);
             setState(() {
               _loading = false;
             });
