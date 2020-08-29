@@ -1,8 +1,10 @@
 import 'package:covidhelper_v2/utils/app_theme.dart';
+import 'package:covidhelper_v2/utils/pics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/physics.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:validators/validators.dart' as validators;
 import 'package:validators/sanitizers.dart' as sanitizers;
 import 'package:covidhelper_v2/pages/vendor/vendor_back.dart';
@@ -34,10 +36,10 @@ class _VendorAddProductCardState extends State<VendorAddProductCard> {
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.fromLTRB(15.0, 8.0, 8.0, 8.0),
-                child: Icon(
-                  Icons.fastfood,
-                  color: AppTheme.lightAccent,
-                  size: 40,
+                child: SvgPicture.asset(
+                  food,
+                  height: 40,
+                  width: 40,
                 ),
               ),
               Padding(
@@ -81,7 +83,11 @@ class _VendorAddProductCardState extends State<VendorAddProductCard> {
                 child: TextFormField(
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
-                    icon: Icon(Icons.queue),
+                    icon: SvgPicture.asset(
+                      warehouse,
+                      height: 25,
+                      width: 25,
+                    ),
                     hintText: 'Introdu aici cantitatea de marfa in stoc',
                     labelText: 'Cantitate',
                   ),
@@ -101,7 +107,11 @@ class _VendorAddProductCardState extends State<VendorAddProductCard> {
                 child: TextFormField(
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
-                    icon: Icon(Icons.queue),
+                    icon: SvgPicture.asset(
+                      dollar,
+                      height: 25,
+                      width: 25,
+                    ),
                     hintText: 'Introdu aici pretul pe o unitate',
                     labelText: 'Pret',
                   ),
