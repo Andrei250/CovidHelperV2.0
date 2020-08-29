@@ -43,7 +43,9 @@ class _HelpPersonCardState extends State<HelpPersonCard> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(25.0),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).pushNamed('/vulnerable_main/get_products');
+                    },
                     color: AppTheme.lightAccent,
                     child: Padding(
                       padding: EdgeInsets.fromLTRB(50.0, 2.0, 50.0, 2.0),

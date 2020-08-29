@@ -1,6 +1,7 @@
 import 'package:covidhelper_v2/components/loading_screen.dart';
 import 'package:covidhelper_v2/components/navigation/feedback.dart';
 import 'package:covidhelper_v2/components/navigation/settings.dart';
+import 'package:covidhelper_v2/components/vulnerable/get_products.dart';
 import 'package:covidhelper_v2/pages/admin_panel.dart';
 import 'package:covidhelper_v2/pages/loading.dart';
 import 'package:covidhelper_v2/pages/vendor/vendor_home.dart';
@@ -53,6 +54,10 @@ class Routing {
       case '/vulnerable_main':
         return CustomRoute(
             builder: (_) => VulnerablesMain(data: settings.arguments));
+        break;
+      case '/vulnerable_main/get_products':
+        return CustomRoute(
+            builder: (_) => GetProducts());
         break;
       case '/vulnerable_main/personal_details':
         return CustomRoute(
