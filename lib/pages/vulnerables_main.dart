@@ -8,6 +8,7 @@ import 'package:covidhelper_v2/pages/register/register_all.dart';
 import 'package:covidhelper_v2/pages/register/register_email.dart';
 import 'package:covidhelper_v2/services/firestore_service.dart';
 import 'package:covidhelper_v2/utils/app_theme.dart';
+import 'package:covidhelper_v2/utils/pics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
@@ -56,7 +57,7 @@ class _VulnerablesMain extends State<VulnerablesMain> {
       backgroundColor: Colors.white,
       leading: IconButton(
         icon: SvgPicture.asset(
-            "assets/icons/menu.svg",
+            drawer,
             color: Colors.black,
         ),
         onPressed: () => _scaffoldKey.currentState.openDrawer(),
@@ -68,19 +69,35 @@ class _VulnerablesMain extends State<VulnerablesMain> {
             'Covidhelper',
             style: eTitle,
           ),
-          Container(
-            width: 40.0,
-            height: 40.0,
-            child: Center(
-                child: Text(
-                  's',
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                width: 40.0,
+                height: 40.0,
+                child: Center(
+                    child: Text(
+                      's',
 //                          child: Text(getInitials(widget.name),
-                  style: eStreet,
-                )),
-            decoration: new BoxDecoration(
-              color: AppTheme.lightAccent,
-              shape: BoxShape.circle,
-            ),
+                      style: eStreet,
+                    )),
+                decoration: new BoxDecoration(
+                  color: AppTheme.lightAccent,
+                  shape: BoxShape.circle,
+                ),
+              ),
+              Container(
+                width: 40.0,
+                height: 40.0,
+                child: Center(
+                  child: IconButton(
+                    icon: Icon(Icons.shopping_cart_rounded),
+                    color: Colors.black,
+                    onPressed: () {},
+                  ),
+                ),
+              )
+            ],
           ),
         ],
       ),
@@ -93,73 +110,73 @@ class _VulnerablesMain extends State<VulnerablesMain> {
 
     return StreamProvider<List<Vendor>>.value(
       value: FirestoreService().vendors,
-      child: MaterialApp(
-          home: Scaffold(
-            key: _scaffoldKey,
-            appBar: interfaceAppBar(_scaffoldKey),
-            drawer: LeftNavigation(size: size, data: widget.data, context: context),
-            bottomNavigationBar: BottomNavyBar(
-              backgroundColor: Colors.grey[100],
-              selectedIndex: _currentIndex,
-              showElevation: true,
-              itemCornerRadius: 32,
-              curve: Curves.easeInBack,
-              onItemSelected: (index) {
+      child: Scaffold(
+        backgroundColor: Colors.white,
+          key: _scaffoldKey,
+          appBar: interfaceAppBar(_scaffoldKey),
+          drawer: LeftNavigation(size: size, data: widget.data, context: context),
+          bottomNavigationBar: BottomNavyBar(
+            backgroundColor: Colors.grey[100],
+            selectedIndex: _currentIndex,
+            showElevation: true,
+            itemCornerRadius: 32,
+            curve: Curves.easeInBack,
+            onItemSelected: (index) {
+              setState(() {
+                _currentIndex = index;
                 setState(() {
-                  _currentIndex = index;
-                  setState(() {
 
-                  });
-                },);
-              },
-              items: <BottomNavyBarItem>[
-                BottomNavyBarItem(
-                  icon: Icon(Icons.help),
-                  title: Text('Ajutor',
-                      style: TextStyle(
-                          fontFamily: 'quicksand',
-                          color: AppTheme.lightAccent,
-                          fontSize: 15.0)
-                      ),
-                  activeColor: AppTheme.lightAccent,
-                  textAlign: TextAlign.center,
-                ),
-                BottomNavyBarItem(
-                  icon: Icon(Icons.notifications),
-                  title: Text('Notificari',
-                      style: TextStyle(
-                          fontFamily: 'quicksand',
-                          color: AppTheme.lightAccent,
-                          fontSize: 15.0)
-                      ),
-                  activeColor: AppTheme.lightAccent,
-                  textAlign: TextAlign.center,
-                ),
-                BottomNavyBarItem(
-                  icon: Icon(Icons.report),
-                  title: Text('Raport',
-                      style: TextStyle(
-                          fontFamily: 'quicksand',
-                          color: AppTheme.lightAccent,
-                          fontSize: 15.0)
+                });
+              },);
+            },
+            items: <BottomNavyBarItem>[
+              BottomNavyBarItem(
+                icon: Icon(Icons.help),
+                title: Text('Ajutor',
+                    style: TextStyle(
+                        fontFamily: 'quicksand',
+                        color: AppTheme.lightAccent,
+                        fontSize: 15.0)
                     ),
-                  activeColor: AppTheme.lightAccent,
-                  textAlign: TextAlign.center,
-                )
-              ],
-            ),
-            body: SizedBox.expand(
-              child: PageView(
+                activeColor: AppTheme.lightAccent,
+                textAlign: TextAlign.center,
+              ),
+              BottomNavyBarItem(
+                icon: Icon(Icons.notifications),
+                title: Text('Notificari',
+                    style: TextStyle(
+                        fontFamily: 'quicksand',
+                        color: AppTheme.lightAccent,
+                        fontSize: 15.0)
+                    ),
+                activeColor: AppTheme.lightAccent,
+                textAlign: TextAlign.center,
+              ),
+              BottomNavyBarItem(
+                icon: Icon(Icons.report),
+                title: Text('Raport',
+                    style: TextStyle(
+                        fontFamily: 'quicksand',
+                        color: AppTheme.lightAccent,
+                        fontSize: 15.0)
+                  ),
+                activeColor: AppTheme.lightAccent,
+                textAlign: TextAlign.center,
+              )
+            ],
+          ),
+          body: SizedBox.expand(
+            child: PageView(
 //                controller: _pageController,
 //                onPageChanged: (index) {
 //                  setState(() => _currentIndex = index);
 //                },
-                children: <Widget>[
-                  getPage(),
-                ],
-              ),
+              children: <Widget>[
+                getPage(),
+              ],
             ),
-          )),
+          ),
+        )
     );
   }
 }
