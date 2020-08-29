@@ -1,15 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class VendorBack {
-  VendorBack({this.uid});
-
-  final String uid;
+  FirebaseAuth _auth = FirebaseAuth.instance;
 
   Future addStock(String categoryDoc, String category, String product,
       String stock, String price) async {
+    FirebaseUser user = await _auth.currentUser();
     CollectionReference cat = Firestore.instance
         .collection('vendor')
-        .document('ACrR5h6tkFNshrsPrgLndmz0K4t2')
+        .document(user.uid)
         .collection(categoryDoc);
     Products products = new Products(price: price, stock: stock, name: product);
     Map<String, dynamic> dataMap = new Map<String, dynamic>();
@@ -19,11 +19,12 @@ class VendorBack {
 
 
 
-  Future addStockToProducts( String product,
+  Future addStockToProducts(String product,
       String stock, String price, bool isShop) async {
+    FirebaseUser user = await _auth.currentUser();
     CollectionReference cat = Firestore.instance
         .collection('vendor')
-        .document('ACrR5h6tkFNshrsPrgLndmz0K4t2')
+        .document(user.uid)
         .collection('Products');
     var dataMap = Map<String, dynamic>();
     dataMap['isShop'] = isShop;
@@ -57,5 +58,27 @@ class Products {
     dataMap['isShop'] = this.isShop;
     dataMap['name'] = this.name;
     return dataMap;
+  }
+}
+
+
+class ListOfProducts{
+  Firestore _db = Firestore.instance;
+  FirebaseAuth _auth = FirebaseAuth.instance;
+
+  String uid ;
+
+   Stream<List<Products>> get products async* {
+     FirebaseUser user = await _auth.currentUser();
+     uid = user.uid;
+      yield* _db
+          .collection('vendor')
+          .document(uid)
+          .collection('Products')
+          .orderBy('stock')
+          .snapshots()
+          .map((snapshot) => snapshot.documents
+          .map((document) => Products.fromJson(document.data))
+          .toList());
   }
 }

@@ -228,15 +228,15 @@ class _VendorHomeScreenState extends State<VendorHomeScreen> {
                   ],
                 ),
               ),
-              Expanded(
-                  child: ListView(scrollDirection: Axis.vertical, children: [
-                VendorProducts(
-                  limit: true,
-                  number: 5,
-                  customHeight: deviceHeight * 0.4,
-                  onAddButtonPressed: widget.onAddButtonPressed,
-                ),
-              ])),
+                  Expanded(
+                      child: ListView(scrollDirection: Axis.vertical, children: [
+                          VendorProducts(
+                            limit: true,
+                            number: 5,
+                            customHeight: deviceHeight * 0.4,
+                            onAddButtonPressed: widget.onAddButtonPressed,
+                          ),
+                  ])),
             ])));
   }
 }
