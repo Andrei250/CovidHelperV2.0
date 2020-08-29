@@ -17,3 +17,7 @@ const people = 'assets/icons/people.svg';
 const location = 'assets/icons/location.svg';
 const dotLoading = 'assets/icons/dot_loading.svg';
 const from = 'assets/icons/from.svg';
+const coin = 'assets/icons/coin.svg';
+const dollar = 'assets/icons/dollar.svg';
+const warehouse = 'assets/icons/warehouse.svg';
+const packages = 'assets/icons/packages.svg';

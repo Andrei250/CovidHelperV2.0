@@ -64,7 +64,7 @@ class _VendorAddProductsState extends State<VendorAddProducts> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Text(
-                          'Stocul magazinului dumneavoastra:',
+                          'Actualizeaza stocul magazinului:',
                           style: eTitle,
                         ),
                         IconButton(
