@@ -21,19 +21,16 @@ class FirestoreService {
         .toList());
   }
 
-  // Stream<List<Products>> get products {
-  //   return _db.collection('vendor').snapshots()
-  //       .map((snapshot) => snapshot.documents
-  //       .map((document) => _db
-  //       .collection('vendor')
-  //       .document('ACrR5h6tkFNshrsPrgLndmz0K4t2')
-  //       .collection('Products')
-  //       .orderBy('stock')
-  //       .snapshots()
-  //       .map((snapshot) => snapshot.documents
-  //       .map((document) => Products.fromJson(document.data))
-  //       .toList())));
-  // }
+   Stream<List<Products>> getProducts(String uid) {
+     return _db.collection('vendor')
+         .document(uid)
+         .collection('Products')
+         .orderBy('stock')
+         .snapshots()
+         .map((snapshot) => snapshot.documents
+         .map((document) => Products.fromJson(document.data))
+         .toList());
+   }
 
   Stream<List<Vendor>> get vendors {
     return _db.collection('vendor').snapshots().map((snapshot) => snapshot
@@ -171,6 +168,7 @@ class FirestoreService {
     if (userData['user_value'] == 'Vulnerables') {
       retrievedData['route'] = '/vulnerable_main';
       retrievedData['type'] = "vulnerable";
+      retrievedData['vendors'] = FirestoreService().vendors;
     } else if (userData['user_value'] == "Admins") {
       retrievedData['route'] = '/admin_panel';
       retrievedData['type'] = "admin";

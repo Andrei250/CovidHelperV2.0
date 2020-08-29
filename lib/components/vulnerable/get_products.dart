@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:covidhelper_v2/models/vulnerable_person.dart';
 import 'package:covidhelper_v2/utils/app_theme.dart';
 import 'package:covidhelper_v2/utils/pics.dart';
 import 'package:flutter/cupertino.dart';
@@ -54,7 +55,7 @@ class _GetProductsState extends State<GetProducts> {
                 height: 40.0,
                 child: Center(
                   child: IconButton(
-                    icon: Icon(Icons.shopping_cart_rounded),
+                    icon: Icon(Icons.shopping_cart),
                     color: Colors.black,
                     onPressed: () {},
                   ),
@@ -65,6 +66,11 @@ class _GetProductsState extends State<GetProducts> {
         ],
       ),
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
   }
 
   @override
@@ -110,14 +116,6 @@ class _GetProductsState extends State<GetProducts> {
         ],
       ),
     );
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    print(Firestore.instance.collection('vendor').snapshots()
-              .map((snapshot) => snapshot.documents));
-
   }
 
   @override
