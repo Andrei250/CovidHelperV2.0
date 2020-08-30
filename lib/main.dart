@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 void main() => runApp(MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: AppTheme.darkTheme,
-      home: AdminPanel(),
-      // initialRoute: '/',
-      // onGenerateRoute: Routing.generateRoute,
+      home: Loading(),
+      initialRoute: '/',
+      onGenerateRoute: Routing.generateRoute,
     ));

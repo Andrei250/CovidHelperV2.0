@@ -1,9 +1,11 @@
 import 'package:covidhelper_v2/components/button_settings.dart';
 import 'package:covidhelper_v2/models/admin.dart';
 import 'package:covidhelper_v2/utils/app_theme.dart';
+import 'package:covidhelper_v2/utils/pics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class MoreMenuAdmin extends StatefulWidget {
   final FirebaseUser user;
@@ -16,8 +18,8 @@ class MoreMenuAdmin extends StatefulWidget {
   @override
   _MoreMenuAdminState createState() => _MoreMenuAdminState();
 }
-class _MoreMenuAdminState extends State<MoreMenuAdmin> {
 
+class _MoreMenuAdminState extends State<MoreMenuAdmin> {
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -35,45 +37,31 @@ class _MoreMenuAdminState extends State<MoreMenuAdmin> {
                 Column(
                   children: [
                     Card(
-                        color: Color.fromRGBO(13, 10, 11, 1),
-                        child: Column(
-                          children: <Widget>[
-                            ListTile(
-                              leading: CircleAvatar(
-                                radius: 29,
-                                backgroundColor: Colors.white,
-                                child: Icon(
-                                  Icons.person,
-                                  size: 50,
-                                  color: Colors.black,
-                                ),
-                              ),
-
-                              title: Text(
-                                  '${widget.admin.first_name} ${widget.admin.last_name}',
-                                  style: TextStyle(
-                                      fontFamily: 'quicksand',
-                                      color: Colors.white,
-                                      fontSize: 16.0
-                                  ),
-                                ),
-                              subtitle: Text(
-                                '${widget.admin.email}',
-                                style: TextStyle(
-                                    fontFamily: 'quicksand',
-                                    color: Colors.white,
-                                    fontSize: 12.0
-                                ),
-                              ),
+                      color: Colors.white,
+                      child: Column(
+                        children: <Widget>[
+                          ListTile(
+                            leading: SvgPicture.asset(
+                              user,
+                              height: 40,
+                              width: 40,
                             ),
-                          ],
-                        ),
+                            title: Text(
+                              '${widget.admin.first_name} ${widget.admin.last_name}',
+                              style: eTitle
+                            ),
+                            subtitle: Text(
+                              '${widget.admin.email}',
+                              style: eWelcome,
+                            ),
+                          ),
+                        ],
                       ),
+                    ),
                     Divider(
                       height: 10.0,
                       color: Colors.grey[400],
                     ),
-
                     ButtonSettings(
                       label: 'Change name',
                       icon: Icon(
@@ -82,8 +70,8 @@ class _MoreMenuAdminState extends State<MoreMenuAdmin> {
                       ),
                       route: '/admin_panel/change_name',
                       arguments: {
-                        'user' : widget.user,
-                        'admin' : widget.admin,
+                        'user': widget.user,
+                        'admin': widget.admin,
                         'function': widget.function,
                       },
                     ),
@@ -95,8 +83,8 @@ class _MoreMenuAdminState extends State<MoreMenuAdmin> {
                       ),
                       route: '/admin_panel/change_password',
                       arguments: {
-                        'user' : widget.user,
-                        'admin' : widget.admin,
+                        'user': widget.user,
+                        'admin': widget.admin,
                         'function': widget.function,
                       },
                     ),
@@ -114,8 +102,8 @@ class _MoreMenuAdminState extends State<MoreMenuAdmin> {
                         color: Colors.white,
                       ),
                       arguments: {
-                        'log-out' : true,
-                        'context' : widget.context,
+                        'log-out': true,
+                        'context': widget.context,
                       },
                     ),
                   ],
