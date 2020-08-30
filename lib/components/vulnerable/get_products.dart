@@ -1,10 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:covidhelper_v2/models/vendor.dart';
 import 'package:covidhelper_v2/models/vulnerable_person.dart';
+import 'package:covidhelper_v2/pages/vendor/vendor_back.dart';
+import 'package:covidhelper_v2/services/firestore_service.dart';
 import 'package:covidhelper_v2/utils/app_theme.dart';
 import 'package:covidhelper_v2/utils/pics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 
 class GetProducts extends StatefulWidget {
   @override
@@ -12,8 +16,7 @@ class GetProducts extends StatefulWidget {
 }
 
 class _GetProductsState extends State<GetProducts> {
-
-
+  List<List<Products>> products;
 
   AppBar interfaceAppBar() {
     return AppBar(
@@ -75,45 +78,77 @@ class _GetProductsState extends State<GetProducts> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white70,
-      appBar: interfaceAppBar(),
-      body: Column(
-        children: [
-          Container(
-            alignment: Alignment.center,
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            height: 54,
-            decoration: BoxDecoration(
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    offset: Offset(0, 10),
-                    blurRadius: 50,
-                    color: Colors.grey.withOpacity(0.23),
-                  )
-                ]
-            ),
-            child: Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    onChanged: (value) {},
-                    decoration: InputDecoration(
-                      hintText: "Cauta produse",
-                      hintStyle: TextStyle(
-                          color: Colors.grey.withOpacity(0.5)
+    Size size = MediaQuery.of(context).size;
+    return MultiProvider(
+      providers: [
+        StreamProvider<List<List<Products>>>.value(value: FirestoreService().products),
+      ],
+      child: Scaffold(
+        backgroundColor: Colors.white70,
+        appBar: interfaceAppBar(),
+        body: Column(
+          children: [
+            Container(
+              alignment: Alignment.center,
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              height: 54,
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      offset: Offset(0, 10),
+                      blurRadius: 50,
+                      color: Colors.grey.withOpacity(0.23),
+                    )
+                  ]
+              ),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      onChanged: (value) {},
+                      decoration: InputDecoration(
+                        hintText: "Cauta produse",
+                        hintStyle: TextStyle(
+                            color: Colors.grey.withOpacity(0.5)
+                        ),
+                        enabledBorder: InputBorder.none,
+                        focusedBorder: InputBorder.none,
                       ),
-                      enabledBorder: InputBorder.none,
-                      focusedBorder: InputBorder.none,
                     ),
                   ),
-                ),
-                SvgPicture.asset("assets/icons/search.svg"),
-              ],
+                  SvgPicture.asset("assets/icons/search.svg"),
+                ],
+              ),
             ),
-          ),
-        ],
+            Builder(
+              builder: (BuildContext context) {
+                products = Provider.of<List<List<Products>>>(context);
+                List<Products> newList = new List<Products>();
+
+                products.forEach((element) {
+                  element.forEach((element) {
+                    if (!newList.contains(element)) {
+                      newList.add(element);
+                    }
+                  });
+                });
+
+                return Expanded(
+                  child: SizedBox(
+                    height: size.height - 54,
+                    child: ListView.builder(
+                      itemCount: newList.length,
+                      itemBuilder: (context, index) {
+                        return Text("DA");
+                      },
+                    ),
+                  ),
+                );
+              }
+            ),
+          ],
+        ),
       ),
     );
   }
