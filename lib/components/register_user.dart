@@ -1,10 +1,9 @@
-import 'package:covidhelper_v2/components/form_input.dart';
-import 'package:covidhelper_v2/models/admin.dart';
 import 'package:covidhelper_v2/services/firestore_service.dart';
 import 'package:covidhelper_v2/utils/app_theme.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:flutter/material.dart';
+
+import 'vulnerable/new_text_field.dart';
 
 class RegisterUser extends StatefulWidget {
   @override
@@ -20,18 +19,20 @@ class _RegisterUserState extends State<RegisterUser> {
   String address = '';
   String first_name = '';
   String last_name = '';
-
-  String emptyness_error = '';
-  String password_error = '';
-  String email_error = '';
-  String phone_error = '';
-
   String message = '';
+  String emailError = '';
+  String passwordError = '';
+  String firstNameError = '';
+  String lastNameError = '';
+  String phoneError = '';
+  String addressError = '';
+  bool added = false;
+  bool _loading = false;
 
   @override
   Widget build(BuildContext context) {
     void changePassword(String val) {
-        password = val;
+      password = val;
     }
 
     void changeEmail(String val) {
@@ -54,135 +55,227 @@ class _RegisterUserState extends State<RegisterUser> {
       phone = val;
     }
 
-    bool inputValidate() {
-      message = '';
-      if (password.isEmpty || email.isEmpty || phone.isEmpty ||
-          last_name.isEmpty || first_name.isEmpty || address.isEmpty) {
-        emptyness_error = 'Toate campurile sunt obligatorii';
-        return false;
+    void verifyEmail() {
+      if (email.isEmpty) {
+        emailError = 'empty';
+      } else if (EmailValidator.validate(email) == false) {
+        emailError = 'invalid';
+      } else {
+        emailError = '';
       }
+    }
 
-      if (password.length < 6) {
-        password_error = 'Parola trebuie sa aiba peste 6 caractere';
-        return false;
+    void verifyPassword() {
+      if (password.isEmpty) {
+        passwordError = 'empty';
+      } else if (password.length < 6) {
+        passwordError = 'short';
+      } else {
+        passwordError = '';
       }
+    }
 
-      if (!EmailValidator.validate(email)) {
-        email_error = 'Email invalid';
-        return false;
+    void verifyName() {
+      if (first_name.isEmpty) {
+        firstNameError = 'empty';
+      } else {
+        firstNameError = '';
       }
+      if (last_name.isEmpty) {
+        lastNameError = 'empty';
+      } else {
+        lastNameError = '';
+      }
+      // TODO add name validator
+    }
 
-      return true;
+    void verifyPhone() {
+      if (phone.isEmpty) {
+        phoneError = 'empty';
+      } else if (phone[0] != '0' || phone.length != 10) {
+        phoneError = 'invalid';
+      } else {
+        phoneError = '';
+      }
+    }
+
+    void verifyAddress() {
+      if (address.isEmpty) {
+        addressError = 'empty';
+      } else {
+        addressError = '';
+      }
+      // TODO add address validator
+    }
+
+    void showMessage() {
+      verifyEmail();
+      verifyPassword();
+      verifyName();
+      verifyPhone();
+      verifyAddress();
+
+      if (emailError == 'empty' ||
+          passwordError == 'empty' ||
+          firstNameError == 'empty' ||
+          lastNameError == 'empty' ||
+          phoneError == 'empty' ||
+          addressError == 'empty') {
+        message = 'Toate campurile sunt obligatorii!';
+      } else if (emailError == 'invalid') {
+        message = 'Introduceti o adresa de email valida!';
+      } else if (passwordError == 'short') {
+        message = 'Parola trebuie sa contina minim 6 caracrere';
+      } else if (phoneError == 'invalid') {
+        message = 'Intoduceti un numar de telefon valid!';
+      } else {
+        message = '';
+      }
     }
 
     return Scaffold(
+      backgroundColor: Colors.grey[100],
+      appBar: PreferredSize(
+        preferredSize: Size(double.infinity, 5.0),
+        child: AppBar(
+          backgroundColor: Colors.grey[100],
+          elevation: 0,
+          bottom: _loading
+              ? PreferredSize(
+                  preferredSize: Size(double.infinity, 1.0),
+                  child: LinearProgressIndicator(
+                    valueColor:
+                        AlwaysStoppedAnimation<Color>(AppTheme.lightAccent),
+                  ),
+                )
+              : null,
+        ),
+      ),
       body: ListView(
         children: <Widget>[
           Container(
-            padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
+            padding: EdgeInsets.symmetric(vertical: 30.0, horizontal: 20.0),
             child: Form(
               child: Column(
                 children: <Widget>[
-                  Text('Add a Vulnerable Person',
-                    style: AppTheme.darkTheme.textTheme.headline2,
+                  Text(
+                    'Adauga o persoana vulnerabila',
+                    style: eTitle,
                   ),
                   SizedBox(
-                    height: 20.0,
-                    child: Text(
-                      '${message}',
-                      style: AppTheme.darkTheme.textTheme.subtitle2,
-                    ),
+                    height: 30.0,
                   ),
                   SizedBox(
                     width: 320.0,
-                    height: 70.0,
-                    child: FormInput(
+                    height: 80.0,
+                    child: NewTextField(
                       label: 'Email',
                       type: false,
+                      error: emailError,
                       changeValue: changeEmail,
                     ),
                   ),
                   SizedBox(
                     width: 320.0,
-                    height: 70.0,
-                    child: FormInput(
-                      label: 'Password',
-                      type: true,
-                      changeValue: changePassword
-                      ),
-                    ),
-                  SizedBox(
-                    width: 320.0,
-                    height: 70.0,
-                    child: FormInput(
-                      label: 'Phone',
-                      type: false,
-                      changeValue: changePhone,
-                    ),
+                    height: 80.0,
+                    child: NewTextField(
+                        label: 'Parola',
+                        type: true,
+                        error: passwordError,
+                        changeValue: changePassword),
                   ),
                   SizedBox(
                     width: 320.0,
-                    height: 70.0,
-                    child: FormInput(
-                      label: 'Address',
+                    height: 80.0,
+                    child: NewTextField(
+                      label: 'Prenume',
                       type: false,
-                      changeValue: changeAddress,
-                    ),
-                  ),
-                  SizedBox(
-                    width: 320.0,
-                    height: 70.0,
-                    child: FormInput(
-                      label: 'First Name',
-                      type: false,
+                      error: firstNameError,
                       changeValue: changeFirstName,
                     ),
                   ),
                   SizedBox(
                     width: 320.0,
-                    height: 70.0,
-                    child: FormInput(
-                      label: 'Last Name',
+                    height: 80.0,
+                    child: NewTextField(
+                      label: 'Nume',
                       type: false,
+                      error: lastNameError,
                       changeValue: changeLastName,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 320.0,
+                    height: 80.0,
+                    child: NewTextField(
+                      label: 'Telefon',
+                      type: false,
+                      error: phoneError,
+                      inputType: TextInputType.number,
+                      changeValue: changePhone,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 320.0,
+                    height: 80.0,
+                    child: NewTextField(
+                      label: 'Adresa',
+                      type: false,
+                      error: addressError,
+                      changeValue: changeAddress,
                     ),
                   ),
                   SizedBox(
                     height: 20.0,
                     child: Text(
-                      '${emptyness_error}',
-                      style: AppTheme.darkTheme.textTheme.subtitle2,
+                      '${message}',
+                      style: added == true ? eWelcome : eWarning,
                     ),
+                  ),
+                  SizedBox(
+                    height: 20,
                   ),
                   RaisedButton(
-                    color: AppTheme.darkTheme.buttonColor,
-                    child: Text(
-                      'Register',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 20.0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25.0),
                       ),
-                    ),
-                    onPressed: () async {
-                      if (!inputValidate()) {
-                        setState(() {
-
-                        });
-                      } else {
-                        emptyness_error = '';
-                        email_error = '';
-                        password_error = '';
-                        message = 'Successfully added';
-                        dynamic result = await _service.createVulnerablePerson(email, password, address, phone, first_name, last_name);
-                        if (result == null) {
-                          message = 'Error on adding new user!';
+                      color: AppTheme.lightAccent,
+                      child: Text('Adauga persoana', style: eButton),
+                      onPressed: () async {
+                        showMessage();
+                        _loading = true;
+                        setState(() {});
+                        if (emailError.isEmpty &&
+                            passwordError.isEmpty &&
+                            firstNameError.isEmpty &&
+                            lastNameError.isEmpty &&
+                            phoneError.isEmpty &&
+                            addressError.isEmpty) {
+                          dynamic result =
+                              await _service.createVulnerablePerson(
+                                  email,
+                                  password,
+                                  address,
+                                  phone,
+                                  first_name,
+                                  last_name);
+                          if (result == null) {
+                            _loading = false;
+                            added = false;
+                            message =
+                                'A aparut o eroare, incercati mai traziu!';
+                          } else {
+                            setState(() {
+                              _loading = false;
+                            });
+                            message = 'Persoana a fost adaugata cu succes!';
+                            added = true;
+                          }
+                          setState(() {});
                         }
-                        setState(() {
-
-                        });
                       }
-                    },
-                  ),
+                      // },
+                      ),
                 ],
               ),
             ),

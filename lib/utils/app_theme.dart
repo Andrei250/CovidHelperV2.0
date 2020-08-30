@@ -107,6 +107,11 @@ final eWarning = TextStyle(
   fontFamily: 'quicksand',
   fontSize: 15,
 );
+final eWarningSmall = TextStyle(
+  color: Colors.red[700],
+  fontFamily: 'quicksand',
+  fontSize: 10,
+);
 final eButton = TextStyle(
   color: Colors.white,
   fontFamily: 'quicksand',

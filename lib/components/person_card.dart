@@ -1,7 +1,9 @@
 import 'package:covidhelper_v2/models/vulnerable_person.dart';
 import 'package:covidhelper_v2/utils/app_theme.dart';
+import 'package:covidhelper_v2/utils/pics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class PersonCard extends StatelessWidget {
   final VulnerablePerson vulnerable;
@@ -11,33 +13,30 @@ class PersonCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(top: 8.0),
-      child: Card(
-        color: AppTheme.primaryColor,
-        margin: EdgeInsets.fromLTRB(20.0, 6.0, 20.0, 0.0),
-        child: ListTile(
-          leading: CircleAvatar(
-            radius: 29,
-            backgroundColor: Colors.white,
-            child: Icon(
-              Icons.person,
-              size: 50,
-              color: Colors.black,
-            ),
-          ),
-          title: Text(
-              vulnerable.first_name.toString() + vulnerable.last_name.toString(),
-              style: AppTheme.darkTheme.textTheme.headline3,
-          ),
-          subtitle: Text(
-            vulnerable.email,
-            style: AppTheme.darkTheme.textTheme.subtitle1,
-          ),
-          onTap: () {
-            Navigator.of(context).pushNamed('/admin_panel/user/update_details', arguments: {'person': vulnerable});
-          },
-        )
-      ),
-    );
+        padding: EdgeInsets.only(top: 8.0),
+        child: Card(
+            color: Colors.white,
+            margin: EdgeInsets.fromLTRB(20.0, 6.0, 20.0, 0.0),
+            child: ListTile(
+              leading: SvgPicture.asset(
+                user,
+                height: 30.0,
+                width: 30.0,
+              ),
+              title: Text(
+                vulnerable.first_name.toString() +
+                    vulnerable.last_name.toString(),
+                style: eTitle,
+              ),
+              subtitle: Text(
+                vulnerable.phone,
+                style: eWelcome,
+              ),
+              onTap: () {
+                Navigator.of(context).pushNamed(
+                    '/admin_panel/user/update_details',
+                    arguments: {'person': vulnerable});
+              },
+            )));
   }
 }

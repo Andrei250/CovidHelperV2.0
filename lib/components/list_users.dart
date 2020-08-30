@@ -31,8 +31,8 @@ class _ListUsersState extends State<ListUsers> {
           padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
           child: Center(
             child: Text(
-              'Vulnerables',
-              style: AppTheme.darkTheme.textTheme.headline2,
+              'Persoane Vulnerabile',
+              style: eWelcomeName,
             ),
           ),
         ),
@@ -40,17 +40,17 @@ class _ListUsersState extends State<ListUsers> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: vulnerables_widgets,
         ),
-        Divider(
-          height: 10.0,
-          color: Colors.grey[400],
-        ),
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-          child: Center(
-            child: Text(
-              'Vendors',
-              style: AppTheme.darkTheme.textTheme.headline2,
-            ),
+          padding: const EdgeInsets.fromLTRB(0.0, 16.0, 0, 16.0),
+          child: Divider(
+            height: 10.0,
+            color: Colors.grey[400],
+          ),
+        ),
+        Center(
+          child: Text(
+            'Vanzatori',
+            style: eWelcomeName
           ),
         ),
         Column(
