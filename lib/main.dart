@@ -8,6 +8,6 @@ void main() => runApp(MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: AppTheme.darkTheme,
       home: Loading(),
-      initialRoute: '/',
+      initialRoute: '/loading',
       onGenerateRoute: Routing.generateRoute,
     ));

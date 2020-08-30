@@ -36,6 +36,7 @@ class _LoadingState extends State<Loading> {
       if (userData['user_value'] == 'Vulnerables') {
         retrievedData['route'] = '/vulnerable_main';
         retrievedData['type'] = "vulnerable";
+        retrievedData['vendors'] = FirestoreService().vendors;
       } else if (userData['user_value'] == "Admins") {
         retrievedData['route'] = '/admin_panel';
         retrievedData['type'] = "admin";
