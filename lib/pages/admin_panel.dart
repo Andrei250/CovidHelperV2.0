@@ -82,6 +82,7 @@ class _AdminPanelState extends State<AdminPanel> {
     return StreamProvider<List<VulnerablePerson>>.value(
       value: FirestoreService().vulnerables,
       child: Scaffold(
+        backgroundColor: Colors.grey[100],
         body: Center(
           child: _getFragment(_selectedIndex, context),
         ),
