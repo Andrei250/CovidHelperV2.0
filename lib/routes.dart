@@ -4,6 +4,7 @@ import 'package:covidhelper_v2/components/navigation/settings.dart';
 import 'package:covidhelper_v2/components/vulnerable/get_products.dart';
 import 'package:covidhelper_v2/pages/admin_panel.dart';
 import 'package:covidhelper_v2/pages/loading.dart';
+import 'package:covidhelper_v2/pages/register/register_address.dart';
 import 'package:covidhelper_v2/pages/vendor/vendor_home.dart';
 import 'package:covidhelper_v2/pages/volunteer/home_volunteer/home.dart';
 import 'package:covidhelper_v2/pages/vulnerables_main.dart';
@@ -14,19 +15,20 @@ import 'components/change_password.dart';
 import 'components/update_user.dart';
 import 'components/vulnerable/personal_details.dart';
 import 'pages/login.dart';
+import 'pages/register/custom_route.dart';
 import 'pages/register/register_back.dart';
 import 'pages/register/register_choose.dart';
 import 'pages/register/register_email.dart';
 import 'pages/register/register_name.dart';
 import 'pages/register/register_password.dart';
 import 'pages/register/register_phone.dart';
-import 'pages/register/custom_route.dart';
 
 class Routing {
   static String email;
   static String name;
   static String phoneNumber;
   static String password;
+  static String address;
   static String userValue;
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -56,8 +58,7 @@ class Routing {
             builder: (_) => VulnerablesMain(data: settings.arguments));
         break;
       case '/vulnerable_main/get_products':
-        return CustomRoute(
-            builder: (_) => GetProducts());
+        return CustomRoute(builder: (_) => GetProducts());
         break;
       case '/vulnerable_main/personal_details':
         return CustomRoute(
@@ -99,17 +100,23 @@ class Routing {
         break;
       case '/register_phone':
         Routing.name = args;
-        return CustomRoute(builder: (_) => RegisterPhone());
+        return CustomRoute(builder: (_) => RegisterPhone(userValue: Routing.userValue,));
+        break;
+      case '/register_address':
+        Routing.phoneNumber = args;
+        return CustomRoute(builder: (_) => RegisterAddress());
         break;
       case '/loading_screen':
-        Routing.phoneNumber = args;
+        Routing.address = args;
         RegisterBack registerBack = new RegisterBack(
             name: Routing.name,
             email: Routing.email,
             phoneNumber: Routing.phoneNumber,
             password: Routing.password,
+            address: Routing.address,
             userValue: Routing.userValue);
         new LoadingScreen(registerBack: registerBack);
+        print(Routing.address);
         return CustomRoute(
             builder: (_) => LoadingScreen(registerBack: registerBack));
         break;
