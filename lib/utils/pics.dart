@@ -21,3 +21,4 @@ const coin = 'assets/icons/coin.svg';
 const dollar = 'assets/icons/dollar.svg';
 const warehouse = 'assets/icons/warehouse.svg';
 const packages = 'assets/icons/packages.svg';
+const addPerson = 'assets/icons/add_person.svg';

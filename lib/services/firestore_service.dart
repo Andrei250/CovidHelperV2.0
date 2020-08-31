@@ -21,28 +21,34 @@ class FirestoreService {
         .toList());
   }
 
-   List<Products> getProducts(String uid) {
-     var data = _db.collection('vendor')
-         .document(uid)
-         .collection('Products')
-         .orderBy('stock')
-         .snapshots()
-         .map((snapshot) => snapshot.documents
-         .map((document) => Products.fromJson(document.data))
-         .toList());
+  List<Products> getProducts(String uid) {
+    var data = _db
+        .collection('vendor')
+        .document(uid)
+        .collection('Products')
+        .orderBy('stock')
+        .snapshots()
+        .map((snapshot) => snapshot.documents
+            .map((document) => Products.fromJson(document.data))
+            .toList());
 
-     List<Products> list = new List<Products>();
+    List<Products> list = new List<Products>();
 
-     data.forEach((element) {list.forEach((element) {list.add(element);});});
+    data.forEach((element) {
+      list.forEach((element) {
+        list.add(element);
+      });
+    });
 
-     return list;
-   }
+    return list;
+  }
 
-   Stream<List<List<Products>>> get products {
-      return _db.collection('vendor').snapshots()
-          .map((snapshot) => snapshot.documents
-          .map((document) => getProducts(document.documentID)).toList());
-   }
+  Stream<List<List<Products>>> get products {
+    return _db.collection('vendor').snapshots().map((snapshot) => snapshot
+        .documents
+        .map((document) => getProducts(document.documentID))
+        .toList());
+  }
 
   Stream<List<Vendor>> get vendors {
     return _db.collection('vendor').snapshots().map((snapshot) => snapshot
@@ -146,6 +152,7 @@ class FirestoreService {
       String password,
       String phoneNumber,
       String name,
+      String address,
       String userValue}) async {
     try {
       AuthResult result = await _auth.createUserWithEmailAndPassword(
@@ -153,7 +160,11 @@ class FirestoreService {
       FirebaseUser user = result.user;
       if (userValue == 'vendor') {
         Vendor vendor = new Vendor(
-            name: name, email: email, phoneNumber: phoneNumber, uid: user.uid);
+            name: name,
+            email: email,
+            phoneNumber: phoneNumber,
+            address: address,
+            uid: user.uid);
         await addNewVendor(vendor, userValue);
         await addUser(vendor.uid, userValue);
         return 200;
@@ -256,6 +267,7 @@ class FirestoreService {
       Vendor vendor = new Vendor(
           name: userData['name'],
           email: userData['email'],
+          address: userData['address'],
           phoneNumber: userData['phoneNumber']);
       return vendor;
     }

@@ -113,24 +113,24 @@ class _AdminPanelState extends State<AdminPanel> {
               items: <BottomNavyBarItem>[
                 BottomNavyBarItem(
                   icon: SvgPicture.asset(
-                    home,
+                    people,
                     height: 30,
                     width: 30,
                     color: AppTheme.lightAccent,
                   ),
-                  title: Text('Home', style: eNavBarText),
+                  title: Text('Utilizatori', style: eNavBarText),
                   activeColor: AppTheme.lightAccent,
                   inactiveColor: AppTheme.lightAccent,
                   textAlign: TextAlign.center,
                 ),
                 BottomNavyBarItem(
                   icon: SvgPicture.asset(
-                    home,
+                    addPerson,
                     height: 30,
                     width: 30,
                     color: AppTheme.lightAccent,
                   ),
-                  title: Text('Home', style: eNavBarText),
+                  title: Text('Adauga', style: eNavBarText),
                   activeColor: AppTheme.lightAccent,
                   inactiveColor: AppTheme.lightAccent,
                   textAlign: TextAlign.center,
@@ -142,14 +142,14 @@ class _AdminPanelState extends State<AdminPanel> {
               setState(() => _currentIndex = index);
             },
             children: <Widget>[
-              MoreMenuAdmin(
-                user: user,
-                admin: admin,
-                function: change,
-                context: context,
-              ),
-              RegisterUser(),
+              // MoreMenuAdmin(
+              //   user: user,
+              //   admin: admin,
+              //   function: change,
+              //   context: context,
+              // ),
               ListUsers(),
+              RegisterUser(),
             ],
           ),
         ));

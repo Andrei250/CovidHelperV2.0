@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class RegisterPhone extends StatefulWidget {
-  RegisterPhone({this.onButtonNextPressed, this.onButtonBackPressed});
+  RegisterPhone({this.onButtonNextPressed, this.onButtonBackPressed, this.userValue});
 
   final VoidCallback onButtonBackPressed;
   final VoidCallback onButtonNextPressed;
+  final String userValue;
 
   @override
   _RegisterPhoneState createState() => _RegisterPhoneState();
@@ -59,7 +60,11 @@ class _RegisterPhoneState extends State<RegisterPhone> {
             setState(() {
               _loading = true;
             });
-            Navigator.of(context).pushNamed('/loading_screen', arguments: phoneNumber);
+            if (widget.userValue == 'vendor') {
+              Navigator.of(context).pushNamed('/register_address', arguments: phoneNumber);
+            } else {
+              Navigator.of(context).pushNamed('/loading_screen', arguments: phoneNumber);
+            }
             setState(() {
               _loading = false;
             });
