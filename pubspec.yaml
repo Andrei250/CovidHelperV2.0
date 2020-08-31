@@ -51,6 +51,9 @@ dependencies:
   validators: ^2.0.1
   fluttertoast: ^7.0.2
   flat: ^0.2.0
+  google_maps_flutter: ^0.5.30
+  location: ^3.0.2
+  geolocator: ^6.0.0
 
 
 dev_dependencies:
