@@ -30,7 +30,7 @@ class _ListProductsState extends State<ListProducts> {
     vendors = Provider.of<List<Vendor>>(context);
     if(vendors != null) {
       vendors.forEach((element) {
-        final elements = FirestoreService().getProducts(element.uid);
+        final elements = FirestoreService().getProductsStream(element.uid);
         if (elements != null) {
           elements.forEach((element) {
             if (element.length > 0) {

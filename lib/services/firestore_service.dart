@@ -21,7 +21,7 @@ class FirestoreService {
         .toList());
   }
   
-   Stream<List<Products>> getProducts(String uid) {
+   Stream<List<Products>> getProductsStream(String uid) {
      return _db.collection('vendor')
          .document(uid)
          .collection('Products')
@@ -31,6 +31,28 @@ class FirestoreService {
          .map((document) => Products.fromJson(document.data))
          .toList());
    }
+
+  List<Products> getProducts(String uid) {
+    var data = _db
+        .collection('vendor')
+        .document(uid)
+        .collection('Products')
+        .orderBy('stock')
+        .snapshots()
+        .map((snapshot) => snapshot.documents
+        .map((document) => Products.fromJson(document.data))
+        .toList());
+
+    List<Products> list = new List<Products>();
+
+    data.forEach((element) {
+      list.forEach((element) {
+        list.add(element);
+      });
+    });
+
+    return list;
+  }
 
 
   Stream<List<Vendor>> get vendors {
