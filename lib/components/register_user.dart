@@ -31,6 +31,22 @@ class _RegisterUserState extends State<RegisterUser> {
 
   @override
   Widget build(BuildContext context) {
+    var _controllerEmail = TextEditingController();
+    var _controllerPassword = TextEditingController();
+    var _controllerFirstName = TextEditingController();
+    var _controllerLastName = TextEditingController();
+    var _controllerPhone = TextEditingController();
+    var _controllerAddress = TextEditingController();
+
+    void clearText() {
+      _controllerEmail.clear();
+      _controllerPassword.clear();
+      _controllerFirstName.clear();
+      _controllerLastName.clear();
+      _controllerPhone.clear();
+      _controllerAddress.clear();
+    }
+
     void changePassword(String val) {
       password = val;
     }
@@ -172,6 +188,7 @@ class _RegisterUserState extends State<RegisterUser> {
                       label: 'Email',
                       type: false,
                       error: emailError,
+                      controller: _controllerEmail,
                       changeValue: changeEmail,
                     ),
                   ),
@@ -182,6 +199,7 @@ class _RegisterUserState extends State<RegisterUser> {
                         label: 'Parola',
                         type: true,
                         error: passwordError,
+                        controller: _controllerPassword,
                         changeValue: changePassword),
                   ),
                   SizedBox(
@@ -191,6 +209,7 @@ class _RegisterUserState extends State<RegisterUser> {
                       label: 'Prenume',
                       type: false,
                       error: firstNameError,
+                      controller: _controllerFirstName,
                       changeValue: changeFirstName,
                     ),
                   ),
@@ -201,6 +220,7 @@ class _RegisterUserState extends State<RegisterUser> {
                       label: 'Nume',
                       type: false,
                       error: lastNameError,
+                      controller: _controllerLastName,
                       changeValue: changeLastName,
                     ),
                   ),
@@ -211,6 +231,7 @@ class _RegisterUserState extends State<RegisterUser> {
                       label: 'Telefon',
                       type: false,
                       error: phoneError,
+                      controller: _controllerPhone,
                       inputType: TextInputType.number,
                       changeValue: changePhone,
                     ),
@@ -222,6 +243,7 @@ class _RegisterUserState extends State<RegisterUser> {
                       label: 'Adresa',
                       type: false,
                       error: addressError,
+                      controller: _controllerAddress,
                       changeValue: changeAddress,
                     ),
                   ),
@@ -243,7 +265,6 @@ class _RegisterUserState extends State<RegisterUser> {
                       child: Text('Adauga persoana', style: eButton),
                       onPressed: () async {
                         showMessage();
-                        _loading = true;
                         setState(() {});
                         if (emailError.isEmpty &&
                             passwordError.isEmpty &&
@@ -251,6 +272,7 @@ class _RegisterUserState extends State<RegisterUser> {
                             lastNameError.isEmpty &&
                             phoneError.isEmpty &&
                             addressError.isEmpty) {
+                          _loading = true;
                           dynamic result =
                               await _service.createVulnerablePerson(
                                   email,
@@ -260,17 +282,17 @@ class _RegisterUserState extends State<RegisterUser> {
                                   first_name,
                                   last_name);
                           if (result == null) {
-                            _loading = false;
                             added = false;
                             message =
                                 'A aparut o eroare, incercati mai traziu!';
                           } else {
-                            setState(() {
-                              _loading = false;
-                            });
-                            message = 'Persoana a fost adaugata cu succes!';
                             added = true;
+                            message = 'Persoana a fost adaugata cu succes!';
+                            Future.delayed(const Duration(milliseconds: 1000), () {
+                              // clearText();
+                            });
                           }
+                          _loading = false;
                           setState(() {});
                         }
                       }

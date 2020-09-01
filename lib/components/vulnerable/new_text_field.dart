@@ -11,16 +11,19 @@ class NewTextField extends StatefulWidget {
   final double width;
   final String error;
   final TextInputType inputType;
+  var controller;
 
-  NewTextField(
-      {this.label,
-      this.type,
-      this.changeValue,
-      this.value,
-      this.theme,
-      this.width,
-      @required this.error,
-      this.inputType});
+  NewTextField({
+    this.label,
+    this.type,
+    this.changeValue,
+    this.value,
+    this.theme,
+    this.width,
+    this.inputType,
+    this.controller,
+    @required this.error,
+  });
 
   @override
   _NewTextFieldState createState() => _NewTextFieldState();
@@ -55,6 +58,7 @@ class _NewTextFieldState extends State<NewTextField> {
           width: widget.width != null ? widget.width : 320.0,
           height: 80.0,
           child: TextFormField(
+            // controller: widget.controller,
             keyboardType: widget.inputType,
             style: eTextField,
             focusNode: focusNode,
@@ -74,14 +78,14 @@ class _NewTextFieldState extends State<NewTextField> {
               focusedBorder: new OutlineInputBorder(
                 borderRadius: new BorderRadius.circular(25.0),
                 borderSide: BorderSide(
-                  color: widget.error.isNotEmpty ? Colors.red : AppTheme.lightAccent,
+                  color: widget.error.isNotEmpty
+                      ? Colors.red
+                      : AppTheme.lightAccent,
                   width: 1.5,
                 ),
               ),
             ),
             obscureText: widget.type,
-            initialValue: widget.value != null ? widget.value : '',
-            validator: (val) => val.isEmpty ? 'Camp obligatoriu' : '',
             onChanged: (val) =>
                 widget.changeValue != null ? widget.changeValue(val) : null,
           ),

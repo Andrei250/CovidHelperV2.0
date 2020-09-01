@@ -20,7 +20,7 @@ class FirestoreService {
         .map((document) => VulnerablePerson.fromJson(document.data))
         .toList());
   }
-
+  
    Stream<List<Products>> getProducts(String uid) {
      return _db.collection('vendor')
          .document(uid)
@@ -135,6 +135,7 @@ class FirestoreService {
       String password,
       String phoneNumber,
       String name,
+      String address,
       String userValue}) async {
     try {
       AuthResult result = await _auth.createUserWithEmailAndPassword(
@@ -142,7 +143,11 @@ class FirestoreService {
       FirebaseUser user = result.user;
       if (userValue == 'vendor') {
         Vendor vendor = new Vendor(
-            name: name, email: email, phoneNumber: phoneNumber, uid: user.uid);
+            name: name,
+            email: email,
+            phoneNumber: phoneNumber,
+            address: address,
+            uid: user.uid);
         await addNewVendor(vendor, userValue);
         await addUser(vendor.uid, userValue);
         return 200;
@@ -245,6 +250,7 @@ class FirestoreService {
       Vendor vendor = new Vendor(
           name: userData['name'],
           email: userData['email'],
+          address: userData['address'],
           phoneNumber: userData['phoneNumber']);
       return vendor;
     }
