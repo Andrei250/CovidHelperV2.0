@@ -17,6 +17,16 @@ class LeftNavigation extends StatefulWidget {
 }
 
 class _LeftNavigationState extends State<LeftNavigation> {
+  String name;
+  String phone;
+
+  @override
+  void initState() {
+    super.initState();
+    name = widget.data['type'] != 'vulnerable' ? widget.data['userInfo']['name'] : widget.data['userInfo']['first_name'] + ' ' + widget.data['userInfo']['last_name'];
+    phone = widget.data['type'] != 'vulnerable' ? widget.data['userInfo']['phoneNumber'] : widget.data['userInfo']['phone'];
+  }
+
   @override
   Widget build(BuildContext context) {
     return OrientationBuilder(
@@ -51,11 +61,11 @@ class _LeftNavigationState extends State<LeftNavigation> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  widget.data['userInfo']['first_name'] + ' ' +widget.data['userInfo']['last_name'] ,
+                                  name ,
                                   style: AppTheme.darkTheme.textTheme.headline3,
                                 ),
                                 Text(
-                                  widget.data['userInfo']['phone'],
+                                  phone,
                                   style: AppTheme.darkTheme.textTheme.headline4,
                                 ),
                               ],
@@ -73,6 +83,11 @@ class _LeftNavigationState extends State<LeftNavigation> {
         );
       },
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 }
 

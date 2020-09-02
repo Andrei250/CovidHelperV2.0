@@ -71,7 +71,7 @@ class Routing {
         return CustomRoute(builder: (_) => Home());
         break;
       case '/vendor_home':
-        return CustomRoute(builder: (_) => VendorHome());
+        return CustomRoute(builder: (_) => VendorHome(data: settings.arguments));
         break;
       case '/settings':
         return CustomRoute(builder: (_) => Settings(data: settings.arguments));
@@ -124,11 +124,11 @@ class Routing {
         return CustomRoute(builder: (_) => Home());
         break;
       case '/vendor_home':
-        return CustomRoute(builder: (_) => VendorHome());
+        return CustomRoute(builder: (_) => VendorHome(data: settings.arguments));
         break;
       case '/home':
         if (Routing.userValue == 'vendor') {
-          return CustomRoute(builder: (_) => VendorHome());
+          return CustomRoute(builder: (_) => VendorHome(data: settings.arguments));
 //        return CustomRoute(builder: (_) => Home(volunteer: args));
         } else if (Routing.userValue == 'volunteer') {
           return CustomRoute(builder: (_) => Home());

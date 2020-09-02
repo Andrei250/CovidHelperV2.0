@@ -14,6 +14,9 @@ class VendorHome extends StatefulWidget {
 //
 //  VendorHome({ this.volunteer });
 
+  final Map data;
+  VendorHome({ this.data });
+
   @override
   _VendorHomeState createState() => _VendorHomeState();
 }
@@ -104,7 +107,9 @@ class _VendorHomeState extends State<VendorHome> {
             }, onAddButtonPressed: () {
               _pageController.animateToPage(2,
                   duration: Duration(milliseconds: 500), curve: Curves.ease);
-            }),
+            },
+              data : widget.data,
+            ),
             VendorAllProducts(limit: false),
             VendorAddProducts(),
             // Container(color: Colors.white,)
