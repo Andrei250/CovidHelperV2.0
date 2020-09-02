@@ -14,7 +14,7 @@ class _VulnerableLocationState extends State<VulnerableLocation> {
   String _adressMessage = "";
 
   void _getCurrentLocation() async {
-    final position = await getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
+    final position = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
     print(position);
 
     setState(() {
@@ -24,7 +24,7 @@ class _VulnerableLocationState extends State<VulnerableLocation> {
 
   _getLocation() async
   {
-    Position position = await getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
+    Position position = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
     debugPrint('location: ${position.latitude}');
     final coordinates = new Coordinates(position.latitude, position.longitude);
     var addresses = await Geocoder.local.findAddressesFromCoordinates(coordinates);
