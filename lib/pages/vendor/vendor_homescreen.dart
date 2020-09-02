@@ -62,10 +62,7 @@ class _VendorHomeScreenState extends State<VendorHomeScreen> {
     Size size = MediaQuery.of(context).size;
     final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>(debugLabel: '_VendorHomeScreen');
 
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-//        theme: AppTheme.darkTheme,
-        home: Scaffold(
+    return Scaffold(
           key: _scaffoldKey,
             drawer: LeftNavigation(size: size, data: widget.data, context: context),
             backgroundColor: Colors.white,
@@ -246,6 +243,6 @@ class _VendorHomeScreenState extends State<VendorHomeScreen> {
                             onAddButtonPressed: widget.onAddButtonPressed,
                           ),
                   ])),
-            ])));
+            ]));
   }
 }

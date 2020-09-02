@@ -39,8 +39,7 @@ class _VendorHomeState extends State<VendorHome> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return Scaffold(
         bottomNavigationBar: BottomNavyBar(
           backgroundColor: AppTheme.lightColor,
           selectedIndex: _currentIndex,
@@ -115,7 +114,6 @@ class _VendorHomeState extends State<VendorHome> {
             // Container(color: Colors.white,)
           ],
         ),
-      ),
-    );
+      );
   }
 }
