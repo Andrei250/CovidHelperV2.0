@@ -224,6 +224,7 @@ class FirestoreService {
       if (userData['user_value'] == 'Vulnerables') {
         retrievedData['route'] = '/vulnerable_main';
         retrievedData['type'] = "vulnerable";
+        retrievedData['vendors'] = FirestoreService().vendors;
       } else if (userData['user_value'] == 'volunteer') {
         retrievedData['route'] = '/volunteer_home';
         retrievedData['type'] = 'volunteer';
@@ -322,7 +323,7 @@ class FirestoreService {
     }
   }
 
-  Future deleteUser(FirebaseUser user, String password) async {
+  Future deleteUser(FirebaseUser user, String password, String type) async {
     String uid = user.uid;
     try {
       AuthResult result = await user.reauthenticateWithCredential(
@@ -330,7 +331,15 @@ class FirestoreService {
               email: user.email, password: password));
       await result.user.delete().then((_) async {
         await _db.collection('Users').document(uid).delete();
-        await _db.collection('Vulnerables').document(uid).delete();
+        String value;
+        if (type == "vulnerable") {
+          value = "Vulnerables";
+        } else if (type == "admin") {
+          value = "Admins";
+        } else {
+          value = type;
+        }
+        await _db.collection(value).document(uid).delete();
       });
 
       return 200;

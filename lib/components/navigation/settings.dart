@@ -114,7 +114,7 @@ class _SettingsState extends State<Settings> {
                       child: Text('Confirma'),
                       onPressed: () async {
                         String password = customController.text.toString();
-                        dynamic result = await FirestoreService().deleteUser(await FirebaseAuth.instance.currentUser(), password);
+                        dynamic result = await FirestoreService().deleteUser(await FirebaseAuth.instance.currentUser(), password, widget.data['type']);
 
                         if (result != null) {
                           Navigator.of(context).pushNamedAndRemoveUntil('/login', (route) => false);
