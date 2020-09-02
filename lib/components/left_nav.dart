@@ -120,6 +120,7 @@ Widget getNavigations(Orientation orientation, Size size, BuildContext context, 
               arguments: {
                 'userInfo' : data,
                 'context' : context,
+                'type' : data['type']
               },
             ),
             ButtonSettings(
