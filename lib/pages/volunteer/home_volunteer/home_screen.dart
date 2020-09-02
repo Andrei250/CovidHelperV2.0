@@ -1,3 +1,4 @@
+import 'package:covidhelper_v2/components/left_nav.dart';
 import 'package:covidhelper_v2/pages/volunteer/home_volunteer/fav_person_card.dart';
 import 'package:covidhelper_v2/pages/volunteer/vulnerable_people_volunteer/volunteer_vulnerables.dart';
 import 'package:covidhelper_v2/utils/app_theme.dart';
@@ -12,8 +13,9 @@ class HomeScreen extends StatefulWidget {
 //  final String name;
 
   final VoidCallback onButtonPressed;
+  final Map data;
 
-  HomeScreen({@required this.onButtonPressed});
+  HomeScreen({@required this.onButtonPressed, this.data});
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -36,11 +38,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
     double deviceHeight = MediaQuery.of(context).size.height;
     double deviceWidth = MediaQuery.of(context).size.width;
+    Size size = MediaQuery.of(context).size;
+    final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>(debugLabel: '_HomeScreenState');
 
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-//        theme: AppTheme.darkTheme,
-        home: Scaffold(
+    return Scaffold(
+            key: _scaffoldKey,
+            drawer: LeftNavigation(size: size, data: widget.data, context: context),
             backgroundColor: Colors.white,
             appBar: PreferredSize(
               preferredSize: Size.fromHeight(50.0),
@@ -49,14 +52,16 @@ class _HomeScreenState extends State<HomeScreen> {
 //                backgroundColor: Color.fromRGBO(0, 200, 150, 1),
                 backgroundColor: Colors.white,
                 elevation: 0,
+                leading: IconButton(
+                  icon: SvgPicture.asset(
+                    drawer,
+                    color: Colors.black,
+                  ),
+                  onPressed: () => _scaffoldKey.currentState.openDrawer(),
+                ),
                 title: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    SvgPicture.asset(
-                      drawer,
-                      color: Colors.black,
-                    ),
-//
 //                    Container(height: 30, width: 30, child: LogoAppBar()),
                     Text(
                       'Covidhelper',
@@ -203,6 +208,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       customHeight: deviceHeight * 0.45,
                     ),
                   ])),
-                ])));
+                ]
+            )
+    );
   }
 }

@@ -15,6 +15,9 @@ class Home extends StatefulWidget {
 //
 //  Home({ this.volunteer });
 
+  final Map data;
+  Home({this.data});
+
   @override
   _HomeState createState() => _HomeState();
 }
@@ -37,10 +40,7 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      onGenerateRoute: Routing.generateRoute,
-      color: Colors.white,
-      home: Scaffold(
+    return Scaffold(
         backgroundColor: Colors.white,
         bottomNavigationBar: BottomNavyBar(
           backgroundColor: Colors.white,
@@ -115,7 +115,9 @@ class _HomeState extends State<Home> {
             HomeScreen(onButtonPressed: () {
               _pageController.animateToPage(1,
                   duration: Duration(milliseconds: 500), curve: Curves.ease);
-            }),
+            },
+            data: widget.data,
+            ),
             PeoplePageVolunteer(limit: false),
             StatisticsVolunteer(),
             // Container(
@@ -123,7 +125,6 @@ class _HomeState extends State<Home> {
             // ),
           ],
         ),
-      ),
-    );
+      );
   }
 }

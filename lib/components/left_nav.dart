@@ -25,6 +25,13 @@ class _LeftNavigationState extends State<LeftNavigation> {
     super.initState();
     name = widget.data['type'] != 'vulnerable' ? widget.data['userInfo']['name'] : widget.data['userInfo']['first_name'] + ' ' + widget.data['userInfo']['last_name'];
     phone = widget.data['type'] != 'vulnerable' ? widget.data['userInfo']['phoneNumber'] : widget.data['userInfo']['phone'];
+    if (phone == null) {
+      phone = "No number";
+    }
+
+    if (name == null) {
+      name = "No name";
+    }
   }
 
   @override

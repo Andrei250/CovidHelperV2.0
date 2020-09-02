@@ -68,7 +68,7 @@ class Routing {
         return CustomRoute(builder: (_) => Login());
         break;
       case '/volunteer_home':
-        return CustomRoute(builder: (_) => Home());
+        return CustomRoute(builder: (_) => Home(data: settings.arguments));
         break;
       case '/vendor_home':
         return CustomRoute(builder: (_) => VendorHome(data: settings.arguments));
@@ -121,7 +121,7 @@ class Routing {
             builder: (_) => LoadingScreen(registerBack: registerBack));
         break;
       case '/volunteer_home':
-        return CustomRoute(builder: (_) => Home());
+        return CustomRoute(builder: (_) => Home(data: settings.arguments));
         break;
       case '/vendor_home':
         return CustomRoute(builder: (_) => VendorHome(data: settings.arguments));
@@ -131,7 +131,7 @@ class Routing {
           return CustomRoute(builder: (_) => VendorHome(data: settings.arguments));
 //        return CustomRoute(builder: (_) => Home(volunteer: args));
         } else if (Routing.userValue == 'volunteer') {
-          return CustomRoute(builder: (_) => Home());
+          return CustomRoute(builder: (_) => Home(data: settings.arguments));
           // return CustomRoute(builder: (_) => Home(volunteer: args));
         }
         break;

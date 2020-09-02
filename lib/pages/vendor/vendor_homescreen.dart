@@ -63,7 +63,7 @@ class _VendorHomeScreenState extends State<VendorHomeScreen> {
     final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>(debugLabel: '_VendorHomeScreen');
 
     return Scaffold(
-          key: _scaffoldKey,
+            key: _scaffoldKey,
             drawer: LeftNavigation(size: size, data: widget.data, context: context),
             backgroundColor: Colors.white,
             appBar: PreferredSize(
