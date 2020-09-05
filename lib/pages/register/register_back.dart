@@ -7,12 +7,14 @@ class RegisterBack {
       this.phoneNumber,
       this.password,
       this.address,
+      this.coordinates,
       this.userValue});
 
   String name;
   String email;
   String phoneNumber;
   String password;
+  String coordinates;
   String address;
   String userValue;
 
@@ -26,6 +28,7 @@ class RegisterBack {
         email: email,
         phoneNumber: phoneNumber,
         password: password,
+        coordinates: coordinates,
         address: address,
         userValue: userValue);
     if (result == null) {

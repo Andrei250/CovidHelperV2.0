@@ -1,6 +1,7 @@
 import 'package:covidhelper_v2/pages/register/register_one_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:geocoder/geocoder.dart';
 
 class RegisterAddress extends StatefulWidget {
   @override
@@ -9,6 +10,7 @@ class RegisterAddress extends StatefulWidget {
 
 class _RegisterAddressState extends State<RegisterAddress> {
   String address;
+  String coordinates;
   String errorText;
   bool _loading;
 
@@ -24,6 +26,12 @@ class _RegisterAddressState extends State<RegisterAddress> {
 
     void changeAddress(String val) {
       address = val;
+    }
+
+    void getCoordinates() async {
+      var addresses = await Geocoder.local.findAddressesFromQuery(address);
+      var first = addresses.first;
+      coordinates = first.coordinates.toString();
     }
 
     void verifyAddress() {
@@ -51,8 +59,9 @@ class _RegisterAddressState extends State<RegisterAddress> {
             setState(() {
               _loading = true;
             });
+            getCoordinates();
             Navigator.of(context)
-                .pushNamed('/loading_screen', arguments: address);
+                .pushNamed('/loading_screen', arguments: address + coordinates );
             setState(() {
               _loading = false;
             });

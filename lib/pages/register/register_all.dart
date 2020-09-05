@@ -1,4 +1,5 @@
 /// nu mai e nevoie de asta, dar il pastam in caz de orice
+/// ok, cum zici tu
 
 // import 'package:covidhelper_v2/components/loading_screen.dart';
 // import 'package:covidhelper_v2/pages/login.dart';
