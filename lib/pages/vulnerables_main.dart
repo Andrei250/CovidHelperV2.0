@@ -93,7 +93,9 @@ class _VulnerablesMain extends State<VulnerablesMain> {
                   child: IconButton(
                     icon: Icon(Icons.shopping_cart),
                     color: Colors.black,
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).pushNamed('/vulnerable_main/shopping_cart');
+                    },
                   ),
                 ),
               )
