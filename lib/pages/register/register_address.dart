@@ -30,16 +30,10 @@ class _RegisterAddressState extends State<RegisterAddress> {
       address = val;
     }
 
-    void getCoordinates() async {
+    Future getCoordinates() async {
       var addresses = await Geocoder.local.findAddressesFromQuery(address);
       var first = addresses.first;
-      coordinates = first.coordinates.toString();
-    }
-
-    void test () {
-      print(_address.addressText);
-      print(_address.coordinates);
-      print(_address.coordinates);
+      _address.coordinates = first.coordinates.toString();
     }
 
     void verifyAddress() {
@@ -60,16 +54,15 @@ class _RegisterAddressState extends State<RegisterAddress> {
       route: '/register_address',
       changeValue: changeAddress,
       loading: _loading,
-      onButtonNextPressed: () {
+      onButtonNextPressed: () async{
+        await getCoordinates();
         setState(() {
           verifyAddress();
           if (addressOk == true) {
             setState(() {
               _loading = true;
             });
-            getCoordinates();
             setState(() {
-              _address.coordinates = coordinates;
               _address.addressText = address;
             });
             Navigator.of(context)
