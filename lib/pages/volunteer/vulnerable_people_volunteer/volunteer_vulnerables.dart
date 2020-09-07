@@ -1,4 +1,4 @@
-import 'package:covidhelper_v2/models/vulnerable_person.dart';
+import 'package:covidhelper_v2/models/orders.dart';
 import 'package:covidhelper_v2/pages/volunteer/vulnerable_people_volunteer/volunteer_vulnearbles_card.dart';
 import 'package:covidhelper_v2/services/firestore_service.dart';
 import 'package:flutter/material.dart';
@@ -21,16 +21,14 @@ class _VolunteerVulnerablesState extends State<VolunteerVulnerables> {
     return Container(
       color: Colors.white,
       height: widget.customHeight,
-//      width: deviceWidth,
-      child: StreamProvider<List<VulnerablePerson>>.value(
-          value: FirestoreService().vulnerables,
+          child: StreamProvider<List<Orders>>.value(
+          value: FirestoreService().orders,
           child: Scaffold(
             backgroundColor: Colors.white,
-            body: Center(
-                child: VolunteerVulnerablesCards(
+            body: VolunteerVulnerablesCards(
               limit: widget.limit,
               number: widget.number,
-            )),
+            ),
           )),
     );
   }

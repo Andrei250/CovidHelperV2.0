@@ -1,4 +1,4 @@
-import 'package:covidhelper_v2/models/vulnerable_person.dart';
+import 'package:covidhelper_v2/models/orders.dart';
 import 'package:covidhelper_v2/services/firestore_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -19,9 +19,22 @@ class VolunteerVulnerablesCards extends StatefulWidget {
 class _VolunteerVulnerablesCardsState extends State<VolunteerVulnerablesCards> {
   final FirestoreService _db = FirestoreService();
 
+  int itemCount(int length) {
+    if (widget.limit == true) {
+      if (widget.number > length) {
+        return length;
+      } else {
+        return widget.number;
+      }
+    } else if (widget.limit == false) {
+      return length;
+    }
+    return 0;
+  }
+
   @override
   Widget build(BuildContext context) {
-    final vulnerables = Provider.of<List<VulnerablePerson>>(context);
+    final orders = Provider.of<List<Orders>>(context);
     return ListView(
       physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
@@ -31,12 +44,10 @@ class _VolunteerVulnerablesCardsState extends State<VolunteerVulnerablesCards> {
           physics: NeverScrollableScrollPhysics(),
           scrollDirection: Axis.vertical,
           shrinkWrap: true,
-          itemCount: vulnerables != null
-              ? widget.limit == true ? widget.number : vulnerables.length
-              : 0,
-//          itemCount: vulnerables != null ? vulnerables.length : 0,
+          itemCount: orders != null ? itemCount(orders.length) : 0,
+          // itemCount: orders != null ? orders.length : 0,
           itemBuilder: (context, index) {
-            return PersonCardVolunteer(vulnerablePerson: vulnerables[index]);
+            return PersonCardVolunteer(orders: orders[index]);
           },
         )
       ],

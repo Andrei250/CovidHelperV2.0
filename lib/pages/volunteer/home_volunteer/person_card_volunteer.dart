@@ -1,4 +1,6 @@
+import 'package:covidhelper_v2/models/orders.dart';
 import 'package:covidhelper_v2/models/vulnerable_person.dart';
+import 'package:covidhelper_v2/services/firestore_service.dart';
 import 'package:covidhelper_v2/utils/app_theme.dart';
 import 'package:covidhelper_v2/utils/pics.dart';
 import 'package:flutter/cupertino.dart';
@@ -7,15 +9,31 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:slide_popup_dialog/slide_popup_dialog.dart' as slideDialog;
 
 class PersonCardVolunteer extends StatefulWidget {
-  PersonCardVolunteer({this.vulnerablePerson});
+  PersonCardVolunteer({this.orders});
 
-  VulnerablePerson vulnerablePerson;
+  Orders orders;
 
   @override
   _PersonCardVolunteerState createState() => _PersonCardVolunteerState();
 }
 
 class _PersonCardVolunteerState extends State<PersonCardVolunteer> {
+  final FirestoreService _service = new FirestoreService();
+  VulnerablePerson vulnerablePerson;
+
+  void _getVulnerablePerson() async {
+    vulnerablePerson = await _service.getVulnerable(widget.orders.person_uid);
+    setState(() {});
+  }
+
+  String orderLat = widget.orders.
+
+  @override
+  void initState() {
+    super.initState();
+    _getVulnerablePerson();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -37,8 +55,11 @@ class _PersonCardVolunteerState extends State<PersonCardVolunteer> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      widget.vulnerablePerson.first_name +
-                          widget.vulnerablePerson.last_name,
+                      vulnerablePerson == null
+                          ? ''
+                          : vulnerablePerson.first_name +
+                              ' ' +
+                              vulnerablePerson.last_name,
                       style: eTitle,
                     ),
                     Text(
@@ -90,8 +111,11 @@ class _PersonCardVolunteerState extends State<PersonCardVolunteer> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    widget.vulnerablePerson.first_name +
-                        widget.vulnerablePerson.last_name,
+                    vulnerablePerson == null
+                        ? ''
+                        : vulnerablePerson.first_name +
+                            ' ' +
+                            vulnerablePerson.last_name,
                     style: eTitle,
                   ),
                 ),
@@ -111,7 +135,7 @@ class _PersonCardVolunteerState extends State<PersonCardVolunteer> {
                 Padding(
                     padding: const EdgeInsets.fromLTRB(25.0, 0.0, 10.0, 5.0),
                     child: Text(
-                      'Strada Luncilor, Nr 7',
+                      widget.orders.address,
                       style: eWelcome,
                     )),
                 Padding(
@@ -155,7 +179,7 @@ class _PersonCardVolunteerState extends State<PersonCardVolunteer> {
                     ),
                     onPressed: () {},
                     child: Padding(
-                     padding: const EdgeInsets.fromLTRB(10.0, 2.0, 10.0, 2.0),
+                      padding: const EdgeInsets.fromLTRB(10.0, 2.0, 10.0, 2.0),
                       child: Text(
                         'REFUZA',
                         style: eDeclineButton,
