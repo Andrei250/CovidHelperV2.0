@@ -10,7 +10,7 @@ import 'package:location/location.dart';
 void main() => runApp(MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: AppTheme.darkTheme,
-      //home: RegisterAddress(),
-       initialRoute: '/loading',
-       onGenerateRoute: Routing.generateRoute,
+      home: Loading(),
+      initialRoute: '/loading',
+      onGenerateRoute: Routing.generateRoute,
     ));

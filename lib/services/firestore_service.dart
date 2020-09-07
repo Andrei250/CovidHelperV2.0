@@ -169,8 +169,8 @@ class FirestoreService {
             name: name,
             email: email,
             phoneNumber: phoneNumber,
-            coordinates: coordinates,
             address: address,
+            coordinates: coordinates,
             uid: user.uid);
         await addNewVendor(vendor, userValue);
         await addUser(vendor.uid, userValue);
@@ -274,8 +274,6 @@ class FirestoreService {
       Vendor vendor = new Vendor(
           name: userData['name'],
           email: userData['email'],
-          coordinates: userData['coordinates'],
-          address: userData['address'],
           phoneNumber: userData['phoneNumber']);
       return vendor;
     }
