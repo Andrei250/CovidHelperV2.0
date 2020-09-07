@@ -15,6 +15,7 @@ import 'components/change_name.dart';
 import 'components/change_password.dart';
 import 'components/update_user.dart';
 import 'components/vulnerable/personal_details.dart';
+import 'models/address.dart';
 import 'pages/login.dart';
 import 'pages/register/custom_route.dart';
 import 'pages/register/register_back.dart';
@@ -29,7 +30,7 @@ class Routing {
   static String name;
   static String phoneNumber;
   static String password;
-  static String address;
+  static AddressCoordAndText address;
   static String userValue;
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -117,8 +118,9 @@ class Routing {
             name: Routing.name,
             email: Routing.email,
             phoneNumber: Routing.phoneNumber,
+            address: address.addressText,
+            coordinates: address.coordinates,
             password: Routing.password,
-            address: Routing.address,
             userValue: Routing.userValue);
         new LoadingScreen(registerBack: registerBack);
         print(Routing.address);
