@@ -23,7 +23,25 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  String _locationMessage = "";
+  String _latitude;
+  String _longitude;
+
+  void _getCurrentLocation() async {
+    final position = await Geolocator()
+        .getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
+    print(position);
+
+    setState(() {
+      _latitude = "${position.latitude}";
+      _longitude = "${position.longitude}";
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _getCurrentLocation();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,19 +56,9 @@ class _HomeScreenState extends State<HomeScreen> {
       return initials.toUpperCase();
     }
 
-    void _getCurrentLocation() async {
-      final position = await Geolocator()
-          .getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
-      print(position);
-
-      setState(() {
-        _locationMessage = "${position.latitude}, ${position.longitude}";
-      });
-    }
-
-    double deviceHeight = MediaQuery.of(context).size.height;
-    double deviceWidth = MediaQuery.of(context).size.width;
     Size size = MediaQuery.of(context).size;
+    double deviceHeight = MediaQuery.of(context).size.height;
+
     final GlobalKey<ScaffoldState> _scaffoldKey =
         new GlobalKey<ScaffoldState>(debugLabel: '_HomeScreenState');
 
@@ -218,6 +226,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   limit: true,
                   number: 5,
                   customHeight: deviceHeight * 0.45,
+                  latitude: _latitude,
+                  longitude: _longitude,
                 ),
               ])),
             ]));

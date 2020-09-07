@@ -5,11 +5,18 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class VolunteerVulnerables extends StatefulWidget {
-  VolunteerVulnerables({this.limit, this.number, this.customHeight});
+  VolunteerVulnerables(
+      {this.limit,
+      this.number,
+      this.customHeight,
+      this.latitude,
+      this.longitude});
 
   bool limit;
   int number;
   double customHeight;
+  String latitude;
+  String longitude;
 
   @override
   _VolunteerVulnerablesState createState() => _VolunteerVulnerablesState();
@@ -21,13 +28,15 @@ class _VolunteerVulnerablesState extends State<VolunteerVulnerables> {
     return Container(
       color: Colors.white,
       height: widget.customHeight,
-          child: StreamProvider<List<Orders>>.value(
+      child: StreamProvider<List<Orders>>.value(
           value: FirestoreService().orders,
           child: Scaffold(
             backgroundColor: Colors.white,
             body: VolunteerVulnerablesCards(
               limit: widget.limit,
               number: widget.number,
+              latitude: widget.latitude,
+              longitude: widget.longitude,
             ),
           )),
     );

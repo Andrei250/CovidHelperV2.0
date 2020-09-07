@@ -6,10 +6,13 @@ import 'package:provider/provider.dart';
 import '../home_volunteer/person_card_volunteer.dart';
 
 class VolunteerVulnerablesCards extends StatefulWidget {
-  VolunteerVulnerablesCards({this.limit, this.number});
+  VolunteerVulnerablesCards(
+      {this.limit, this.number, this.longitude, this.latitude});
 
   bool limit;
   int number;
+  String latitude;
+  String longitude;
 
   @override
   _VolunteerVulnerablesCardsState createState() =>
@@ -47,7 +50,11 @@ class _VolunteerVulnerablesCardsState extends State<VolunteerVulnerablesCards> {
           itemCount: orders != null ? itemCount(orders.length) : 0,
           // itemCount: orders != null ? orders.length : 0,
           itemBuilder: (context, index) {
-            return PersonCardVolunteer(orders: orders[index]);
+            return PersonCardVolunteer(
+              orders: orders[index],
+              longitude: widget.longitude,
+              latitude: widget.latitude,
+            );
           },
         )
       ],

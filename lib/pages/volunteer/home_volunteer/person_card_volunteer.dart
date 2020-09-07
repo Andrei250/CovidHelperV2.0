@@ -6,12 +6,15 @@ import 'package:covidhelper_v2/utils/pics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:slide_popup_dialog/slide_popup_dialog.dart' as slideDialog;
 
 class PersonCardVolunteer extends StatefulWidget {
-  PersonCardVolunteer({this.orders});
+  PersonCardVolunteer({this.orders, this.longitude, this.latitude});
 
   Orders orders;
+  String latitude;
+  String longitude;
 
   @override
   _PersonCardVolunteerState createState() => _PersonCardVolunteerState();
@@ -20,18 +23,29 @@ class PersonCardVolunteer extends StatefulWidget {
 class _PersonCardVolunteerState extends State<PersonCardVolunteer> {
   final FirestoreService _service = new FirestoreService();
   VulnerablePerson vulnerablePerson;
+  double distance;
 
   void _getVulnerablePerson() async {
     vulnerablePerson = await _service.getVulnerable(widget.orders.person_uid);
     setState(() {});
   }
 
-  String orderLat = widget.orders.
-
   @override
   void initState() {
     super.initState();
     _getVulnerablePerson();
+    _calculateDistance();
+  }
+
+  Future<void> _calculateDistance() async {
+    final double dist = await Geolocator().distanceBetween(
+        double.parse(widget.latitude),
+        double.parse(widget.longitude),
+        widget.orders.latitude,
+        widget.orders.longitude);
+    distance = dist;
+    print('00000000000000000000');
+    print(dist);
   }
 
   @override
@@ -63,7 +77,7 @@ class _PersonCardVolunteerState extends State<PersonCardVolunteer> {
                       style: eTitle,
                     ),
                     Text(
-                      'Se afla la 3km de tine',
+                      'Se afla la ' + distance.toString() + ' de tine',
                       style: eWelcome,
                     ),
                   ],
@@ -128,7 +142,7 @@ class _PersonCardVolunteerState extends State<PersonCardVolunteer> {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(25.0, 15.0, 10.0, 5.0),
                   child: Text(
-                    'Persoana se afla la 15km de tine',
+                    'Persoana se afla la ' + distance.toString() + ' de tine',
                     style: eWelcome,
                   ),
                 ),
