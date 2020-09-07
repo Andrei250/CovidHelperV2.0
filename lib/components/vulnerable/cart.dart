@@ -9,6 +9,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:geocoder/geocoder.dart';
+import 'package:geolocator/geolocator.dart';
 
 class ShoppingCart extends StatefulWidget {
   Map data;
@@ -24,6 +26,15 @@ class _ShoppingCartState extends State<ShoppingCart> {
   List<Widget> list_of_prods = List<Widget>();
   FirebaseUser user;
   DocumentReference userInfo;
+  Position position;
+  var first;
+
+  Future<void> _getLocation() async {
+    position = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
+    final coordinates = new Coordinates(position.latitude, position.longitude);
+    var addresses = await Geocoder.local.findAddressesFromCoordinates(coordinates);
+    first = addresses.first;
+  }
 
   Future<void> getData() async {
     user = await FirebaseAuth.instance.currentUser();
@@ -163,32 +174,39 @@ class _ShoppingCartState extends State<ShoppingCart> {
 
                         VulnerablePerson person = VulnerablePerson().fromStream(
                             retrieved_data);
-                        Map<String, dynamic> data = Map<String, dynamic>();
-                        data['address'] = person.address;
-                        data['person_uid'] = user.uid;
-                        data['is_med'] = true;
-                        data['products'] = meds;
-                        data['type'] = "queue";
-                        meds.clear();
 
-                        if (meds.length > 0) {
-                          await Firestore.instance.collection('orders').add(
-                              data);
-                        }
 
-                        data['is_med'] = false;
-                        data['products'] = prods;
-                        prods.clear();
+                        await _getLocation().then((value) async {
+                          Map<String, dynamic> data = Map<String, dynamic>();
 
-                        if (prods.length > 0) {
-                          await Firestore.instance.collection('orders').add(
-                              data);
-                        }
+                          data['address'] = first.addressLine;
+                          data['long'] = position.longitude;
+                          data['lat'] = position.latitude;
+                          data['person_uid'] = user.uid;
+                          data['is_med'] = true;
+                          data['products'] = meds;
+                          data['type'] = "queue";
 
-                        if (widget.data['func'] != null) {
-                          widget.data['func']();
-                        }
-                        Navigator.of(context).pop();
+                          if (meds.length > 0) {
+                            await Firestore.instance.collection('orders').add(
+                                data);
+                          }
+
+                          data['is_med'] = false;
+                          data['products'] = prods;
+                          meds.clear();
+
+                          if (prods.length > 0) {
+                            await Firestore.instance.collection('orders').add(
+                                data);
+                          }
+
+                          prods.clear();
+                          if (widget.data['func'] != null) {
+                            widget.data['func']();
+                          }
+                          Navigator.of(context).pop();
+                        });
                       });
                     });
                   },
