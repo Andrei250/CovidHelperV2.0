@@ -6,8 +6,8 @@ class RegisterBack {
       this.email,
       this.phoneNumber,
       this.password,
-      this.address,
       this.coordinates,
+      this.address,
       this.userValue});
 
   String name;
@@ -28,8 +28,8 @@ class RegisterBack {
         email: email,
         phoneNumber: phoneNumber,
         password: password,
-        coordinates: coordinates,
         address: address,
+        coordinates: coordinates,
         userValue: userValue);
     if (result == null) {
       message = 'Error on adding new user!';

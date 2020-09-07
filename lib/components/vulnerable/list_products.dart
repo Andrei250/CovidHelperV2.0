@@ -1,6 +1,8 @@
+import 'package:covidhelper_v2/components/vulnerable/card_for_product.dart';
 import 'package:covidhelper_v2/models/vendor.dart';
 import 'package:covidhelper_v2/pages/vendor/vendor_back.dart';
 import 'package:covidhelper_v2/services/firestore_service.dart';
+import 'package:covidhelper_v2/utils/shopping_cart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
@@ -39,18 +41,18 @@ class _ListProductsState extends State<ListProducts> {
 
                 if (products != null) {
                   products.forEach((element) {
-                    if (element.name == el.name && element.price == el.price) {
+                    if (element.name == el.name) {
                       exists = true;
-                      element.stock = element.stock + el.stock;
+                      element.stock = int.parse(element.stock) > int.parse(el.stock) ? element.stock.toString() : el.stock.toString();
                     }
                   });
                 }
 
                 if (exists == false) {
                   products.add(el);
-                  if (_currentIndex == 0) {
+                  if (_currentIndex < vendors.length) {
                     setState(() {
-                      _currentIndex = 1;
+                      _currentIndex ++;
                     });
                   }
                 }
@@ -59,7 +61,6 @@ class _ListProductsState extends State<ListProducts> {
           });
         }
       });
-
     }
 
     return ListView(
@@ -68,7 +69,7 @@ class _ListProductsState extends State<ListProducts> {
             scrollDirection: Axis.vertical,
             shrinkWrap: true,
             itemCount: products.length,
-            itemBuilder: (context, index) =>  Text(products[index].name),
+            itemBuilder: (context, index) =>  CardForProduct(product: products[index]),
         ),
       ],
     );

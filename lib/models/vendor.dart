@@ -2,13 +2,13 @@
 
 class Vendor {
   const Vendor(
-      {this.name, this.email, this.phoneNumber,this.coordinates, this.address, this.uid});
+      {this.name, this.email, this.phoneNumber, this.uid, this.coordinates, this.address});
 
+  final String address;
+  final String coordinates;
   final String name;
   final String email;
   final String phoneNumber;
-  final String coordinates;
-  final String address;
   final String uid;
 
   Vendor.fromJson(Map<String, dynamic> parsedJson)

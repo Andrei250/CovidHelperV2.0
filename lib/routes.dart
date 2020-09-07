@@ -1,6 +1,7 @@
 import 'package:covidhelper_v2/components/loading_screen.dart';
 import 'package:covidhelper_v2/components/navigation/feedback.dart';
 import 'package:covidhelper_v2/components/navigation/settings.dart';
+import 'package:covidhelper_v2/components/vulnerable/cart.dart';
 import 'package:covidhelper_v2/components/vulnerable/get_products.dart';
 import 'package:covidhelper_v2/pages/admin_panel.dart';
 import 'package:covidhelper_v2/pages/loading.dart';
@@ -14,6 +15,7 @@ import 'components/change_name.dart';
 import 'components/change_password.dart';
 import 'components/update_user.dart';
 import 'components/vulnerable/personal_details.dart';
+import 'models/address.dart';
 import 'pages/login.dart';
 import 'pages/register/custom_route.dart';
 import 'pages/register/register_back.dart';
@@ -28,7 +30,7 @@ class Routing {
   static String name;
   static String phoneNumber;
   static String password;
-  static String address;
+  static AddressCoordAndText address;
   static String userValue;
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -57,6 +59,10 @@ class Routing {
         return CustomRoute(
             builder: (_) => VulnerablesMain(data: settings.arguments));
         break;
+      case '/vulnerable_main/shopping_cart':
+        return CustomRoute(
+            builder: (_) => ShoppingCart(data: settings.arguments,));
+        break;
       case '/vulnerable_main/get_products':
         return CustomRoute(builder: (_) => GetProducts());
         break;
@@ -68,10 +74,10 @@ class Routing {
         return CustomRoute(builder: (_) => Login());
         break;
       case '/volunteer_home':
-        return CustomRoute(builder: (_) => Home());
+        return CustomRoute(builder: (_) => Home(data: settings.arguments));
         break;
       case '/vendor_home':
-        return CustomRoute(builder: (_) => VendorHome());
+        return CustomRoute(builder: (_) => VendorHome(data: settings.arguments));
         break;
       case '/settings':
         return CustomRoute(builder: (_) => Settings(data: settings.arguments));
@@ -112,8 +118,9 @@ class Routing {
             name: Routing.name,
             email: Routing.email,
             phoneNumber: Routing.phoneNumber,
+            address: address.addressText,
+            coordinates: address.coordinates,
             password: Routing.password,
-            address: Routing.address,
             userValue: Routing.userValue);
         new LoadingScreen(registerBack: registerBack);
         print(Routing.address);
@@ -121,17 +128,17 @@ class Routing {
             builder: (_) => LoadingScreen(registerBack: registerBack));
         break;
       case '/volunteer_home':
-        return CustomRoute(builder: (_) => Home());
+        return CustomRoute(builder: (_) => Home(data: settings.arguments));
         break;
       case '/vendor_home':
-        return CustomRoute(builder: (_) => VendorHome());
+        return CustomRoute(builder: (_) => VendorHome(data: settings.arguments));
         break;
       case '/home':
         if (Routing.userValue == 'vendor') {
-          return CustomRoute(builder: (_) => VendorHome());
+          return CustomRoute(builder: (_) => VendorHome(data: settings.arguments));
 //        return CustomRoute(builder: (_) => Home(volunteer: args));
         } else if (Routing.userValue == 'volunteer') {
-          return CustomRoute(builder: (_) => Home());
+          return CustomRoute(builder: (_) => Home(data: settings.arguments));
           // return CustomRoute(builder: (_) => Home(volunteer: args));
         }
         break;

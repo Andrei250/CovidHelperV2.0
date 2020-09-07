@@ -26,9 +26,7 @@ class _RegisterChooseState extends State<RegisterChoose> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      onGenerateRoute: Routing.generateRoute,
-      home: Scaffold(
+    return Scaffold(
         // app bar with size 1px to deal with the notches
         backgroundColor: Colors.white,
         appBar: AppBar(
@@ -122,7 +120,6 @@ class _RegisterChooseState extends State<RegisterChoose> {
             ],
           ),
         ),
-      ),
-    );
+      );
   }
 }

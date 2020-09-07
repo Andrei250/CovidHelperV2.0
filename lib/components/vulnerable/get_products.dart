@@ -18,6 +18,12 @@ class GetProducts extends StatefulWidget {
 
 class _GetProductsState extends State<GetProducts> {
 
+  void resetBuild() {
+    setState(() {
+
+    });
+  }
+
   AppBar interfaceAppBar() {
     return AppBar(
       elevation:0,
@@ -60,7 +66,9 @@ class _GetProductsState extends State<GetProducts> {
                   child: IconButton(
                     icon: Icon(Icons.shopping_cart),
                     color: Colors.black,
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).pushNamed('/vulnerable_main/shopping_cart', arguments: {"func": resetBuild});
+                    },
                   ),
                 ),
               )
@@ -85,7 +93,7 @@ class _GetProductsState extends State<GetProducts> {
         StreamProvider<List<Vendor>>.value(value: FirestoreService().vendors),
       ],
       child: Scaffold(
-        backgroundColor: Colors.white70,
+        backgroundColor: Colors.white,
         appBar: appBar,
         body: Column(
           children: [
@@ -99,7 +107,7 @@ class _GetProductsState extends State<GetProducts> {
                     BoxShadow(
                       offset: Offset(0, 10),
                       blurRadius: 50,
-                      color: Colors.grey.withOpacity(0.23),
+                      color: Colors.white,
                     )
                   ]
               ),
@@ -122,8 +130,11 @@ class _GetProductsState extends State<GetProducts> {
                 ],
               ),
             ),
+            Divider(
+              thickness: 2,
+            ),
             SizedBox(
-              height: size.height - 54 - appBar.preferredSize.height - 50,
+              height: size.height - 54 - appBar.preferredSize.height - 66,
               child: ListProducts(),
             ),
           ],

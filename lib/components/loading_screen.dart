@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:covidhelper_v2/models/vendor.dart';
 import 'package:covidhelper_v2/models/volunteer.dart';
 import 'package:covidhelper_v2/pages/register/register_back.dart';
@@ -22,20 +23,41 @@ class _LoadingScreenState extends State<LoadingScreen> {
     await widget.registerBack.addNewUser();
 
     FirebaseAuth _auth = FirebaseAuth.instance;
-    FirebaseUser user;
-    user = await _auth.currentUser();
+    FirebaseUser currentUser;
+    Firestore _db = Firestore.instance;
+
+    currentUser = await _auth.currentUser();
+    var userData = await _db.collection("Users").document(currentUser.uid).get();
+    var userInfo = await _db
+        .collection(userData['user_value'])
+        .document(currentUser.uid)
+        .get();
+    Map<String, dynamic> retrievedData = new Map<String, dynamic>();
+    retrievedData['userInfo'] = userInfo;
+
+    if (userData['user_value'] == 'Vulnerables') {
+      retrievedData['route'] = '/vulnerable_main';
+      retrievedData['type'] = "vulnerable";
+      retrievedData['vendors'] = FirestoreService().vendors;
+    } else if (userData['user_value'] == "Admins") {
+      retrievedData['route'] = '/admin_panel';
+      retrievedData['type'] = "admin";
+    } else if (userData['user_value'] == 'volunteer') {
+      retrievedData['route'] = '/volunteer_home';
+      retrievedData['type'] = 'volunteer';
+    } else if (userData['user_value'] == 'vendor') {
+      retrievedData['route'] = '/vendor_home';
+      retrievedData['type'] = "vendor";
+    }
 
     if (widget.registerBack.userValue == 'volunteer') {
-      Volunteer volunteer;
-      volunteer = await FirestoreService().getVolunteer(user);
       Navigator.of(context).pushNamedAndRemoveUntil(
           '/home', (Route<dynamic> route) => false,
-          arguments: volunteer);
+          arguments: retrievedData);
     } else if (widget.registerBack.userValue == 'vendor') {
-      Vendor vendor;
-      vendor = await FirestoreService().getVendor(user);
       Navigator.of(context).pushNamedAndRemoveUntil(
-          '/home', (Route<dynamic> route) => false);
+          '/home', (Route<dynamic> route) => false,
+          arguments: retrievedData);
     }
   }
 
