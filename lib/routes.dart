@@ -119,11 +119,11 @@ class Routing {
             email: Routing.email,
             phoneNumber: Routing.phoneNumber,
             address: address.addressText,
-            coordinates: address.coordinates,
+            long: address.long,
+            lat: address.lat,
             password: Routing.password,
             userValue: Routing.userValue);
         new LoadingScreen(registerBack: registerBack);
-        print(Routing.address);
         return CustomRoute(
             builder: (_) => LoadingScreen(registerBack: registerBack));
         break;

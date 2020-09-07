@@ -157,8 +157,9 @@ class FirestoreService {
       String password,
       String phoneNumber,
       String name,
+      String lat,
       String address,
-      String coordinates,
+      String long,
       String userValue}) async {
     try {
       AuthResult result = await _auth.createUserWithEmailAndPassword(
@@ -170,7 +171,8 @@ class FirestoreService {
             email: email,
             phoneNumber: phoneNumber,
             address: address,
-            coordinates: coordinates,
+            long: long,
+            lat: lat,
             uid: user.uid);
         await addNewVendor(vendor, userValue);
         await addUser(vendor.uid, userValue);

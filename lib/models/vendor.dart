@@ -2,10 +2,11 @@
 
 class Vendor {
   const Vendor(
-      {this.name, this.email, this.phoneNumber, this.uid, this.coordinates, this.address});
+      {this.name, this.email, this.phoneNumber, this.uid, this.lat, this.long, this.address});
 
   final String address;
-  final String coordinates;
+  final String lat;
+  final String long;
   final String name;
   final String email;
   final String phoneNumber;
@@ -15,7 +16,8 @@ class Vendor {
       : name = parsedJson['name'] ?? '',
         email = parsedJson['email'] ?? '',
         phoneNumber = parsedJson['phoneNumber'] ?? '',
-        coordinates = parsedJson['coordinates'] ?? '',
+        lat = parsedJson['lat'] ?? '',
+        long  = parsedJson['long'] ?? '',
         address = parsedJson['address'] ?? '',
         uid = parsedJson['uid'] ?? '';
 
@@ -24,7 +26,8 @@ class Vendor {
     dataMap['name'] = this.name;
     dataMap['email'] = this.email;
     dataMap['phoneNumber'] = this.phoneNumber;
-    dataMap['coordinates'] = this.coordinates;
+    dataMap['lat'] = this.lat;
+    dataMap['long'] = this.long;
     dataMap['address'] = this.address;
     dataMap['uid'] = this.uid;
     return dataMap;
