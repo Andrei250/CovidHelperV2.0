@@ -93,50 +93,12 @@ class _GetProductsState extends State<GetProducts> {
         StreamProvider<List<Vendor>>.value(value: FirestoreService().vendors),
       ],
       child: Scaffold(
+        resizeToAvoidBottomPadding: false,
         backgroundColor: Colors.white,
         appBar: appBar,
         body: Column(
           children: [
-            Container(
-              alignment: Alignment.center,
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              height: 54,
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      offset: Offset(0, 10),
-                      blurRadius: 50,
-                      color: Colors.white,
-                    )
-                  ]
-              ),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: TextField(
-                      onChanged: (value) {},
-                      decoration: InputDecoration(
-                        hintText: "Cauta produse",
-                        hintStyle: TextStyle(
-                            color: Colors.grey.withOpacity(0.5)
-                        ),
-                        enabledBorder: InputBorder.none,
-                        focusedBorder: InputBorder.none,
-                      ),
-                    ),
-                  ),
-                  SvgPicture.asset("assets/icons/search.svg"),
-                ],
-              ),
-            ),
-            Divider(
-              thickness: 2,
-            ),
-            SizedBox(
-              height: size.height - 54 - appBar.preferredSize.height - 66,
-              child: ListProducts(),
-            ),
+            ListProducts(size: size, appbar: appBar),
           ],
         ),
       ),
