@@ -113,6 +113,7 @@ class Routing {
         return CustomRoute(builder: (_) => RegisterAddress());
         break;
       case '/loading_screen':
+      if(Routing.address != null) {
         Routing.address = args;
         RegisterBack registerBack = new RegisterBack(
             name: Routing.name,
@@ -126,6 +127,17 @@ class Routing {
         new LoadingScreen(registerBack: registerBack);
         return CustomRoute(
             builder: (_) => LoadingScreen(registerBack: registerBack));
+      }else{
+        RegisterBack registerBack = new RegisterBack(
+            name: Routing.name,
+            email: Routing.email,
+            phoneNumber: Routing.phoneNumber,
+            password: Routing.password,
+            userValue: Routing.userValue);
+        new LoadingScreen(registerBack: registerBack);
+        return CustomRoute(
+            builder: (_) => LoadingScreen(registerBack: registerBack));
+      }
         break;
       case '/volunteer_home':
         return CustomRoute(builder: (_) => Home(data: settings.arguments));
