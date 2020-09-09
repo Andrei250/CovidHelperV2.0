@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:covidhelper_v2/components/vulnerable/list_products.dart';
 import 'package:covidhelper_v2/models/vendor.dart';
 import 'package:covidhelper_v2/models/vulnerable_person.dart';
 import 'package:covidhelper_v2/pages/vendor/vendor_back.dart';
@@ -16,7 +17,12 @@ class GetProducts extends StatefulWidget {
 }
 
 class _GetProductsState extends State<GetProducts> {
-  List<List<Products>> products;
+
+  void resetBuild() {
+    setState(() {
+
+    });
+  }
 
   AppBar interfaceAppBar() {
     return AppBar(
@@ -60,7 +66,9 @@ class _GetProductsState extends State<GetProducts> {
                   child: IconButton(
                     icon: Icon(Icons.shopping_cart),
                     color: Colors.black,
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).pushNamed('/vulnerable_main/shopping_cart', arguments: {"func": resetBuild});
+                    },
                   ),
                 ),
               )
@@ -79,74 +87,18 @@ class _GetProductsState extends State<GetProducts> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    AppBar appBar = interfaceAppBar();
     return MultiProvider(
       providers: [
-        StreamProvider<List<List<Products>>>.value(value: FirestoreService().products),
+        StreamProvider<List<Vendor>>.value(value: FirestoreService().vendors),
       ],
       child: Scaffold(
-        backgroundColor: Colors.white70,
-        appBar: interfaceAppBar(),
+        resizeToAvoidBottomPadding: false,
+        backgroundColor: Colors.white,
+        appBar: appBar,
         body: Column(
           children: [
-            Container(
-              alignment: Alignment.center,
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              height: 54,
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      offset: Offset(0, 10),
-                      blurRadius: 50,
-                      color: Colors.grey.withOpacity(0.23),
-                    )
-                  ]
-              ),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: TextField(
-                      onChanged: (value) {},
-                      decoration: InputDecoration(
-                        hintText: "Cauta produse",
-                        hintStyle: TextStyle(
-                            color: Colors.grey.withOpacity(0.5)
-                        ),
-                        enabledBorder: InputBorder.none,
-                        focusedBorder: InputBorder.none,
-                      ),
-                    ),
-                  ),
-                  SvgPicture.asset("assets/icons/search.svg"),
-                ],
-              ),
-            ),
-            Builder(
-              builder: (BuildContext context) {
-                products = Provider.of<List<List<Products>>>(context);
-                List<Products> newList = new List<Products>();
-
-                products.forEach((element) {
-                  element.forEach((element) {
-                    if (!newList.contains(element)) {
-                      newList.add(element);
-                    }
-                  });
-                });
-
-                return Expanded(
-                  child: SizedBox(
-                    height: size.height - 54,
-                    child: ListView.builder(
-                      itemCount: newList.length,
-                      itemBuilder: (context, index) {
-                        return Text("DA");
-                      },
-                    ),
-                  ),
-                );
-              }
-            ),
+            ListProducts(size: size, appbar: appBar),
           ],
         ),
       ),

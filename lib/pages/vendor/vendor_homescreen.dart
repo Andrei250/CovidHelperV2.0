@@ -1,3 +1,4 @@
+import 'package:covidhelper_v2/components/left_nav.dart';
 import 'package:covidhelper_v2/pages/vendor/vendor_back.dart';
 import 'package:covidhelper_v2/pages/vendor/vendor_coming_volunteer.dart';
 import 'package:covidhelper_v2/pages/vendor/vendor_produtcs.dart';
@@ -15,9 +16,10 @@ class VendorHomeScreen extends StatefulWidget {
 
   final VoidCallback onSeeAllButtonPressed;
   final VoidCallback onAddButtonPressed;
+  final Map data;
 
   VendorHomeScreen(
-      {@required this.onSeeAllButtonPressed, this.onAddButtonPressed});
+      {@required this.onSeeAllButtonPressed, this.onAddButtonPressed, this.data});
 
   @override
   _VendorHomeScreenState createState() => _VendorHomeScreenState();
@@ -57,11 +59,12 @@ class _VendorHomeScreenState extends State<VendorHomeScreen> {
 
     double deviceHeight = MediaQuery.of(context).size.height;
     double deviceWidth = MediaQuery.of(context).size.width;
+    Size size = MediaQuery.of(context).size;
+    final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>(debugLabel: '_VendorHomeScreen');
 
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-//        theme: AppTheme.darkTheme,
-        home: Scaffold(
+    return Scaffold(
+            key: _scaffoldKey,
+            drawer: LeftNavigation(size: size, data: widget.data, context: context),
             backgroundColor: Colors.white,
             appBar: PreferredSize(
               preferredSize: Size.fromHeight(50.0),
@@ -70,13 +73,16 @@ class _VendorHomeScreenState extends State<VendorHomeScreen> {
 //                backgroundColor: Color.fromRGBO(0, 200, 150, 1),
                 backgroundColor: Colors.white,
                 elevation: 0,
+                leading: IconButton(
+                  icon: SvgPicture.asset(
+                    drawer,
+                    color: Colors.black,
+                  ),
+                  onPressed: () => _scaffoldKey.currentState.openDrawer(),
+                ),
                 title: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    SvgPicture.asset(
-                      drawer,
-                      color: Colors.black,
-                    ),
 //                    Container(height: 30, width: 30, child: LogoAppBar()),
                     Text(
                       'Covidhelper',
@@ -101,7 +107,7 @@ class _VendorHomeScreenState extends State<VendorHomeScreen> {
               ),
             ),
             body:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: <
+            Column(crossAxisAlignment: CrossAxisAlignment.start, children: <
                     Widget>[
               Padding(
                 padding: const EdgeInsets.fromLTRB(15.0, 5.0, 0.0, 0.0),
@@ -237,6 +243,6 @@ class _VendorHomeScreenState extends State<VendorHomeScreen> {
                             onAddButtonPressed: widget.onAddButtonPressed,
                           ),
                   ])),
-            ])));
+            ]));
   }
 }

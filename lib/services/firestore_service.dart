@@ -20,6 +20,17 @@ class FirestoreService {
         .map((document) => VulnerablePerson.fromJson(document.data))
         .toList());
   }
+  
+   Stream<List<Products>> getProductsStream(String uid) {
+     return _db.collection('vendor')
+         .document(uid)
+         .collection('Products')
+         .orderBy('stock')
+         .snapshots()
+         .map((snapshot) => snapshot.documents
+         .map((document) => Products.fromJson(document.data))
+         .toList());
+   }
 
   List<Products> getProducts(String uid) {
     var data = _db
@@ -29,8 +40,8 @@ class FirestoreService {
         .orderBy('stock')
         .snapshots()
         .map((snapshot) => snapshot.documents
-            .map((document) => Products.fromJson(document.data))
-            .toList());
+        .map((document) => Products.fromJson(document.data))
+        .toList());
 
     List<Products> list = new List<Products>();
 
@@ -43,12 +54,6 @@ class FirestoreService {
     return list;
   }
 
-  Stream<List<List<Products>>> get products {
-    return _db.collection('vendor').snapshots().map((snapshot) => snapshot
-        .documents
-        .map((document) => getProducts(document.documentID))
-        .toList());
-  }
 
   Stream<List<Vendor>> get vendors {
     return _db.collection('vendor').snapshots().map((snapshot) => snapshot
@@ -152,7 +157,9 @@ class FirestoreService {
       String password,
       String phoneNumber,
       String name,
+      String lat,
       String address,
+      String long,
       String userValue}) async {
     try {
       AuthResult result = await _auth.createUserWithEmailAndPassword(
@@ -164,6 +171,8 @@ class FirestoreService {
             email: email,
             phoneNumber: phoneNumber,
             address: address,
+            long: long,
+            lat: lat,
             uid: user.uid);
         await addNewVendor(vendor, userValue);
         await addUser(vendor.uid, userValue);
@@ -219,6 +228,7 @@ class FirestoreService {
       if (userData['user_value'] == 'Vulnerables') {
         retrievedData['route'] = '/vulnerable_main';
         retrievedData['type'] = "vulnerable";
+        retrievedData['vendors'] = FirestoreService().vendors;
       } else if (userData['user_value'] == 'volunteer') {
         retrievedData['route'] = '/volunteer_home';
         retrievedData['type'] = 'volunteer';
@@ -267,7 +277,6 @@ class FirestoreService {
       Vendor vendor = new Vendor(
           name: userData['name'],
           email: userData['email'],
-          address: userData['address'],
           phoneNumber: userData['phoneNumber']);
       return vendor;
     }
@@ -317,7 +326,7 @@ class FirestoreService {
     }
   }
 
-  Future deleteUser(FirebaseUser user, String password) async {
+  Future deleteUser(FirebaseUser user, String password, String type) async {
     String uid = user.uid;
     try {
       AuthResult result = await user.reauthenticateWithCredential(
@@ -325,7 +334,15 @@ class FirestoreService {
               email: user.email, password: password));
       await result.user.delete().then((_) async {
         await _db.collection('Users').document(uid).delete();
-        await _db.collection('Vulnerables').document(uid).delete();
+        String value;
+        if (type == "vulnerable") {
+          value = "Vulnerables";
+        } else if (type == "admin") {
+          value = "Admins";
+        } else {
+          value = type;
+        }
+        await _db.collection(value).document(uid).delete();
       });
 
       return 200;

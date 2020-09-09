@@ -64,8 +64,6 @@ class _LoadingState extends State<Loading> {
   @override
   Widget build(BuildContext context) {
     loading();
-    return MaterialApp(
-      home: StartingLoading()
-    );
+    return StartingLoading();
   }
 }
