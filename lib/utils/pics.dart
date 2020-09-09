@@ -1,5 +1,4 @@
 const logo_one = 'assets/images/logos/logo_white.svg';
-const distance = 'assets/images/location.svg';
 const pill = 'assets/icons/pill.svg';
 const food = 'assets/icons/food.svg';
 const clock = 'assets/icons/clock.svg';
@@ -22,3 +21,8 @@ const dollar = 'assets/icons/dollar.svg';
 const warehouse = 'assets/icons/warehouse.svg';
 const packages = 'assets/icons/packages.svg';
 const addPerson = 'assets/icons/add_person.svg';
+const distance = 'assets/icons/distance.svg';
+const grocery = 'assets/icons/grocery.svg';
+const phone = 'assets/icons/phone.svg';
+const order = 'assets/icons/order.svg';
+const vendor = 'assets/icons/vendor.svg';

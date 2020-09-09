@@ -198,3 +198,9 @@ final eTextField = TextStyle(
   fontFamily: 'quicksand',
   fontSize: 17.0,
 );
+
+final eName = TextStyle(
+  color: Colors.grey[500],
+  fontFamily: 'quicksand',
+  fontSize: 20.0,
+);
