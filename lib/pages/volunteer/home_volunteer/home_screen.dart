@@ -6,7 +6,6 @@ import 'package:covidhelper_v2/utils/pics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:geolocator/geolocator.dart';
 
 class HomeScreen extends StatefulWidget {
 //  HomeScreen({this.name});
@@ -15,32 +14,23 @@ class HomeScreen extends StatefulWidget {
 
   final VoidCallback onButtonPressed;
   final Map data;
+  String latitude;
+  String longitude;
 
-  HomeScreen({@required this.onButtonPressed, this.data});
+  HomeScreen(
+      {@required this.onButtonPressed,
+      this.data,
+      this.longitude,
+      this.latitude});
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  String _latitude;
-  String _longitude;
-
-  void _getCurrentLocation() async {
-    final position = await Geolocator()
-        .getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
-    print(position);
-
-    setState(() {
-      _latitude = "${position.latitude}";
-      _longitude = "${position.longitude}";
-    });
-  }
-
   @override
   void initState() {
     super.initState();
-    _getCurrentLocation();
   }
 
   @override
@@ -226,8 +216,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   limit: true,
                   number: 5,
                   customHeight: deviceHeight * 0.45,
-                  latitude: _latitude,
-                  longitude: _longitude,
+                  latitude: widget.latitude,
+                  longitude: widget.longitude,
                 ),
               ])),
             ]));

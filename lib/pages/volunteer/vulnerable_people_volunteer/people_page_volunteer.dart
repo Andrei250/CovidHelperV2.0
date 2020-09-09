@@ -3,11 +3,18 @@ import 'package:covidhelper_v2/utils/app_theme.dart';
 import 'package:flutter/material.dart';
 
 class PeoplePageVolunteer extends StatefulWidget {
-  PeoplePageVolunteer({this.limit, this.number, this.customHeight});
+  PeoplePageVolunteer(
+      {this.limit,
+      this.number,
+      this.customHeight,
+      this.latitude,
+      this.longitude});
 
   bool limit;
   int number;
   double customHeight;
+  String latitude;
+  String longitude;
 
   @override
   _PeoplePageVolunteerState createState() => _PeoplePageVolunteerState();
@@ -32,10 +39,15 @@ class _PeoplePageVolunteerState extends State<PeoplePageVolunteer> {
               style: eTitle,
             )),
           ),
+          SizedBox(
+            height: 20,
+          ),
           VolunteerVulnerables(
             limit: widget.limit,
             number: widget.number,
             customHeight: deviceHeight * 0.85,
+            longitude: widget.longitude,
+            latitude: widget.latitude,
           ),
         ],
       ),

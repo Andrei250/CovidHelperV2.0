@@ -21,9 +21,16 @@ class PersonCardVolunteer extends StatefulWidget {
 }
 
 class _PersonCardVolunteerState extends State<PersonCardVolunteer> {
+  final double speed = 1.4; // m/s -- average speed when walking
   final FirestoreService _service = new FirestoreService();
   VulnerablePerson vulnerablePerson;
-  double distance;
+  var distance;
+  String unit;
+  String time;
+  double timeDouble;
+  String timeUnit;
+  String timeUnitSecond;
+  String timeSecond = null;
 
   void _getVulnerablePerson() async {
     vulnerablePerson = await _service.getVulnerable(widget.orders.person_uid);
@@ -38,14 +45,32 @@ class _PersonCardVolunteerState extends State<PersonCardVolunteer> {
   }
 
   Future<void> _calculateDistance() async {
-    final double dist = await Geolocator().distanceBetween(
+    var dist = await Geolocator().distanceBetween(
         double.parse(widget.latitude),
         double.parse(widget.longitude),
         widget.orders.latitude,
         widget.orders.longitude);
-    distance = dist;
-    print('00000000000000000000');
-    print(dist);
+    timeDouble = dist / speed;
+
+    if (timeDouble < 60) {
+      time = '1';
+      timeUnit = 'min';
+    } else if (timeDouble >= 60 && timeDouble < 3600) {
+      time = (timeDouble / 60).floor().toString();
+      timeUnit = 'min';
+    } else if (timeDouble >= 3600) {
+      double decimals = timeDouble / 3600 - (timeDouble / 3600).floor();
+      timeSecond = (decimals * 60).floor().toString();
+      time = (timeDouble / 3600).floor().toString();
+      timeUnit = 'ore';
+    }
+    if (dist >= 1000) {
+      dist /= 1000;
+      unit = 'km';
+    } else {
+      unit = 'm';
+    }
+    distance = dist.floor();
   }
 
   @override
@@ -77,7 +102,11 @@ class _PersonCardVolunteerState extends State<PersonCardVolunteer> {
                       style: eTitle,
                     ),
                     Text(
-                      'Se afla la ' + distance.toString() + ' de tine',
+                      'Se afla la ' +
+                          distance.toString() +
+                          ' ' +
+                          unit.toString() +
+                          ' de tine',
                       style: eWelcome,
                     ),
                   ],
@@ -142,7 +171,11 @@ class _PersonCardVolunteerState extends State<PersonCardVolunteer> {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(25.0, 15.0, 10.0, 5.0),
                   child: Text(
-                    'Persoana se afla la ' + distance.toString() + ' de tine',
+                    'Persoana se afla la ' +
+                        distance.toString() +
+                        ' ' +
+                        unit.toString() +
+                        ' de tine',
                     style: eWelcome,
                   ),
                 ),
@@ -161,7 +194,13 @@ class _PersonCardVolunteerState extends State<PersonCardVolunteer> {
                 Padding(
                     padding: const EdgeInsets.fromLTRB(25.0, 0.0, 10.0, 25.0),
                     child: Text(
-                      'Durata aproximativa a calatoriei: 50 de minute',
+                      'Durata aproximativa a calatoriei: ' +
+                          time +
+                          ' ' +
+                          timeUnit +
+                          (timeSecond != null
+                              ? (' si ' + timeSecond + ' min')
+                              : ''),
                       style: eWelcome,
                     )),
               ],
