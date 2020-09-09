@@ -1,15 +1,22 @@
-import 'package:covidhelper_v2/models/vulnerable_person.dart';
+import 'package:covidhelper_v2/models/orders.dart';
 import 'package:covidhelper_v2/pages/volunteer/vulnerable_people_volunteer/volunteer_vulnearbles_card.dart';
 import 'package:covidhelper_v2/services/firestore_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class VolunteerVulnerables extends StatefulWidget {
-  VolunteerVulnerables({this.limit, this.number, this.customHeight});
+  VolunteerVulnerables(
+      {this.limit,
+      this.number,
+      this.customHeight,
+      this.latitude,
+      this.longitude});
 
   bool limit;
   int number;
   double customHeight;
+  String latitude;
+  String longitude;
 
   @override
   _VolunteerVulnerablesState createState() => _VolunteerVulnerablesState();
@@ -21,16 +28,16 @@ class _VolunteerVulnerablesState extends State<VolunteerVulnerables> {
     return Container(
       color: Colors.white,
       height: widget.customHeight,
-//      width: deviceWidth,
-      child: StreamProvider<List<VulnerablePerson>>.value(
-          value: FirestoreService().vulnerables,
+      child: StreamProvider<List<Orders>>.value(
+          value: FirestoreService().orders,
           child: Scaffold(
             backgroundColor: Colors.white,
-            body: Center(
-                child: VolunteerVulnerablesCards(
+            body: VolunteerVulnerablesCards(
               limit: widget.limit,
               number: widget.number,
-            )),
+              latitude: widget.latitude,
+              longitude: widget.longitude,
+            ),
           )),
     );
   }

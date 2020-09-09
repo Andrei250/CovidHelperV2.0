@@ -1,21 +1,78 @@
+import 'package:covidhelper_v2/models/orders.dart';
 import 'package:covidhelper_v2/models/vulnerable_person.dart';
+import 'package:covidhelper_v2/services/firestore_service.dart';
 import 'package:covidhelper_v2/utils/app_theme.dart';
 import 'package:covidhelper_v2/utils/pics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:slide_popup_dialog/slide_popup_dialog.dart' as slideDialog;
 
 class PersonCardVolunteer extends StatefulWidget {
-  PersonCardVolunteer({this.vulnerablePerson});
+  PersonCardVolunteer({this.orders, this.longitude, this.latitude});
 
-  VulnerablePerson vulnerablePerson;
+  Orders orders;
+  String latitude;
+  String longitude;
 
   @override
   _PersonCardVolunteerState createState() => _PersonCardVolunteerState();
 }
 
 class _PersonCardVolunteerState extends State<PersonCardVolunteer> {
+  final double speed = 1.4; // m/s -- average speed when walking
+  final FirestoreService _service = new FirestoreService();
+  VulnerablePerson vulnerablePerson;
+  var distance;
+  String unit;
+  String time;
+  double timeDouble;
+  String timeUnit;
+  String timeUnitSecond;
+  String timeSecond = null;
+
+  void _getVulnerablePerson() async {
+    vulnerablePerson = await _service.getVulnerable(widget.orders.person_uid);
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _getVulnerablePerson();
+    _calculateDistance();
+  }
+
+  Future<void> _calculateDistance() async {
+    var dist = await Geolocator().distanceBetween(
+        double.parse(widget.latitude),
+        double.parse(widget.longitude),
+        widget.orders.latitude,
+        widget.orders.longitude);
+    timeDouble = dist / speed;
+
+    if (timeDouble < 60) {
+      time = '1';
+      timeUnit = 'min';
+    } else if (timeDouble >= 60 && timeDouble < 3600) {
+      time = (timeDouble / 60).floor().toString();
+      timeUnit = 'min';
+    } else if (timeDouble >= 3600) {
+      double decimals = timeDouble / 3600 - (timeDouble / 3600).floor();
+      timeSecond = (decimals * 60).floor().toString();
+      time = (timeDouble / 3600).floor().toString();
+      timeUnit = 'ore';
+    }
+    if (dist >= 1000) {
+      dist /= 1000;
+      unit = 'km';
+    } else {
+      unit = 'm';
+    }
+    distance = dist.floor();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -37,12 +94,19 @@ class _PersonCardVolunteerState extends State<PersonCardVolunteer> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      widget.vulnerablePerson.first_name +
-                          widget.vulnerablePerson.last_name,
+                      vulnerablePerson == null
+                          ? ''
+                          : vulnerablePerson.first_name +
+                              ' ' +
+                              vulnerablePerson.last_name,
                       style: eTitle,
                     ),
                     Text(
-                      'Se afla la 3km de tine',
+                      'Se afla la ' +
+                          distance.toString() +
+                          ' ' +
+                          unit.toString() +
+                          ' de tine',
                       style: eWelcome,
                     ),
                   ],
@@ -90,8 +154,11 @@ class _PersonCardVolunteerState extends State<PersonCardVolunteer> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    widget.vulnerablePerson.first_name +
-                        widget.vulnerablePerson.last_name,
+                    vulnerablePerson == null
+                        ? ''
+                        : vulnerablePerson.first_name +
+                            ' ' +
+                            vulnerablePerson.last_name,
                     style: eTitle,
                   ),
                 ),
@@ -104,14 +171,18 @@ class _PersonCardVolunteerState extends State<PersonCardVolunteer> {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(25.0, 15.0, 10.0, 5.0),
                   child: Text(
-                    'Persoana se afla la 15km de tine',
+                    'Persoana se afla la ' +
+                        distance.toString() +
+                        ' ' +
+                        unit.toString() +
+                        ' de tine',
                     style: eWelcome,
                   ),
                 ),
                 Padding(
                     padding: const EdgeInsets.fromLTRB(25.0, 0.0, 10.0, 5.0),
                     child: Text(
-                      'Strada Luncilor, Nr 7',
+                      widget.orders.address,
                       style: eWelcome,
                     )),
                 Padding(
@@ -123,7 +194,13 @@ class _PersonCardVolunteerState extends State<PersonCardVolunteer> {
                 Padding(
                     padding: const EdgeInsets.fromLTRB(25.0, 0.0, 10.0, 25.0),
                     child: Text(
-                      'Durata aproximativa a calatoriei: 50 de minute',
+                      'Durata aproximativa a calatoriei: ' +
+                          time +
+                          ' ' +
+                          timeUnit +
+                          (timeSecond != null
+                              ? (' si ' + timeSecond + ' min')
+                              : ''),
                       style: eWelcome,
                     )),
               ],
@@ -155,7 +232,7 @@ class _PersonCardVolunteerState extends State<PersonCardVolunteer> {
                     ),
                     onPressed: () {},
                     child: Padding(
-                     padding: const EdgeInsets.fromLTRB(10.0, 2.0, 10.0, 2.0),
+                      padding: const EdgeInsets.fromLTRB(10.0, 2.0, 10.0, 2.0),
                       child: Text(
                         'REFUZA',
                         style: eDeclineButton,

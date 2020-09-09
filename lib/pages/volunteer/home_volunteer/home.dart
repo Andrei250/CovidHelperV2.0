@@ -7,8 +7,7 @@ import 'package:covidhelper_v2/utils/app_theme.dart';
 import 'package:covidhelper_v2/utils/pics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
-import '../../../routes.dart';
+import 'package:geolocator/geolocator.dart';
 
 class Home extends StatefulWidget {
 //  Volunteer volunteer;
@@ -16,6 +15,7 @@ class Home extends StatefulWidget {
 //  Home({ this.volunteer });
 
   final Map data;
+
   Home({this.data});
 
   @override
@@ -25,11 +25,25 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   int _currentIndex = 0;
   PageController _pageController;
+  String _latitude;
+  String _longitude;
+
+  void _getCurrentLocation() async {
+    final position = await Geolocator()
+        .getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
+    print(position);
+
+    setState(() {
+      _latitude = "${position.latitude}";
+      _longitude = "${position.longitude}";
+    });
+  }
 
   @override
   void initState() {
     super.initState();
     _pageController = PageController();
+    _getCurrentLocation();
   }
 
   @override
@@ -41,60 +55,44 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
+      bottomNavigationBar: BottomNavyBar(
         backgroundColor: Colors.white,
-        bottomNavigationBar: BottomNavyBar(
-          backgroundColor: Colors.white,
-          selectedIndex: _currentIndex,
-          showElevation: true,
-          itemCornerRadius: 25,
-          curve: Curves.easeInBack,
-          onItemSelected: (index) {
-            setState(
-              () {
-                _currentIndex = index;
-                _pageController.jumpToPage(index);
-              },
-            );
-          },
-          items: <BottomNavyBarItem>[
-            BottomNavyBarItem(
-              icon: SvgPicture.asset(
-                home,
-                height: 30,
-                width: 30,
-                color: AppTheme.lightAccent,
-              ),
-              title: Text('Home', style: eNavBarText),
-              activeColor: AppTheme.lightAccent,
-              inactiveColor: AppTheme.lightAccent,
-              textAlign: TextAlign.center,
+        selectedIndex: _currentIndex,
+        showElevation: true,
+        itemCornerRadius: 25,
+        curve: Curves.easeInBack,
+        onItemSelected: (index) {
+          setState(
+            () {
+              _currentIndex = index;
+              _pageController.jumpToPage(index);
+            },
+          );
+        },
+        items: <BottomNavyBarItem>[
+          BottomNavyBarItem(
+            icon: SvgPicture.asset(
+              home,
+              height: 30,
+              width: 30,
+              color: AppTheme.lightAccent,
             ),
-            BottomNavyBarItem(
-              icon: SvgPicture.asset(
-                people,
-                height: 30,
-                width: 30,
-                color: AppTheme.lightAccent,
-              ),
-              title: Text(
-                'Persoane',
-                style: eNavBarText,
-              ),
-              activeColor: AppTheme.lightAccent,
-              inactiveColor: AppTheme.lightAccent,
-              textAlign: TextAlign.center,
+            title: Text('Home', style: eNavBarText),
+            activeColor: AppTheme.lightAccent,
+            inactiveColor: AppTheme.lightAccent,
+            textAlign: TextAlign.center,
+          ),
+          BottomNavyBarItem(
+            icon: SvgPicture.asset(
+              people,
+              height: 30,
+              width: 30,
+              color: AppTheme.lightAccent,
             ),
-            BottomNavyBarItem(
-              icon: SvgPicture.asset(
-                graph,
-                height: 30,
-                width: 30,
-                color: AppTheme.lightAccent,
-              ),
-              title: Text('Statistici', style: eNavBarText),
-              activeColor: AppTheme.lightAccent,
-              inactiveColor: AppTheme.lightAccent,
-              textAlign: TextAlign.center,
+            title: Text(
+              'Persoane',
+              style: eNavBarText,
             ),
             BottomNavyBarItem(
               icon: SvgPicture.asset(
@@ -124,20 +122,26 @@ class _HomeState extends State<Home> {
           },
           children: <Widget>[
 //                HomeScreen(name: widget.volunteer.name),
-            HomeScreen(onButtonPressed: () {
+          HomeScreen(
+            onButtonPressed: () {
               _pageController.animateToPage(1,
                   duration: Duration(milliseconds: 500), curve: Curves.ease);
             },
             data: widget.data,
-            ),
-            PeoplePageVolunteer(limit: false),
-            StatisticsVolunteer(),
-            CurrentOrder(),
-            // Container(
-            //   color: Colors.red,                     // notifications
-            // ),
-          ],
-        ),
-      );
+            latitude: _latitude,
+            longitude: _longitude,
+          ),
+          PeoplePageVolunteer(
+            limit: false,
+            latitude: _latitude,
+            longitude: _longitude,
+          ),
+          StatisticsVolunteer(),
+          // Container(
+          //   color: Colors.red,                     // notifications
+          // ),
+        ],
+      ),
+    );
   }
 }

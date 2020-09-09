@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:covidhelper_v2/models/admin.dart';
+import 'package:covidhelper_v2/models/orders.dart';
 import 'package:covidhelper_v2/models/user.dart';
 import 'package:covidhelper_v2/models/vendor.dart';
 import 'package:covidhelper_v2/models/volunteer.dart';
@@ -20,17 +21,25 @@ class FirestoreService {
         .map((document) => VulnerablePerson.fromJson(document.data))
         .toList());
   }
-  
-   Stream<List<Products>> getProductsStream(String uid) {
-     return _db.collection('vendor')
-         .document(uid)
-         .collection('Products')
-         .orderBy('stock')
-         .snapshots()
-         .map((snapshot) => snapshot.documents
-         .map((document) => Products.fromJson(document.data))
-         .toList());
-   }
+
+  Stream<List<Orders>> get orders {
+    return _db.collection('orders').snapshots().map((snapshot) => snapshot
+        .documents
+        .map((document) => Orders.fromJson(document.data))
+        .toList());
+  }
+
+  Stream<List<Products>> getProductsStream(String uid) {
+    return _db
+        .collection('vendor')
+        .document(uid)
+        .collection('Products')
+        .orderBy('stock')
+        .snapshots()
+        .map((snapshot) => snapshot.documents
+            .map((document) => Products.fromJson(document.data))
+            .toList());
+  }
 
   List<Products> getProducts(String uid) {
     var data = _db
@@ -40,8 +49,8 @@ class FirestoreService {
         .orderBy('stock')
         .snapshots()
         .map((snapshot) => snapshot.documents
-        .map((document) => Products.fromJson(document.data))
-        .toList());
+            .map((document) => Products.fromJson(document.data))
+            .toList());
 
     List<Products> list = new List<Products>();
 
@@ -53,7 +62,6 @@ class FirestoreService {
 
     return list;
   }
-
 
   Stream<List<Vendor>> get vendors {
     return _db.collection('vendor').snapshots().map((snapshot) => snapshot
@@ -289,6 +297,19 @@ class FirestoreService {
       User currentUser = new User(
           uid: user.uid, email: user.email, user_value: userData['user_value']);
       return currentUser;
+    }
+    return null;
+  }
+
+  Future<VulnerablePerson> getVulnerable(String uid) async {
+    var userData = await _db.collection('Vulnerables').document(uid).get();
+    if (userData != null) {
+      VulnerablePerson vulnerablePerson = new VulnerablePerson(
+          first_name: userData['first_name'],
+          last_name: userData['last_name'],
+          email: userData['email'],
+          phone: userData['phone']);
+      return vulnerablePerson;
     }
     return null;
   }
