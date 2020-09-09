@@ -1,17 +1,20 @@
 class AddressCoordAndText {
-  AddressCoordAndText({this.coordinates, this.addressText});
+  AddressCoordAndText({this.lat, this.long , this.addressText});
 
-  String coordinates;
   String addressText;
+  String lat;
+  String long;
 
   AddressCoordAndText.fromJson(Map<String, dynamic> parsedJson)
-      : coordinates = parsedJson['coordinates'] ?? '',
-        addressText = parsedJson['address'] ?? '';
+      : addressText = parsedJson['addressText'] ?? '',
+        lat = parsedJson['lat'] ?? '',
+        long = parsedJson['long'] ?? '';
 
   Map<String, dynamic> toJson(){
     var dataMap = Map<String, dynamic>();
-    dataMap['coordinates'] = this.coordinates;
-    dataMap['address'] = this.addressText;
+    dataMap['addressText'] = this.addressText;
+    dataMap['lat'] = this.lat;
+    dataMap['long'] = this.long;
     return dataMap;
   }
 }

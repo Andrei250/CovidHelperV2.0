@@ -33,7 +33,8 @@ class _RegisterAddressState extends State<RegisterAddress> {
     Future getCoordinates() async {
       var addresses = await Geocoder.local.findAddressesFromQuery(address);
       var first = addresses.first;
-      _address.coordinates = first.coordinates.toString();
+      _address.long = first.coordinates.longitude.toString();
+      _address.lat = first.coordinates.latitude.toString();
     }
 
     void verifyAddress() {

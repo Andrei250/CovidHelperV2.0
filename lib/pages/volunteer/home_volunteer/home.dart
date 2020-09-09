@@ -1,4 +1,5 @@
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
+import 'package:covidhelper_v2/pages/volunteer/current_order/current_order.dart';
 import 'package:covidhelper_v2/pages/volunteer/home_volunteer/home_screen.dart';
 import 'package:covidhelper_v2/pages/volunteer/statistics_volunteer/statistics.dart';
 import 'package:covidhelper_v2/pages/volunteer/vulnerable_people_volunteer/people_page_volunteer.dart';
@@ -93,37 +94,33 @@ class _HomeState extends State<Home> {
               'Persoane',
               style: eNavBarText,
             ),
-            activeColor: AppTheme.lightAccent,
-            inactiveColor: AppTheme.lightAccent,
-            textAlign: TextAlign.center,
-          ),
-          BottomNavyBarItem(
-            icon: SvgPicture.asset(
-              graph,
-              height: 30,
-              width: 30,
-              color: AppTheme.lightAccent,
+            BottomNavyBarItem(
+              icon: SvgPicture.asset(
+                box,
+                height: 30,
+                width: 30,
+                color: AppTheme.lightAccent,
+              ),
+              title: Text('In Curs', style: eNavBarText),
+              activeColor: AppTheme.lightAccent,
+              inactiveColor: AppTheme.lightAccent,
+              textAlign: TextAlign.center,
             ),
-            title: Text('Statistici', style: eNavBarText),
-            activeColor: AppTheme.lightAccent,
-            inactiveColor: AppTheme.lightAccent,
-            textAlign: TextAlign.center,
-          ),
-          //     BottomNavyBarItem(
-          //       icon: Icon(Icons.notifications),
-          //       title: Text('home', style: eNavBarText),
-          //       activeColor: AppTheme.lightAccent,
-          //       inactiveColor: AppTheme.lightAccent,
-          //       textAlign: TextAlign.center,
-          //     )
-        ],
-      ),
-      body: PageView(
-        controller: _pageController,
-        onPageChanged: (index) {
-          setState(() => _currentIndex = index);
-        },
-        children: <Widget>[
+            //     BottomNavyBarItem(
+            //       icon: Icon(Icons.notifications),
+            //       title: Text('home', style: eNavBarText),
+            //       activeColor: AppTheme.lightAccent,
+            //       inactiveColor: AppTheme.lightAccent,
+            //       textAlign: TextAlign.center,
+            //     )
+          ],
+        ),
+        body: PageView(
+          controller: _pageController,
+          onPageChanged: (index) {
+            setState(() => _currentIndex = index);
+          },
+          children: <Widget>[
 //                HomeScreen(name: widget.volunteer.name),
           HomeScreen(
             onButtonPressed: () {

@@ -144,7 +144,7 @@ class _CardForProductState extends State<CardForProduct> {
                         });
                       },
                       icon: Icon(
-                          const IconData(0xe15b, fontFamily: 'MaterialIcons'),
+                          Icons.remove,
                           color: Colors.black
                       ),
                     ),
