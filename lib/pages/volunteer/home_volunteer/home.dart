@@ -93,7 +93,7 @@ class _HomeState extends State<Home> {
             title: Text(
               'Persoane',
               style: eNavBarText,
-            ),
+            )),
             BottomNavyBarItem(
               icon: SvgPicture.asset(
                 box,
@@ -136,7 +136,7 @@ class _HomeState extends State<Home> {
             latitude: _latitude,
             longitude: _longitude,
           ),
-          StatisticsVolunteer(),
+          CurrentOrder(),
           // Container(
           //   color: Colors.red,                     // notifications
           // ),
