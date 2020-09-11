@@ -67,7 +67,7 @@ class _RegisterAddressState extends State<RegisterAddress> {
               _address.addressText = address;
             });
             Navigator.of(context)
-                .pushNamed('/loading_screen', arguments: _address );
+                .pushNamed('/loading_screen_vendor', arguments: _address );
             setState(() {
               _loading = false;
             });
