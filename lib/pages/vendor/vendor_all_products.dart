@@ -22,25 +22,25 @@ class _VendorAllProductsState extends State<VendorAllProducts> {
         child: Container(
       height: deviceHeight,
       color: Colors.white,
-      child: ListView(
-        scrollDirection: Axis.vertical,
-        shrinkWrap: true,
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.fromLTRB(8.0, 20.0, 8.0, 8.0),
-            child: Center(
-                child: Text(
-              'Produsele tale',
-              style: eTitle,
-            )),
-          ),
-          VendorProducts(
-            limit: widget.limit,
-            number: widget.number,
-            customHeight: deviceHeight * 0.85,
-          ),
-        ],
-      ),
+          child: ListView(
+            scrollDirection: Axis.vertical,
+            shrinkWrap: true,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.fromLTRB(8.0, 20.0, 8.0, 8.0),
+                child: Center(
+                    child: Text(
+                  'Produsele tale',
+                  style: eTitle,
+                )),
+              ),
+              VendorProducts(
+                limit: widget.limit,
+                number: widget.number,
+                customHeight: deviceHeight * 0.85,
+              ),
+             ],
+         ),
     ));
   }
 }

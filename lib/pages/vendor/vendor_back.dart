@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:covidhelper_v2/models/orders.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class VendorBack {
@@ -81,4 +82,19 @@ class ListOfProducts{
           .map((document) => Products.fromJson(document.data))
           .toList());
   }
+}
+
+class ListOfOrders{
+  Firestore _db = Firestore.instance;
+  FirebaseAuth _auth = FirebaseAuth.instance;
+
+  String uid ;
+
+  Stream<List<Orders>> get orders {
+    return _db.collection('orders').
+    where('vendor_uid', isEqualTo: uid).where('type', isEqualTo: 'processing').
+    snapshots().map((snapshot) => snapshot.documents.
+    map((document) => Orders.fromJson(document.data)).toList());
+  }
+
 }
