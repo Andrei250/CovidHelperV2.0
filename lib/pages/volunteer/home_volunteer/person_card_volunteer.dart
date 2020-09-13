@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:covidhelper_v2/models/orders.dart';
 import 'package:covidhelper_v2/models/vulnerable_person.dart';
+import 'package:covidhelper_v2/pages/vendor/vendor_back.dart';
 import 'package:covidhelper_v2/services/firestore_service.dart';
 import 'package:covidhelper_v2/utils/app_theme.dart';
 import 'package:covidhelper_v2/utils/pics.dart';
@@ -31,6 +33,8 @@ class _PersonCardVolunteerState extends State<PersonCardVolunteer> {
   String timeUnit;
   String timeUnitSecond;
   String timeSecond = null;
+  List<Products> products_shop = List<Products>();
+
 
   void _getVulnerablePerson() async {
     vulnerablePerson = await _service.getVulnerable(widget.orders.person_uid);
@@ -71,6 +75,11 @@ class _PersonCardVolunteerState extends State<PersonCardVolunteer> {
       unit = 'm';
     }
     distance = dist.floor();
+  }
+
+  Future<void> getProds(String uid) async {
+    var documents = await FirestoreService().getProducts(uid);
+    products_shop = documents.documents.map((e) => Products.fromJson(e.data)).toList();
   }
 
   @override
@@ -213,7 +222,60 @@ class _PersonCardVolunteerState extends State<PersonCardVolunteer> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(25.0),
                     ),
-                    onPressed: () {},
+                    onPressed: () async {
+                      String shop_uid = "j0anv0qmcOSNMzfzZ56q9yyctef2";
+                      double lat = 45.02355;
+                      double long = 23.2717983;
+                      String shop_address = 'Strada 23 August 65, Târgu Jiu 210006, Romania';
+
+                      await getProds(shop_uid).then((value) async {
+                        Map<String, dynamic> data = widget.orders.toJson();
+
+                        products_shop.forEach((element) {
+                          if (widget.orders.products.containsKey(element.name)) {
+                            if (int.parse(element.stock) == int.parse(widget.orders.products[element.name])) {
+                              widget.orders.products.remove(element.name);
+                              products_shop.removeAt(products_shop.indexOf(element));
+                            } else if (int.parse(element.stock) < int.parse(widget.orders.products[element.name])) {
+                              widget.orders.products[element.name] = (int.parse(widget.orders.products[element.name]) - int.parse(element.stock)).toString();
+                              products_shop[products_shop.indexOf(element)].stock = '0';
+                            } else {
+                              products_shop[products_shop.indexOf(element)].stock = (int.parse(element.stock) - int.parse(widget.orders.products[element.name])).toString();
+                              widget.orders.products.remove(element.name);
+                            }
+                          }
+                        });
+
+                        products_shop.forEach((element) async {
+                          if (int.parse(element.stock) > 0) {
+                            await Firestore.instance
+                                .collection('vendor')
+                                .document(shop_uid)
+                                .collection('Products')
+                                .document(element.name)
+                                .setData(element.toJson());
+                          } else {
+                            await Firestore.instance
+                                .collection('vendor')
+                                .document(shop_uid)
+                                .collection('Products')
+                                .document(element.name)
+                                .delete();
+                          }
+                        });
+
+                        data['type'] = "processed";
+
+                        await Firestore.instance.collection('orders').document(widget.orders.uid).setData(data);
+
+                        if (widget.orders.products.length != 0) {
+                            data = widget.orders.toJson();
+                            await Firestore.instance.collection('orders').add(
+                                data);
+                        }
+
+                      });
+                    },
                     color: AppTheme.lightAccent,
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(50.0, 2.0, 50.0, 2.0),

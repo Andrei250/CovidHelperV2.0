@@ -25,7 +25,18 @@ class FirestoreService {
   Stream<List<Orders>> get orders {
     return _db.collection('orders').snapshots().map((snapshot) => snapshot
         .documents
-        .map((document) => Orders.fromJson(document.data))
+        .map((document) {
+          Orders order = Orders(address: document.data['address'],
+                                is_med: document.data['is_med'],
+                                person_uid: document.data['person_uid'],
+                                products: document.data['products'],
+                                type: document.data['type'],
+                                longitude: document.data['long'],
+                                latitude: document.data['lat']);
+          order.uid = document.documentID;
+
+          return order;
+        })
         .toList());
   }
 
@@ -41,26 +52,13 @@ class FirestoreService {
             .toList());
   }
 
-  List<Products> getProducts(String uid) {
-    var data = _db
+  Future<QuerySnapshot> getProducts(String uid) async {
+    return await _db
         .collection('vendor')
         .document(uid)
         .collection('Products')
         .orderBy('stock')
-        .snapshots()
-        .map((snapshot) => snapshot.documents
-            .map((document) => Products.fromJson(document.data))
-            .toList());
-
-    List<Products> list = new List<Products>();
-
-    data.forEach((element) {
-      list.forEach((element) {
-        list.add(element);
-      });
-    });
-
-    return list;
+        .getDocuments();
   }
 
   Stream<List<Vendor>> get vendors {
