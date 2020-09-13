@@ -233,14 +233,14 @@ class _PersonCardVolunteerState extends State<PersonCardVolunteer> {
 
                         products_shop.forEach((element) {
                           if (widget.orders.products.containsKey(element.name)) {
-                            if (int.parse(element.stock) == int.parse(widget.orders.products[element.name])) {
+                            if (int.parse(element.stock) == widget.orders.products[element.name]) {
                               widget.orders.products.remove(element.name);
                               products_shop.removeAt(products_shop.indexOf(element));
-                            } else if (int.parse(element.stock) < int.parse(widget.orders.products[element.name])) {
-                              widget.orders.products[element.name] = (int.parse(widget.orders.products[element.name]) - int.parse(element.stock)).toString();
+                            } else if (int.parse(element.stock) < widget.orders.products[element.name]) {
+                              widget.orders.products[element.name] = (widget.orders.products[element.name] - int.parse(element.stock));
                               products_shop[products_shop.indexOf(element)].stock = '0';
                             } else {
-                              products_shop[products_shop.indexOf(element)].stock = (int.parse(element.stock) - int.parse(widget.orders.products[element.name])).toString();
+                              products_shop[products_shop.indexOf(element)].stock = (int.parse(element.stock) - widget.orders.products[element.name]).toString();
                               widget.orders.products.remove(element.name);
                             }
                           }
@@ -264,12 +264,13 @@ class _PersonCardVolunteerState extends State<PersonCardVolunteer> {
                           }
                         });
 
-                        data['type'] = "processed";
+                        data['type'] = "processing";
 
                         await Firestore.instance.collection('orders').document(widget.orders.uid).setData(data);
 
                         if (widget.orders.products.length != 0) {
                             data = widget.orders.toJson();
+                            data['type'] = "queue";
                             await Firestore.instance.collection('orders').add(
                                 data);
                         }
