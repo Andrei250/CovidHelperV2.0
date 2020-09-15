@@ -1,9 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:covidhelper_v2/components/heuristics.dart';
 import 'package:covidhelper_v2/models/orders.dart';
 import 'package:covidhelper_v2/models/vulnerable_person.dart';
+import 'package:covidhelper_v2/pages/vendor/vendor_back.dart';
 import 'package:covidhelper_v2/services/firestore_service.dart';
 import 'package:covidhelper_v2/utils/app_theme.dart';
 import 'package:covidhelper_v2/utils/pics.dart';
+import 'package:covidhelper_v2/utils/volunteer_orders.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -24,6 +28,7 @@ class PersonCardVolunteer extends StatefulWidget {
 class _PersonCardVolunteerState extends State<PersonCardVolunteer> {
   final double speed = 1.4; // m/s -- average speed when walking
   final FirestoreService _service = new FirestoreService();
+  FirebaseUser _user;
   VulnerablePerson vulnerablePerson;
   var distance;
   String unit;
@@ -32,6 +37,7 @@ class _PersonCardVolunteerState extends State<PersonCardVolunteer> {
   String timeUnit;
   String timeUnitSecond;
   String timeSecond = null;
+  List<Products> products_shop = List<Products>();
   Heuristics heuristics;
 
 
@@ -40,9 +46,16 @@ class _PersonCardVolunteerState extends State<PersonCardVolunteer> {
     setState(() {});
   }
 
+  Future<void> getUser() async {
+    _user = await FirebaseAuth.instance.currentUser();
+  }
+
   @override
   void initState() {
     super.initState();
+    heuristics = Heuristics();
+    print(volunteer_orders);
+    getUser();
     _getVulnerablePerson();
     _calculateDistance();
   }
@@ -74,6 +87,11 @@ class _PersonCardVolunteerState extends State<PersonCardVolunteer> {
       unit = 'm';
     }
     distance = dist.floor();
+  }
+
+  Future<void> getProds(String uid) async {
+    var documents = await FirestoreService().getProducts(uid);
+    products_shop = documents.documents.map((e) => Products.fromJson(e.data)).toList();
   }
 
   @override
@@ -217,7 +235,15 @@ class _PersonCardVolunteerState extends State<PersonCardVolunteer> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(25.0),
                     ),
-                    onPressed: () {},
+                    onPressed: () async {
+                      if (volunteer_orders == null || volunteer_orders.isEmpty) {
+                        Map<String, dynamic> data = widget.orders.toJson();
+                        data['volunteer_uid'] = _user.uid;
+                        data['type'] = "processing";
+                        volunteer_orders = data;
+                        await Firestore.instance.collection('orders').document(widget.orders.uid).setData(data);
+                      }
+                    },
                     color: AppTheme.lightAccent,
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(50.0, 2.0, 50.0, 2.0),
@@ -238,7 +264,7 @@ class _PersonCardVolunteerState extends State<PersonCardVolunteer> {
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(10.0, 2.0, 10.0, 2.0),
                       child: Text(
-                        'REFUZA',
+                        'SUNA',
                         style: eDeclineButton,
                       ),
                     ),

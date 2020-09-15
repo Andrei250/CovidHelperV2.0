@@ -8,6 +8,7 @@ import 'package:covidhelper_v2/models/vendor.dart';
 import 'package:covidhelper_v2/models/volunteer.dart';
 import 'package:covidhelper_v2/models/vulnerable_person.dart';
 import 'package:covidhelper_v2/pages/vendor/vendor_back.dart';
+import 'package:covidhelper_v2/utils/volunteer_orders.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
 
@@ -22,10 +23,29 @@ class FirestoreService {
         .toList());
   }
 
+  //TODO change the type => ['vendor', 'volunteer']
+  Future<QuerySnapshot> getCurrentOrder(String uid) async {
+    return _db.collection('orders')
+              .where('volunteer_uid' , isEqualTo: uid)
+              .where('type', whereIn: ['processing'])
+              .getDocuments();
+  }
+
   Stream<List<Orders>> get orders {
     return _db.collection('orders').snapshots().map((snapshot) => snapshot
         .documents
-        .map((document) => Orders.fromJson(document.data))
+        .map((document) {
+          Orders order = Orders(address: document.data['address'],
+                                is_med: document.data['is_med'],
+                                person_uid: document.data['person_uid'],
+                                products: document.data['products'],
+                                type: document.data['type'],
+                                longitude: document.data['long'],
+                                latitude: document.data['lat']);
+          order.uid = document.documentID;
+
+          return order;
+        })
         .toList());
   }
 
@@ -41,26 +61,13 @@ class FirestoreService {
             .toList());
   }
 
-  List<Products> getProducts(String uid) {
-    var data = _db
+  Future<QuerySnapshot> getProducts(String uid) async {
+    return await _db
         .collection('vendor')
         .document(uid)
         .collection('Products')
         .orderBy('stock')
-        .snapshots()
-        .map((snapshot) => snapshot.documents
-            .map((document) => Products.fromJson(document.data))
-            .toList());
-
-    List<Products> list = new List<Products>();
-
-    data.forEach((element) {
-      list.forEach((element) {
-        list.add(element);
-      });
-    });
-
-    return list;
+        .getDocuments();
   }
 
   Stream<List<Vendor>> get vendors {
@@ -238,6 +245,15 @@ class FirestoreService {
         retrievedData['type'] = "vulnerable";
         retrievedData['vendors'] = FirestoreService().vendors;
       } else if (userData['user_value'] == 'volunteer') {
+        var _currentOrder = await FirestoreService().getCurrentOrder(user.uid);
+
+        if (_currentOrder.documents.length == 0) {
+          volunteer_orders = null;
+        } else {
+          volunteer_orders = Map<String,dynamic>();
+          volunteer_orders = _currentOrder.documents[0].data;
+        }
+
         retrievedData['route'] = '/volunteer_home';
         retrievedData['type'] = 'volunteer';
       } else if (userData['user_value'] == 'vendor') {
