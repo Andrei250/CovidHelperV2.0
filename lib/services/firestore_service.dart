@@ -341,6 +341,27 @@ class FirestoreService {
     }
   }
 
+  Future<Map<int, Orders>> getAllOrders() async {
+    CollectionReference ref = _db.collection('Orders');
+    QuerySnapshot eventsQuery =
+        await ref.where("type", isEqualTo: 'queue').getDocuments();
+
+    Map<int, Orders> eventsHashMap = new Map<int, Orders>();
+  int aux = 0;
+    eventsQuery.documents.forEach((document) {
+      eventsHashMap.putIfAbsent(
+          aux++,
+          () => new Orders(
+              latitude: document['lat'],
+              longitude: document['long'],
+              address: document['address'],
+              is_med: document['is_med'],
+              person_uid: document['person_uid'],
+              products: document['products']));
+    });
+    return eventsHashMap;
+  }
+
   Future changePassAdmin(FirebaseUser user, Admin admin, String password,
       String new_password) async {
     try {

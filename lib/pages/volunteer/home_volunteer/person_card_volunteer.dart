@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:covidhelper_v2/components/heuristics.dart';
 import 'package:covidhelper_v2/models/orders.dart';
 import 'package:covidhelper_v2/models/vulnerable_person.dart';
 import 'package:covidhelper_v2/pages/vendor/vendor_back.dart';
@@ -36,6 +37,7 @@ class _PersonCardVolunteerState extends State<PersonCardVolunteer> {
   String timeUnitSecond;
   String timeSecond = null;
   List<Products> products_shop = List<Products>();
+  Heuristics heuristics;
 
 
   void _getVulnerablePerson() async {
@@ -118,11 +120,12 @@ class _PersonCardVolunteerState extends State<PersonCardVolunteer> {
                       style: eTitle,
                     ),
                     Text(
-                      'Se afla la ' +
-                          distance.toString() +
-                          ' ' +
-                          unit.toString() +
-                          ' de tine',
+                      heuristics.calculateScore().toString(),
+                      // 'Se afla la ' +
+                      //     distance.toString() +
+                      //     ' ' +
+                      //     unit.toString() +
+                      //     ' de tine',
                       style: eWelcome,
                     ),
                   ],
