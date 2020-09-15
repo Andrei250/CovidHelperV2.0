@@ -81,46 +81,58 @@ class Heuristics {
     return 101112;
   }
 
-  void printare() async {
+  Future<Vendor> backend() async {
     vendors = await getVendors();
     double bestScore = double.negativeInfinity;
     int selectedVendor = -1;
     for (int i = 0; i < vendors.length; i++) {
       double newScore = await score(vendors[i]);
-      if (newScore > bestScore) {
+      if (newScore != null && newScore > bestScore) {
         bestScore = newScore;
         selectedVendor = i;
       }
     }
-    print('vendorul selectat $selectedVendor');
-  }
-
-  Future<double> score(Vendor vendor) async {
-    double stock = await stockPercent(vendor);
-    double distance = await calculateDistance(order, vendor);
-    return (distance * distanceHeu + stock * stockHeu);
+    return vendors[selectedVendor];
   }
 
   // function which calculates the percent of the products that are in stock
   // the vendor must be provided as a parameter
-  Future<double> stockPercent(Vendor vendor) async {
+  Future<dynamic> stockPercent(Vendor vendor) async {
     products = await getProducts(vendor.uid);
     double availableProducts = 0;
-    if (products == null) {
+    if (products.isEmpty) {
+      return null;
+    } else {
+      if (order.products.length != 0) {
+        order.products.forEach((key, value) {
+          bool found = false;
+          if (products[key] != null) {
+            if (double.parse(products[key].stock) >= value) {
+              found = true;
+              availableProducts++;
+            }
+          }
+        });
+        return (availableProducts / order.products.length);
+      }
+      return 0;
+    }
+  }
+
+  // calculates the score for each vendor
+  // if the stock is null or equals to 0 or if distance is null
+  // then the vendor will be omitted
+  Future<double> score(Vendor vendor) async {
+    double stock = await stockPercent(vendor);
+    double distance = await calculateDistance(order, vendor);
+    if (stock == null || distance == null || stock == 0.0) {
       return null;
     }
-    if (order.products.length != 0) {
-      order.products.forEach((key, value) {
-        bool found = false;
-        if (products[key] != null) {
-          if (double.parse(products[key].stock) >= value) {
-            found = true;
-            availableProducts++;
-          }
-        }
-      });
-      return (availableProducts / order.products.length);
-    }
-    return 0;
+    return (distance * distanceHeu + stock * stockHeu);
+  }
+
+  Future<String> getVendorUid() async {
+    Vendor vendor = await backend();
+    return vendor.uid;
   }
 }

@@ -45,9 +45,6 @@ class _PersonCardVolunteerState extends State<PersonCardVolunteer> {
     super.initState();
     _getVulnerablePerson();
     _calculateDistance();
-    heuristics = new Heuristics(order: widget.orders);
-    heuristics.printare();
-
   }
 
   Future<void> _calculateDistance() async {
