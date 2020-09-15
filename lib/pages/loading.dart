@@ -3,6 +3,7 @@ import 'package:covidhelper_v2/components/starting_loading.dart';
 import 'package:covidhelper_v2/models/user.dart';
 import 'package:covidhelper_v2/services/firestore_service.dart';
 import 'package:covidhelper_v2/utils/app_theme.dart';
+import 'package:covidhelper_v2/utils/volunteer_orders.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -30,6 +31,7 @@ class _LoadingState extends State<Loading> {
           .collection(userData['user_value'])
           .document(currentUser.uid)
           .get();
+
       Map<String, dynamic> retrievedData = new Map<String, dynamic>();
       retrievedData['userInfo'] = userInfo;
 
@@ -41,6 +43,15 @@ class _LoadingState extends State<Loading> {
         retrievedData['route'] = '/admin_panel';
         retrievedData['type'] = "admin";
       } else if (userData['user_value'] == 'volunteer') {
+        var _currentOrder = await FirestoreService().getCurrentOrder(currentUser.uid);
+
+        if (_currentOrder.documents.length == 0) {
+          volunteer_orders = null;
+        } else {
+          volunteer_orders = Map<String,dynamic>();
+          volunteer_orders = _currentOrder.documents[0].data;
+        }
+
         retrievedData['route'] = '/volunteer_home';
         retrievedData['type'] = 'volunteer';
       } else if (userData['user_value'] == 'vendor') {

@@ -8,6 +8,7 @@ import 'package:covidhelper_v2/models/vendor.dart';
 import 'package:covidhelper_v2/models/volunteer.dart';
 import 'package:covidhelper_v2/models/vulnerable_person.dart';
 import 'package:covidhelper_v2/pages/vendor/vendor_back.dart';
+import 'package:covidhelper_v2/utils/volunteer_orders.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
 
@@ -20,6 +21,14 @@ class FirestoreService {
         .documents
         .map((document) => VulnerablePerson.fromJson(document.data))
         .toList());
+  }
+
+  //TODO change the type => ['vendor', 'volunteer']
+  Future<QuerySnapshot> getCurrentOrder(String uid) async {
+    return _db.collection('orders')
+              .where('volunteer_uid' , isEqualTo: uid)
+              .where('type', whereIn: ['processing', 'queue'])
+              .getDocuments();
   }
 
   Stream<List<Orders>> get orders {
@@ -236,6 +245,15 @@ class FirestoreService {
         retrievedData['type'] = "vulnerable";
         retrievedData['vendors'] = FirestoreService().vendors;
       } else if (userData['user_value'] == 'volunteer') {
+        var _currentOrder = await FirestoreService().getCurrentOrder(user.uid);
+
+        if (_currentOrder.documents.length == 0) {
+          volunteer_orders = null;
+        } else {
+          volunteer_orders = Map<String,dynamic>();
+          volunteer_orders = _currentOrder.documents[0].data;
+        }
+
         retrievedData['route'] = '/volunteer_home';
         retrievedData['type'] = 'volunteer';
       } else if (userData['user_value'] == 'vendor') {

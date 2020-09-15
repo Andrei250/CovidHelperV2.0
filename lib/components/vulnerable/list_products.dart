@@ -122,6 +122,7 @@ class _ListProductsState extends State<ListProducts> {
           height: widget.size.height - widget.appbar.preferredSize.height - 120,
           child: ListView(
             shrinkWrap: true,
+            scrollDirection: Axis.vertical,
             children: [
               ListView.builder(
                   scrollDirection: Axis.vertical,

@@ -5,6 +5,7 @@ import 'package:covidhelper_v2/pages/vendor/vendor_back.dart';
 import 'package:covidhelper_v2/services/firestore_service.dart';
 import 'package:covidhelper_v2/utils/app_theme.dart';
 import 'package:covidhelper_v2/utils/pics.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -25,6 +26,7 @@ class PersonCardVolunteer extends StatefulWidget {
 class _PersonCardVolunteerState extends State<PersonCardVolunteer> {
   final double speed = 1.4; // m/s -- average speed when walking
   final FirestoreService _service = new FirestoreService();
+  FirebaseUser _user;
   VulnerablePerson vulnerablePerson;
   var distance;
   String unit;
@@ -41,9 +43,14 @@ class _PersonCardVolunteerState extends State<PersonCardVolunteer> {
     setState(() {});
   }
 
+  Future<void> getUser() async {
+    _user = await FirebaseAuth.instance.currentUser();
+  }
+
   @override
   void initState() {
     super.initState();
+    getUser();
     _getVulnerablePerson();
     _calculateDistance();
   }
@@ -223,59 +230,9 @@ class _PersonCardVolunteerState extends State<PersonCardVolunteer> {
                       borderRadius: BorderRadius.circular(25.0),
                     ),
                     onPressed: () async {
-                      String shop_uid = "j0anv0qmcOSNMzfzZ56q9yyctef2";
-                      double lat = 45.02355;
-                      double long = 23.2717983;
-                      String shop_address = 'Strada 23 August 65, Târgu Jiu 210006, Romania';
-
-                      await getProds(shop_uid).then((value) async {
                         Map<String, dynamic> data = widget.orders.toJson();
-
-                        products_shop.forEach((element) {
-                          if (widget.orders.products.containsKey(element.name)) {
-                            if (int.parse(element.stock) == widget.orders.products[element.name]) {
-                              widget.orders.products.remove(element.name);
-                              products_shop.removeAt(products_shop.indexOf(element));
-                            } else if (int.parse(element.stock) < widget.orders.products[element.name]) {
-                              widget.orders.products[element.name] = (widget.orders.products[element.name] - int.parse(element.stock));
-                              products_shop[products_shop.indexOf(element)].stock = '0';
-                            } else {
-                              products_shop[products_shop.indexOf(element)].stock = (int.parse(element.stock) - widget.orders.products[element.name]).toString();
-                              widget.orders.products.remove(element.name);
-                            }
-                          }
-                        });
-
-                        products_shop.forEach((element) async {
-                          if (int.parse(element.stock) > 0) {
-                            await Firestore.instance
-                                .collection('vendor')
-                                .document(shop_uid)
-                                .collection('Products')
-                                .document(element.name)
-                                .setData(element.toJson());
-                          } else {
-                            await Firestore.instance
-                                .collection('vendor')
-                                .document(shop_uid)
-                                .collection('Products')
-                                .document(element.name)
-                                .delete();
-                          }
-                        });
-
-                        data['type'] = "processing";
-
+                        data['volunteer_uid'] = _user.uid;
                         await Firestore.instance.collection('orders').document(widget.orders.uid).setData(data);
-
-                        if (widget.orders.products.length != 0) {
-                            data = widget.orders.toJson();
-                            data['type'] = "queue";
-                            await Firestore.instance.collection('orders').add(
-                                data);
-                        }
-
-                      });
                     },
                     color: AppTheme.lightAccent,
                     child: Padding(

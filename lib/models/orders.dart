@@ -7,6 +7,7 @@ class Orders {
   Map<String, dynamic> products;
   String type;
   String uid;
+  String volunteer_uid;
 
   Orders(
       {this.address,
@@ -15,7 +16,8 @@ class Orders {
       this.products,
       this.type,
       this.longitude,
-      this.latitude});
+      this.latitude,
+      this.volunteer_uid});
 
   Orders.fromJson(Map<String, dynamic> parsedJson)
       : address = parsedJson['address'] ?? '',
@@ -24,7 +26,8 @@ class Orders {
         is_med = parsedJson['is_med'] ?? '',
         person_uid = parsedJson['person_uid'] ?? '',
         products = parsedJson['products'] ?? '',
-        type = parsedJson['type'] ?? '';
+        type = parsedJson['type'] ?? '',
+        volunteer_uid = parsedJson['volunteer_uid'] ?? '';
 
   Map<String, dynamic> toJson() {
     var dataMap = Map<String, dynamic>();
