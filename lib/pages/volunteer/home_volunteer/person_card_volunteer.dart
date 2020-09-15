@@ -232,6 +232,7 @@ class _PersonCardVolunteerState extends State<PersonCardVolunteer> {
                     onPressed: () async {
                         Map<String, dynamic> data = widget.orders.toJson();
                         data['volunteer_uid'] = _user.uid;
+                        data['type'] = "processing";
                         await Firestore.instance.collection('orders').document(widget.orders.uid).setData(data);
                     },
                     color: AppTheme.lightAccent,
@@ -254,7 +255,7 @@ class _PersonCardVolunteerState extends State<PersonCardVolunteer> {
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(10.0, 2.0, 10.0, 2.0),
                       child: Text(
-                        'REFUZA',
+                        'SUNA',
                         style: eDeclineButton,
                       ),
                     ),
