@@ -33,11 +33,10 @@ class VendorBack {
     dataMap['stock'] = stock;
     return cat.document(product).setData(dataMap, merge: true);
   }
-
 }
 
 class Products {
-  Products({this.price, this.stock, this.name});
+  Products({this.price, this.stock, this.name, this.isShop});
 
   String stock;
   String price;

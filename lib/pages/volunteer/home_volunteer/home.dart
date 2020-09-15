@@ -1,4 +1,5 @@
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
+import 'package:covidhelper_v2/components/heuristics.dart';
 import 'package:covidhelper_v2/pages/volunteer/current_order/current_order.dart';
 import 'package:covidhelper_v2/pages/volunteer/home_volunteer/home_screen.dart';
 import 'package:covidhelper_v2/pages/volunteer/statistics_volunteer/statistics.dart';
