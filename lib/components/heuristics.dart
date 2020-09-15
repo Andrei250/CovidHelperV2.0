@@ -74,7 +74,7 @@ class Heuristics {
   Future<dynamic> calculateDistance(Orders order, Vendor vendor) async {
     double dist = await Geolocator().distanceBetween(double.parse(vendor.lat),
         double.parse(vendor.long), order.latitude, order.longitude);
-    return dist / 1000;
+    return (dist / 1000);
   }
 
   double calculateScore() {
@@ -83,8 +83,22 @@ class Heuristics {
 
   void printare() async {
     vendors = await getVendors();
-    print('0000000000000000000000000000000000000000000000000000000');
-    print(await calculateDistance(order, vendors[4]));
+    double bestScore = double.negativeInfinity;
+    int selectedVendor = -1;
+    for (int i = 0; i < vendors.length; i++) {
+      double newScore = await score(vendors[i]);
+      if (newScore > bestScore) {
+        bestScore = newScore;
+        selectedVendor = i;
+      }
+    }
+    print('vendorul selectat $selectedVendor');
+  }
+
+  Future<double> score(Vendor vendor) async {
+    double stock = await stockPercent(vendor);
+    double distance = await calculateDistance(order, vendor);
+    return (distance * distanceHeu + stock * stockHeu);
   }
 
   // function which calculates the percent of the products that are in stock
@@ -92,6 +106,9 @@ class Heuristics {
   Future<double> stockPercent(Vendor vendor) async {
     products = await getProducts(vendor.uid);
     double availableProducts = 0;
+    if (products == null) {
+      return null;
+    }
     if (order.products.length != 0) {
       order.products.forEach((key, value) {
         bool found = false;
