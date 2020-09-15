@@ -6,6 +6,7 @@ import 'package:covidhelper_v2/pages/vendor/vendor_back.dart';
 import 'package:covidhelper_v2/services/firestore_service.dart';
 import 'package:covidhelper_v2/utils/app_theme.dart';
 import 'package:covidhelper_v2/utils/pics.dart';
+import 'package:covidhelper_v2/utils/volunteer_orders.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -52,6 +53,8 @@ class _PersonCardVolunteerState extends State<PersonCardVolunteer> {
   @override
   void initState() {
     super.initState();
+    heuristics = Heuristics();
+    print(volunteer_orders);
     getUser();
     _getVulnerablePerson();
     _calculateDistance();
@@ -233,10 +236,13 @@ class _PersonCardVolunteerState extends State<PersonCardVolunteer> {
                       borderRadius: BorderRadius.circular(25.0),
                     ),
                     onPressed: () async {
+                      if (volunteer_orders == null || volunteer_orders.isEmpty) {
                         Map<String, dynamic> data = widget.orders.toJson();
                         data['volunteer_uid'] = _user.uid;
                         data['type'] = "processing";
+                        volunteer_orders = data;
                         await Firestore.instance.collection('orders').document(widget.orders.uid).setData(data);
+                      }
                     },
                     color: AppTheme.lightAccent,
                     child: Padding(

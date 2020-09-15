@@ -8,6 +8,7 @@ class Orders {
   String type;
   String uid;
   String volunteer_uid;
+  String vendor_uid;
 
   Orders(
       {this.address,
@@ -17,7 +18,8 @@ class Orders {
       this.type,
       this.longitude,
       this.latitude,
-      this.volunteer_uid});
+      this.volunteer_uid,
+      this.vendor_uid});
 
   Orders.fromJson(Map<String, dynamic> parsedJson)
       : address = parsedJson['address'] ?? '',
@@ -38,6 +40,9 @@ class Orders {
     dataMap['person_uid'] = this.person_uid;
     dataMap['products'] = this.products;
     dataMap['type'] = this.type;
+    if (this.vendor_uid != null && this.vendor_uid.length > 0) {
+      dataMap['vendor_uid'] = this.vendor_uid;
+    }
     return dataMap;
   }
 

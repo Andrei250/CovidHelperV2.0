@@ -27,7 +27,7 @@ class FirestoreService {
   Future<QuerySnapshot> getCurrentOrder(String uid) async {
     return _db.collection('orders')
               .where('volunteer_uid' , isEqualTo: uid)
-              .where('type', whereIn: ['processing', 'queue'])
+              .where('type', whereIn: ['processing'])
               .getDocuments();
   }
 
