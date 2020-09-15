@@ -41,7 +41,8 @@ class FirestoreService {
                                 products: document.data['products'],
                                 type: document.data['type'],
                                 longitude: document.data['long'],
-                                latitude: document.data['lat']);
+                                latitude: document.data['lat'],
+                                vendor_uid: document.data['vendor_uid']);
           order.uid = document.documentID;
 
           return order;

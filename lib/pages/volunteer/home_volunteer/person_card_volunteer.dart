@@ -53,8 +53,7 @@ class _PersonCardVolunteerState extends State<PersonCardVolunteer> {
   @override
   void initState() {
     super.initState();
-    heuristics = Heuristics();
-    print(volunteer_orders);
+    heuristics = Heuristics(order: widget.orders);
     getUser();
     _getVulnerablePerson();
     _calculateDistance();
