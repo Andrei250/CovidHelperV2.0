@@ -53,8 +53,7 @@ class _PersonCardVolunteerState extends State<PersonCardVolunteer> {
   @override
   void initState() {
     super.initState();
-    heuristics = Heuristics();
-    print(volunteer_orders);
+    heuristics = Heuristics(order: widget.orders);
     getUser();
     _getVulnerablePerson();
     _calculateDistance();
@@ -239,7 +238,7 @@ class _PersonCardVolunteerState extends State<PersonCardVolunteer> {
                       if (volunteer_orders == null || volunteer_orders.isEmpty) {
                         Map<String, dynamic> data = widget.orders.toJson();
                         data['volunteer_uid'] = _user.uid;
-                        data['type'] = "processing";
+                        data['type'] = "vendor";
                         volunteer_orders = data;
                         await Firestore.instance.collection('orders').document(widget.orders.uid).setData(data);
                       }

@@ -23,11 +23,10 @@ class FirestoreService {
         .toList());
   }
 
-  //TODO change the type => ['vendor', 'volunteer']
   Future<QuerySnapshot> getCurrentOrder(String uid) async {
     return _db.collection('orders')
               .where('volunteer_uid' , isEqualTo: uid)
-              .where('type', whereIn: ['processing'])
+              .where('type', whereIn: ['vendor', 'volunteer'])
               .getDocuments();
   }
 
@@ -41,7 +40,8 @@ class FirestoreService {
                                 products: document.data['products'],
                                 type: document.data['type'],
                                 longitude: document.data['long'],
-                                latitude: document.data['lat']);
+                                latitude: document.data['lat'],
+                                vendor_uid: document.data['vendor_uid']);
           order.uid = document.documentID;
 
           return order;
