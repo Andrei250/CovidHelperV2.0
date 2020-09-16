@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 /// Class with the details about a vendor
 
 class Vendor {
@@ -20,6 +22,15 @@ class Vendor {
         long  = parsedJson['long'] ?? '',
         address = parsedJson['address'] ?? '',
         uid = parsedJson['uid'] ?? '';
+
+  Vendor.fromSnapshot(DocumentSnapshot parsedJson)
+        : name = parsedJson['name'] ?? '',
+          email = parsedJson['email'] ?? '',
+          phoneNumber = parsedJson['phoneNumber'] ?? '',
+          lat = parsedJson['lat'] ?? '',
+          long  = parsedJson['long'] ?? '',
+          address = parsedJson['address'] ?? '',
+          uid = parsedJson['uid'] ?? '';
 
   Map<String, dynamic> toJson() {
     var dataMap = Map<String, dynamic>();

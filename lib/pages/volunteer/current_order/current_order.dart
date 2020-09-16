@@ -1,6 +1,9 @@
+import 'package:covidhelper_v2/models/vendor.dart';
 import 'package:covidhelper_v2/models/vulnerable_person.dart';
+import 'package:covidhelper_v2/services/firestore_service.dart';
 import 'package:covidhelper_v2/utils/app_theme.dart';
 import 'package:covidhelper_v2/utils/pics.dart';
+import 'package:covidhelper_v2/utils/volunteer_orders.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -12,15 +15,60 @@ class CurrentOrder extends StatefulWidget {
 
 class _CurrentOrderState extends State<CurrentOrder> {
   bool _visibility = true;
-  VulnerablePerson vulnerable = new VulnerablePerson(
-      first_name: 'Ion',
-      last_name: 'Basfa',
-      email: 'a@a.a',
-      address: 'a',
-      phone: '0123123123');
+  VulnerablePerson vulnerable;
+  Vendor _vendor;
+  int _index = 1;
+
+  Future<void> getVulnerable() async {
+    if (volunteer_orders != null && volunteer_orders.isNotEmpty) {
+      vulnerable = await FirestoreService().getVulnerable(volunteer_orders['person_uid']);
+    }
+  }
+
+  Future<void> getVendor() async {
+    if (volunteer_orders != null && volunteer_orders.isNotEmpty) {
+      _vendor = await FirestoreService().getOrderVendor(volunteer_orders['vendor_uid']);
+    }
+  }
+
+  Future<void> initValues() async {
+    if (volunteer_orders == null || volunteer_orders.isEmpty) {
+      _index = 1;
+    } else {
+      if (volunteer_orders['type'] == 'vendor') {
+        _index = 2;
+      } else if (volunteer_orders['type'] == 'volunteer') {
+        _visibility = true;
+        _index = 3;
+      }
+
+      await getVulnerable();
+      await getVendor();
+    }
+  }
+
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    initValues();
+  }
 
   @override
   Widget build(BuildContext context) {
+    String vulnerable_name = vulnerable != null ? vulnerable.first_name + '' + vulnerable.last_name : "";
+    String vulnerable_adress = vulnerable != null ? vulnerable.address : '';
+    String vulnerable_phone =  vulnerable != null ? vulnerable.phone : '';
+
+    String vendor_name = _vendor != null ? _vendor.name : "";
+    String vendor_adress = _vendor != null ? _vendor.address : '';
+    String vendor_phone =  _vendor != null ? _vendor.phoneNumber : '';
+
     return Scaffold(
         backgroundColor: Colors.grey[100],
         appBar: AppBar(
@@ -36,8 +84,83 @@ class _CurrentOrderState extends State<CurrentOrder> {
           elevation: 0,
         ),
         body: ListView(children: [
+
           Visibility(
-              visible: _visibility,
+            visible: _index == 1 ? true : false,
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0.0),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(25.0),
+                child: Container(
+                  color: Colors.white,
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(32.0, 8.0, 8.0, 8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Nu ai nicio comanda in desfasurare',
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 3,
+                              style: eName
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 10.0,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+
+          Visibility(
+            visible: _index == 2 ? true : false,
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0.0),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(25.0),
+                child: Container(
+                  color: Colors.white,
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(32.0, 8.0, 8.0, 8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Aveti o comanda in desfaturare.',
+                              style: eName,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 4
+                            ),
+                            Text(
+                              'Trebuie sa asteptati sa fiti contactat de magazin.',
+                              style: eName,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 4
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+
+
+          Visibility(
+              visible: _index == 3 ? _visibility : false,
               child: Column(children: [
                 Padding(
                   padding: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0.0),
@@ -69,7 +192,7 @@ class _CurrentOrderState extends State<CurrentOrder> {
                             ConstrainedBox(
                               constraints: BoxConstraints(maxWidth: 300.0),
                               child: Text(
-                                'La Colt',
+                                '$vendor_name',
                                 style: eTitle,
                               ),
                             ),
@@ -109,7 +232,7 @@ class _CurrentOrderState extends State<CurrentOrder> {
                             ConstrainedBox(
                               constraints: BoxConstraints(maxWidth: 300.0),
                               child: Text(
-                                '0712312312',
+                                '$vendor_phone',
                                 style: eTitle,
                               ),
                             ),
@@ -149,7 +272,7 @@ class _CurrentOrderState extends State<CurrentOrder> {
                             ConstrainedBox(
                               constraints: BoxConstraints(maxWidth: 300.0),
                               child: Text(
-                                'Strada Turtelor Dulci din Padurea Bantuita din Clujul Constantean',
+                                '$vendor_adress',
                                 style: eTitle,
                               ),
                             ),
@@ -321,7 +444,7 @@ class _CurrentOrderState extends State<CurrentOrder> {
                             borderRadius: BorderRadius.circular(25.0),
                           ),
                           child: Text(
-                            'Am ridicat produsele',
+                            'Finalizeaza comanda',
                             style: eButton,
                           ),
                           onPressed: () {
@@ -334,7 +457,7 @@ class _CurrentOrderState extends State<CurrentOrder> {
                 )
               ])),
           Visibility(
-              visible: !_visibility,
+              visible:  _index == 3 ? !_visibility : false,
               child: Column(children: [
                 Padding(
                   padding: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0.0),
@@ -367,9 +490,7 @@ class _CurrentOrderState extends State<CurrentOrder> {
                             ConstrainedBox(
                               constraints: BoxConstraints(maxWidth: 300.0),
                               child: Text(
-                                vulnerable.first_name +
-                                    ' ' +
-                                    vulnerable.last_name,
+                                vulnerable_name,
                                 style: eTitle,
                               ),
                             ),
@@ -409,7 +530,7 @@ class _CurrentOrderState extends State<CurrentOrder> {
                             ConstrainedBox(
                               constraints: BoxConstraints(maxWidth: 300.0),
                               child: Text(
-                                vulnerable.phone,
+                                vulnerable_phone,
                                 style: eTitle,
                               ),
                             ),
@@ -449,7 +570,7 @@ class _CurrentOrderState extends State<CurrentOrder> {
                             ConstrainedBox(
                               constraints: BoxConstraints(maxWidth: 300.0),
                               child: Text(
-                                vulnerable.address,
+                                '$vulnerable_adress',
                                 style: eTitle,
                               ),
                             ),
