@@ -23,11 +23,10 @@ class FirestoreService {
         .toList());
   }
 
-  //TODO change the type => ['vendor', 'volunteer']
   Future<QuerySnapshot> getCurrentOrder(String uid) async {
     return _db.collection('orders')
               .where('volunteer_uid' , isEqualTo: uid)
-              .where('type', whereIn: ['processing'])
+              .where('type', whereIn: ['vendor', 'volunteer'])
               .getDocuments();
   }
 
