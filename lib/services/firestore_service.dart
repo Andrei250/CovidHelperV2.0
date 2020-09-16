@@ -295,6 +295,15 @@ class FirestoreService {
     return null;
   }
 
+  Future<Vendor> getOrderVendor(String uid) async {
+    var userData = await _db.collection('vendor').document(uid).get();
+
+    if (userData != null) {
+      return Vendor.fromSnapshot(userData);
+    }
+    return null;
+  }
+
   Future<Vendor> getVendor(FirebaseUser user) async {
     var userData = await _db.collection('vendor').document(user.uid).get();
     if (userData != null) {
