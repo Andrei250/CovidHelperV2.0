@@ -137,7 +137,7 @@ class _VendorHomeScreenState extends State<VendorHomeScreen> {
                   child: ListView(scrollDirection: Axis.vertical, children: [
                     VendorOrders(
                       limit: true,
-                      number: 5,
+                      number: 3,
                       customHeight: deviceHeight * 0.4,
                     ),
                   ])),

@@ -90,11 +90,28 @@ class ListOfOrders{
 
   String uid ;
 
-  Stream<List<Orders>> get orders {
-    return _db.collection('orders').
+  Stream<List<Orders>> get orders async* {
+    FirebaseUser user = await _auth.currentUser();
+    uid = user.uid;
+    yield* _db.collection('orders').
     where('vendor_uid', isEqualTo: uid).where('type', isEqualTo: 'processing').
-    snapshots().map((snapshot) => snapshot.documents.
-    map((document) => Orders.fromJson(document.data)).toList());
+    snapshots().map((snapshot) =>
+        snapshot.documents.map((document) =>
+            Orders.fromJson(document.data)).toList());
   }
 
+}
+
+class UpdateType {
+  Firestore _db = Firestore.instance;
+  FirebaseAuth _auth = FirebaseAuth.instance;
+
+  String uid ;
+
+  Future addStock(String order_uid) async {
+    DocumentReference cat = _db.collection('order')
+        .document(order_uid);
+    Map<String, dynamic> dataMap = new Map<String, dynamic>();
+    return cat.setData(dataMap, merge: true);
+  }
 }

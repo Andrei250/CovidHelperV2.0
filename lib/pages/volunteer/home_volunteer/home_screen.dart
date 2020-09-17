@@ -212,13 +212,13 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               Expanded(
                   child: ListView(scrollDirection: Axis.vertical, children: [
-                VolunteerVulnerables(
-                  limit: true,
-                  number: 5,
-                  customHeight: deviceHeight * 0.45,
-                  latitude: widget.latitude,
-                  longitude: widget.longitude,
-                ),
+                    VolunteerVulnerables(
+                      limit: true,
+                      number: 5,
+                      customHeight: deviceHeight * 0.45,
+                      latitude: widget.latitude,
+                      longitude: widget.longitude,
+                    ),
               ])),
             ]));
   }

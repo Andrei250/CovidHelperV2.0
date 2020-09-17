@@ -1,14 +1,22 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:covidhelper_v2/models/orders.dart';
+import 'package:covidhelper_v2/routes.dart';
 import 'package:covidhelper_v2/utils/app_theme.dart';
 import 'package:covidhelper_v2/utils/pics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:slide_popup_dialog/slide_popup_dialog.dart' as slideDialog;
+import 'package:url_launcher/url_launcher.dart';
+import 'package:covidhelper_v2/pages/vendor/vendor_back.dart';
 
 class VendorComingVolunteer extends StatefulWidget {
-  VendorComingVolunteer({this.name});
+  VendorComingVolunteer({this.name, this.phonenumber, this.order});
 
   final String name;
+  final String phonenumber;
+  Orders order;
+
 
   @override
   _VendorComingVolunteerState createState() => _VendorComingVolunteerState();
@@ -65,12 +73,14 @@ class _VendorComingVolunteerState extends State<VendorComingVolunteer> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(25.0),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    launch('tel://'+widget.phonenumber);
+                  },
                   color: AppTheme.lightAccent,
                   child: Padding(
-                    padding: const EdgeInsets.fromLTRB(50.0, 2.0, 50.0, 2.0),
+                    padding: const EdgeInsets.fromLTRB(10.0, 2.0, 10.0, 2.0),
                     child: Text(
-                      'SUNA',
+                      'CHEAMA VOLUNTARUL',
                       style: eAcceptButton,
                     ),
                   ),
@@ -82,16 +92,18 @@ class _VendorComingVolunteerState extends State<VendorComingVolunteer> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(25.0),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    launch('tel://'+widget.phonenumber);
+                  },
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(2.0, 2.0, 2.0, 2.0),
                     child: Text(
-                      'REFUZA',
+                      'SUNA',
                       style: eDeclineButton,
                     ),
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ],
@@ -169,7 +181,7 @@ class _VendorComingVolunteerState extends State<VendorComingVolunteer> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(25.0),
                     ),
-                    onPressed: () {},
+                    onPressed: () { launch('tel://'+widget.phonenumber);},
                     color: AppTheme.lightAccent,
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(50.0, 2.0, 50.0, 2.0),
@@ -186,7 +198,8 @@ class _VendorComingVolunteerState extends State<VendorComingVolunteer> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(25.0),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                    },
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(10.0, 2.0, 10.0, 2.0),
                       child: Text(
@@ -198,9 +211,28 @@ class _VendorComingVolunteerState extends State<VendorComingVolunteer> {
                 ),
               ],
             ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(25.0, 0.0, 25.0, 0.0),
+              child: FlatButton(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(25.0),
+                ),
+                onPressed: () {},
+                color: Colors.red,
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(75.0, 2.0, 75.0, 2.0),
+                  child: Text(
+                    'REFUZA COMANDA',
+                    style: eAcceptButton,
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),
     );
   }
-}
+  }
+
+
